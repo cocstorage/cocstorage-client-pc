@@ -15,10 +15,12 @@
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },
   "dependencies": {
+    "axios": "^0.26.1",
+    "cocstorage-ui": "file:../cocstorage-ui",
     "next": "^12.1.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "cocstorage-ui": "file:../cocstorage-ui"
+    "react-query": "^3.35.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -31,6 +33,7 @@
     "eslint-config-next": "^12.1.5",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
