@@ -2,7 +2,7 @@
   "name": "cocstorage-web-pc",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/cocstorage/cocstorage-web-client-pc",
+  "repository": "https://github.com/kimjh96/cocstorage-web-client-pc",
   "author": "kimjh96 <kimjhs@kakao.com>",
   "license": "MIT",
   "private": false,
@@ -15,9 +15,12 @@
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
     "axios": "^0.26.1",
     "cocstorage-ui": "file:../cocstorage-ui",
     "next": "^12.1.5",
+    "next-pwa": "^5.5.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-query": "^3.35.0"
@@ -41,5 +44,8 @@
     "eslint-plugin-react-hooks": "^4.4.0",
     "prettier": "^2.6.2",
     "typescript": "^4.6.3"
+  },
+  "resolutions": {
+    "webpack": "^5.72.0"
   }
 }

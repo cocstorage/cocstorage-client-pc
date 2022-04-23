@@ -1,4 +1,6 @@
-module.exports = {
+const withPWA = require('next-pwa');
+
+module.exports = withPWA({
   swcMinify: true,
   reactStrictMode: process.env.NODE_ENV === 'development',
   poweredByHeader: process.env.NODE_ENV === 'development',
@@ -10,4 +12,4 @@ module.exports = {
   images: {
     domains: [process.env.IMAGE_DOMAIN]
   }
-};
+});
