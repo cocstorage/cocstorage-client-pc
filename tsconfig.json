@@ -19,6 +19,12 @@
       ],
       "@library/*": [
         "./src/library/*"
+      ],
+      "@styles": [
+        "./src/styles"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
       ]
     },
     "module": "esnext",
