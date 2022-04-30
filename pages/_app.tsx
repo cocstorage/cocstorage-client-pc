@@ -15,7 +15,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <meta charSet="utf-8" />재
+        <meta charSet="utf-8" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         <meta httpEquiv="content-language" content="ko" />
         <meta name="description" content="내가 만들어 운영하는 커뮤니티" />
