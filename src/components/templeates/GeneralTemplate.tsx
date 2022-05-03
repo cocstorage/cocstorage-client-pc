@@ -1,7 +1,7 @@
 import React, { ReactElement, PropsWithChildren } from 'react';
-import { useTheme } from 'cocstorage-ui';
+import styled from '@emotion/styled';
 
-import { StyledGeneralTemplate, Content } from './GeneralTemplate.styles';
+import { useTheme } from 'cocstorage-ui';
 
 export interface GeneralTemplateProps {
   header?: ReactElement;
@@ -19,5 +19,21 @@ function GeneralTemplate({ children, header, footer }: PropsWithChildren<General
     </StyledGeneralTemplate>
   );
 }
+
+export const StyledGeneralTemplate = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: ${({ theme: { breakpoints } }) => breakpoints.xl}px;
+  min-width: ${({ theme: { breakpoints } }) => breakpoints.md}px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
+`;
+
+export const Content = styled.main`
+  width: 100%;
+`;
 
 export default GeneralTemplate;

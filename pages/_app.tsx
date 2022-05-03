@@ -1,17 +1,65 @@
-import React from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 
-import { ThemeProvider, GlobalStyles } from 'cocstorage-ui';
-
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryCache, QueryClientProvider, Hydrate } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+
+import type { AxiosError } from 'axios';
+
+import { ThemeProvider, GlobalStyles, Dialog, Box } from 'cocstorage-ui';
+
+import ErrorMessage from '@components/UI/molecules/ErrorMessage';
+import { getErrorMessageByCode } from '@utils';
 
 import '@styles/base.css';
 
-const queryClient = new QueryClient();
-
 function App({ Component, pageProps }: AppProps) {
+  const [open, setOpen] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<{
+    title: string;
+    code: string;
+    message: string;
+  }>({
+    title: '알 수 없는 오류가 발생했어요.',
+    code: '',
+    message: '문제가 지속된다면 관리자에게 문의해 주세요!'
+  });
+
+  const queryClient = useRef<QueryClient>(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          refetchOnMount: false,
+          refetchOnReconnect: false,
+          refetchOnWindowFocus: false,
+          retry: 1
+        }
+      },
+      queryCache: new QueryCache({
+        onError: (error) => {
+          const asError = error as AxiosError;
+
+          if (asError && asError.response) {
+            const { data = {} } = (asError || {}).response || {};
+
+            setErrorMessage({
+              title: getErrorMessageByCode(data.code),
+              code: data.code ? data.code : 'NONE',
+              message: '문제가 지속된다면 위의 코드와 함께 관리자에게 문의해 주세요!'
+            });
+
+            setOpen(true);
+          } else {
+            setOpen(true);
+          }
+        }
+      })
+    })
+  );
+
+  const handleClose = useCallback(() => setOpen(false), []);
+
   return (
     <>
       <Head>
@@ -41,10 +89,17 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png" />
         <title>개념글 저장소</title>
       </Head>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient.current}>
         <ThemeProvider theme="light">
           <GlobalStyles />
-          <Component {...pageProps} />
+          <Hydrate state={pageProps.dehydratedState}>
+            <Component {...pageProps} />
+          </Hydrate>
+          <Dialog open={open} onClose={handleClose}>
+            <Box customStyle={{ padding: 16 }}>
+              <ErrorMessage {...errorMessage} onClose={handleClose} />
+            </Box>
+          </Dialog>
         </ThemeProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

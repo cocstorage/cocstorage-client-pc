@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 const Axios = (() => {
   let axiosInstance: AxiosInstance;
@@ -26,6 +26,41 @@ const Axios = (() => {
       } else if (axiosInstance && !jwt) {
         delete axiosInstance.defaults.headers.common.Authorization;
       }
+    },
+    get<T>(url: string, config?: AxiosRequestConfig) {
+      if (axiosInstance) {
+        return axiosInstance.get<T>(url, config);
+      }
+
+      return Axios.getInstance().get<T>(url, config);
+    },
+    post<T>(url: string, config?: AxiosRequestConfig) {
+      if (axiosInstance) {
+        return axiosInstance.post<T>(url, config);
+      }
+
+      return Axios.getInstance().post<T>(url, config);
+    },
+    put<T>(url: string, config?: AxiosRequestConfig) {
+      if (axiosInstance) {
+        return axiosInstance.put<T>(url, config);
+      }
+
+      return Axios.getInstance().put<T>(url, config);
+    },
+    delete<T>(url: string, config?: AxiosRequestConfig) {
+      if (axiosInstance) {
+        return axiosInstance.delete<T>(url, config);
+      }
+
+      return Axios.getInstance().delete<T>(url, config);
+    },
+    patch<T>(url: string, config?: AxiosRequestConfig) {
+      if (axiosInstance) {
+        return axiosInstance.patch<T>(url, config);
+      }
+
+      return Axios.getInstance().patch<T>(url, config);
     }
   };
 })();

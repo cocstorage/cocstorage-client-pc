@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const HeaderWrapper = styled.header`
+export const Wrapper = styled.header`
   display: flex;
   justify-content: center;
   width: 100%;

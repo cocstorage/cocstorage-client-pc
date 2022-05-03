@@ -1,21 +1,31 @@
 import React, { memo, HTMLAttributes } from 'react';
-import { Tag, Typography, Badge, Icon } from 'cocstorage-ui';
+
+import { Tag, Typography, Badge, Icon, GenericComponentProps } from 'cocstorage-ui';
 
 import { IssueKeyword } from '@dto/issue-keywords';
 
 import { StyledIssueKeywordCard, Keyword } from './IssueKeywordCard.styles';
 
-interface IssueKeywordCardProps extends HTMLAttributes<HTMLDivElement> {
+interface IssueKeywordCardProps
+  extends Omit<
+    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+    'customStyle'
+  > {
   issueKeyword: IssueKeyword;
   isTopTier?: boolean;
 }
 
-function IssueKeywordCard({ issueKeyword, isTopTier = false, ...props }: IssueKeywordCardProps) {
+function IssueKeywordCard({
+  componentRef,
+  issueKeyword: { number, keyword, isNew, isUp, isDown },
+  isTopTier = false,
+  ...props
+}: IssueKeywordCardProps) {
   return (
-    <StyledIssueKeywordCard {...props}>
+    <StyledIssueKeywordCard ref={componentRef} {...props}>
       <Tag
         color={isTopTier ? 'accent' : 'semiAccent'}
-        text={String(issueKeyword.number)}
+        text={String(number)}
         customStyle={{
           display: 'flex',
           justifyContent: 'center',
@@ -25,11 +35,11 @@ function IssueKeywordCard({ issueKeyword, isTopTier = false, ...props }: IssueKe
       />
       <Keyword>
         <Typography component="div" fontWeight={700} lineHeight="18px">
-          {issueKeyword.keyword}
+          {keyword}
         </Typography>
       </Keyword>
-      {issueKeyword.isNew && <Badge severity="warning">NEW</Badge>}
-      {issueKeyword.isUp && (
+      {isNew && <Badge severity="warning">NEW</Badge>}
+      {isUp && (
         <Badge
           severity="success"
           startIcon={
@@ -42,7 +52,7 @@ function IssueKeywordCard({ issueKeyword, isTopTier = false, ...props }: IssueKe
           }
         />
       )}
-      {issueKeyword.isDown && <Badge severity="error" startIcon={<Icon name="PolyGon_12_12" />} />}
+      {isDown && <Badge severity="error" startIcon={<Icon name="PolyGon_12_12" />} />}
     </StyledIssueKeywordCard>
   );
 }

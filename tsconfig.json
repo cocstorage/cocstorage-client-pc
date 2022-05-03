@@ -6,12 +6,18 @@
       "@api/*": ["./src/api/*"],
       "@components": ["./src/components"],
       "@components/*": ["./src/components/*"],
+      "@constants": ["./src/constants"],
+      "@constants/*": ["./src/constants/*"],
       "@dto": ["./src/dto"],
       "@dto/*": ["./src/dto/*"],
       "@library": ["./src/library"],
       "@library/*": ["./src/library/*"],
       "@styles": ["./src/styles"],
-      "@styles/*": ["./src/styles/*"]
+      "@styles/*": ["./src/styles/*"],
+      "@types": ["./src/types"],
+      "@types/*": ["./src/types/*"],
+      "@utils": ["./src/utils"],
+      "@utils/*": ["./src/utils/*"]
     },
     "module": "esnext",
     "target": "es5",
@@ -39,6 +45,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "index.d.ts"
   ]
 }

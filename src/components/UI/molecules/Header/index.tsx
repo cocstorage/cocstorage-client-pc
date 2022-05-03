@@ -2,7 +2,7 @@ import React, { useState, useCallback, memo, ChangeEvent } from 'react';
 
 import { useTheme, Typography, TextBar, Icon, Tag } from 'cocstorage-ui';
 
-import { HeaderWrapper, StyledHeader, LogoWrapper, Logo, Tags, TagsInner } from './Header.styles';
+import { Wrapper, StyledHeader, LogoWrapper, Logo, Tags, TagsInner } from './Header.styles';
 
 function Header() {
   const {
@@ -17,7 +17,7 @@ function Header() {
   );
 
   return (
-    <HeaderWrapper>
+    <Wrapper>
       <StyledHeader theme={theme}>
         <LogoWrapper>
           <Logo
@@ -40,10 +40,7 @@ function Header() {
           customStyle={{
             maxWidth: 280,
             backgroundColor: palette.box.filled.normal,
-            borderColor: 'transparent',
-            '&:focus svg': {
-              color: 'inherit'
-            }
+            borderColor: 'transparent'
           }}
         />
         <Tags>
@@ -86,7 +83,7 @@ function Header() {
           />
         </Tags>
       </StyledHeader>
-    </HeaderWrapper>
+    </Wrapper>
   );
 }
 

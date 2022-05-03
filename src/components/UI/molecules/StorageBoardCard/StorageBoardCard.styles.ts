@@ -1,6 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { StorageBoardCardProps } from '.';
+import { StorageBoardCardProps } from './index';
 
 export const StyledStorageBoardCard = styled.div<Pick<StorageBoardCardProps, 'variant'>>`
   display: grid;
@@ -69,32 +69,20 @@ export const Thumbnail = styled.img`
   transform: translate(-50%, -50%);
 `;
 
-export const Content = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
 export const Storage = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 4px;
-`;
-
-export const Subject = styled.div`
-  flex-grow: 1;
 `;
 
 export const Info = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
 `;
 
-export const InfoLabel = styled.label`
+export const InfoLabel = styled.span`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 2.5px;
 `;

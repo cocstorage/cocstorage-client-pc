@@ -1,17 +1,21 @@
 import React, { memo, HTMLAttributes } from 'react';
 
-import { Avatar, Typography } from 'cocstorage-ui';
+import { Avatar, Typography, GenericComponentProps } from 'cocstorage-ui';
 
 import { StyledStorageCard } from './StorageCard.styles';
 
-interface StorageCardProps extends HTMLAttributes<HTMLDivElement> {
+interface StorageCardProps
+  extends Omit<
+    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+    'customStyle'
+  > {
   src: string;
   name: string;
 }
 
-function StorageCard({ src, name, ...props }: StorageCardProps) {
+function StorageCard({ componentRef, src, name, ...props }: StorageCardProps) {
   return (
-    <StyledStorageCard {...props}>
+    <StyledStorageCard ref={componentRef} {...props}>
       <Avatar width="36px" height="36px" round src={src} alt="Storage Logo Img" />
       <Typography component="div" lineHeight="14px">
         {name}
