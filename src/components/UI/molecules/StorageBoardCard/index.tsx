@@ -1,15 +1,7 @@
 import React, { useState, useCallback, useMemo, memo, HTMLAttributes } from 'react';
 import dayjs from 'dayjs';
 
-import {
-  useTheme,
-  Avatar,
-  Typography,
-  Icon,
-  Flexbox,
-  Badge,
-  GenericComponentProps
-} from 'cocstorage-ui';
+import { useTheme, Avatar, Typography, Icon, Flexbox, Badge } from 'cocstorage-ui';
 
 import { StorageBoard } from '@dto/storage-boards';
 
@@ -23,17 +15,12 @@ import {
   InfoLabel
 } from './StorageBoardCard.styles';
 
-export interface StorageBoardCardProps
-  extends Omit<
-    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'customStyle'
-  > {
+export interface StorageBoardCardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'emphasize' | 'normal' | 'compact';
   storageBoard: StorageBoard;
 }
 
 function StorageBoardCard({
-  componentRef,
   variant = 'compact',
   storageBoard: {
     storage: { name, avatarUrl },
@@ -43,7 +30,8 @@ function StorageBoardCard({
     thumbUp = 0,
     thumbnailUrl,
     createdAt
-  }
+  },
+  ...props
 }: StorageBoardCardProps) {
   const {
     theme,
@@ -64,7 +52,7 @@ function StorageBoardCard({
 
   if (variant === 'emphasize') {
     return (
-      <StyledStorageBoardCard ref={componentRef} variant={variant}>
+      <StyledStorageBoardCard variant={variant} {...props}>
         <ThumbnailWrapper theme={theme} variant={variant}>
           <ThumbnailInner>
             <Thumbnail width={246} src={src} alt="Thumbnail Img" onError={handleError} />
@@ -114,7 +102,7 @@ function StorageBoardCard({
 
   if (variant === 'normal') {
     return (
-      <StyledStorageBoardCard ref={componentRef} variant={variant}>
+      <StyledStorageBoardCard variant={variant} {...props}>
         <ThumbnailWrapper theme={theme} variant={variant}>
           <ThumbnailInner>
             <Thumbnail width={82} src={src} alt="Thumbnail Img" onError={handleError} />
@@ -161,7 +149,7 @@ function StorageBoardCard({
   }
 
   return (
-    <StyledStorageBoardCard ref={componentRef} variant={variant}>
+    <StyledStorageBoardCard variant={variant} {...props}>
       <Flexbox direction="vertical" justifyContent="space-between" gap={8}>
         <Typography component="div" lineHeight="18px" noWrap lineClamp={1}>
           {dayjs().diff(createdAt, 'day') <= 1 && (

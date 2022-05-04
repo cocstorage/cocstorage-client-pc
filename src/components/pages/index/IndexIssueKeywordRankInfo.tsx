@@ -1,26 +1,17 @@
 import React, { memo, HTMLAttributes } from 'react';
 
-import { Flexbox, GenericComponentProps } from 'cocstorage-ui';
+import { Flexbox } from 'cocstorage-ui';
 
 import { Footer, IssueKeywordCard, SideAccordion } from '@components/UI/molecules';
 import { IssueKeyword } from '@dto/issue-keywords';
 
-interface IssueKeywordRankInfoProps
-  extends Omit<
-    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'customStyle'
-  > {
+interface IssueKeywordRankInfoProps extends HTMLAttributes<HTMLDivElement> {
   ranks: IssueKeyword[];
 }
 
-function IndexIssueKeywordRankInfo({ componentRef, ranks }: IssueKeywordRankInfoProps) {
+function IndexIssueKeywordRankInfo({ ranks, ...props }: IssueKeywordRankInfoProps) {
   return (
-    <Flexbox
-      componentRef={componentRef}
-      direction="vertical"
-      gap={20}
-      customStyle={{ minWidth: 183 }}
-    >
+    <Flexbox direction="vertical" gap={20} customStyle={{ minWidth: 183 }} {...props}>
       <SideAccordion title="지금 막 뜨고 있어요!">
         {ranks.map((issueKeyword) => (
           <IssueKeywordCard

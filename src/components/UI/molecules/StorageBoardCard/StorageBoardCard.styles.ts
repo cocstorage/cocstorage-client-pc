@@ -31,7 +31,7 @@ export const ThumbnailWrapper = styled.div<Pick<StorageBoardCardProps, 'variant'
   padding-top: 56.25%;
   overflow: hidden;
 
-  background-color: ${({ theme: { palette } }) => palette.background.fg2};
+  background-color: ${({ theme: { palette } }) => palette.background.fg1};
 
   ${({ variant }): CSSObject => {
     switch (variant) {

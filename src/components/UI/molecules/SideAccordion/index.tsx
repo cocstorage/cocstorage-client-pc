@@ -1,20 +1,16 @@
 import React, { memo, PropsWithChildren, HTMLAttributes } from 'react';
 
-import { Typography, GenericComponentProps } from 'cocstorage-ui';
+import { Typography } from 'cocstorage-ui';
 
 import { StyledSideAccordion, List } from './SideAccordion.styles';
 
-interface SideAccordionProps
-  extends Omit<
-    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'customStyle'
-  > {
+interface SideAccordionProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
 }
 
-function SideAccordion({ componentRef, children, title }: PropsWithChildren<SideAccordionProps>) {
+function SideAccordion({ children, title, ...props }: PropsWithChildren<SideAccordionProps>) {
   return (
-    <StyledSideAccordion ref={componentRef}>
+    <StyledSideAccordion {...props}>
       <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
         {title}
       </Typography>

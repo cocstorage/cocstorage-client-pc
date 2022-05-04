@@ -1,26 +1,17 @@
 import React, { memo, HTMLAttributes } from 'react';
 
-import { Flexbox, Grid, Typography, GenericComponentProps } from 'cocstorage-ui';
+import { Flexbox, Grid, Typography } from 'cocstorage-ui';
 
 import { StorageBoardCard } from '@components/UI/molecules';
 import { StorageBoard } from '@dto/storage-boards';
 
-interface LatestStorageBoardsProps
-  extends Omit<
-    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'customStyle'
-  > {
+interface LatestStorageBoardsProps extends HTMLAttributes<HTMLDivElement> {
   latestStorageBoards: StorageBoard[];
 }
 
-function IndexLatestStorageBoards({ componentRef, latestStorageBoards }: LatestStorageBoardsProps) {
+function IndexLatestStorageBoards({ latestStorageBoards, ...props }: LatestStorageBoardsProps) {
   return (
-    <Flexbox
-      componentRef={componentRef}
-      direction="vertical"
-      gap={18}
-      customStyle={{ marginTop: 30 }}
-    >
+    <Flexbox direction="vertical" gap={18} customStyle={{ marginTop: 30 }} {...props}>
       <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
         최신 게시글
       </Typography>

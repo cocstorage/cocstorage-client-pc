@@ -1,43 +1,24 @@
 import React, { memo, HTMLAttributes } from 'react';
 
-import {
-  useTheme,
-  Button,
-  Flexbox,
-  Grid,
-  Icon,
-  Tag,
-  Typography,
-  GenericComponentProps
-} from 'cocstorage-ui';
+import { useTheme, Button, Flexbox, Grid, Icon, Tag, Typography } from 'cocstorage-ui';
 
 import { StorageBoardCard } from '@components/UI/molecules';
 import { StorageBoard } from '@dto/storage-boards';
 
-interface BestWorstStorageBoardsProps
-  extends Omit<
-    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'customStyle'
-  > {
+interface BestWorstStorageBoardsProps extends HTMLAttributes<HTMLDivElement> {
   popularStorageBoards: StorageBoard[];
 }
 
 function IndexBestWorstStorageBoards({
-  componentRef,
-  popularStorageBoards
+  popularStorageBoards,
+  ...props
 }: BestWorstStorageBoardsProps) {
   const {
     theme: { type, palette }
   } = useTheme();
 
   return (
-    <Grid
-      componentRef={componentRef}
-      container
-      columnGap={18}
-      rowGap={30}
-      customStyle={{ marginTop: 5 }}
-    >
+    <Grid container columnGap={18} rowGap={30} customStyle={{ marginTop: 5 }} {...props}>
       <Grid
         item
         xs={1}

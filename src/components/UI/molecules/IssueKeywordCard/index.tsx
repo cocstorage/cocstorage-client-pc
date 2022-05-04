@@ -1,28 +1,23 @@
 import React, { memo, HTMLAttributes } from 'react';
 
-import { Tag, Typography, Badge, Icon, GenericComponentProps } from 'cocstorage-ui';
+import { Tag, Typography, Badge, Icon } from 'cocstorage-ui';
 
 import { IssueKeyword } from '@dto/issue-keywords';
 
 import { StyledIssueKeywordCard, Keyword } from './IssueKeywordCard.styles';
 
-interface IssueKeywordCardProps
-  extends Omit<
-    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'customStyle'
-  > {
+interface IssueKeywordCardProps extends HTMLAttributes<HTMLDivElement> {
   issueKeyword: IssueKeyword;
   isTopTier?: boolean;
 }
 
 function IssueKeywordCard({
-  componentRef,
   issueKeyword: { number, keyword, isNew, isUp, isDown },
   isTopTier = false,
   ...props
 }: IssueKeywordCardProps) {
   return (
-    <StyledIssueKeywordCard ref={componentRef} {...props}>
+    <StyledIssueKeywordCard {...props}>
       <Tag
         color={isTopTier ? 'accent' : 'semiAccent'}
         text={String(number)}

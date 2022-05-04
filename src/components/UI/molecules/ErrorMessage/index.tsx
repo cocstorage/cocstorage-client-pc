@@ -1,33 +1,16 @@
 import React, { memo, HTMLAttributes } from 'react';
-import { Flexbox, Typography, Icon, Button, Tag, GenericComponentProps } from 'cocstorage-ui';
+import { Flexbox, Typography, Button, Tag, Icon } from 'cocstorage-ui';
 
-export interface ErrorMessageProps
-  extends Omit<
-    GenericComponentProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'customStyle'
-  > {
+export interface ErrorMessageProps extends HTMLAttributes<HTMLDivElement> {
   code?: string;
   title: string;
   message: string;
   onClose?: () => void;
 }
 
-function ErrorMessage({
-  componentRef,
-  code,
-  title,
-  message,
-  onClose,
-  ...props
-}: ErrorMessageProps) {
+function ErrorMessage({ code, title, message, onClose, ...props }: ErrorMessageProps) {
   return (
-    <Flexbox
-      componentRef={componentRef}
-      direction="vertical"
-      alignment="center"
-      gap={30}
-      {...props}
-    >
+    <Flexbox direction="vertical" alignment="center" gap={30} {...props}>
       <Flexbox direction="vertical" alignment="center" gap={20}>
         <Icon name="InfoOutlined" width={60} height={60} />
         <Flexbox direction="vertical" alignment="center" gap={6}>
