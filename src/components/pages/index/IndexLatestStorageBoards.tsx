@@ -21,6 +21,16 @@ function IndexLatestStorageBoards({ latestStorageBoards, ...props }: LatestStora
             <StorageBoardCard storageBoard={storageBoard} />
           </Grid>
         ))}
+        {latestStorageBoards.map((storageBoard) => (
+          <Grid key={`latest-storage-board-${storageBoard.id}`} item xs={1} sm={1} md={2}>
+            <StorageBoardCard storageBoard={storageBoard} />
+          </Grid>
+        ))}
+        {latestStorageBoards.map((storageBoard) => (
+          <Grid key={`latest-storage-board-${storageBoard.id}`} item xs={1} sm={1} md={2}>
+            <StorageBoardCard storageBoard={storageBoard} />
+          </Grid>
+        ))}
       </Grid>
     </Flexbox>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { QueryClient, dehydrate, useQuery } from 'react-query';
 
 import { Grid, Alert, Icon, IconButton } from 'cocstorage-ui';
@@ -24,26 +24,49 @@ function Index() {
     queryKeys.storageBoards.popularStorageBoards,
     fetchPopularStorageBoards
   );
-
   const { data: latestStorageBoards = [] } = useQuery(
     queryKeys.storageBoards.latestStorageBoards,
     fetchLatestStorageBoards
   );
-
   const { data: { ranks = [] } = {} } = useQuery(
     queryKeys.issueKeywords.issueKeywordRank,
     fetchIssueKeywordRank
   );
-
   const { data: { notices = [] } = {} } = useQuery(queryKeys.notices.notices, fetchNotices);
 
+  const [fixed, setFixed] = useState<boolean>(false);
+
+  const gridRef = useRef<HTMLDivElement | null>(null);
+
+  const handleScroll = useCallback(() => {
+    if (gridRef.current) {
+      const { top = 0 } = gridRef.current?.getBoundingClientRect() || {};
+      const { scrollY } = window;
+      const { scrollTop } = document.documentElement;
+
+      if (top + scrollY < scrollTop && !fixed) {
+        setFixed(true);
+      } else if (scrollY <= 0 && fixed) {
+        setFixed(false);
+      }
+    }
+  }, [fixed]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
+
   return (
-    <GeneralTemplate header={<Header />}>
+    <GeneralTemplate header={<Header fixed={fixed} />}>
       <Grid container columnGap={20}>
         <Grid item lgHidden>
           <IndexPopularStorages />
         </Grid>
-        <Grid item auto>
+        <Grid ref={gridRef} item auto>
           {notices.length > 0 && (
             <Alert
               severity="info"
