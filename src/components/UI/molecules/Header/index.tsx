@@ -34,7 +34,7 @@ function Header({ scrollFixedTrigger, ...props }: HeaderProps) {
             <Logo
               width={34}
               height={24}
-              src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
+              src="https://static.cocstorage.com/assets/logo.png"
               alt="Logo Img"
             />
             <Hidden lgHidden>

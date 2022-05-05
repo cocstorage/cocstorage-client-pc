@@ -15,7 +15,7 @@ function IndexIssueKeywordRankInfo() {
   );
 
   return (
-    <Box customStyle={{ minWidth: 183 }}>
+    <Box customStyle={{ minWidth: 183, whiteSpace: 'nowrap' }}>
       <Flexbox direction="vertical" gap={20} customStyle={{ position: 'fixed' }}>
         <SideAccordion title="지금 막 뜨고 있어요!">
           {ranks.map((issueKeyword) => (

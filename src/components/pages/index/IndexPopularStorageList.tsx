@@ -6,7 +6,7 @@ import { SideAccordion, StorageCard } from '@components/UI/molecules';
 
 function IndexPopularStorageList() {
   return (
-    <Flexbox direction="vertical" gap={30} customStyle={{ minWidth: 183 }}>
+    <Flexbox direction="vertical" gap={30} customStyle={{ minWidth: 183, whiteSpace: 'nowrap' }}>
       <Box customStyle={{ position: 'fixed' }}>
         <SideAccordion title="인기 게시판">
           <StorageCard

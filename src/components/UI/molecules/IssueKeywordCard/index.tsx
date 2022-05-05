@@ -35,20 +35,10 @@ function IssueKeywordCard({
         </Typography>
       </Keyword>
       {isNew && <Badge severity="warning">NEW</Badge>}
-      {isUp && (
-        <Badge
-          severity="success"
-          startIcon={
-            <Icon
-              name="PolyGon_12_12"
-              customStyle={{
-                transform: 'rotate(180deg)'
-              }}
-            />
-          }
-        />
+      {isUp && <Badge severity="success" startIcon={<Icon name="ArrowDropTopSpecify_12_12" />} />}
+      {isDown && (
+        <Badge severity="error" startIcon={<Icon name="ArrowDropBottomSpecify_12_12" />} />
       )}
-      {isDown && <Badge severity="error" startIcon={<Icon name="PolyGon_12_12" />} />}
     </StyledIssueKeywordCard>
   );
 }
