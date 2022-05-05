@@ -35,10 +35,8 @@ function IssueKeywordCard({
         </Typography>
       </Keyword>
       {isNew && <Badge severity="warning">NEW</Badge>}
-      {isUp && <Badge severity="success" startIcon={<Icon name="ArrowDropTopSpecify_12_12" />} />}
-      {isDown && (
-        <Badge severity="error" startIcon={<Icon name="ArrowDropBottomSpecify_12_12" />} />
-      )}
+      {isUp && <Badge severity="success" startIcon={<Icon name="ArrowDropUpSpecify_12_12" />} />}
+      {isDown && <Badge severity="error" startIcon={<Icon name="ArrowDropDownSpecify_12_12" />} />}
     </StyledIssueKeywordCard>
   );
 }

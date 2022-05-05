@@ -54,13 +54,10 @@ function IndexBestWorstStorageBoardGrid() {
           </Flexbox>
           <Button
             color="transparent"
-            endIcon={<Icon name="CaretSemiLeftOutlined" width={16} height={16} />}
+            size="pico"
+            endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
             customStyle={{
-              fontSize: 12,
-              color: palette.text[type].text1,
-              '& > svg': {
-                transform: 'rotate(180deg)'
-              }
+              color: palette.text[type].text1
             }}
           >
             더보기
@@ -119,13 +116,10 @@ function IndexBestWorstStorageBoardGrid() {
           </Flexbox>
           <Button
             color="transparent"
-            endIcon={<Icon name="CaretSemiLeftOutlined" width={16} height={16} />}
+            size="pico"
+            endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
             customStyle={{
-              fontSize: 12,
-              color: palette.text[type].text1,
-              '& > svg': {
-                transform: 'rotate(180deg)'
-              }
+              color: palette.text[type].text1
             }}
           >
             더보기

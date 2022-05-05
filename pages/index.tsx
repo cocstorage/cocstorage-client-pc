@@ -1,13 +1,13 @@
 import React from 'react';
 import { QueryClient, dehydrate } from 'react-query';
 
-import { Grid } from 'cocstorage-ui';
+import { Box, Grid } from 'cocstorage-ui';
 
 import { Header } from '@components/UI/molecules';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 
 import {
-  IndexPopularStorageList,
+  IndexLeftMenu,
   IndexBestWorstStorageBoardGrid,
   IndexNoticeAlert,
   IndexIssueKeywordRankInfo,
@@ -24,16 +24,20 @@ function Index() {
   return (
     <GeneralTemplate header={<Header scrollFixedTrigger />}>
       <Grid container columnGap={20}>
-        <Grid item lgHidden>
-          <IndexPopularStorageList />
+        <Grid item lgHidden customStyle={{ minWidth: 203 }}>
+          <Box customStyle={{ position: 'fixed', width: 183 }}>
+            <IndexLeftMenu />
+          </Box>
         </Grid>
         <Grid item auto>
           <IndexNoticeAlert />
           <IndexBestWorstStorageBoardGrid />
           <IndexLatestStorageBoardGrid />
         </Grid>
-        <Grid item>
-          <IndexIssueKeywordRankInfo />
+        <Grid item customStyle={{ minWidth: 203 }}>
+          <Box customStyle={{ position: 'fixed', width: 183 }}>
+            <IndexIssueKeywordRankInfo />
+          </Box>
         </Grid>
       </Grid>
     </GeneralTemplate>
