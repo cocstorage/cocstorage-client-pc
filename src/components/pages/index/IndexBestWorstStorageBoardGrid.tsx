@@ -1,24 +1,25 @@
-import React, { memo, HTMLAttributes } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
 
 import { useTheme, Button, Flexbox, Grid, Icon, Tag, Typography } from 'cocstorage-ui';
 
 import { StorageBoardCard } from '@components/UI/molecules';
-import { StorageBoard } from '@dto/storage-boards';
 
-interface BestWorstStorageBoardsProps extends HTMLAttributes<HTMLDivElement> {
-  popularStorageBoards: StorageBoard[];
-}
+import { fetchPopularStorageBoards } from '@api/v1/storage-boards';
+import queryKeys from '@constants/react-query';
 
-function IndexBestWorstStorageBoards({
-  popularStorageBoards,
-  ...props
-}: BestWorstStorageBoardsProps) {
+function IndexBestWorstStorageBoardGrid() {
   const {
     theme: { type, palette }
   } = useTheme();
 
+  const { data: popularStorageBoards = [] } = useQuery(
+    queryKeys.storageBoards.popularStorageBoards,
+    fetchPopularStorageBoards
+  );
+
   return (
-    <Grid container columnGap={18} rowGap={30} customStyle={{ marginTop: 5 }} {...props}>
+    <Grid container columnGap={18} rowGap={30} customStyle={{ marginTop: 5 }}>
       <Grid
         item
         xs={1}
@@ -142,4 +143,4 @@ function IndexBestWorstStorageBoards({
   );
 }
 
-export default memo(IndexBestWorstStorageBoards);
+export default IndexBestWorstStorageBoardGrid;

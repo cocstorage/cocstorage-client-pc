@@ -1,8 +1,8 @@
 import styled, { CSSObject } from '@emotion/styled';
 
-import { HeaderProps } from '.';
-
-export const StyledHeader = styled.header<Pick<HeaderProps, 'fixed'>>`
+export const StyledHeader = styled.header<{
+  scrollFixed?: boolean;
+}>`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -11,14 +11,14 @@ export const StyledHeader = styled.header<Pick<HeaderProps, 'fixed'>>`
 
   background-color: ${({ theme: { palette } }) => palette.background.bg};
 
-  ${({ theme: { palette }, fixed }): CSSObject =>
-    fixed
+  ${({ theme: { palette }, scrollFixed }): CSSObject =>
+    scrollFixed
       ? {
           position: 'fixed',
           top: 0,
           left: 0,
           zIndex: 1,
-          animation: 'slideDown .5s forwards',
+          animation: 'slideDown .2s forwards',
           borderColor: palette.box.stroked.normal
         }
       : {}}
@@ -34,13 +34,22 @@ export const StyledHeader = styled.header<Pick<HeaderProps, 'fixed'>>`
   }
 `;
 
-export const HeaderInner = styled.div`
+export const HeaderInner = styled.div<{
+  scrollFixed?: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: ${({ theme: { breakpoints } }) => `calc(${breakpoints.xl}px - 40px)`};
+  max-width: ${({ theme: { breakpoints } }) => `${breakpoints.xl}px`};
   gap: 8px;
+
+  ${({ scrollFixed }): CSSObject =>
+    scrollFixed
+      ? {
+          padding: '0 20px'
+        }
+      : {}};
 `;
 
 export const Logo = styled.img``;

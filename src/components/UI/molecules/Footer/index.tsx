@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 import { useTheme, Typography } from 'cocstorage-ui';
@@ -31,4 +31,4 @@ function Footer() {
   );
 }
 
-export default memo(Footer);
+export default Footer;

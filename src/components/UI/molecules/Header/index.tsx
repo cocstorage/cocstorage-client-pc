@@ -1,29 +1,66 @@
-import React, { useState, useCallback, memo, ChangeEvent, HTMLAttributes } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  ChangeEvent,
+  HTMLAttributes
+} from 'react';
 
 import { useTheme, Typography, TextBar, Icon, Tag, Flexbox, Box } from 'cocstorage-ui';
 
 import { StyledHeader, HeaderInner, Logo } from './Header.styles';
 
-export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
-  fixed?: boolean;
+interface HeaderProps extends HTMLAttributes<HTMLHeadElement> {
+  scrollFixedTrigger?: boolean;
 }
 
-function Header({ fixed = false, ...props }: HeaderProps) {
+function Header({ scrollFixedTrigger, ...props }: HeaderProps) {
   const {
     theme,
     theme: { type, palette }
   } = useTheme();
+
+  const [scrollFixed, setScrollFixed] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
+
+  const headerRef = useRef<HTMLHeadElement | null>(null);
+
+  const handleScroll = useCallback(() => {
+    if (!headerRef.current) return;
+
+    const { top = 0 } = headerRef.current?.getBoundingClientRect() || {};
+    const { scrollY } = window;
+    const { scrollTop } = document.documentElement;
+
+    if (top + scrollY < scrollTop && !scrollFixed) {
+      setScrollFixed(true);
+    } else if (scrollTop <= 0 && scrollFixed) {
+      setScrollFixed(false);
+    }
+  }, [scrollFixed]);
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setValue(event.currentTarget.value),
     []
   );
 
+  useEffect(() => {
+    if (scrollFixedTrigger) {
+      window.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (scrollFixedTrigger) {
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [scrollFixedTrigger, handleScroll]);
+
   return (
     <>
-      <StyledHeader theme={theme} fixed={fixed} {...props}>
-        <HeaderInner theme={theme}>
+      <StyledHeader ref={headerRef} theme={theme} scrollFixed={scrollFixed} {...props}>
+        <HeaderInner theme={theme} scrollFixed={scrollFixed}>
           <Flexbox gap={8}>
             <Logo
               width={34}
@@ -89,9 +126,11 @@ function Header({ fixed = false, ...props }: HeaderProps) {
           </Flexbox>
         </HeaderInner>
       </StyledHeader>
-      {fixed && <Box customStyle={{ height: 73 }} />}
+      {scrollFixed && (
+        <Box customStyle={{ height: headerRef.current ? headerRef.current?.clientHeight : 73 }} />
+      )}
     </>
   );
 }
 
-export default memo(Header);
+export default Header;

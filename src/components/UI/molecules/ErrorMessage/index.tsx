@@ -1,4 +1,4 @@
-import React, { memo, HTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { Flexbox, Typography, Button, Tag, Icon } from 'cocstorage-ui';
 
 export interface ErrorMessageProps extends HTMLAttributes<HTMLDivElement> {
@@ -31,4 +31,4 @@ function ErrorMessage({ code, title, message, onClose, ...props }: ErrorMessageP
   );
 }
 
-export default memo(ErrorMessage);
+export default ErrorMessage;

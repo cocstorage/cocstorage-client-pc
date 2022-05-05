@@ -1,17 +1,21 @@
-import React, { memo, HTMLAttributes } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
 
 import { Flexbox, Grid, Typography } from 'cocstorage-ui';
 
 import { StorageBoardCard } from '@components/UI/molecules';
-import { StorageBoard } from '@dto/storage-boards';
 
-interface LatestStorageBoardsProps extends HTMLAttributes<HTMLDivElement> {
-  latestStorageBoards: StorageBoard[];
-}
+import { fetchLatestStorageBoards } from '@api/v1/storage-boards';
+import queryKeys from '@constants/react-query';
 
-function IndexLatestStorageBoards({ latestStorageBoards, ...props }: LatestStorageBoardsProps) {
+function IndexLatestStorageBoardGrid() {
+  const { data: latestStorageBoards = [] } = useQuery(
+    queryKeys.storageBoards.latestStorageBoards,
+    fetchLatestStorageBoards
+  );
+
   return (
-    <Flexbox direction="vertical" gap={18} customStyle={{ marginTop: 30 }} {...props}>
+    <Flexbox direction="vertical" gap={18} customStyle={{ marginTop: 30 }}>
       <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
         최신 게시글
       </Typography>
@@ -36,4 +40,4 @@ function IndexLatestStorageBoards({ latestStorageBoards, ...props }: LatestStora
   );
 }
 
-export default memo(IndexLatestStorageBoards);
+export default IndexLatestStorageBoardGrid;
