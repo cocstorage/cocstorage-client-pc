@@ -1,13 +1,8 @@
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useRef,
-  ChangeEvent,
-  HTMLAttributes
-} from 'react';
+import React, { useState, useCallback, useRef, ChangeEvent, HTMLAttributes } from 'react';
 
 import { useTheme, Typography, TextBar, Icon, Tag, Flexbox, Box } from 'cocstorage-ui';
+
+import useScrollTrigger from '@hooks/useScrollTrigger';
 
 import { StyledHeader, HeaderInner, Logo } from './Header.styles';
 
@@ -20,42 +15,16 @@ function Header({ scrollFixedTrigger, ...props }: HeaderProps) {
     theme,
     theme: { type, palette }
   } = useTheme();
-
-  const [scrollFixed, setScrollFixed] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
 
   const headerRef = useRef<HTMLHeadElement | null>(null);
 
-  const handleScroll = useCallback(() => {
-    if (!headerRef.current) return;
-
-    const { top = 0 } = headerRef.current?.getBoundingClientRect() || {};
-    const { scrollY } = window;
-    const { scrollTop } = document.documentElement;
-
-    if (top + scrollY < scrollTop && !scrollFixed) {
-      setScrollFixed(true);
-    } else if (scrollTop <= 0 && scrollFixed) {
-      setScrollFixed(false);
-    }
-  }, [scrollFixed]);
+  const { scrollFixed } = useScrollTrigger({ trigger: scrollFixedTrigger, ref: headerRef });
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setValue(event.currentTarget.value),
     []
   );
-
-  useEffect(() => {
-    if (scrollFixedTrigger) {
-      window.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (scrollFixedTrigger) {
-        window.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [scrollFixedTrigger, handleScroll]);
 
   return (
     <>
@@ -127,7 +96,7 @@ function Header({ scrollFixedTrigger, ...props }: HeaderProps) {
         </HeaderInner>
       </StyledHeader>
       {scrollFixed && (
-        <Box customStyle={{ height: headerRef.current ? headerRef.current?.clientHeight : 73 }} />
+        <Box customStyle={{ height: headerRef.current ? headerRef.current?.clientHeight : 70 }} />
       )}
     </>
   );

@@ -6,7 +6,7 @@ export const StyledHeader = styled.header<{
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 72px;
+  height: 70px;
   border-bottom: 1px solid transparent;
 
   background-color: ${({ theme: { palette } }) => palette.background.bg};
