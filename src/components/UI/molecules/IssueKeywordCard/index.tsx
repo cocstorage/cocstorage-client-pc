@@ -20,14 +20,15 @@ function IssueKeywordCard({
     <StyledIssueKeywordCard {...props}>
       <Tag
         color={isTopTier ? 'accent' : 'semiAccent'}
-        text={String(number)}
         customStyle={{
           display: 'flex',
           justifyContent: 'center',
           width: 24,
           height: 24
         }}
-      />
+      >
+        {number}
+      </Tag>
       <Keyword>
         <Typography component="div" fontWeight={700} lineHeight="18px">
           {keyword}

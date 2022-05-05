@@ -36,7 +36,6 @@ function IndexBestWorstStorageBoardGrid() {
           <Flexbox alignment="center" justifyContent="space-between" gap={8}>
             <Tag
               color="semiAccent"
-              text="베스트"
               startIcon={<Icon name="ThumbsUpOutlined" width={14} height={14} />}
               customStyle={{
                 padding: '0 6px',
@@ -46,7 +45,9 @@ function IndexBestWorstStorageBoardGrid() {
                 lineHeight: '18px',
                 letterSpacing: '-0.6px'
               }}
-            />
+            >
+              베스트
+            </Tag>
             <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
               오 좋아요!
             </Typography>
@@ -91,7 +92,6 @@ function IndexBestWorstStorageBoardGrid() {
           <Flexbox alignment="center" justifyContent="space-between" gap={8}>
             <Tag
               color="semiAccent"
-              text="워스트"
               startIcon={
                 <Icon
                   name="ThumbsDownOutlined"
@@ -110,7 +110,9 @@ function IndexBestWorstStorageBoardGrid() {
                 backgroundColor: palette.secondary.red.bg,
                 color: palette.secondary.red.main
               }}
-            />
+            >
+              베스트
+            </Tag>
             <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
               이건 좀...
             </Typography>

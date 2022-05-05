@@ -21,17 +21,7 @@ function IndexLatestStorageBoardGrid() {
       </Typography>
       <Grid container columnGap={20} rowGap={20}>
         {latestStorageBoards.map((storageBoard) => (
-          <Grid key={`latest-storage-board-${storageBoard.id}`} item xs={1} sm={1} md={2}>
-            <StorageBoardCard storageBoard={storageBoard} />
-          </Grid>
-        ))}
-        {latestStorageBoards.map((storageBoard) => (
-          <Grid key={`latest-storage-board-${storageBoard.id}`} item xs={1} sm={1} md={2}>
-            <StorageBoardCard storageBoard={storageBoard} />
-          </Grid>
-        ))}
-        {latestStorageBoards.map((storageBoard) => (
-          <Grid key={`latest-storage-board-${storageBoard.id}`} item xs={1} sm={1} md={2}>
+          <Grid key={`latest-storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
             <StorageBoardCard storageBoard={storageBoard} />
           </Grid>
         ))}

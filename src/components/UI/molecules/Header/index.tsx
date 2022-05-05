@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, ChangeEvent, HTMLAttributes } from 'react';
 
-import { useTheme, Typography, TextBar, Icon, Tag, Flexbox, Box } from 'cocstorage-ui';
+import { useTheme, Typography, TextBar, Icon, Tag, Flexbox, Box, Hidden } from 'cocstorage-ui';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
@@ -37,9 +37,11 @@ function Header({ scrollFixedTrigger, ...props }: HeaderProps) {
               src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
               alt="Logo Img"
             />
-            <Typography fontSize="18px">
-              <strong>개념글’</strong>저장소
-            </Typography>
+            <Hidden lgHidden>
+              <Typography fontSize="18px">
+                <strong>개념글’</strong>저장소
+              </Typography>
+            </Hidden>
           </Flexbox>
           <TextBar
             fullWidth
@@ -59,31 +61,32 @@ function Header({ scrollFixedTrigger, ...props }: HeaderProps) {
               <Tag
                 color="semiAccent"
                 startIcon={<Icon name="HomeFilled" width={16} />}
-                text="홈"
                 customStyle={{
                   display: 'flex',
                   alignItems: 'center',
-                  height: 26,
+                  height: 32,
                   cursor: 'pointer'
                 }}
-              />
+              >
+                <Hidden lgHidden>홈</Hidden>
+              </Tag>
               <Tag
                 color="transparent"
                 startIcon={<Icon name="CommunityFilled" width={16} />}
-                text="게시판"
                 customStyle={{
-                  height: 26,
+                  height: 32,
                   padding: 0,
                   cursor: 'pointer'
                 }}
-              />
+              >
+                <Hidden lgHidden>게시판</Hidden>
+              </Tag>
             </Flexbox>
             <Tag
               color="transparent"
               startIcon={<Icon name="LoginOutlined" width={16} />}
-              text="로그인"
               customStyle={{
-                height: 26,
+                height: 32,
                 padding: 0,
                 color: palette.text[type].main,
                 '& svg path': {
@@ -91,7 +94,9 @@ function Header({ scrollFixedTrigger, ...props }: HeaderProps) {
                 },
                 cursor: 'pointer'
               }}
-            />
+            >
+              <Hidden lgHidden>로그인</Hidden>
+            </Tag>
           </Flexbox>
         </HeaderInner>
       </StyledHeader>
