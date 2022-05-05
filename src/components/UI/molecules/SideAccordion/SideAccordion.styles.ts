@@ -21,7 +21,7 @@ export const List = styled.div<
   ${({ disableToggle, toggleList, toggleListMaxHeight }): CSSObject =>
     !disableToggle
       ? {
-          maxHeight: toggleList ? toggleListMaxHeight : '100%',
+          maxHeight: toggleList ? toggleListMaxHeight : toggleListMaxHeight * 2,
           overflowY: 'auto'
         }
       : {}};

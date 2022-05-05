@@ -19,6 +19,8 @@ function SideAccordion({
     theme: { type, palette }
   } = useTheme();
 
+  const [openToggleButton, setOpenToggleButton] = useState<boolean>(true);
+
   const [toggleList, setToggleList] = useState<boolean>(true);
   const [toggleListMaxHeight, setToggleListMaxHeight] = useState<number>(144);
   const [toggleCount] = useState<number>(5);
@@ -29,7 +31,11 @@ function SideAccordion({
 
   useEffect(() => {
     if (!disableToggle && listRef.current) {
-      const { firstElementChild } = listRef.current;
+      const { firstElementChild, childElementCount } = listRef.current;
+
+      if (childElementCount < toggleCount) {
+        setOpenToggleButton(false);
+      }
 
       if (firstElementChild) {
         setToggleListMaxHeight(firstElementChild.clientHeight * toggleCount);
@@ -43,7 +49,7 @@ function SideAccordion({
         <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
           {title}
         </Typography>
-        {!disableToggle && (
+        {openToggleButton && !disableToggle && (
           <Button
             color="transparent"
             size="pico"
