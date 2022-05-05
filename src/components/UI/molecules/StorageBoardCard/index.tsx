@@ -52,12 +52,14 @@ function StorageBoardCard({
 
   if (variant === 'emphasize') {
     return (
-      <StyledStorageBoardCard variant={variant} {...props}>
-        <ThumbnailWrapper theme={theme} variant={variant}>
-          <ThumbnailInner>
-            <Thumbnail width={246} src={src} alt="Thumbnail Img" onError={handleError} />
-          </ThumbnailInner>
-        </ThumbnailWrapper>
+      <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
+        {thumbnailUrl && (
+          <ThumbnailWrapper theme={theme} variant={variant}>
+            <ThumbnailInner>
+              <Thumbnail width={246} src={src} alt="Thumbnail Img" onError={handleError} />
+            </ThumbnailInner>
+          </ThumbnailWrapper>
+        )}
         <Flexbox direction="vertical" justifyContent="space-between">
           <Flexbox direction="vertical" gap={8}>
             <Storage>
@@ -102,12 +104,14 @@ function StorageBoardCard({
 
   if (variant === 'normal') {
     return (
-      <StyledStorageBoardCard variant={variant} {...props}>
-        <ThumbnailWrapper theme={theme} variant={variant}>
-          <ThumbnailInner>
-            <Thumbnail width={82} src={src} alt="Thumbnail Img" onError={handleError} />
-          </ThumbnailInner>
-        </ThumbnailWrapper>
+      <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
+        {thumbnailUrl && (
+          <ThumbnailWrapper theme={theme} variant={variant}>
+            <ThumbnailInner>
+              <Thumbnail width={82} src={src} alt="Thumbnail Img" onError={handleError} />
+            </ThumbnailInner>
+          </ThumbnailWrapper>
+        )}
         <Flexbox direction="vertical" justifyContent="space-between" gap={8}>
           <Typography component="div" lineHeight="18px" noWrap lineClamp={2}>
             {subject}
@@ -149,7 +153,7 @@ function StorageBoardCard({
   }
 
   return (
-    <StyledStorageBoardCard variant={variant} {...props}>
+    <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
       <Flexbox direction="vertical" justifyContent="space-between" gap={8}>
         <Typography component="div" lineHeight="18px" noWrap lineClamp={1}>
           {dayjs().diff(createdAt, 'day') <= 1 && (
@@ -197,11 +201,13 @@ function StorageBoardCard({
           </Storage>
         </Info>
       </Flexbox>
-      <ThumbnailWrapper theme={theme} variant={variant}>
-        <ThumbnailInner>
-          <Thumbnail width={61} src={src} alt="Thumbnail Img" onError={handleError} />
-        </ThumbnailInner>
-      </ThumbnailWrapper>
+      {thumbnailUrl && (
+        <ThumbnailWrapper theme={theme} variant={variant}>
+          <ThumbnailInner>
+            <Thumbnail width={61} src={src} alt="Thumbnail Img" onError={handleError} />
+          </ThumbnailInner>
+        </ThumbnailWrapper>
+      )}
     </StyledStorageBoardCard>
   );
 }

@@ -2,28 +2,38 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { StorageBoardCardProps } from './index';
 
-export const StyledStorageBoardCard = styled.div<Pick<StorageBoardCardProps, 'variant'>>`
+export const StyledStorageBoardCard = styled.div<
+  Pick<StorageBoardCardProps, 'variant'> & {
+    hasThumbnail: boolean;
+  }
+>`
   display: grid;
-  column-gap: 14px;
   cursor: pointer;
 
-  ${({ variant }): CSSObject => {
+  ${({ variant, hasThumbnail }): CSSObject => {
     switch (variant) {
       case 'emphasize':
         return {
-          gridTemplateColumns: '183px 1fr'
+          gridTemplateColumns: !hasThumbnail ? 'auto 1fr' : '183px 1fr'
         };
       case 'normal':
         return {
-          gridTemplateColumns: '82px 1fr',
+          gridTemplateColumns: !hasThumbnail ? 'auto 1fr' : '82px 1fr',
           minHeight: 60
         };
       default:
         return {
-          gridTemplateColumns: '1fr 61px'
+          gridTemplateColumns: !hasThumbnail ? '1fr auto' : '1fr 61px'
         };
     }
   }}
+
+  ${({ hasThumbnail }): CSSObject =>
+    hasThumbnail
+      ? {
+          columnGap: 14
+        }
+      : {}}
 `;
 
 export const ThumbnailWrapper = styled.div<Pick<StorageBoardCardProps, 'variant'>>`
