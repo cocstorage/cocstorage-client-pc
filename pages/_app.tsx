@@ -9,9 +9,9 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 import type { AxiosError } from 'axios';
 
-import { ThemeProvider, GlobalStyles, Dialog, Box } from 'cocstorage-ui';
+import { ThemeProvider, GlobalStyles } from 'cocstorage-ui';
 
-import ErrorMessage from '@components/UI/molecules/ErrorMessage';
+import MessageDialog from '@components/UI/organisms/MessageDialog';
 import { getErrorMessageByCode } from '@utils';
 
 import '@styles/base.css';
@@ -98,11 +98,7 @@ function App({ Component, pageProps }: AppProps) {
             <Hydrate state={pageProps.dehydratedState}>
               <Component {...pageProps} />
             </Hydrate>
-            <Dialog open={open} onClose={handleClose}>
-              <Box customStyle={{ padding: 16 }}>
-                <ErrorMessage {...errorMessage} onClose={handleClose} />
-              </Box>
-            </Dialog>
+            <MessageDialog open={open} onClose={handleClose} {...errorMessage} />
           </ThemeProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

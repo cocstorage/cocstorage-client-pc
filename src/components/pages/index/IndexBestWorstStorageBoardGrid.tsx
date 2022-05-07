@@ -18,6 +18,8 @@ function IndexBestWorstStorageBoardGrid() {
     fetchPopularStorageBoards
   );
 
+  if (popularStorageBoards.length === 0) return null;
+
   return (
     <Grid container columnGap={18} rowGap={30} customStyle={{ marginTop: 5 }}>
       <Grid

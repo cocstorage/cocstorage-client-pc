@@ -4,4 +4,4 @@ export { default as StorageCard } from './StorageCard';
 export { default as StorageBoardCard } from './StorageBoardCard';
 export { default as SideAccordion } from './SideAccordion';
 export { default as IssueKeywordCard } from './IssueKeywordCard';
-export { default as ErrorMessage } from './ErrorMessage';
+export { default as Message } from './Message';

@@ -1,14 +1,15 @@
 import React, { HTMLAttributes } from 'react';
+
 import { Flexbox, Typography, Button, Tag, Icon } from 'cocstorage-ui';
 
-export interface ErrorMessageProps extends HTMLAttributes<HTMLDivElement> {
+export interface MessageProps extends HTMLAttributes<HTMLDivElement> {
   code?: string;
   title: string;
   message: string;
   onClose?: () => void;
 }
 
-function ErrorMessage({ code, title, message, onClose, ...props }: ErrorMessageProps) {
+function Message({ code, title, message, onClose, ...props }: MessageProps) {
   return (
     <Flexbox direction="vertical" alignment="center" gap={30} {...props}>
       <Flexbox direction="vertical" alignment="center" gap={20}>
@@ -17,7 +18,11 @@ function ErrorMessage({ code, title, message, onClose, ...props }: ErrorMessageP
           <Typography fontSize={22} fontWeight={700} lineHeight="28px">
             {title}
           </Typography>
-          {code && <Tag text={`CODE: ${code}`} color="accent" customStyle={{ margin: '8px 0' }} />}
+          {code && (
+            <Tag color="accent" customStyle={{ margin: '8px 0' }}>
+              CODE: {code}
+            </Tag>
+          )}
           <Typography
             fontSize="14px"
             fontWeight={500}
@@ -31,4 +36,4 @@ function ErrorMessage({ code, title, message, onClose, ...props }: ErrorMessageP
   );
 }
 
-export default ErrorMessage;
+export default Message;

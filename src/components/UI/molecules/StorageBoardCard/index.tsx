@@ -39,8 +39,10 @@ function StorageBoardCard({
   } = useTheme();
 
   const [loadFailed, setLoadFailed] = useState<boolean>(false);
+  const [storageLogoLoadFailed, setStorageLogoLoadFailed] = useState<boolean>(false);
 
   const handleError = useCallback(() => setLoadFailed(true), []);
+  const handleStorageLogoError = useCallback(() => setStorageLogoLoadFailed(true), []);
 
   const src = useMemo<string>(() => {
     if (loadFailed || !thumbnailUrl) {
@@ -49,6 +51,14 @@ function StorageBoardCard({
 
     return thumbnailUrl;
   }, [thumbnailUrl, loadFailed]);
+
+  const storageSrc = useMemo<string>(() => {
+    if (storageLogoLoadFailed || !avatarUrl) {
+      return 'https://static.cocstorage.com/assets/thumbnail.png';
+    }
+
+    return avatarUrl;
+  }, [avatarUrl, storageLogoLoadFailed]);
 
   if (variant === 'emphasize') {
     return (
@@ -61,7 +71,14 @@ function StorageBoardCard({
         <Flexbox direction="vertical" justifyContent="space-between">
           <Flexbox direction="vertical" gap={8}>
             <Storage>
-              <Avatar round width="14px" height="14px" src={avatarUrl || ''} alt="Storage Img" />
+              <Avatar
+                round
+                width="14px"
+                height="14px"
+                src={storageSrc}
+                alt="Storage Img"
+                onError={handleStorageLogoError}
+              />
               <Typography
                 component="span"
                 fontSize="10px"
@@ -132,7 +149,13 @@ function StorageBoardCard({
               </Typography>
             </InfoLabel>
             <Storage>
-              <Avatar width="14px" height="14px" src={avatarUrl || ''} alt="Storage Img" />
+              <Avatar
+                width="14px"
+                height="14px"
+                src={storageSrc}
+                alt="Storage Img"
+                onError={handleStorageLogoError}
+              />
               <Typography
                 component="span"
                 fontSize="10px"
@@ -151,7 +174,15 @@ function StorageBoardCard({
   return (
     <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
       <Flexbox direction="vertical" justifyContent="space-between" gap={8}>
-        <Typography component="div" lineHeight="18px" noWrap lineClamp={1}>
+        <Typography
+          component="div"
+          lineHeight="18px"
+          noWrap
+          lineClamp={1}
+          customStyle={{
+            textAlign: 'left'
+          }}
+        >
           {dayjs().diff(createdAt, 'day') <= 1 && (
             <Badge
               severity="success"
@@ -185,7 +216,14 @@ function StorageBoardCard({
             </Typography>
           </InfoLabel>
           <Storage>
-            <Avatar round width="14px" height="14px" src={avatarUrl || ''} alt="Storage Img" />
+            <Avatar
+              round
+              width="14px"
+              height="14px"
+              src={storageSrc}
+              alt="Storage Img"
+              onError={handleStorageLogoError}
+            />
             <Typography
               component="span"
               fontSize="10px"
