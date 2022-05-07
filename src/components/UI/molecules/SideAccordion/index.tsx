@@ -6,12 +6,14 @@ import { StyledSideAccordion, List } from './SideAccordion.styles';
 
 export interface SideAccordionProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
+  listGap?: number;
   disableToggle?: boolean;
 }
 
 function SideAccordion({
   children,
   title,
+  listGap = 12,
   disableToggle = false,
   ...props
 }: PropsWithChildren<SideAccordionProps>) {
@@ -71,6 +73,7 @@ function SideAccordion({
       </Flexbox>
       <List
         ref={listRef}
+        listGap={listGap}
         toggleList={toggleList}
         toggleListMaxHeight={toggleListMaxHeight}
         disableToggle={disableToggle}

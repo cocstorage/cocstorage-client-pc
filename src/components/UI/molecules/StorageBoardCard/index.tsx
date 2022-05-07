@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, memo, HTMLAttributes } from 'react';
+import React, { useState, useCallback, useMemo, memo, ButtonHTMLAttributes } from 'react';
 import dayjs from 'dayjs';
 
 import { useTheme, Avatar, Typography, Icon, Flexbox, Badge } from 'cocstorage-ui';
@@ -15,7 +15,7 @@ import {
   InfoLabel
 } from './StorageBoardCard.styles';
 
-export interface StorageBoardCardProps extends HTMLAttributes<HTMLDivElement> {
+export interface StorageBoardCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'emphasize' | 'normal' | 'compact';
   storageBoard: StorageBoard;
 }
@@ -53,13 +53,11 @@ function StorageBoardCard({
   if (variant === 'emphasize') {
     return (
       <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-        {thumbnailUrl && (
-          <ThumbnailWrapper theme={theme} variant={variant}>
-            <ThumbnailInner>
-              <Thumbnail width={246} src={src} alt="Thumbnail Img" onError={handleError} />
-            </ThumbnailInner>
-          </ThumbnailWrapper>
-        )}
+        <ThumbnailWrapper theme={theme} variant={variant}>
+          <ThumbnailInner>
+            <Thumbnail width={246} src={src} alt="Thumbnail Img" onError={handleError} />
+          </ThumbnailInner>
+        </ThumbnailWrapper>
         <Flexbox direction="vertical" justifyContent="space-between">
           <Flexbox direction="vertical" gap={8}>
             <Storage>
@@ -105,13 +103,11 @@ function StorageBoardCard({
   if (variant === 'normal') {
     return (
       <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-        {thumbnailUrl && (
-          <ThumbnailWrapper theme={theme} variant={variant}>
-            <ThumbnailInner>
-              <Thumbnail width={82} src={src} alt="Thumbnail Img" onError={handleError} />
-            </ThumbnailInner>
-          </ThumbnailWrapper>
-        )}
+        <ThumbnailWrapper theme={theme} variant={variant}>
+          <ThumbnailInner>
+            <Thumbnail width={82} src={src} alt="Thumbnail Img" onError={handleError} />
+          </ThumbnailInner>
+        </ThumbnailWrapper>
         <Flexbox direction="vertical" justifyContent="space-between" gap={8}>
           <Typography component="div" lineHeight="18px" noWrap lineClamp={2}>
             {subject}

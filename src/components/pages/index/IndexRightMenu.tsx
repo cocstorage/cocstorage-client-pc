@@ -8,7 +8,7 @@ import { Footer, IssueKeywordCard, SideAccordion } from '@components/UI/molecule
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import queryKeys from '@constants/react-query';
 
-function IndexIssueKeywordRankInfo() {
+function IndexRightMenu() {
   const { data: { ranks = [] } = {} } = useQuery(
     queryKeys.issueKeywords.issueKeywordRank,
     fetchIssueKeywordRank
@@ -30,4 +30,4 @@ function IndexIssueKeywordRankInfo() {
   );
 }
 
-export default IndexIssueKeywordRankInfo;
+export default IndexRightMenu;

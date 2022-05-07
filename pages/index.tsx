@@ -10,7 +10,7 @@ import {
   IndexLeftMenu,
   IndexBestWorstStorageBoardGrid,
   IndexNoticeAlert,
-  IndexIssueKeywordRankInfo,
+  IndexRightMenu,
   IndexLatestStorageBoardGrid
 } from '@components/pages/index';
 
@@ -36,7 +36,7 @@ function Index() {
         </Grid>
         <Grid item customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <IndexIssueKeywordRankInfo />
+            <IndexRightMenu />
           </Box>
         </Grid>
       </Grid>

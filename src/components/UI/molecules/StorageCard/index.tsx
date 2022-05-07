@@ -1,10 +1,10 @@
-import React, { useState, useMemo, memo, HTMLAttributes, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, memo, ButtonHTMLAttributes } from 'react';
 
 import { Avatar, Typography } from 'cocstorage-ui';
 
 import { StyledStorageCard } from './StorageCard.styles';
 
-interface StorageCardProps extends HTMLAttributes<HTMLDivElement> {
+interface StorageCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   src: string;
   name: string;
 }

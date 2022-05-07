@@ -2,7 +2,7 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { StorageBoardCardProps } from './index';
 
-export const StyledStorageBoardCard = styled.div<
+export const StyledStorageBoardCard = styled.button<
   Pick<StorageBoardCardProps, 'variant'> & {
     hasThumbnail: boolean;
   }
@@ -14,11 +14,13 @@ export const StyledStorageBoardCard = styled.div<
     switch (variant) {
       case 'emphasize':
         return {
-          gridTemplateColumns: !hasThumbnail ? 'auto 1fr' : '183px 1fr'
+          gridTemplateColumns: '183px 1fr',
+          columnGap: 14
         };
       case 'normal':
         return {
-          gridTemplateColumns: !hasThumbnail ? 'auto 1fr' : '82px 1fr',
+          gridTemplateColumns: '82px 1fr',
+          columnGap: 14,
           minHeight: 60
         };
       default:

@@ -9,14 +9,14 @@ export const StyledSideAccordion = styled.div`
 `;
 
 export const List = styled.div<
-  Pick<SideAccordionProps, 'disableToggle'> & {
+  Pick<SideAccordionProps, 'listGap' | 'disableToggle'> & {
     toggleList: boolean;
     toggleListMaxHeight: number;
   }
 >`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: ${({ listGap }) => `${listGap}px`};
 
   ${({ disableToggle, toggleList, toggleListMaxHeight }): CSSObject =>
     !disableToggle
