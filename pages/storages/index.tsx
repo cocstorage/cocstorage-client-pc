@@ -1,4 +1,5 @@
 import React from 'react';
+import { dehydrate, QueryClient } from 'react-query';
 
 import { Grid, Box } from 'cocstorage-ui';
 
@@ -12,6 +13,10 @@ import {
   StoragesNoticeAlert,
   StoragesCardGrid
 } from '@components/pages/storages';
+
+import { fetchStorageCategories } from '@api/v1/storage-categories';
+import { fetchStorages } from '@api/v1/storages';
+import queryKeys from '@constants/react-query';
 
 function Storages() {
   return (
@@ -35,6 +40,22 @@ function Storages() {
       </Grid>
     </GeneralTemplate>
   );
+}
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(
+    queryKeys.storageCategories.storageCategories,
+    fetchStorageCategories
+  );
+  await queryClient.prefetchQuery(queryKeys.storages.storages, fetchStorages);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient)
+    }
+  };
 }
 
 export default Storages;

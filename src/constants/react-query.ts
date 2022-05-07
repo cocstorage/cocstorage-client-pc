@@ -1,3 +1,11 @@
+const storageCategories = {
+  storageCategories: ['storageCategories']
+};
+
+const storages = {
+  storages: ['storages']
+};
+
 const storageBoards = {
   latestStorageBoards: ['latestStorageBoards'],
   popularStorageBoards: ['popularStorageBoards']
@@ -12,6 +20,8 @@ const notices = {
 };
 
 const queryKeys = {
+  storageCategories,
+  storages,
   storageBoards,
   issueKeywords,
   notices

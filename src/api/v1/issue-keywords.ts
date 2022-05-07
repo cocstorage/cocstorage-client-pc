@@ -7,7 +7,7 @@ const BASE_PATH = '/issue-keywords';
 export async function fetchIssueKeywordRank() {
   const response = await Axios.get<IssueKeywordRank>(`${BASE_PATH}/rank`);
 
-  if (response) return (await response).data;
+  if (response) return response.data;
 
   return {
     id: 0,

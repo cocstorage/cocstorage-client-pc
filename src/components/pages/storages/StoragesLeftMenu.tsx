@@ -1,54 +1,48 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import styled, { CSSObject } from '@emotion/styled';
+import { useQuery } from 'react-query';
+
+import { useRecoilState } from 'recoil';
+import { selectedCategoryIdState } from '@recoil/storages/atoms';
 
 import { useTheme, Typography } from 'cocstorage-ui';
 
 import { SideAccordion } from '@components/UI/molecules';
 
+import { fetchStorageCategories } from '@api/v1/storage-categories';
+import queryKeys from '@constants/react-query';
+
 function StoragesLeftMenu() {
   const { theme } = useTheme();
 
+  const [selectedCategoryId, setSelectedCategoryId] = useRecoilState(selectedCategoryIdState);
+
+  const { data: { categories = [] } = {} } = useQuery(
+    queryKeys.storageCategories.storageCategories,
+    fetchStorageCategories
+  );
+
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const categoryId = Number(event.currentTarget.getAttribute('data-category-id') || 0);
+
+    setSelectedCategoryId(categoryId === selectedCategoryId ? 0 : categoryId);
+  };
+
   return (
     <SideAccordion title="카테고리" listGap={2}>
-      <Category theme={theme} active>
-        <Typography fontSize="16px" fontWeight={500} lineHeight="20px">
-          게임
-        </Typography>
-        <Typography
-          fontSize="16px"
-          fontWeight={500}
-          lineHeight="20px"
-          color={theme.palette.primary.main}
+      {categories.map((category) => (
+        <Category
+          key={`category-${category.id}`}
+          theme={theme}
+          active={category.id === selectedCategoryId}
+          data-category-id={category.id}
+          onClick={handleClick}
         >
-          50
-        </Typography>
-      </Category>
-      <Category theme={theme}>
-        <Typography fontSize="16px" fontWeight={500} lineHeight="20px">
-          스포츠
-        </Typography>
-        <Typography
-          fontSize="16px"
-          fontWeight={500}
-          lineHeight="20px"
-          color={theme.palette.primary.main}
-        >
-          50
-        </Typography>
-      </Category>
-      <Category theme={theme}>
-        <Typography fontSize="16px" fontWeight={500} lineHeight="20px">
-          정치
-        </Typography>
-        <Typography
-          fontSize="16px"
-          fontWeight={500}
-          lineHeight="20px"
-          color={theme.palette.primary.main}
-        >
-          50
-        </Typography>
-      </Category>
+          <Typography fontSize="16px" fontWeight={500} lineHeight="20px">
+            {category.name}
+          </Typography>
+        </Category>
+      ))}
     </SideAccordion>
   );
 }

@@ -2,6 +2,8 @@ import React, { useCallback, useState, useRef } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 
+import { RecoilRoot } from 'recoil';
+
 import { QueryClient, QueryCache, QueryClientProvider, Hydrate } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
@@ -89,20 +91,22 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png" />
         <title>개념글 저장소</title>
       </Head>
-      <QueryClientProvider client={queryClient.current}>
-        <ThemeProvider theme="light">
-          <GlobalStyles />
-          <Hydrate state={pageProps.dehydratedState}>
-            <Component {...pageProps} />
-          </Hydrate>
-          <Dialog open={open} onClose={handleClose}>
-            <Box customStyle={{ padding: 16 }}>
-              <ErrorMessage {...errorMessage} onClose={handleClose} />
-            </Box>
-          </Dialog>
-        </ThemeProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient.current}>
+          <ThemeProvider theme="light">
+            <GlobalStyles />
+            <Hydrate state={pageProps.dehydratedState}>
+              <Component {...pageProps} />
+            </Hydrate>
+            <Dialog open={open} onClose={handleClose}>
+              <Box customStyle={{ padding: 16 }}>
+                <ErrorMessage {...errorMessage} onClose={handleClose} />
+              </Box>
+            </Dialog>
+          </ThemeProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </RecoilRoot>
     </>
   );
 }
