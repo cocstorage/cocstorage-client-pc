@@ -14,7 +14,7 @@ interface HeaderProps extends HTMLAttributes<HTMLHeadElement> {
   scrollFixedTrigger?: boolean;
 }
 
-function Header({ scrollFixedTrigger, ...props }: HeaderProps) {
+function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const router = useRouter();
 
   const {

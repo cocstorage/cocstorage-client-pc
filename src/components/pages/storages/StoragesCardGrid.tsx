@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+
 import { useQuery } from 'react-query';
 
 import { useRecoilValue } from 'recoil';
@@ -51,7 +53,11 @@ function StoragesCardGrid() {
               <Grid container columnGap={20} rowGap={12} customStyle={{ marginTop: 20 }}>
                 {categoryStorages.map((storage) => (
                   <Grid key={`storage-${storage.id}`} item xs={2}>
-                    <StorageCard name={storage.name} src={storage.avatarUrl || ''} />
+                    <Link href={`/storages/${storage.path}`}>
+                      <a>
+                        <StorageCard name={storage.name} src={storage.avatarUrl || ''} />
+                      </a>
+                    </Link>
                   </Grid>
                 ))}
               </Grid>

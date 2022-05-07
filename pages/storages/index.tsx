@@ -3,7 +3,7 @@ import { dehydrate, QueryClient } from 'react-query';
 
 import { Grid, Box } from 'cocstorage-ui';
 
-import { Header } from '@components/UI/molecules';
+import { Header, Footer } from '@components/UI/molecules';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 
 import {
@@ -20,7 +20,7 @@ import queryKeys from '@constants/react-query';
 
 function Storages() {
   return (
-    <GeneralTemplate header={<Header />}>
+    <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
       <Grid container columnGap={20}>
         <Grid item customStyle={{ minWidth: 176, marginRight: 27 }}>
           <Box customStyle={{ position: 'fixed', width: 156 }}>
