@@ -7,15 +7,12 @@ import { Pagination } from '@dto/common';
 const BASE_PATH = '/notices';
 
 export async function fetchNotices(config?: AxiosRequestConfig) {
-  const response = await Axios.get<{ notices: Notice[]; pagination: Pagination }>(
-    BASE_PATH,
-    config
-  );
+  const { data } = await Axios.get<FetchNoticesResponse>(BASE_PATH, config);
 
-  if (response) return response.data;
+  return data;
+}
 
-  return {
-    notices: [],
-    pagination: {}
-  };
+export interface FetchNoticesResponse {
+  notices: Notice[];
+  pagination: Pagination;
 }

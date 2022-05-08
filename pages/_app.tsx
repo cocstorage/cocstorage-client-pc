@@ -1,6 +1,9 @@
 import React, { useCallback, useState, useRef } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import RelativeTime from 'dayjs/plugin/relativeTime';
 
 import { RecoilRoot } from 'recoil';
 
@@ -15,6 +18,9 @@ import MessageDialog from '@components/UI/organisms/MessageDialog';
 import { getErrorMessageByCode } from '@utils';
 
 import '@styles/base.css';
+
+dayjs.locale('ko');
+dayjs.extend(RelativeTime);
 
 function App({ Component, pageProps }: AppProps) {
   const [open, setOpen] = useState<boolean>(false);

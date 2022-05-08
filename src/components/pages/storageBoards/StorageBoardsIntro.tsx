@@ -1,58 +1,77 @@
 import React, { useState, useRef } from 'react';
+import { useRouter } from 'next/router';
+import dayjs from 'dayjs';
+
+import { useQuery } from 'react-query';
 
 import {
   useTheme,
-  Avatar,
   Flexbox,
   Icon,
   IconButton,
   Typography,
   Box,
   Button,
-  Menu
+  Menu,
+  Hidden
 } from 'cocstorage-ui';
 
+import { RatioImage } from '@components/UI/atoms';
+
+import { fetchStorage } from '@api/v1/storages';
+import queryKeys from '@constants/react-query';
+
 function StorageBoardsIntro() {
+  const { query } = useRouter();
   const {
     theme: { type, palette }
   } = useTheme();
+
+  const { data: { path, name, avatarUrl, description, user, createdAt } = {} } = useQuery(
+    queryKeys.storages.storageById(query.path as string),
+    () => fetchStorage(query.path as string)
+  );
 
   const [open, setOpen] = useState<boolean>(false);
 
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
+  const handleMenuOpen = () => setOpen(true);
+  const handleMenuClose = () => setOpen(false);
+
   return (
     <Flexbox justifyContent="space-between">
       <Flexbox gap={16} alignment="center">
-        <Avatar
-          round
+        <RatioImage
           width={102}
           height={102}
-          src="https://static.cocstorage.com/images/xt868xt2w6i50bf4x98xdsbfado3"
+          round={6}
+          src={avatarUrl || ''}
           alt="Storage Logo Img"
         />
         <div>
           <Flexbox alignment="center" gap={6}>
             <Typography fontSize="20px" fontWeight={700} lineHeight="25px">
-              인터넷 방송
+              {name}
             </Typography>
             <IconButton ref={buttonRef}>
               <Icon
                 name="InfoOutlined"
                 width={20}
                 height={20}
-                onClick={() => setOpen(true)}
+                onClick={handleMenuOpen}
                 color={palette.text[type].text1}
+                customStyle={{ display: 'block' }}
               />
             </IconButton>
-            <Menu anchorRef={buttonRef} centered open={open} onClose={() => setOpen(false)}>
+            <Menu anchorRef={buttonRef} centered open={open} onClose={handleMenuClose}>
               <Flexbox gap={10} direction="vertical" customStyle={{ padding: 20 }}>
                 <Flexbox>
                   <Typography fontWeight={500} lineHeight="18px" customStyle={{ width: 54 }}>
                     관리자
                   </Typography>
                   <Typography lineHeight="18px" color={palette.text[type].text1}>
-                    HYEOK
+                    {(user || {}).nickname}
                   </Typography>
                 </Flexbox>
                 <Flexbox>
@@ -60,7 +79,7 @@ function StorageBoardsIntro() {
                     개설일
                   </Typography>
                   <Typography lineHeight="18px" color={palette.text[type].text1}>
-                    2022. 05. 07
+                    {dayjs(createdAt).format('YYYY. MM. DD')}
                   </Typography>
                 </Flexbox>
                 <Flexbox>
@@ -68,7 +87,7 @@ function StorageBoardsIntro() {
                     URL
                   </Typography>
                   <Typography lineHeight="18px" color={palette.text[type].text1}>
-                    https://www.cocstorage.com/storages/ibroadcast
+                    {`https://www.cocstorage.com/storages/${path}`}
                   </Typography>
                 </Flexbox>
               </Flexbox>
@@ -79,7 +98,7 @@ function StorageBoardsIntro() {
             color={palette.text[type].text1}
             customStyle={{ marginTop: 2 }}
           >
-            인터넷 방송 저장소입니다.
+            {description}
           </Typography>
           <Box customStyle={{ marginTop: 16 }}>
             <Flexbox alignment="center" gap={6}>
@@ -87,7 +106,7 @@ function StorageBoardsIntro() {
                 관리자
               </Typography>
               <Typography lineHeight="18px" color={palette.text[type].text1}>
-                HYEOK
+                {(user || {}).nickname}
               </Typography>
             </Flexbox>
           </Box>
@@ -99,7 +118,7 @@ function StorageBoardsIntro() {
           size="small"
           startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
         >
-          게시글 작성
+          <Hidden lgHidden>게시글 작성</Hidden>
         </Button>
         <Button
           size="small"

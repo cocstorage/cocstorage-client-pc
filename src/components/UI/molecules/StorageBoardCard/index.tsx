@@ -1,29 +1,34 @@
-import React, { useState, useCallback, useMemo, memo, ButtonHTMLAttributes } from 'react';
+import React, { useMemo, memo, ButtonHTMLAttributes } from 'react';
 import dayjs from 'dayjs';
 
-import { useTheme, Avatar, Typography, Icon, Flexbox, Badge } from 'cocstorage-ui';
+import { useTheme, Typography, Icon, Flexbox, Badge } from 'cocstorage-ui';
+
+import { RatioImage } from '@components/UI/atoms';
 
 import { StorageBoard } from '@dto/storage-boards';
 
 import {
   StyledStorageBoardCard,
-  ThumbnailWrapper,
-  ThumbnailInner,
-  Thumbnail,
   Storage,
   Info,
-  InfoLabel
+  InfoLabel,
+  UserInfo
 } from './StorageBoardCard.styles';
 
 export interface StorageBoardCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'emphasize' | 'normal' | 'compact';
+  badgeVariant?: string | 'latest' | 'popular' | 'worst';
   storageBoard: StorageBoard;
+  inStorage?: boolean;
 }
 
 function StorageBoardCard({
   variant = 'compact',
+  badgeVariant = 'latest',
   storageBoard: {
+    user,
     storage: { name, avatarUrl },
+    nickname,
     subject,
     viewCount = 0,
     commentTotalCount = 0,
@@ -31,6 +36,7 @@ function StorageBoardCard({
     thumbnailUrl,
     createdAt
   },
+  inStorage = true,
   ...props
 }: StorageBoardCardProps) {
   const {
@@ -38,46 +44,40 @@ function StorageBoardCard({
     theme: { type, palette }
   } = useTheme();
 
-  const [loadFailed, setLoadFailed] = useState<boolean>(false);
-  const [storageLogoLoadFailed, setStorageLogoLoadFailed] = useState<boolean>(false);
-
-  const handleError = useCallback(() => setLoadFailed(true), []);
-  const handleStorageLogoError = useCallback(() => setStorageLogoLoadFailed(true), []);
-
-  const src = useMemo<string>(() => {
-    if (loadFailed || !thumbnailUrl) {
-      return 'https://static.cocstorage.com/assets/thumbnail.png';
+  const round = useMemo<number>(() => {
+    if (variant === 'emphasize') {
+      return 12;
+    }
+    if (variant === 'normal') {
+      return 6;
     }
 
-    return thumbnailUrl;
-  }, [thumbnailUrl, loadFailed]);
-
-  const storageSrc = useMemo<string>(() => {
-    if (storageLogoLoadFailed || !avatarUrl) {
-      return 'https://static.cocstorage.com/assets/thumbnail.png';
-    }
-
-    return avatarUrl;
-  }, [avatarUrl, storageLogoLoadFailed]);
+    return 8;
+  }, [variant]);
 
   if (variant === 'emphasize') {
     return (
       <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-        <ThumbnailWrapper theme={theme} variant={variant}>
-          <ThumbnailInner>
-            <Thumbnail width={246} src={src} alt="Thumbnail Img" onError={handleError} />
-          </ThumbnailInner>
-        </ThumbnailWrapper>
-        <Flexbox direction="vertical" justifyContent="space-between">
+        <RatioImage
+          ratio="16:9"
+          src={thumbnailUrl || ''}
+          alt="Thumbnail Img"
+          width={183}
+          round={round}
+        />
+        <Flexbox
+          direction="vertical"
+          justifyContent="space-between"
+          customStyle={{ height: '100%' }}
+        >
           <Flexbox direction="vertical" gap={8}>
             <Storage>
-              <Avatar
-                round
-                width="14px"
-                height="14px"
-                src={storageSrc}
-                alt="Storage Img"
-                onError={handleStorageLogoError}
+              <RatioImage
+                src={avatarUrl || ''}
+                alt="Storage Logo Img"
+                width={14}
+                height={14}
+                round={6}
               />
               <Typography
                 component="span"
@@ -120,12 +120,19 @@ function StorageBoardCard({
   if (variant === 'normal') {
     return (
       <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-        <ThumbnailWrapper theme={theme} variant={variant}>
-          <ThumbnailInner>
-            <Thumbnail width={82} src={src} alt="Thumbnail Img" onError={handleError} />
-          </ThumbnailInner>
-        </ThumbnailWrapper>
-        <Flexbox direction="vertical" justifyContent="space-between" gap={8}>
+        <RatioImage
+          ratio="4:3"
+          src={thumbnailUrl || ''}
+          alt="Thumbnail Img"
+          width={82}
+          round={round}
+        />
+        <Flexbox
+          direction="vertical"
+          justifyContent="space-between"
+          gap={8}
+          customStyle={{ height: '100%' }}
+        >
           <Typography component="div" lineHeight="18px" noWrap lineClamp={2}>
             {subject}
           </Typography>
@@ -149,12 +156,12 @@ function StorageBoardCard({
               </Typography>
             </InfoLabel>
             <Storage>
-              <Avatar
-                width="14px"
-                height="14px"
-                src={storageSrc}
-                alt="Storage Img"
-                onError={handleStorageLogoError}
+              <RatioImage
+                src={avatarUrl || ''}
+                alt="Storage Logo Img"
+                width={14}
+                height={14}
+                round={6}
               />
               <Typography
                 component="span"
@@ -173,7 +180,12 @@ function StorageBoardCard({
 
   return (
     <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-      <Flexbox direction="vertical" justifyContent="space-between" gap={8}>
+      <Flexbox
+        direction="vertical"
+        justifyContent="space-between"
+        gap={8}
+        customStyle={{ height: '100%' }}
+      >
         <Typography
           component="div"
           lineHeight="18px"
@@ -183,7 +195,7 @@ function StorageBoardCard({
             textAlign: 'left'
           }}
         >
-          {dayjs().diff(createdAt, 'day') <= 1 && (
+          {badgeVariant === 'latest' && dayjs().diff(createdAt, 'day') <= 1 && (
             <Badge
               severity="success"
               customStyle={{
@@ -193,6 +205,32 @@ function StorageBoardCard({
             >
               NEW
             </Badge>
+          )}
+          {badgeVariant === 'popular' && (
+            <Badge
+              severity="info"
+              startIcon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
+              iconOnly
+              customStyle={{
+                width: 18,
+                height: 18,
+                verticalAlign: 'middle',
+                marginRight: 4
+              }}
+            />
+          )}
+          {badgeVariant === 'worst' && (
+            <Badge
+              severity="error"
+              startIcon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
+              iconOnly
+              customStyle={{
+                width: 18,
+                height: 18,
+                verticalAlign: 'middle',
+                marginRight: 4
+              }}
+            />
           )}
           {subject}
         </Typography>
@@ -215,32 +253,64 @@ function StorageBoardCard({
               {thumbUp.toLocaleString()}
             </Typography>
           </InfoLabel>
-          <Storage>
-            <Avatar
-              round
-              width="14px"
-              height="14px"
-              src={storageSrc}
-              alt="Storage Img"
-              onError={handleStorageLogoError}
-            />
-            <Typography
-              component="span"
-              fontSize="10px"
-              lineHeight="13px"
-              color={palette.text[type].text1}
-            >
-              {name}
-            </Typography>
-          </Storage>
+          {!inStorage && (
+            <Storage>
+              <RatioImage
+                src={avatarUrl || ''}
+                alt="Storage Logo Img"
+                width={14}
+                height={14}
+                round={6}
+              />
+              <Typography
+                component="span"
+                fontSize="10px"
+                lineHeight="13px"
+                color={palette.text[type].text1}
+              >
+                {name}
+              </Typography>
+            </Storage>
+          )}
+          {inStorage && (
+            <UserInfo theme={theme}>
+              <Flexbox gap={2.5} alignment="center">
+                <RatioImage
+                  src={user?.avatarUrl || ''}
+                  alt="Storage Logo Img"
+                  width={14}
+                  height={14}
+                  round="50%"
+                />
+                <Typography
+                  component="span"
+                  fontSize="10px"
+                  lineHeight="13px"
+                  color={palette.text[type].text1}
+                >
+                  {user?.nickname || nickname}
+                </Typography>
+              </Flexbox>
+              <Typography
+                component="span"
+                fontSize="10px"
+                lineHeight="13px"
+                color={palette.text[type].text1}
+              >
+                {dayjs(createdAt).fromNow()}
+              </Typography>
+            </UserInfo>
+          )}
         </Info>
       </Flexbox>
       {thumbnailUrl && (
-        <ThumbnailWrapper theme={theme} variant={variant}>
-          <ThumbnailInner>
-            <Thumbnail width={61} src={src} alt="Thumbnail Img" onError={handleError} />
-          </ThumbnailInner>
-        </ThumbnailWrapper>
+        <RatioImage
+          ratio="4:3"
+          src={thumbnailUrl || ''}
+          alt="Thumbnail Img"
+          width={61}
+          round={round}
+        />
       )}
     </StyledStorageBoardCard>
   );

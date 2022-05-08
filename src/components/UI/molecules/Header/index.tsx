@@ -109,7 +109,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Link href="/storages">
                 <a>
                   <Tag
-                    color={router.pathname === '/storages' ? 'semiAccent' : 'transparent'}
+                    color={router.pathname.includes('/storages') ? 'semiAccent' : 'transparent'}
                     startIcon={<Icon name="CommunityFilled" width={16} />}
                     customStyle={{
                       height: 32,

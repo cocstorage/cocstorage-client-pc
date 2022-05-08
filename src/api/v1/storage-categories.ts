@@ -6,11 +6,7 @@ import { StorageCategory } from '@dto/storage-category';
 const BASE_PATH = '/storage-categories';
 
 export async function fetchStorageCategories(config?: AxiosRequestConfig) {
-  const response = await Axios.get<{ categories: StorageCategory[] }>(BASE_PATH, config);
+  const { data } = await Axios.get<{ categories: StorageCategory[] }>(BASE_PATH, config);
 
-  if (response) return response.data;
-
-  return {
-    categories: []
-  };
+  return data;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { dehydrate, QueryClient } from 'react-query';
+import { QueryClient, dehydrate } from 'react-query';
 
 import { Grid, Box } from 'cocstorage-ui';
 

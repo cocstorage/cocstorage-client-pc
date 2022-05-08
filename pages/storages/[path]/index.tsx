@@ -1,4 +1,9 @@
 import React from 'react';
+import { GetServerSidePropsContext } from 'next';
+
+import { QueryClient, dehydrate } from 'react-query';
+
+import { storageBoardParamsDefault } from '@recoil/storageBoards/atoms';
 
 import { Flexbox } from 'cocstorage-ui';
 
@@ -9,8 +14,13 @@ import {
   StorageBoardsIntro,
   StorageBoardsTabs,
   StorageBoardsNoticeAlert,
-  StorageBoardsGrid
+  StorageBoardsGrid,
+  StorageBoardsPagination
 } from '@components/pages/storageBoards';
+
+import { fetchStorage } from '@api/v1/storages';
+import { fetchStorageBoards } from '@api/v1/storage-boards';
+import queryKeys from '@constants/react-query';
 
 function StorageBoard() {
   return (
@@ -20,9 +30,27 @@ function StorageBoard() {
         <StorageBoardsTabs />
         <StorageBoardsNoticeAlert />
         <StorageBoardsGrid />
+        <StorageBoardsPagination />
       </Flexbox>
     </GeneralTemplate>
   );
+}
+
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+  const queryClient = new QueryClient();
+  const id = query.path as string;
+
+  await queryClient.prefetchQuery(queryKeys.storages.storageById(id), () => fetchStorage(id));
+  await queryClient.prefetchQuery(
+    queryKeys.storageBoards.storageBoardsByParams(storageBoardParamsDefault),
+    () => fetchStorageBoards(id, storageBoardParamsDefault)
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient)
+    }
+  };
 }
 
 export default StorageBoard;

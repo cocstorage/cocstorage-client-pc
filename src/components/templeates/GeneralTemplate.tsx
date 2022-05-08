@@ -28,7 +28,7 @@ export const StyledGeneralTemplate = styled.div`
   max-width: ${({ theme: { breakpoints } }) => breakpoints.xl}px;
   min-width: ${({ theme: { breakpoints } }) => breakpoints.md}px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px 20px;
   height: 100%;
 `;
 

@@ -5,15 +5,7 @@ import { IssueKeywordRank } from '@dto/issue-keywords';
 const BASE_PATH = '/issue-keywords';
 
 export async function fetchIssueKeywordRank() {
-  const response = await Axios.get<IssueKeywordRank>(`${BASE_PATH}/rank`);
+  const { data } = await Axios.get<IssueKeywordRank>(`${BASE_PATH}/rank`);
 
-  if (response) return response.data;
-
-  return {
-    id: 0,
-    date: '',
-    ranks: []
-  };
+  return data;
 }
-
-export default fetchIssueKeywordRank;

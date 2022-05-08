@@ -9,6 +9,8 @@ import queryKeys from '@constants/react-query';
 function IndexNoticeAlert() {
   const { data: { notices = [] } = {} } = useQuery(queryKeys.notices.notices, fetchNotices);
 
+  if (!notices.length) return null;
+
   return (
     <Alert
       severity="info"
