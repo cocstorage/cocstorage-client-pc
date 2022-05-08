@@ -305,7 +305,7 @@ function StorageBoardCard({
       </Flexbox>
       {thumbnailUrl && (
         <RatioImage
-          ratio="4:3"
+          ratio="16:9"
           src={thumbnailUrl || ''}
           alt="Thumbnail Img"
           width={61}

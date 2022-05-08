@@ -8,6 +8,7 @@ export const StyledStorageBoardCard = styled.button<
   }
 >`
   display: grid;
+  align-items: center;
   width: 100%;
   text-align: left;
   cursor: pointer;

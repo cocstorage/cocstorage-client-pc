@@ -72,17 +72,17 @@ const Wrapper = styled.div<{
   align-items: center;
   gap: 30px;
   width: 100%;
-  border-bottom: 1px solid transparent;
+  padding: 0 54px;
+  border-bottom: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
   background-color: ${({ theme: { palette } }) => palette.background.bg};
 
-  ${({ theme: { palette }, scrollFixed }): CSSObject =>
+  ${({ scrollFixed }): CSSObject =>
     scrollFixed
       ? {
           position: 'fixed',
           top: 0,
           left: 0,
           padding: '0 20px',
-          borderColor: palette.box.stroked.normal,
           zIndex: 1,
           animation: 'slideDown .2s forwards'
         }
