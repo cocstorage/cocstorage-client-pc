@@ -12,7 +12,8 @@ import {
   Storage,
   Info,
   InfoLabel,
-  UserInfo
+  UserInfo,
+  Dot
 } from './StorageBoardCard.styles';
 
 export interface StorageBoardCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -73,41 +74,36 @@ function StorageBoardCard({
           <Flexbox direction="vertical" gap={8}>
             <Storage>
               <RatioImage
-                src={avatarUrl || ''}
-                alt="Storage Logo Img"
                 width={14}
                 height={14}
+                src={avatarUrl || ''}
+                alt="Storage Logo Img"
                 round={6}
               />
-              <Typography
-                component="span"
-                fontSize="10px"
-                lineHeight="13px"
-                color={palette.text[type].text1}
-              >
+              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
                 {name}
               </Typography>
             </Storage>
-            <Typography component="div" lineHeight="18px" noWrap lineClamp={2}>
+            <Typography noWrap lineClamp={2} lineHeight="18px">
               {subject}
             </Typography>
           </Flexbox>
           <Info>
             <InfoLabel>
               <Icon name="ViewOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px" lineHeight="13px">
+              <Typography component="span" fontSize="10px">
                 {viewCount.toLocaleString()}
               </Typography>
             </InfoLabel>
             <InfoLabel>
               <Icon name="CommentOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px" lineHeight="13px">
+              <Typography component="span" fontSize="10px">
                 {commentTotalCount.toLocaleString()}
               </Typography>
             </InfoLabel>
             <InfoLabel>
               <Icon name="ThumbsUpOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px" lineHeight="13px">
+              <Typography component="span" fontSize="10px">
                 {thumbUp.toLocaleString()}
               </Typography>
             </InfoLabel>
@@ -133,42 +129,37 @@ function StorageBoardCard({
           gap={8}
           customStyle={{ height: '100%' }}
         >
-          <Typography component="div" lineHeight="18px" noWrap lineClamp={2}>
+          <Typography noWrap lineClamp={2} lineHeight="18px">
             {subject}
           </Typography>
           <Info>
             <InfoLabel>
               <Icon name="ViewOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px" lineHeight="13px">
+              <Typography component="span" fontSize="10px">
                 {viewCount.toLocaleString()}
               </Typography>
             </InfoLabel>
             <InfoLabel>
               <Icon name="CommentOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px" lineHeight="13px">
+              <Typography component="span" fontSize="10px">
                 {commentTotalCount.toLocaleString()}
               </Typography>
             </InfoLabel>
             <InfoLabel>
               <Icon name="ThumbsUpOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px" lineHeight="13px">
+              <Typography component="span" fontSize="10px">
                 {thumbUp.toLocaleString()}
               </Typography>
             </InfoLabel>
             <Storage>
               <RatioImage
-                src={avatarUrl || ''}
-                alt="Storage Logo Img"
                 width={14}
                 height={14}
+                src={avatarUrl || ''}
+                alt="Storage Logo Img"
                 round={6}
               />
-              <Typography
-                component="span"
-                fontSize="10px"
-                lineHeight="13px"
-                color={palette.text[type].text1}
-              >
+              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
                 {name}
               </Typography>
             </Storage>
@@ -183,28 +174,12 @@ function StorageBoardCard({
       <Flexbox
         direction="vertical"
         justifyContent="space-between"
-        gap={8}
+        gap={6}
         customStyle={{ height: '100%' }}
       >
-        <Typography
-          component="div"
-          lineHeight="18px"
-          noWrap
-          lineClamp={1}
-          customStyle={{
-            textAlign: 'left'
-          }}
-        >
+        <Flexbox gap={4} alignment="center">
           {badgeVariant === 'latest' && dayjs().diff(createdAt, 'day') <= 1 && (
-            <Badge
-              severity="success"
-              customStyle={{
-                verticalAlign: 'middle',
-                marginRight: 4
-              }}
-            >
-              NEW
-            </Badge>
+            <Badge severity="success">NEW</Badge>
           )}
           {badgeVariant === 'popular' && (
             <Badge
@@ -213,9 +188,7 @@ function StorageBoardCard({
               iconOnly
               customStyle={{
                 width: 18,
-                height: 18,
-                verticalAlign: 'middle',
-                marginRight: 4
+                height: 18
               }}
             />
           )}
@@ -226,77 +199,72 @@ function StorageBoardCard({
               iconOnly
               customStyle={{
                 width: 18,
-                height: 18,
-                verticalAlign: 'middle',
-                marginRight: 4
+                height: 18
               }}
             />
           )}
-          {subject}
-        </Typography>
+          <Typography
+            noWrap
+            lineClamp={1}
+            lineHeight="18px"
+            customStyle={{
+              textAlign: 'left'
+            }}
+          >
+            {subject}
+          </Typography>
+        </Flexbox>
         <Info>
           <InfoLabel>
             <Icon name="ViewOutlined" width={14} height={14} />
-            <Typography component="span" fontSize="10px" lineHeight="13px">
+            <Typography component="span" fontSize="10px">
               {viewCount.toLocaleString()}
             </Typography>
           </InfoLabel>
           <InfoLabel>
             <Icon name="CommentOutlined" width={14} height={14} />
-            <Typography component="span" fontSize="10px" lineHeight="13px">
+            <Typography component="span" fontSize="10px">
               {commentTotalCount.toLocaleString()}
             </Typography>
           </InfoLabel>
           <InfoLabel>
             <Icon name="ThumbsUpOutlined" width={14} height={14} />
-            <Typography component="span" fontSize="10px" lineHeight="13px">
+            <Typography component="span" fontSize="10px">
               {thumbUp.toLocaleString()}
             </Typography>
           </InfoLabel>
           {!inStorage && (
             <Storage>
               <RatioImage
-                src={avatarUrl || ''}
-                alt="Storage Logo Img"
                 width={14}
                 height={14}
+                src={avatarUrl || ''}
+                alt="Storage Logo Img"
                 round={6}
               />
-              <Typography
-                component="span"
-                fontSize="10px"
-                lineHeight="13px"
-                color={palette.text[type].text1}
-              >
+              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
                 {name}
               </Typography>
             </Storage>
           )}
           {inStorage && (
             <UserInfo theme={theme}>
-              <Flexbox gap={2.5} alignment="center">
-                <RatioImage
-                  src={user?.avatarUrl || ''}
-                  alt="Storage Logo Img"
-                  width={14}
-                  height={14}
-                  round="50%"
-                />
-                <Typography
-                  component="span"
-                  fontSize="10px"
-                  lineHeight="13px"
-                  color={palette.text[type].text1}
-                >
+              <Flexbox gap={4} alignment="center">
+                {user?.avatarUrl && (
+                  <RatioImage
+                    src={user?.avatarUrl || ''}
+                    alt="User Avatar Img"
+                    width={14}
+                    height={14}
+                    round="50%"
+                  />
+                )}
+                <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
                   {user?.nickname || nickname}
                 </Typography>
               </Flexbox>
-              <Typography
-                component="span"
-                fontSize="10px"
-                lineHeight="13px"
-                color={palette.text[type].text1}
-              >
+              <Dot />
+              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </UserInfo>
