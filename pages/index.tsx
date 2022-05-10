@@ -1,22 +1,21 @@
-import React from 'react';
 import { QueryClient, dehydrate } from 'react-query';
 
 import { Box, Grid } from 'cocstorage-ui';
 
-import { Header } from '@components/UI/molecules';
+import {
+  IndexBestWorstStorageBoardGrid,
+  IndexLatestStorageBoardGrid,
+  IndexLeftMenu,
+  IndexNoticeAlert,
+  IndexRightMenu
+} from '@components/pages/index';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 
-import {
-  IndexLeftMenu,
-  IndexBestWorstStorageBoardGrid,
-  IndexNoticeAlert,
-  IndexRightMenu,
-  IndexLatestStorageBoardGrid
-} from '@components/pages/index';
+import { Header } from '@components/UI/molecules';
 
-import { fetchPopularStorageBoards, fetchLatestStorageBoards } from '@api/v1/storage-boards';
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { fetchNotices } from '@api/v1/notices';
+import { fetchLatestStorageBoards, fetchPopularStorageBoards } from '@api/v1/storage-boards';
 
 import queryKeys from '@constants/react-query';
 

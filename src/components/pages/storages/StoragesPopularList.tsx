@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { Avatar, Flexbox, Box, Typography } from 'cocstorage-ui';
+import { Avatar, Box, Flexbox, Typography } from 'cocstorage-ui';
 
 function StoragesPopularList() {
   return (

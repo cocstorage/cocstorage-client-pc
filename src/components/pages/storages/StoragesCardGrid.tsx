@@ -1,9 +1,9 @@
-import React from 'react';
 import Link from 'next/link';
 
 import { useQuery } from 'react-query';
 
 import { useRecoilValue } from 'recoil';
+
 import { selectedCategoryIdState } from '@recoil/storages/atoms';
 
 import { Grid, Typography } from 'cocstorage-ui';
@@ -12,6 +12,7 @@ import { StorageCard } from '@components/UI/molecules';
 
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 import { fetchStorages } from '@api/v1/storages';
+
 import queryKeys from '@constants/react-query';
 
 function StoragesCardGrid() {

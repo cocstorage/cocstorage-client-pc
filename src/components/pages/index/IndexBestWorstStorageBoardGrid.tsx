@@ -1,11 +1,11 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 
-import { useTheme, Button, Flexbox, Grid, Icon, Tag, Typography } from 'cocstorage-ui';
+import { Button, Flexbox, Grid, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
 
 import { StorageBoardCard } from '@components/UI/molecules';
 
 import { fetchPopularStorageBoards } from '@api/v1/storage-boards';
+
 import queryKeys from '@constants/react-query';
 
 function IndexBestWorstStorageBoardGrid() {

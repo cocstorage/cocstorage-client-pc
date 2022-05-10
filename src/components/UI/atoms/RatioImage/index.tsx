@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useRef, useMemo, HTMLAttributes } from 'react';
+import { HTMLAttributes, useCallback, useMemo, useRef, useState } from 'react';
+
 import { CSSObject } from '@emotion/styled';
 
-import { useTheme, Avatar, Box, CSSValue } from 'cocstorage-ui';
+import { Avatar, Box, CSSValue, useTheme } from 'cocstorage-ui';
 
-import { AvatarWrapper, AvatarInner } from './RatioImage.styles';
+import { AvatarInner, AvatarWrapper } from './RatioImage.styles';
 
 export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
   src: string;

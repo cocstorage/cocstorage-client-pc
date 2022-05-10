@@ -1,14 +1,15 @@
-import React, { useState, useRef, ChangeEvent, HTMLAttributes } from 'react';
+import { ChangeEvent, HTMLAttributes, useRef, useState } from 'react';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useTheme, Typography, TextBar, Icon, Tag, Flexbox, Box, Hidden } from 'cocstorage-ui';
+import { Box, Flexbox, Hidden, Icon, Tag, TextBar, Typography, useTheme } from 'cocstorage-ui';
 
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
-import { StyledHeader, HeaderInner, Logo } from './Header.styles';
+import { HeaderInner, Logo, StyledHeader } from './Header.styles';
 
 interface HeaderProps extends HTMLAttributes<HTMLHeadElement> {
   scrollFixedTrigger?: boolean;

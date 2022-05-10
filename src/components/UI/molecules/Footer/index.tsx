@@ -1,9 +1,8 @@
-import React from 'react';
 import Link from 'next/link';
 
-import { useTheme, Typography } from 'cocstorage-ui';
+import { Typography, useTheme } from 'cocstorage-ui';
 
-import { StyledFooter, Links } from './Footer.styles';
+import { Links, StyledFooter } from './Footer.styles';
 
 function Footer() {
   const {

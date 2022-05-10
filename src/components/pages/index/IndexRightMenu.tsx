@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 
 import { Flexbox } from 'cocstorage-ui';
@@ -6,6 +5,7 @@ import { Flexbox } from 'cocstorage-ui';
 import { Footer, IssueKeywordCard, SideAccordion } from '@components/UI/molecules';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
+
 import queryKeys from '@constants/react-query';
 
 function IndexRightMenu() {

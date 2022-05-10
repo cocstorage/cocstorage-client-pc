@@ -1,8 +1,8 @@
-import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useRecoilValue } from 'recoil';
+
 import { storageBoardParamsState } from '@recoil/storageBoards/atoms';
 
 import { Grid } from 'cocstorage-ui';

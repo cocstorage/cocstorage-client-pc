@@ -1,4 +1,5 @@
-import React, { ReactElement, PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
+
 import styled from '@emotion/styled';
 
 import { useTheme } from 'cocstorage-ui';

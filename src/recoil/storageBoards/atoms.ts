@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+
 import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
 
 export const storageBoardParamsDefault: FetchStorageBoardsParams = {

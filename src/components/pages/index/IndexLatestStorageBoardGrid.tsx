@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 
 import { Flexbox, Grid, Typography } from 'cocstorage-ui';
@@ -6,6 +5,7 @@ import { Flexbox, Grid, Typography } from 'cocstorage-ui';
 import { StorageBoardCard } from '@components/UI/molecules';
 
 import { fetchLatestStorageBoards } from '@api/v1/storage-boards';
+
 import queryKeys from '@constants/react-query';
 
 function IndexLatestStorageBoardGrid() {

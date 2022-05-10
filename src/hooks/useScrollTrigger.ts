@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, RefObject } from 'react';
+import { RefObject, useCallback, useEffect, useState } from 'react';
 
 interface UseScrollTriggerProps<T> {
   trigger?: boolean;

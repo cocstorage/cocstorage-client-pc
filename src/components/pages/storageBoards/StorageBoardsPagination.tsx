@@ -1,7 +1,7 @@
-import React from 'react';
 import { useRouter } from 'next/router';
 
 import { useRecoilState } from 'recoil';
+
 import { storageBoardParamsState } from '@recoil/storageBoards/atoms';
 
 import { Pagination } from 'cocstorage-ui';

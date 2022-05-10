@@ -1,21 +1,20 @@
-import React from 'react';
 import { QueryClient, dehydrate } from 'react-query';
 
-import { Grid, Box } from 'cocstorage-ui';
-
-import { Header, Footer } from '@components/UI/molecules';
-import GeneralTemplate from '@components/templeates/GeneralTemplate';
+import { Box, Grid } from 'cocstorage-ui';
 
 import {
+  StoragesCardGrid,
   StoragesLeftMenu,
-  StoragesRightMenu,
-  StoragesPopularList,
   StoragesNoticeAlert,
-  StoragesCardGrid
+  StoragesPopularList,
+  StoragesRightMenu
 } from '@components/pages/storages';
+import GeneralTemplate from '@components/templeates/GeneralTemplate';
+import { Footer, Header } from '@components/UI/molecules';
 
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 import { fetchStorages } from '@api/v1/storages';
+
 import queryKeys from '@constants/react-query';
 
 function Storages() {

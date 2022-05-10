@@ -1,19 +1,23 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
+
 import { useRouter } from 'next/router';
-import styled, { CSSObject } from '@emotion/styled';
 
 import { useQuery } from 'react-query';
 
+import styled, { CSSObject } from '@emotion/styled';
+
 import { useRecoilState } from 'recoil';
+
 import { storageBoardParamsState } from '@recoil/storageBoards/atoms';
 
-import { useTheme, Tabs, Tab, Box } from 'cocstorage-ui';
+import { Box, Tab, Tabs, useTheme } from 'cocstorage-ui';
 
 import { RatioImage } from '@components/UI/atoms';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
 import { fetchStorage } from '@api/v1/storages';
+
 import queryKeys from '@constants/react-query';
 
 function StorageBoardsTabs() {

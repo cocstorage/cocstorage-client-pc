@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Button, Flexbox, Icon } from 'cocstorage-ui';
 
 import { SideAccordion, StorageCard } from '@components/UI/molecules';

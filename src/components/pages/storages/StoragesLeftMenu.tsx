@@ -1,15 +1,19 @@
-import React, { MouseEvent } from 'react';
-import styled, { CSSObject } from '@emotion/styled';
+import { MouseEvent } from 'react';
+
 import { useQuery } from 'react-query';
 
+import styled, { CSSObject } from '@emotion/styled';
+
 import { useRecoilState } from 'recoil';
+
 import { selectedCategoryIdState } from '@recoil/storages/atoms';
 
-import { useTheme, Typography } from 'cocstorage-ui';
+import { Typography, useTheme } from 'cocstorage-ui';
 
 import { SideAccordion } from '@components/UI/molecules';
 
 import { fetchStorageCategories } from '@api/v1/storage-categories';
+
 import queryKeys from '@constants/react-query';
 
 function StoragesLeftMenu() {

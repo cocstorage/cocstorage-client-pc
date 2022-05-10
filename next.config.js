@@ -2,11 +2,12 @@ const withPWA = require('next-pwa');
 
 module.exports = withPWA({
   pwa: {
-    disable: process.env.NODE_ENV === 'development',
+    disable: true,
     dest: 'public'
   },
   experimental: {
-    emotion: true
+    emotion: true,
+    scrollRestoration: true
   },
   swcMinify: true,
   reactStrictMode: process.env.NODE_ENV === 'development',

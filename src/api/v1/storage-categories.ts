@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
-import Axios from '@library/axios';
 
 import { StorageCategory } from '@dto/storage-category';
+import Axios from '@library/axios';
 
 const BASE_PATH = '/storage-categories';
 

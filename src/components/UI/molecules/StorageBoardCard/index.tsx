@@ -1,19 +1,20 @@
-import React, { useMemo, memo, ButtonHTMLAttributes } from 'react';
-import dayjs from 'dayjs';
+import { ButtonHTMLAttributes, memo, useMemo } from 'react';
 
-import { useTheme, Typography, Icon, Flexbox, Badge } from 'cocstorage-ui';
+import { Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+
+import dayjs from 'dayjs';
 
 import { RatioImage } from '@components/UI/atoms';
 
 import { StorageBoard } from '@dto/storage-boards';
 
 import {
-  StyledStorageBoardCard,
-  Storage,
+  Dot,
   Info,
   InfoLabel,
-  UserInfo,
-  Dot
+  Storage,
+  StyledStorageBoardCard,
+  UserInfo
 } from './StorageBoardCard.styles';
 
 export interface StorageBoardCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {

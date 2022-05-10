@@ -1,6 +1,5 @@
-import Axios from '@library/axios';
-
 import { IssueKeywordRank } from '@dto/issue-keywords';
+import Axios from '@library/axios';
 
 const BASE_PATH = '/issue-keywords';
 

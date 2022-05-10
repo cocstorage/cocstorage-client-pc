@@ -1,7 +1,6 @@
-import Axios from '@library/axios';
-
-import { Storage } from '@dto/storages';
 import { Pagination } from '@dto/common';
+import { Storage } from '@dto/storages';
+import Axios from '@library/axios';
 
 const BASE_PATH = '/storages';
 

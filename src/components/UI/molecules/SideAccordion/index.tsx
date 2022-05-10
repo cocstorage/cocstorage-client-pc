@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef, PropsWithChildren, HTMLAttributes } from 'react';
+import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-import { useTheme, Typography, Flexbox, Button, Icon } from 'cocstorage-ui';
+import { Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
-import { StyledSideAccordion, List } from './SideAccordion.styles';
+import { List, StyledSideAccordion } from './SideAccordion.styles';
 
 export interface SideAccordionProps extends HTMLAttributes<HTMLDivElement> {
   title: string;

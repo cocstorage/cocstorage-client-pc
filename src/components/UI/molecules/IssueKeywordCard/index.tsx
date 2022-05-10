@@ -1,10 +1,10 @@
-import React, { memo, ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 
-import { Tag, Typography, Badge, Icon } from 'cocstorage-ui';
+import { Badge, Icon, Tag, Typography } from 'cocstorage-ui';
 
 import { IssueKeyword } from '@dto/issue-keywords';
 
-import { StyledIssueKeywordCard, Keyword } from './IssueKeywordCard.styles';
+import { Keyword, StyledIssueKeywordCard } from './IssueKeywordCard.styles';
 
 interface IssueKeywordCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   issueKeyword: IssueKeyword;

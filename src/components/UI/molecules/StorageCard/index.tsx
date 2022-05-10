@@ -1,4 +1,4 @@
-import React, { memo, ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 
 import { Typography } from 'cocstorage-ui';
 

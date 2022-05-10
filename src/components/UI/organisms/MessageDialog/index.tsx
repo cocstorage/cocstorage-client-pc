@@ -1,4 +1,5 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
+
 import { Box, Dialog } from 'cocstorage-ui';
 
 import Message from '@components/UI/molecules/Message';

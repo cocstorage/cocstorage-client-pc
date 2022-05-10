@@ -1,22 +1,27 @@
-import React, { useCallback, useState, useRef } from 'react';
-import Head from 'next/head';
+import { useCallback, useRef, useState } from 'react';
+
 import { AppProps } from 'next/app';
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-import RelativeTime from 'dayjs/plugin/relativeTime';
+import Head from 'next/head';
+
+import { Hydrate, QueryCache, QueryClient, QueryClientProvider } from 'react-query';
+
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { RecoilRoot } from 'recoil';
 
-import { QueryClient, QueryCache, QueryClientProvider, Hydrate } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { GlobalStyles, ThemeProvider } from 'cocstorage-ui';
 
 import type { AxiosError } from 'axios';
 
-import { ThemeProvider, GlobalStyles } from 'cocstorage-ui';
+import dayjs from 'dayjs';
+
+import RelativeTime from 'dayjs/plugin/relativeTime';
 
 import MessageDialog from '@components/UI/organisms/MessageDialog';
+
 import { getErrorMessageByCode } from '@utils';
 
+import 'dayjs/locale/ko';
 import '@styles/base.css';
 
 dayjs.locale('ko');

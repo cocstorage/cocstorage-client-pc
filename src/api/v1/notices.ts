@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
-import Axios from '@library/axios';
 
-import { Notice } from '@dto/notices';
 import { Pagination } from '@dto/common';
+import { Notice } from '@dto/notices';
+import Axios from '@library/axios';
 
 const BASE_PATH = '/notices';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { GetServerSidePropsContext } from 'next';
 
 import { QueryClient, dehydrate } from 'react-query';
@@ -7,19 +6,20 @@ import { storageBoardParamsDefault } from '@recoil/storageBoards/atoms';
 
 import { Flexbox } from 'cocstorage-ui';
 
-import { Header, Footer } from '@components/UI/molecules';
+import {
+  StorageBoardsGrid,
+  StorageBoardsIntro,
+  StorageBoardsNoticeAlert,
+  StorageBoardsPagination,
+  StorageBoardsTabs
+} from '@components/pages/storageBoards';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 
-import {
-  StorageBoardsIntro,
-  StorageBoardsTabs,
-  StorageBoardsNoticeAlert,
-  StorageBoardsGrid,
-  StorageBoardsPagination
-} from '@components/pages/storageBoards';
+import { Footer, Header } from '@components/UI/molecules';
 
-import { fetchStorage } from '@api/v1/storages';
 import { fetchStorageBoards } from '@api/v1/storage-boards';
+import { fetchStorage } from '@api/v1/storages';
+
 import queryKeys from '@constants/react-query';
 
 function StorageBoard() {

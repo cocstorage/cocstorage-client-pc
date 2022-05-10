@@ -1,25 +1,28 @@
-import React, { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
+
 import { useRouter } from 'next/router';
-import dayjs from 'dayjs';
 
 import { useQuery } from 'react-query';
 
 import {
-  useTheme,
-  Flexbox,
-  Icon,
-  IconButton,
-  Typography,
   Box,
   Button,
+  Flexbox,
+  Hidden,
+  Icon,
+  IconButton,
   Menu,
-  Hidden
+  Typography,
+  useTheme
 } from 'cocstorage-ui';
+
+import dayjs from 'dayjs';
 
 import { RatioImage } from '@components/UI/atoms';
 import { MessageDialog } from '@components/UI/organisms';
 
 import { fetchStorage } from '@api/v1/storages';
+
 import queryKeys from '@constants/react-query';
 
 function StorageBoardsIntro() {

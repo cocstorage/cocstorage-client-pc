@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { SideAccordion, StorageCard } from '@components/UI/molecules';
 
 function StoragesRightMenu() {

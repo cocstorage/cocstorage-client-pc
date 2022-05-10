@@ -1,9 +1,9 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 
 import { Alert, Icon, IconButton } from 'cocstorage-ui';
 
 import { fetchNotices } from '@api/v1/notices';
+
 import queryKeys from '@constants/react-query';
 
 function IndexNoticeAlert() {
