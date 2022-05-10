@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -10,9 +10,11 @@ import { useRecoilState } from 'recoil';
 
 import { storageBoardParamsState } from '@recoil/storageBoards/atoms';
 
-import { Box, Tab, Tabs, useTheme } from 'cocstorage-ui';
+import { Box, Button, Flexbox, Icon, Tab, Tabs, useTheme } from 'cocstorage-ui';
 
 import { RatioImage } from '@components/UI/atoms';
+
+import { MessageDialog } from '@components/UI/organisms';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
@@ -26,6 +28,8 @@ function StorageBoardsTabs() {
   const { theme } = useTheme();
 
   const [params, setParams] = useRecoilState(storageBoardParamsState);
+
+  const [open, setOpen] = useState<boolean>(false);
 
   const tabsRef = useRef<HTMLDivElement | null>(null);
 
@@ -44,27 +48,50 @@ function StorageBoardsTabs() {
     }));
   };
 
+  const handleClick = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
       <Wrapper theme={theme} scrollFixed={scrollFixed}>
+        <Flexbox gap={30} alignment="center">
+          {scrollFixed && (
+            <RatioImage
+              width={24}
+              height={24}
+              round={6}
+              src={avatarUrl || ''}
+              alt="Storage Logo Img"
+            />
+          )}
+          <Tabs ref={tabsRef} onChange={handleChange} value={params.orderBy || 'latest'}>
+            <Tab text="최신" value="latest" />
+            <Tab text="베스트" value="popular" />
+            <Tab text="워스트" value="worst" />
+          </Tabs>
+        </Flexbox>
         {scrollFixed && (
-          <RatioImage
-            width={24}
-            height={24}
-            round={6}
-            src={avatarUrl || ''}
-            alt="Storage Logo Img"
+          <Button
+            color="accent"
+            size="pico"
+            startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
+            iconOnly
+            onClick={handleClick}
+            customStyle={{
+              padding: 5
+            }}
           />
         )}
-        <Tabs ref={tabsRef} onChange={handleChange} value={params.orderBy || 'latest'}>
-          <Tab text="최신" value="latest" />
-          <Tab text="베스트" value="popular" />
-          <Tab text="워스트" value="worst" />
-        </Tabs>
       </Wrapper>
       {scrollFixed && (
         <Box customStyle={{ height: tabsRef.current ? tabsRef.current?.clientHeight : 40 }} />
       )}
+      <MessageDialog
+        open={open}
+        title="준비 중인 기능이에요."
+        message="조금만 기다려 주세요!"
+        onClose={handleClose}
+      />
     </>
   );
 }
@@ -74,7 +101,7 @@ const Wrapper = styled.div<{
 }>`
   display: flex;
   align-items: center;
-  gap: 30px;
+  justify-content: space-between;
   width: 100%;
   padding: 0 54px;
   border-bottom: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};

@@ -1,5 +1,10 @@
+import GeneralTemplate from '@components/templeates/GeneralTemplate';
+import { Header } from '@components/UI/molecules';
+
 function StorageBoardDetail() {
-  return <div>StorageBoardDetail</div>;
+  return (
+    <GeneralTemplate header={<Header scrollFixedTrigger />}>StorageBoardDetail</GeneralTemplate>
+  );
 }
 
 export default StorageBoardDetail;
