@@ -146,7 +146,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Link href="/">
                 <a>
                   <Tag
-                    color={isHome ? 'semiAccent' : 'transparent'}
+                    variant={isHome ? 'semiAccent' : 'transparent'}
                     startIcon={<Icon name={isHome ? 'HomeFilled' : 'HomeOutlined'} width={16} />}
                     customStyle={{
                       display: 'flex',
@@ -163,7 +163,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Link href="/storages">
                 <a>
                   <Tag
-                    color={isStorages ? 'semiAccent' : 'transparent'}
+                    variant={isStorages ? 'semiAccent' : 'transparent'}
                     startIcon={<Icon name="CommunityFilled" width={16} />}
                     customStyle={{
                       height: 32,
@@ -176,7 +176,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               </Link>
             </Flexbox>
             <Tag
-              color="transparent"
+              variant="transparent"
               startIcon={<Icon name="LoginOutlined" width={16} />}
               customStyle={{
                 height: 32,

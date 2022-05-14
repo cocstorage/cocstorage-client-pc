@@ -28,6 +28,7 @@ function CommentForm() {
         <TextBar
           size="small"
           value={value}
+          placeholder="닉네임"
           onChange={handleChange}
           customStyle={{
             borderColor: box.stroked.normal
@@ -36,6 +37,7 @@ function CommentForm() {
         <TextBar
           type="password"
           size="small"
+          placeholder="비밀번호"
           value={value}
           onChange={handleChange}
           customStyle={{

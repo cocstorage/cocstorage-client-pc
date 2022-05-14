@@ -1,5 +1,3 @@
-import { HTMLAttributes } from 'react';
-
 import Link from 'next/link';
 
 import { useRecoilValue } from 'recoil';
@@ -12,7 +10,7 @@ import { StorageBoardCard } from '@components/UI/molecules';
 
 import useStorageBoards from '@hooks/react-query/useStorageBoards';
 
-interface StorageBoardGridProps extends HTMLAttributes<HTMLAttributes<HTMLDivElement>> {
+interface StorageBoardGridProps {
   path: string;
 }
 

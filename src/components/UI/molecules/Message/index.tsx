@@ -19,7 +19,7 @@ function Message({ code, title, message, onClose, ...props }: MessageProps) {
             {title}
           </Typography>
           {code && (
-            <Tag color="accent" customStyle={{ margin: '8px 0' }}>
+            <Tag variant="accent" customStyle={{ margin: '8px 0' }}>
               CODE: {code}
             </Tag>
           )}

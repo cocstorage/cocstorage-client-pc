@@ -1,10 +1,8 @@
-import { HTMLAttributes } from 'react';
-
 import { Box, Dialog } from 'cocstorage-ui';
 
 import Message from '@components/UI/molecules/Message';
 
-interface MessageDialogProps extends HTMLAttributes<HTMLDivElement> {
+interface MessageDialogProps {
   open: boolean;
   title: string;
   code?: string;

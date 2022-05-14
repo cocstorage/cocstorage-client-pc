@@ -30,7 +30,7 @@ function IndexLeftMenu() {
         />
       </SideAccordion>
       <Button
-        color="semiAccent"
+        variant="semiAccent"
         size="small"
         startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
       >

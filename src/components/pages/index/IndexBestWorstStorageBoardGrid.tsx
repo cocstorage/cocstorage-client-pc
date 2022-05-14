@@ -37,7 +37,7 @@ function IndexBestWorstStorageBoardGrid() {
         <Flexbox alignment="center" justifyContent="space-between" gap={4}>
           <Flexbox alignment="center" justifyContent="space-between" gap={8}>
             <Tag
-              color="semiAccent"
+              variant="semiAccent"
               startIcon={<Icon name="ThumbsUpOutlined" width={14} height={14} />}
               customStyle={{
                 padding: '0 6px',
@@ -55,7 +55,7 @@ function IndexBestWorstStorageBoardGrid() {
             </Typography>
           </Flexbox>
           <Button
-            color="transparent"
+            variant="transparent"
             size="pico"
             endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
             customStyle={{
@@ -90,7 +90,7 @@ function IndexBestWorstStorageBoardGrid() {
         <Flexbox alignment="center" justifyContent="space-between" gap={4}>
           <Flexbox alignment="center" justifyContent="space-between" gap={8}>
             <Tag
-              color="semiAccent"
+              variant="semiAccent"
               startIcon={
                 <Icon
                   name="ThumbsDownOutlined"
@@ -117,7 +117,7 @@ function IndexBestWorstStorageBoardGrid() {
             </Typography>
           </Flexbox>
           <Button
-            color="transparent"
+            variant="transparent"
             size="pico"
             endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
             customStyle={{

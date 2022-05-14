@@ -19,7 +19,7 @@ function IssueKeywordCard({
   return (
     <StyledIssueKeywordCard {...props}>
       <Tag
-        color={isTopTier ? 'accent' : 'semiAccent'}
+        variant={isTopTier ? 'accent' : 'semiAccent'}
         customStyle={{
           display: 'flex',
           justifyContent: 'center',

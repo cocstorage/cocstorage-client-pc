@@ -123,7 +123,7 @@ function StorageBoardsIntro() {
         </Flexbox>
         <Flexbox gap={6} alignment="center">
           <Button
-            color="accent"
+            variant="accent"
             size="small"
             startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
             onClick={handleDialogOpen}

@@ -69,7 +69,7 @@ function StorageBoardsTabs() {
         </Flexbox>
         {scrollFixed && (
           <Button
-            color="accent"
+            variant="accent"
             size="pico"
             startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
             iconOnly

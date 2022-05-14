@@ -53,7 +53,7 @@ function SideAccordion({
         </Typography>
         {openToggleButton && !disableToggle && (
           <Button
-            color="transparent"
+            variant="transparent"
             size="pico"
             startIcon={
               <Icon

@@ -73,7 +73,7 @@ function StorageBoardContent() {
               </Typography>
             </Flexbox>
             <Button
-              color="transparent"
+              variant="transparent"
               size="pico"
               startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
               iconOnly
