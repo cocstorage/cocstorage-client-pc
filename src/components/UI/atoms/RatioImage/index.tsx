@@ -2,7 +2,7 @@ import { HTMLAttributes, useCallback, useMemo, useRef, useState } from 'react';
 
 import { CSSObject } from '@emotion/styled';
 
-import { Avatar, Box, CSSValue, useTheme } from 'cocstorage-ui';
+import { Avatar, Box, CSSValue } from 'cocstorage-ui';
 
 import { AvatarInner, AvatarWrapper } from './RatioImage.styles';
 
@@ -24,8 +24,6 @@ function RatioImage({
   round = 6,
   ...props
 }: RatioImageProps) {
-  const { theme } = useTheme();
-
   const customStyleRef = useRef<CSSObject>({
     position: 'absolute',
     top: 0,
@@ -49,7 +47,7 @@ function RatioImage({
 
   return (
     <Box customStyle={{ width, height }}>
-      <AvatarWrapper theme={theme} ratio={ratio} round={round} {...props}>
+      <AvatarWrapper ratio={ratio} round={round} {...props}>
         <AvatarInner>
           <Avatar
             width={width}

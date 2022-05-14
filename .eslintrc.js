@@ -113,7 +113,7 @@ module.exports = {
           caseInsensitive: true
         },
         pathGroupsExcludedImportTypes: ['builtin'],
-        'newlines-between': 'always-and-inside-groups'
+        'newlines-between': 'always'
       }
     ],
     'sort-imports': [

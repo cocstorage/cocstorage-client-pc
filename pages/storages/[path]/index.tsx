@@ -1,36 +1,46 @@
 import { GetServerSidePropsContext } from 'next';
 
+import { useRouter } from 'next/router';
+
 import { QueryClient, dehydrate } from 'react-query';
 
-import { storageBoardParamsDefault } from '@recoil/storageBoards/atoms';
+import { storageBoardsParamsDefault } from '@recoil/boards/atoms';
 
-import { Flexbox } from 'cocstorage-ui';
+import { Box, Flexbox } from 'cocstorage-ui';
 
 import {
-  StorageBoardsGrid,
   StorageBoardsIntro,
   StorageBoardsNoticeAlert,
-  StorageBoardsPagination,
   StorageBoardsTabs
 } from '@components/pages/storageBoards';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
-
 import { Footer, Header } from '@components/UI/molecules';
+import { StorageBoardGrid, StorageBoardGridPagination } from '@components/UI/organisms';
 
 import { fetchStorageBoards } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
 
 import queryKeys from '@constants/react-query';
 
-function StorageBoard() {
+function StorageBoards() {
+  const {
+    query: { path = '' }
+  } = useRouter();
+
   return (
     <GeneralTemplate header={<Header />} footer={<Footer />}>
       <Flexbox gap={20} direction="vertical">
         <StorageBoardsIntro />
         <StorageBoardsTabs />
         <StorageBoardsNoticeAlert />
-        <StorageBoardsGrid />
-        <StorageBoardsPagination />
+        <StorageBoardGrid path={path as string} />
+        <Box
+          customStyle={{
+            margin: '50px auto'
+          }}
+        >
+          <StorageBoardGridPagination path={path as string} />
+        </Box>
       </Flexbox>
     </GeneralTemplate>
   );
@@ -42,8 +52,8 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
 
   await queryClient.prefetchQuery(queryKeys.storages.storageById(id), () => fetchStorage(id));
   await queryClient.prefetchQuery(
-    queryKeys.storageBoards.storageBoardsByParams(storageBoardParamsDefault),
-    () => fetchStorageBoards(id, storageBoardParamsDefault)
+    queryKeys.storageBoards.storageBoardsByParams(storageBoardsParamsDefault),
+    () => fetchStorageBoards(id, storageBoardsParamsDefault)
   );
 
   return {
@@ -53,4 +63,4 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   };
 }
 
-export default StorageBoard;
+export default StorageBoards;

@@ -1,13 +1,20 @@
-import { ChangeEvent, HTMLAttributes, useRef, useState } from 'react';
+import { ChangeEvent, HTMLAttributes, useMemo, useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { useQuery } from 'react-query';
+
 import { Box, Flexbox, Hidden, Icon, Tag, TextBar, Typography, useTheme } from 'cocstorage-ui';
 
+import { RatioImage } from '@components/UI/atoms';
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
+
+import { fetchStorage } from '@api/v1/storages';
+
+import queryKeys from '@constants/react-query';
 
 import { HeaderInner, Logo, StyledHeader } from './Header.styles';
 
@@ -19,9 +26,17 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const router = useRouter();
 
   const {
-    theme,
     theme: { type, palette }
   } = useTheme();
+
+  const { data: { avatarUrl = '', name = '' } = {} } = useQuery(
+    queryKeys.storages.storageById(router.query.path as string),
+    () => fetchStorage(router.query.path as string),
+    {
+      enabled: JSON.stringify(router.query) !== '{}' && router.pathname === '/storages/[path]/[id]'
+    }
+  );
+
   const [open, setOpen] = useState<boolean>(false);
   const [message] = useState<{
     title: string;
@@ -34,6 +49,13 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   });
 
   const [value, setValue] = useState<string>('');
+
+  const isHome = useMemo(() => router.pathname === '/', [router.pathname]);
+  const isStorages = useMemo(() => router.pathname.includes('/storages'), [router.pathname]);
+  const isBoardDetail = useMemo(
+    () => router.pathname === '/storages/[path]/[id]',
+    [router.pathname]
+  );
 
   const headerRef = useRef<HTMLHeadElement | null>(null);
 
@@ -48,23 +70,54 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
 
   return (
     <>
-      <StyledHeader ref={headerRef} theme={theme} scrollFixed={scrollFixed} {...props}>
-        <HeaderInner theme={theme} scrollFixed={scrollFixed}>
+      <StyledHeader ref={headerRef} scrollFixed={scrollFixed} {...props}>
+        <HeaderInner scrollFixed={scrollFixed}>
           <Link href="/">
             <a>
-              <Flexbox component="button" gap={8}>
-                <Logo
-                  width={34}
-                  height={24}
-                  src="https://static.cocstorage.com/assets/logo.png"
-                  alt="Logo Img"
-                />
-                <Hidden lgHidden>
-                  <Typography fontSize="18px">
-                    <strong>개념글’</strong>저장소
-                  </Typography>
-                </Hidden>
-              </Flexbox>
+              {!isBoardDetail && (
+                <Flexbox component="button" gap={8}>
+                  <Logo
+                    width={34}
+                    height={24}
+                    src="https://static.cocstorage.com/assets/logo.png"
+                    alt="Logo Img"
+                  />
+                  <Hidden lgHidden>
+                    <Typography fontSize="18px">
+                      <strong>개념글’</strong>저장소
+                    </Typography>
+                  </Hidden>
+                </Flexbox>
+              )}
+              {isBoardDetail && (
+                <Flexbox gap={14} alignment="center">
+                  <Logo
+                    width={34}
+                    height={24}
+                    src="https://static.cocstorage.com/assets/logo.png"
+                    alt="Logo Img"
+                  />
+                  <Box
+                    customStyle={{
+                      width: 1,
+                      height: 16,
+                      backgroundColor: palette.box.stroked.normal
+                    }}
+                  />
+                  <Flexbox gap={10} alignment="center">
+                    <RatioImage
+                      width={24}
+                      height={24}
+                      round={4}
+                      src={avatarUrl || ''}
+                      alt="Storage Logo Img"
+                    />
+                    <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+                      {name}
+                    </Typography>
+                  </Flexbox>
+                </Flexbox>
+              )}
             </a>
           </Link>
           <Box
@@ -93,8 +146,8 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Link href="/">
                 <a>
                   <Tag
-                    color={router.pathname === '/' ? 'semiAccent' : 'transparent'}
-                    startIcon={<Icon name="HomeFilled" width={16} />}
+                    color={isHome ? 'semiAccent' : 'transparent'}
+                    startIcon={<Icon name={isHome ? 'HomeFilled' : 'HomeOutlined'} width={16} />}
                     customStyle={{
                       display: 'flex',
                       alignItems: 'center',
@@ -110,7 +163,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Link href="/storages">
                 <a>
                   <Tag
-                    color={router.pathname.includes('/storages') ? 'semiAccent' : 'transparent'}
+                    color={isStorages ? 'semiAccent' : 'transparent'}
                     startIcon={<Icon name="CommunityFilled" width={16} />}
                     customStyle={{
                       height: 32,

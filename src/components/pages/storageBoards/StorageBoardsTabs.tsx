@@ -8,12 +8,11 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { useRecoilState } from 'recoil';
 
-import { storageBoardParamsState } from '@recoil/storageBoards/atoms';
+import { storageBoardsParamsState } from '@recoil/boards/atoms';
 
-import { Box, Button, Flexbox, Icon, Tab, Tabs, useTheme } from 'cocstorage-ui';
+import { Box, Button, Flexbox, Icon, Tab, Tabs } from 'cocstorage-ui';
 
 import { RatioImage } from '@components/UI/atoms';
-
 import { MessageDialog } from '@components/UI/organisms';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
@@ -25,9 +24,7 @@ import queryKeys from '@constants/react-query';
 function StorageBoardsTabs() {
   const { query } = useRouter();
 
-  const { theme } = useTheme();
-
-  const [params, setParams] = useRecoilState(storageBoardParamsState);
+  const [params, setParams] = useRecoilState(storageBoardsParamsState);
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -53,7 +50,7 @@ function StorageBoardsTabs() {
 
   return (
     <>
-      <Wrapper theme={theme} scrollFixed={scrollFixed}>
+      <Wrapper scrollFixed={scrollFixed}>
         <Flexbox gap={30} alignment="center">
           {scrollFixed && (
             <RatioImage

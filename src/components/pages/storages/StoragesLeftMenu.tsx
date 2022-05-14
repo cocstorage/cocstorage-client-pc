@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 
 import { selectedCategoryIdState } from '@recoil/storages/atoms';
 
-import { Typography, useTheme } from 'cocstorage-ui';
+import { Typography } from 'cocstorage-ui';
 
 import { SideAccordion } from '@components/UI/molecules';
 
@@ -17,8 +17,6 @@ import { fetchStorageCategories } from '@api/v1/storage-categories';
 import queryKeys from '@constants/react-query';
 
 function StoragesLeftMenu() {
-  const { theme } = useTheme();
-
   const [selectedCategoryId, setSelectedCategoryId] = useRecoilState(selectedCategoryIdState);
 
   const { data: { categories = [] } = {} } = useQuery(
@@ -37,7 +35,6 @@ function StoragesLeftMenu() {
       {categories.map((category) => (
         <Category
           key={`category-${category.id}`}
-          theme={theme}
           active={category.id === selectedCategoryId}
           data-category-id={category.id}
           onClick={handleClick}

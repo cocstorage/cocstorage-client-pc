@@ -2,18 +2,14 @@ import { PropsWithChildren, ReactElement } from 'react';
 
 import styled from '@emotion/styled';
 
-import { useTheme } from 'cocstorage-ui';
-
 export interface GeneralTemplateProps {
   header?: ReactElement;
   footer?: ReactElement;
 }
 
 function GeneralTemplate({ children, header, footer }: PropsWithChildren<GeneralTemplateProps>) {
-  const { theme } = useTheme();
-
   return (
-    <StyledGeneralTemplate theme={theme}>
+    <StyledGeneralTemplate>
       {header}
       <Content>{children}</Content>
       {footer}

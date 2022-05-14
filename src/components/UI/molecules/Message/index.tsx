@@ -24,7 +24,6 @@ function Message({ code, title, message, onClose, ...props }: MessageProps) {
             </Tag>
           )}
           <Typography
-            fontSize="14px"
             fontWeight={500}
             lineHeight="18px"
             dangerouslySetInnerHTML={{ __html: message }}

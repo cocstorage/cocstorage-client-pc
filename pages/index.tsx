@@ -10,7 +10,6 @@ import {
   IndexRightMenu
 } from '@components/pages/index';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
-
 import { Header } from '@components/UI/molecules';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';

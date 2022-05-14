@@ -85,7 +85,7 @@ function StorageBoardCard({
                 {name}
               </Typography>
             </Storage>
-            <Typography noWrap lineClamp={2} lineHeight="18px">
+            <Typography noWrap lineClamp={2} lineHeight="18px" customStyle={{ flex: 1 }}>
               {subject}
             </Typography>
           </Flexbox>
@@ -130,7 +130,7 @@ function StorageBoardCard({
           gap={8}
           customStyle={{ height: '100%' }}
         >
-          <Typography noWrap lineClamp={2} lineHeight="18px">
+          <Typography noWrap lineClamp={2} lineHeight="18px" customStyle={{ flex: 1 }}>
             {subject}
           </Typography>
           <Info>
@@ -209,6 +209,7 @@ function StorageBoardCard({
             lineClamp={1}
             lineHeight="18px"
             customStyle={{
+              flex: 1,
               textAlign: 'left'
             }}
           >
