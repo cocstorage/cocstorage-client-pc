@@ -8,7 +8,7 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { useRecoilState } from 'recoil';
 
-import { storageBoardsParamsState } from '@recoil/boards/atoms';
+import { storageBoardsParamsState } from '@recoil/storageBoards/atoms';
 
 import { Box, Button, Flexbox, Icon, Tab, Tabs } from 'cocstorage-ui';
 

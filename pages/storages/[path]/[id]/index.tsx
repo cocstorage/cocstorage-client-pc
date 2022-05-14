@@ -1,4 +1,8 @@
+import { GetServerSidePropsContext } from 'next';
+
 import { useRouter } from 'next/router';
+
+import { QueryClient, dehydrate } from 'react-query';
 
 import { Box, Flexbox, Grid, Typography } from 'cocstorage-ui';
 
@@ -11,10 +15,16 @@ import {
   StorageBoardGrid,
   StorageBoardGridPagination
 } from '@components/UI/organisms';
+import CommentListPagination from '@components/UI/organisms/CommentListPagination';
+
+import { fetchStorageBoard } from '@api/v1/storage-boards';
+import { fetchStorage } from '@api/v1/storages';
+
+import queryKeys from '@constants/react-query';
 
 function StorageBoard() {
   const {
-    query: { path = '' }
+    query: { path = '', id = 0 }
   } = useRouter();
 
   return (
@@ -22,7 +32,18 @@ function StorageBoard() {
       <Grid container columnGap={20}>
         <Grid item auto>
           <StorageBoardContent />
-          <CommentList />
+          {path && id && (
+            <Flexbox direction="vertical" gap={24}>
+              <CommentList type="storageBoard" path={path as string} id={id as string} />
+              <Box customStyle={{ margin: 'auto' }}>
+                <CommentListPagination
+                  type="storageBoard"
+                  path={path as string}
+                  id={id as string}
+                />
+              </Box>
+            </Flexbox>
+          )}
           <Box customStyle={{ margin: '35px 0 50px 0' }}>
             <CommentForm />
           </Box>
@@ -48,6 +69,25 @@ function StorageBoard() {
       </Grid>
     </GeneralTemplate>
   );
+}
+
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+  const queryClient = new QueryClient();
+  const path = query.path as string;
+  const id = query.id as string;
+
+  const storage = await fetchStorage(path);
+
+  await queryClient.setQueryData(queryKeys.storages.storageById(path), storage);
+  await queryClient.prefetchQuery(queryKeys.storageBoards.storageBoardById(id), () =>
+    fetchStorageBoard(storage.id, id)
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient)
+    }
+  };
 }
 
 export default StorageBoard;

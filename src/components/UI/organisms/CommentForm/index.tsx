@@ -31,6 +31,7 @@ function CommentForm() {
           placeholder="닉네임"
           onChange={handleChange}
           customStyle={{
+            maxWidth: 173,
             borderColor: box.stroked.normal
           }}
         />
@@ -41,6 +42,7 @@ function CommentForm() {
           value={value}
           onChange={handleChange}
           customStyle={{
+            maxWidth: 173,
             borderColor: box.stroked.normal
           }}
         />
@@ -66,6 +68,7 @@ const CommentBar = styled.div`
   display: flex;
   max-height: 80px;
   border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
+  background-color: ${({ theme: { palette } }) => palette.background.bg};
   border-radius: 10px;
   overflow: hidden;
 `;
@@ -78,6 +81,7 @@ const CommentTextArea = styled.textarea`
   outline: 0;
   font-size: 14px;
   line-height: 18px;
+  background-color: inherit;
   color: ${({ theme: { type, palette } }) => palette.text[type].main};
 
   &::placeholder {

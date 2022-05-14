@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { useRecoilValue } from 'recoil';
 
-import { storageBoardsParamsState } from '@recoil/boards/atoms';
+import { storageBoardsParamsState } from '@recoil/storageBoards/atoms';
 
 import { Grid } from 'cocstorage-ui';
 

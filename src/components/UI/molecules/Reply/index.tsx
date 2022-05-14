@@ -2,7 +2,15 @@ import { memo } from 'react';
 
 import { Avatar, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
-function Reply() {
+import dayjs from 'dayjs';
+
+import { StorageBoardCommentReply } from '@dto/storage-board-comments';
+
+interface ReplyProps {
+  reply: StorageBoardCommentReply;
+}
+
+function Reply({ reply }: ReplyProps) {
   const {
     theme: {
       type,
@@ -26,21 +34,34 @@ function Reply() {
         }
       }}
     >
-      <Avatar
-        width={30}
-        height={30}
-        src="https://static.cocstorage.com/images/zksw76puo6l255o5sabljom0gw8l"
-        alt="User Avatar"
-      />
-      <Flexbox gap={8} direction="vertical" customStyle={{ flexGrow: 1 }}>
-        <div>
+      {reply.isMember && reply.user?.avatarUrl && (
+        <Avatar
+          width={30}
+          height={30}
+          src="https://static.cocstorage.com/images/zksw76puo6l255o5sabljom0gw8l"
+          alt="User Avatar"
+        />
+      )}
+      <Flexbox gap={8} direction="vertical" customStyle={{ flex: 1 }}>
+        <Flexbox gap={4}>
           <Typography fontSize="12px" fontWeight={700} lineHeight="15px">
-            사용자
+            {reply.nickname || reply.user?.nickname}
           </Typography>
-          <Typography lineHeight="18px" customStyle={{ marginTop: 4 }}>
-            내용입니다.
-          </Typography>
-        </div>
+          {!reply.user && reply.createdIp && (
+            <Typography fontSize="10px" fontWeight={700} lineHeight="15px">
+              ({reply.createdIp})
+            </Typography>
+          )}
+        </Flexbox>
+        <Typography lineHeight="18px" customStyle={{ marginTop: 4 }}>
+          {reply.content.split('\n').map((content, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <span key={`reply-content-${index}`}>
+              {content}
+              <br />
+            </span>
+          ))}
+        </Typography>
         <Flexbox direction="vertical" gap={11}>
           <Flexbox gap={12} alignment="center">
             <Typography
@@ -50,7 +71,7 @@ function Reply() {
                 color: text[type].text1
               }}
             >
-              22분전
+              {dayjs(reply.createdAt).fromNow()}
             </Typography>
           </Flexbox>
         </Flexbox>

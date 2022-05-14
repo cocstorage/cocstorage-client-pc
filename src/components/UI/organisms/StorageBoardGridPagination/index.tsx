@@ -1,16 +1,16 @@
 import { useRecoilState } from 'recoil';
 
-import { storageBoardsParamsState } from '@recoil/boards/atoms';
+import { storageBoardsParamsState } from '@recoil/storageBoards/atoms';
 
 import { Pagination } from 'cocstorage-ui';
 
 import useStorageBoards from '@hooks/react-query/useStorageBoards';
 
-interface StorageBoardGridPagination {
+interface StorageBoardGridPaginationProps {
   path: string;
 }
 
-function StorageBoardGridPagination({ path }: StorageBoardGridPagination) {
+function StorageBoardGridPagination({ path }: StorageBoardGridPaginationProps) {
   const [params, setParams] = useRecoilState(storageBoardsParamsState);
 
   const { data: { pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {} } =

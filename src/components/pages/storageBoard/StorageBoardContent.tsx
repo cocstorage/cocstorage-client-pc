@@ -1,34 +1,46 @@
-import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import styled from '@emotion/styled';
 
 import { Avatar, Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
+import dayjs from 'dayjs';
+
+import useStorage from '@hooks/react-query/useStorage';
+import useStorageBoard from '@hooks/react-query/useStorageBoard';
+
 function StorageBoardContent() {
+  const { query: { path = '', id = 0 } = {} } = useRouter();
   const {
     theme: { type, palette }
   } = useTheme();
+
+  const { data: { id: storageId } = {} } = useStorage(path as string);
+
+  const { data: storageBoard } = useStorageBoard(storageId as number, id as string);
 
   return (
     <>
       <Flexbox direction="vertical" gap={8}>
         <Typography fontSize="22px" fontWeight={700} lineHeight="28px">
-          호나우두 vs 호날두 축구 기량 평가는 이것만 보면 종결 남 ㅋㅋ
+          {storageBoard?.subject}
         </Typography>
         <Flexbox justifyContent="space-between">
           <Flexbox gap={6}>
-            <Avatar
-              width={24}
-              height={24}
-              src="https://static.cocstorage.com/assets/thumbnail.png"
-              alt="User Avatar Img"
-            />
+            {storageBoard?.isMember && storageBoard.user?.avatarUrl && (
+              <Avatar
+                width={24}
+                height={24}
+                src={storageBoard.user?.avatarUrl}
+                alt="User Avatar Img"
+              />
+            )}
             <UserInfo>
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                사용자
+                {storageBoard?.nickname || storageBoard?.user?.nickname}
               </Typography>
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                22분 전
+                {dayjs(storageBoard?.createdAt).fromNow()}
               </Typography>
             </UserInfo>
           </Flexbox>
@@ -41,7 +53,7 @@ function StorageBoardContent() {
                 color={palette.text[type].text1}
               />
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                4955
+                {storageBoard?.thumbUp.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
@@ -52,7 +64,7 @@ function StorageBoardContent() {
                 color={palette.text[type].text1}
               />
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                1000
+                {storageBoard?.thumbDown.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
@@ -63,13 +75,13 @@ function StorageBoardContent() {
                 color={palette.text[type].text1}
               />
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                20
+                {storageBoard?.commentTotalCount.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
               <Icon name="ViewOutlined" width={15} height={15} color={palette.text[type].text1} />
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                588
+                {storageBoard?.viewCount.toLocaleString()}
               </Typography>
             </Flexbox>
             <Button
@@ -89,27 +101,7 @@ function StorageBoardContent() {
           backgroundColor: palette.box.stroked.normal
         }}
       />
-      <Content>
-        <div>
-          <Image
-            width={587}
-            height={404}
-            src="https://static.cocstorage.com/assets/test.png"
-            alt="Test Img"
-            quality={100}
-          />
-        </div>
-        이거 하나만 봐도 눈이 달려있지 않은 넘이 아닌 이상 한 눈에 호나우두가 축구 더 잘하는 선수인
-        걸 알 수 있음 ㅋㅋ
-        <div>
-          <Image
-            width={587}
-            height={404}
-            src="https://static.cocstorage.com/assets/test.png"
-            alt="Test Img"
-          />
-        </div>
-      </Content>
+      <Content dangerouslySetInnerHTML={{ __html: storageBoard?.content || '' }} />
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
           size="small"
@@ -123,7 +115,7 @@ function StorageBoardContent() {
             color: palette.primary.main
           }}
         >
-          4933
+          {storageBoard?.thumbUp.toLocaleString()}
         </Button>
         <Button
           size="small"
@@ -141,7 +133,7 @@ function StorageBoardContent() {
             color: palette.text[type].text1
           }}
         >
-          1333
+          {storageBoard?.thumbDown.toLocaleString()}
         </Button>
       </Box>
       <Box
@@ -177,7 +169,9 @@ const UserInfo = styled.div`
 
 const Content = styled.article`
   position: relative;
-  img {
+
+  img,
+  video {
     border-radius: 8px;
   }
 `;

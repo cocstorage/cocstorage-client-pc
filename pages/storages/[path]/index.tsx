@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import { QueryClient, dehydrate } from 'react-query';
 
-import { storageBoardsParamsDefault } from '@recoil/boards/atoms';
+import { storageBoardsParamsDefault } from '@recoil/storageBoards/atoms';
 
 import { Box, Flexbox } from 'cocstorage-ui';
 
