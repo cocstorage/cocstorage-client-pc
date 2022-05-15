@@ -4,13 +4,13 @@ import { Avatar, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-
 
 import dayjs from 'dayjs';
 
-import { StorageBoardCommentReply } from '@dto/storage-board-comments';
+import { StorageBoardReply } from '@dto/storage-board-comments';
 
 interface ReplyProps {
-  reply: StorageBoardCommentReply;
+  reply: StorageBoardReply;
 }
 
-function Reply({ reply }: ReplyProps) {
+function Reply({ reply: { user, nickname, content, createdAt, createdIp, isMember } }: ReplyProps) {
   const {
     theme: {
       type,
@@ -34,7 +34,7 @@ function Reply({ reply }: ReplyProps) {
         }
       }}
     >
-      {reply.isMember && reply.user?.avatarUrl && (
+      {isMember && (user || {}).avatarUrl && (
         <Avatar
           width={30}
           height={30}
@@ -45,19 +45,19 @@ function Reply({ reply }: ReplyProps) {
       <Flexbox gap={8} direction="vertical" customStyle={{ flex: 1 }}>
         <Flexbox gap={4}>
           <Typography fontSize="12px" fontWeight={700} lineHeight="15px">
-            {reply.nickname || reply.user?.nickname}
+            {nickname || (user || {}).nickname}
           </Typography>
-          {!reply.user && reply.createdIp && (
-            <Typography fontSize="10px" fontWeight={700} lineHeight="15px">
-              ({reply.createdIp})
+          {!user && createdIp && (
+            <Typography fontSize="10px" lineHeight="15px" color={text[type].text1}>
+              ({createdIp})
             </Typography>
           )}
         </Flexbox>
         <Typography lineHeight="18px" customStyle={{ marginTop: 4 }}>
-          {reply.content.split('\n').map((content, index) => (
+          {content.split('\n').map((splitContent, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <span key={`reply-content-${index}`}>
-              {content}
+              {splitContent}
               <br />
             </span>
           ))}
@@ -71,7 +71,7 @@ function Reply({ reply }: ReplyProps) {
                 color: text[type].text1
               }}
             >
-              {dayjs(reply.createdAt).fromNow()}
+              {dayjs(createdAt).fromNow()}
             </Typography>
           </Flexbox>
         </Flexbox>

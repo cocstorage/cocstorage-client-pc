@@ -5,15 +5,21 @@ import { Avatar, Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocsto
 import dayjs from 'dayjs';
 
 import Reply from '@components/UI/molecules/Reply';
-import CommentForm from '@components/UI/organisms/CommentForm';
+import ReplyForm from '@components/UI/organisms/ReplyForm';
 
 import { StorageBoardComment } from '@dto/storage-board-comments';
 
 interface CommentProps {
+  storageId: number;
+  id: number;
   comment: StorageBoardComment;
 }
 
-function Comment({ comment }: CommentProps) {
+function Comment({
+  storageId,
+  id,
+  comment: { id: commentId, user, nickname, content = '', replies, createdAt, createdIp, isMember }
+}: CommentProps) {
   const {
     theme: {
       type,
@@ -28,24 +34,24 @@ function Comment({ comment }: CommentProps) {
   return (
     <>
       <Flexbox gap={10} customStyle={{ flex: 1 }}>
-        {comment.isMember && comment.user?.avatarUrl && (
-          <Avatar width={30} height={30} src={comment.user?.avatarUrl} alt="User Avatar" />
+        {isMember && (user || {}).avatarUrl && (
+          <Avatar width={30} height={30} src={(user || {}).avatarUrl || ''} alt="User Avatar" />
         )}
         <Flexbox gap={8} direction="vertical" customStyle={{ flex: 1 }}>
           <Flexbox gap={4}>
             <Typography fontSize="12px" fontWeight={700} lineHeight="15px">
-              {comment.nickname || comment.user?.nickname}
+              {nickname || (user || {}).nickname}
             </Typography>
-            {!comment.user && comment.createdIp && (
-              <Typography fontSize="10px" fontWeight={700} lineHeight="15px">
-                ({comment.createdIp})
+            {!user && createdIp && (
+              <Typography fontSize="10px" lineHeight="15px" color={text[type].text1}>
+                ({createdIp})
               </Typography>
             )}
           </Flexbox>
           <Typography lineHeight="18px" customStyle={{ marginTop: 4 }}>
-            {comment.content.split('\n').map((content, index) => (
+            {content.split('\n').map((splitContent, index) => (
               // eslint-disable-next-line react/no-array-index-key
-              <span key={`comment-content-${index}`}>{content}</span>
+              <span key={`comment-content-${index}`}>{splitContent}</span>
             ))}
           </Typography>
           <Flexbox direction="vertical" gap={11}>
@@ -57,7 +63,7 @@ function Comment({ comment }: CommentProps) {
                   color: text[type].text1
                 }}
               >
-                {dayjs(comment.createdAt).fromNow()}
+                {dayjs(createdAt).fromNow()}
               </Typography>
               <Typography
                 fontSize="12px"
@@ -68,7 +74,7 @@ function Comment({ comment }: CommentProps) {
                 답글달기
               </Typography>
             </Flexbox>
-            {comment.replies.length > 0 && (
+            {replies.length > 0 && (
               <Flexbox gap={10} alignment="center">
                 <Box customStyle={{ width: 24, height: 1, backgroundColor: text[type].text3 }} />
                 <Typography
@@ -80,7 +86,7 @@ function Comment({ comment }: CommentProps) {
                   }}
                   onClick={handleClick}
                 >
-                  {`답글 ${comment.replies.length}개`}
+                  {`답글 ${replies.length}개`}
                 </Typography>
               </Flexbox>
             )}
@@ -112,9 +118,9 @@ function Comment({ comment }: CommentProps) {
               }
             }}
           >
-            <CommentForm type="storageBoardReply" commentId={0} />
+            <ReplyForm storageId={storageId} id={id} commentId={commentId} />
           </Flexbox>
-          {comment.replies.map((reply) => (
+          {replies.map((reply) => (
             <Reply key={`reply-${reply.id}`} reply={reply} />
           ))}
         </Flexbox>

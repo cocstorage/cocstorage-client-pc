@@ -1,16 +1,16 @@
 import { Pagination } from '@dto/common';
-import { StorageBoardComment } from '@dto/storage-board-comments';
+import { StorageBoardComment, StorageBoardReply } from '@dto/storage-board-comments';
 import Axios from '@library/axios';
 
 const BASE_PATH = '/storages';
 
 export async function fetchStorageBoardComments(
-  path: number | string,
+  storageId: number,
   id: number | string,
   params?: FetchStorageBoardCommentsParams
 ) {
   const { data } = await Axios.get<FetchStorageBoardCommentsResponse>(
-    `${BASE_PATH}/${path}/boards/${id}/comments`,
+    `${BASE_PATH}/${storageId}/boards/${id}/comments`,
     {
       params
     }
@@ -20,12 +20,26 @@ export async function fetchStorageBoardComments(
 }
 
 export async function postNonMemberStorageBoardComment(
-  path: number | string,
+  storageId: number,
   id: number | string,
   data: PostStorageBoardCommentData
 ) {
   const { data: response } = await Axios.post<StorageBoardComment, PostStorageBoardCommentData>(
-    `${BASE_PATH}/${path}/boards/${id}/comments/non-members`,
+    `${BASE_PATH}/${storageId}/boards/${id}/comments/non-members`,
+    data
+  );
+
+  return response;
+}
+
+export async function postNonMemberStorageBoardReply(
+  storageId: number,
+  id: number,
+  commentId: number,
+  data: PostStorageBoardCommentData
+) {
+  const { data: response } = await Axios.post<StorageBoardReply, PostStorageBoardCommentData>(
+    `${BASE_PATH}/${storageId}/boards/${id}/comments/${commentId}/replies/non-members`,
     data
   );
 

@@ -12,19 +12,12 @@ import useStorage from '@hooks/react-query/useStorage';
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
 import useStorageBoardComments from '@hooks/react-query/useStorageBoardComments';
 
-type ConditionalCommentListProps =
-  | {
-      type: 'storageBoard';
-      path: string;
-      id: number;
-    }
-  | {
-      type: 'notice';
-      path: never;
-      id: number;
-    };
+interface CommentListProps {
+  path: string;
+  id: number;
+}
 
-function CommentList({ path, id }: ConditionalCommentListProps) {
+function CommentList({ path, id }: CommentListProps) {
   const {
     theme: { palette }
   } = useTheme();
@@ -55,7 +48,7 @@ function CommentList({ path, id }: ConditionalCommentListProps) {
         page: commentLatestPage
       }));
     }
-  }, [setParams, params.page, commentLatestPage]);
+  }, [setParams, commentLatestPage]);
 
   useEffect(() => {
     return () => {
@@ -79,13 +72,18 @@ function CommentList({ path, id }: ConditionalCommentListProps) {
               color: palette.primary.main
             }}
           >
-            {commentTotalCount.toLocaleString()}
+            {commentTotalCount}
           </Typography>
         </Flexbox>
       </Flexbox>
       <Flexbox gap={18} direction="vertical">
         {comments.map((comment) => (
-          <Comment key={`comment-${comment.id}`} comment={comment} />
+          <Comment
+            key={`comment-${comment.id}`}
+            storageId={storageId as number}
+            id={id}
+            comment={comment}
+          />
         ))}
       </Flexbox>
     </>

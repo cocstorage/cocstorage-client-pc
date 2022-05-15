@@ -13,10 +13,10 @@ export interface StorageBoardComment {
   createdIp: string;
   createdAt: string;
   updatedAt: string;
-  replies: StorageBoardCommentReply[];
+  replies: StorageBoardReply[];
 }
 
-export interface StorageBoardCommentReply {
+export interface StorageBoardReply {
   id: number;
   storageBoardCommentId: number;
   user: User | null;

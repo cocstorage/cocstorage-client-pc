@@ -16,16 +16,22 @@ export async function fetchLatestStorageBoards() {
   return data;
 }
 
-export async function fetchStorageBoards(id: number | string, params?: FetchStorageBoardsParams) {
-  const { data } = await Axios.get<FetchStorageBoardsResponse>(`${BASE_PATH}/${id}/boards`, {
-    params
-  });
+export async function fetchStorageBoards(
+  pathOrStorageId: number | string,
+  params?: FetchStorageBoardsParams
+) {
+  const { data } = await Axios.get<FetchStorageBoardsResponse>(
+    `${BASE_PATH}/${pathOrStorageId}/boards`,
+    {
+      params
+    }
+  );
 
   return data;
 }
 
-export async function fetchStorageBoard(path: number | string, id: number | string) {
-  const { data } = await Axios.get<StorageBoard>(`${BASE_PATH}/${path}/boards/${id}`);
+export async function fetchStorageBoard(pathOrStorageId: number | string, id: number) {
+  const { data } = await Axios.get<StorageBoard>(`${BASE_PATH}/${pathOrStorageId}/boards/${id}`);
 
   return data;
 }

@@ -33,14 +33,18 @@ function StorageBoards() {
         <StorageBoardsIntro />
         <StorageBoardsTabs />
         <StorageBoardsNoticeAlert />
-        <StorageBoardGrid path={String(path)} />
-        <Box
-          customStyle={{
-            margin: '50px auto'
-          }}
-        >
-          <StorageBoardGridPagination path={String(path)} />
-        </Box>
+        {path && (
+          <>
+            <StorageBoardGrid path={String(path)} />
+            <Box
+              customStyle={{
+                margin: '50px auto'
+              }}
+            >
+              <StorageBoardGridPagination path={String(path)} />
+            </Box>
+          </>
+        )}
       </Flexbox>
     </GeneralTemplate>
   );

@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import styled from '@emotion/styled';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
@@ -12,30 +12,27 @@ import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
 
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
-import useStorage from '@hooks/react-query/useStorage';
-import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
-import useStorageBoardComments from '@hooks/react-query/useStorageBoardComments';
-
 import {
   PostStorageBoardCommentData,
-  postNonMemberStorageBoardComment
+  postNonMemberStorageBoardReply
 } from '@api/v1/storage-board-comments';
 
 import queryKeys from '@constants/react-query';
 import validators from '@constants/validators';
 
-interface CommentFormProps {
-  path: string;
+interface ReplyFormProps {
+  storageId: number;
   id: number;
+  commentId: number;
 }
 
-function CommentForm({ path, id }: CommentFormProps) {
+function ReplyForm({ storageId, id, commentId }: ReplyFormProps) {
   const {
     theme: {
       palette: { box }
     }
   } = useTheme();
-  const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
+  const params = useRecoilValue(storageBoardCommentsParamsState);
 
   const [nickname, setNickname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -53,44 +50,16 @@ function CommentForm({ path, id }: CommentFormProps) {
 
   const queryClient = useQueryClient();
 
-  const { data: { id: storageId } = {} } = useStorage(path);
-
-  const storageBoard = useStorageBoardData(id);
-
-  const { data: { comments = [], pagination: { perPage = 0 } = {} } = {} } =
-    useStorageBoardComments(storageId as number, id, params, {
-      enabled: params.page !== 0,
-      keepPreviousData: true
-    });
-
   const { mutate, isLoading } = useMutation(
     (data: PostStorageBoardCommentData) =>
-      postNonMemberStorageBoardComment(storageId as number, id, data),
+      postNonMemberStorageBoardReply(storageId, id, commentId, data),
     {
       onSuccess: () => {
         setContent('');
 
-        const commentLatestPage = storageBoard?.commentLatestPage || 0;
-
-        if (params.page === commentLatestPage && comments.length + 1 <= perPage) {
-          queryClient
-            .invalidateQueries(
-              queryKeys.storageBoardComments.storageBoardCommentsByIdWithParams(id, params)
-            )
-            .then();
-        } else {
-          const newCommentLatestPage =
-            comments.length + 1 > perPage ? commentLatestPage + 1 : commentLatestPage;
-
-          queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(id), {
-            ...storageBoard,
-            commentLatestPage: newCommentLatestPage
-          });
-          setParams((prevParams) => ({
-            ...prevParams,
-            page: newCommentLatestPage
-          }));
-        }
+        return queryClient.invalidateQueries(
+          queryKeys.storageBoardComments.storageBoardCommentsByIdWithParams(id, params)
+        );
       }
     }
   );
@@ -168,8 +137,8 @@ function CommentForm({ path, id }: CommentFormProps) {
             />
           </Flexbox>
         </form>
-        <CommentBar>
-          <CommentTextArea
+        <ReplyBar>
+          <ReplyTextArea
             onChange={handleChangeContent}
             value={content}
             placeholder="내용을 입력해주세요."
@@ -185,14 +154,14 @@ function CommentForm({ path, id }: CommentFormProps) {
           >
             작성
           </Button>
-        </CommentBar>
+        </ReplyBar>
       </Flexbox>
       <MessageDialog open={open} {...errorMessage} onClose={handleClose} />
     </>
   );
 }
 
-const CommentBar = styled.div`
+const ReplyBar = styled.div`
   flex-grow: 1;
   display: flex;
   max-height: 80px;
@@ -202,7 +171,7 @@ const CommentBar = styled.div`
   overflow: hidden;
 `;
 
-const CommentTextArea = styled.textarea`
+const ReplyTextArea = styled.textarea`
   flex-grow: 1;
   padding: 12px;
   border: none;
@@ -218,4 +187,4 @@ const CommentTextArea = styled.textarea`
   }
 `;
 
-export default CommentForm;
+export default ReplyForm;

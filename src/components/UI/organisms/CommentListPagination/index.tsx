@@ -7,19 +7,12 @@ import { Pagination } from 'cocstorage-ui';
 import useStorage from '@hooks/react-query/useStorage';
 import useStorageBoardComments from '@hooks/react-query/useStorageBoardComments';
 
-type ConditionalCommentListPaginationProps =
-  | {
-      type: 'storageBoard';
-      path: string;
-      id: number;
-    }
-  | {
-      type: 'notice';
-      path: never;
-      id: number;
-    };
+interface CommentListPaginationProps {
+  path: string;
+  id: number;
+}
 
-function CommentListPagination({ path, id }: ConditionalCommentListPaginationProps) {
+function CommentListPagination({ path, id }: CommentListPaginationProps) {
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
 
   const { data: { id: storageId } = {} } = useStorage(path);
