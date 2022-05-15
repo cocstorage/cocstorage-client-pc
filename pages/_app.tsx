@@ -3,7 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 
-import { Hydrate, QueryCache, QueryClient, QueryClientProvider } from 'react-query';
+import { Hydrate, MutationCache, QueryCache, QueryClient, QueryClientProvider } from 'react-query';
 
 import { ReactQueryDevtools } from 'react-query/devtools';
 
@@ -49,6 +49,25 @@ function App({ Component, pageProps }: AppProps) {
           retry: 1
         }
       },
+      mutationCache: new MutationCache({
+        onError: (error) => {
+          const asError = error as AxiosError;
+
+          if (asError && asError.response) {
+            const { data = {} } = (asError || {}).response || {};
+
+            setErrorMessage({
+              title: getErrorMessageByCode(data.code),
+              code: data.code ? data.code : 'NONE',
+              message: '문제가 지속된다면 위의 코드와 함께 관리자에게 문의해 주세요!'
+            });
+
+            setOpen(true);
+          } else {
+            setOpen(true);
+          }
+        }
+      }),
       queryCache: new QueryCache({
         onError: (error) => {
           const asError = error as AxiosError;

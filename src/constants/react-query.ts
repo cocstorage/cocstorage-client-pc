@@ -14,14 +14,15 @@ const storageBoards = {
   latestStorageBoards: ['latestStorageBoards'],
   popularStorageBoards: ['popularStorageBoards'],
   storageBoardsByParams: (params: FetchStorageBoardsParams) => ['storageBoards', params],
-  storageBoardById: (id: number | string) => ['storageBoard', id]
+  storageBoardById: (id: number) => ['storageBoard', id]
 };
 
 const storageBoardComments = {
-  storageBoardCommentsByIdWithParams: (
-    id: number | string,
-    params: FetchStorageBoardCommentsParams
-  ) => ['storageBoardComments', id, params]
+  storageBoardCommentsByIdWithParams: (id: number, params: FetchStorageBoardCommentsParams) => [
+    'storageBoardComments',
+    id,
+    params
+  ]
 };
 
 const issueKeywords = {

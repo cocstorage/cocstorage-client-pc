@@ -1,4 +1,6 @@
-import { useRecoilValue } from 'recoil';
+import { useEffect, useRef } from 'react';
+
+import { useRecoilState } from 'recoil';
 
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
@@ -7,40 +9,59 @@ import { Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 import Comment from '@components/UI/organisms/Comment';
 
 import useStorage from '@hooks/react-query/useStorage';
-import useStorageBoard from '@hooks/react-query/useStorageBoard';
+import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
 import useStorageBoardComments from '@hooks/react-query/useStorageBoardComments';
 
 type ConditionalCommentListProps =
   | {
       type: 'storageBoard';
       path: string;
-      id: number | string;
+      id: number;
     }
   | {
       type: 'notice';
       path: never;
-      id: number | string;
+      id: number;
     };
 
 function CommentList({ path, id }: ConditionalCommentListProps) {
   const {
     theme: { palette }
   } = useTheme();
-  const params = useRecoilValue(storageBoardCommentsParamsState);
+  const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
+
+  const isUpdatedCommentPageRef = useRef<boolean>(false);
 
   const { data: { id: storageId } = {} } = useStorage(path);
 
-  const { data: { commentTotalCount = 0 } = {} } = useStorageBoard(storageId as number, id);
+  const { commentTotalCount = 0, commentLatestPage } = useStorageBoardData(id) || {};
 
   const { data: { comments = [] } = {} } = useStorageBoardComments(
     storageId as number,
     id,
     params,
     {
-      enabled: !!storageId,
+      enabled: params.page !== 0,
       keepPreviousData: true
     }
   );
+
+  useEffect(() => {
+    if (!isUpdatedCommentPageRef.current && commentLatestPage) {
+      isUpdatedCommentPageRef.current = true;
+
+      setParams((prevParams) => ({
+        ...prevParams,
+        page: commentLatestPage
+      }));
+    }
+  }, [setParams, params.page, commentLatestPage]);
+
+  useEffect(() => {
+    return () => {
+      isUpdatedCommentPageRef.current = false;
+    };
+  }, [commentLatestPage]);
 
   return (
     <>

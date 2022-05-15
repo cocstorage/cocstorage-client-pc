@@ -10,7 +10,7 @@ import queryKeys from '@constants/react-query';
 
 export default function useStorageBoardComments(
   storageId: number,
-  id: number | string,
+  id: number,
   params: FetchStorageBoardCommentsParams,
   options?: Omit<UseQueryOptions<FetchStorageBoardCommentsResponse>, 'queryKey' | 'queryFn'>
 ) {

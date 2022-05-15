@@ -112,7 +112,7 @@ function Comment({ comment }: CommentProps) {
               }
             }}
           >
-            <CommentForm />
+            <CommentForm type="storageBoardReply" commentId={0} />
           </Flexbox>
           {comment.replies.map((reply) => (
             <Reply key={`reply-${reply.id}`} reply={reply} />

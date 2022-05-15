@@ -33,30 +33,28 @@ function StorageBoard() {
         <Grid item auto>
           <StorageBoardContent />
           {path && id && (
-            <Flexbox direction="vertical" gap={24}>
-              <CommentList type="storageBoard" path={path as string} id={id as string} />
-              <Box customStyle={{ margin: 'auto' }}>
-                <CommentListPagination
-                  type="storageBoard"
-                  path={path as string}
-                  id={id as string}
-                />
+            <>
+              <Flexbox direction="vertical" gap={24}>
+                <CommentList type="storageBoard" path={String(path)} id={Number(id)} />
+                <Box customStyle={{ margin: 'auto' }}>
+                  <CommentListPagination type="storageBoard" path={String(path)} id={Number(id)} />
+                </Box>
+              </Flexbox>
+              <Box customStyle={{ margin: '35px 0 50px 0' }}>
+                <CommentForm type="storageBoard" path={String(path)} id={Number(id)} />
               </Box>
-            </Flexbox>
+            </>
           )}
-          <Box customStyle={{ margin: '35px 0 50px 0' }}>
-            <CommentForm />
-          </Box>
           {path && (
             <>
               <Flexbox gap={20} direction="vertical">
                 <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
                   이 게시판의 다른 글
                 </Typography>
-                <StorageBoardGrid path={path as string} />
+                <StorageBoardGrid path={String(path)} />
               </Flexbox>
               <Flexbox justifyContent="center" customStyle={{ margin: '50px 0 30px 0' }}>
-                <StorageBoardGridPagination path={path as string} />
+                <StorageBoardGridPagination path={String(path)} />
               </Flexbox>
             </>
           )}
@@ -73,8 +71,8 @@ function StorageBoard() {
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const queryClient = new QueryClient();
-  const path = query.path as string;
-  const id = query.id as string;
+  const path = String(query.path);
+  const id = Number(query.id);
 
   const storage = await fetchStorage(path);
 

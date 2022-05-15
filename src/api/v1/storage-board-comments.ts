@@ -5,18 +5,31 @@ import Axios from '@library/axios';
 const BASE_PATH = '/storages';
 
 export async function fetchStorageBoardComments(
+  path: number | string,
   id: number | string,
-  boardId: number | string,
   params?: FetchStorageBoardCommentsParams
 ) {
   const { data } = await Axios.get<FetchStorageBoardCommentsResponse>(
-    `${BASE_PATH}/${id}/boards/${boardId}/comments`,
+    `${BASE_PATH}/${path}/boards/${id}/comments`,
     {
       params
     }
   );
 
   return data;
+}
+
+export async function postNonMemberStorageBoardComment(
+  path: number | string,
+  id: number | string,
+  data: PostStorageBoardCommentData
+) {
+  const { data: response } = await Axios.post<StorageBoardComment, PostStorageBoardCommentData>(
+    `${BASE_PATH}/${path}/boards/${id}/comments/non-members`,
+    data
+  );
+
+  return response;
 }
 
 export interface FetchStorageBoardCommentsParams {
@@ -31,4 +44,10 @@ export interface FetchStorageBoardCommentsParams {
 export interface FetchStorageBoardCommentsResponse {
   comments: StorageBoardComment[];
   pagination: Pagination;
+}
+
+export interface PostStorageBoardCommentData {
+  nickname?: string | null;
+  password?: string | null;
+  content: string | null;
 }

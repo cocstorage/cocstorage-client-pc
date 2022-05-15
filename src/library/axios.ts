@@ -34,19 +34,19 @@ const Axios = (() => {
 
       return Axios.getInstance().get<T>(url, config);
     },
-    post<T>(url: string, config?: AxiosRequestConfig) {
+    post<T, D>(url: string, data?: D, config?: AxiosRequestConfig) {
       if (axiosInstance) {
-        return axiosInstance.post<T>(url, config);
+        return axiosInstance.post<T>(url, data, config);
       }
 
-      return Axios.getInstance().post<T>(url, config);
+      return Axios.getInstance().post<T>(url, data, config);
     },
-    put<T>(url: string, config?: AxiosRequestConfig) {
+    put<T, D>(url: string, data?: D, config?: AxiosRequestConfig) {
       if (axiosInstance) {
-        return axiosInstance.put<T>(url, config);
+        return axiosInstance.put<T>(url, data, config);
       }
 
-      return Axios.getInstance().put<T>(url, config);
+      return Axios.getInstance().put<T>(url, data, config);
     },
     delete<T>(url: string, config?: AxiosRequestConfig) {
       if (axiosInstance) {
@@ -55,12 +55,12 @@ const Axios = (() => {
 
       return Axios.getInstance().delete<T>(url, config);
     },
-    patch<T>(url: string, config?: AxiosRequestConfig) {
+    patch<T, D>(url: string, data?: D, config?: AxiosRequestConfig) {
       if (axiosInstance) {
-        return axiosInstance.patch<T>(url, config);
+        return axiosInstance.patch<T>(url, data, config);
       }
 
-      return Axios.getInstance().patch<T>(url, config);
+      return Axios.getInstance().patch<T>(url, data, config);
     }
   };
 })();

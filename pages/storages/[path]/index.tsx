@@ -33,13 +33,13 @@ function StorageBoards() {
         <StorageBoardsIntro />
         <StorageBoardsTabs />
         <StorageBoardsNoticeAlert />
-        <StorageBoardGrid path={path as string} />
+        <StorageBoardGrid path={String(path)} />
         <Box
           customStyle={{
             margin: '50px auto'
           }}
         >
-          <StorageBoardGridPagination path={path as string} />
+          <StorageBoardGridPagination path={String(path)} />
         </Box>
       </Flexbox>
     </GeneralTemplate>
@@ -48,12 +48,12 @@ function StorageBoards() {
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const queryClient = new QueryClient();
-  const id = query.path as string;
+  const path = String(query.path);
 
-  await queryClient.prefetchQuery(queryKeys.storages.storageById(id), () => fetchStorage(id));
+  await queryClient.prefetchQuery(queryKeys.storages.storageById(path), () => fetchStorage(path));
   await queryClient.prefetchQuery(
     queryKeys.storageBoards.storageBoardsByParams(storageBoardsParamsDefault),
-    () => fetchStorageBoards(id, storageBoardsParamsDefault)
+    () => fetchStorageBoards(path, storageBoardsParamsDefault)
   );
 
   return {

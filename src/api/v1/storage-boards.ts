@@ -24,8 +24,8 @@ export async function fetchStorageBoards(id: number | string, params?: FetchStor
   return data;
 }
 
-export async function fetchStorageBoard(id: number | string, boardId: number | string) {
-  const { data } = await Axios.get<StorageBoard>(`${BASE_PATH}/${id}/boards/${boardId}`);
+export async function fetchStorageBoard(path: number | string, id: number | string) {
+  const { data } = await Axios.get<StorageBoard>(`${BASE_PATH}/${path}/boards/${id}`);
 
   return data;
 }

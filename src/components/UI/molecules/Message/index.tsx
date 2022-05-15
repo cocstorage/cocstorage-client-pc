@@ -14,7 +14,14 @@ function Message({ code, title, message, onClose, ...props }: MessageProps) {
     <Flexbox direction="vertical" alignment="center" gap={30} {...props}>
       <Flexbox direction="vertical" alignment="center" gap={20}>
         <Icon name="InfoOutlined" width={60} height={60} />
-        <Flexbox direction="vertical" alignment="center" gap={6}>
+        <Flexbox
+          direction="vertical"
+          alignment="center"
+          gap={6}
+          customStyle={{
+            textAlign: 'center'
+          }}
+        >
           <Typography fontSize={22} fontWeight={700} lineHeight="28px">
             {title}
           </Typography>

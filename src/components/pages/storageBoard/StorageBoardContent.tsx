@@ -6,41 +6,49 @@ import { Avatar, Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocsto
 
 import dayjs from 'dayjs';
 
-import useStorage from '@hooks/react-query/useStorage';
-import useStorageBoard from '@hooks/react-query/useStorageBoard';
+import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
 
 function StorageBoardContent() {
-  const { query: { path = '', id = 0 } = {} } = useRouter();
+  const { query: { id = 0 } = {} } = useRouter();
   const {
     theme: { type, palette }
   } = useTheme();
 
-  const { data: { id: storageId } = {} } = useStorage(path as string);
-
-  const { data: storageBoard } = useStorageBoard(storageId as number, id as string);
+  const {
+    user,
+    subject = '',
+    content = '',
+    nickname,
+    thumbUp = 0,
+    thumbDown = 0,
+    commentTotalCount = 0,
+    viewCount = 0,
+    createdAt,
+    isMember
+  } = useStorageBoardData(Number(id)) || {};
 
   return (
     <>
       <Flexbox direction="vertical" gap={8}>
         <Typography fontSize="22px" fontWeight={700} lineHeight="28px">
-          {storageBoard?.subject}
+          {subject}
         </Typography>
         <Flexbox justifyContent="space-between">
           <Flexbox gap={6}>
-            {storageBoard?.isMember && storageBoard.user?.avatarUrl && (
+            {isMember && (user || {}).avatarUrl && (
               <Avatar
                 width={24}
                 height={24}
-                src={storageBoard.user?.avatarUrl}
+                src={(user || {}).avatarUrl || ''}
                 alt="User Avatar Img"
               />
             )}
             <UserInfo>
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                {storageBoard?.nickname || storageBoard?.user?.nickname}
+                {nickname || user?.nickname}
               </Typography>
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                {dayjs(storageBoard?.createdAt).fromNow()}
+                {dayjs(createdAt).fromNow()}
               </Typography>
             </UserInfo>
           </Flexbox>
@@ -53,7 +61,7 @@ function StorageBoardContent() {
                 color={palette.text[type].text1}
               />
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                {storageBoard?.thumbUp.toLocaleString()}
+                {thumbUp.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
@@ -64,7 +72,7 @@ function StorageBoardContent() {
                 color={palette.text[type].text1}
               />
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                {storageBoard?.thumbDown.toLocaleString()}
+                {thumbDown.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
@@ -75,13 +83,13 @@ function StorageBoardContent() {
                 color={palette.text[type].text1}
               />
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                {storageBoard?.commentTotalCount.toLocaleString()}
+                {commentTotalCount.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
               <Icon name="ViewOutlined" width={15} height={15} color={palette.text[type].text1} />
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
-                {storageBoard?.viewCount.toLocaleString()}
+                {viewCount.toLocaleString()}
               </Typography>
             </Flexbox>
             <Button
@@ -101,7 +109,7 @@ function StorageBoardContent() {
           backgroundColor: palette.box.stroked.normal
         }}
       />
-      <Content dangerouslySetInnerHTML={{ __html: storageBoard?.content || '' }} />
+      <Content dangerouslySetInnerHTML={{ __html: content }} />
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
           size="small"
@@ -115,7 +123,7 @@ function StorageBoardContent() {
             color: palette.primary.main
           }}
         >
-          {storageBoard?.thumbUp.toLocaleString()}
+          {thumbUp.toLocaleString()}
         </Button>
         <Button
           size="small"
@@ -133,7 +141,7 @@ function StorageBoardContent() {
             color: palette.text[type].text1
           }}
         >
-          {storageBoard?.thumbDown.toLocaleString()}
+          {thumbDown.toLocaleString()}
         </Button>
       </Box>
       <Box
@@ -171,7 +179,9 @@ const Content = styled.article`
   position: relative;
 
   img,
-  video {
+  video,
+  embed,
+  iframe {
     border-radius: 8px;
   }
 `;

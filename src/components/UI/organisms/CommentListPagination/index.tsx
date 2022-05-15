@@ -11,12 +11,12 @@ type ConditionalCommentListPaginationProps =
   | {
       type: 'storageBoard';
       path: string;
-      id: number | string;
+      id: number;
     }
   | {
       type: 'notice';
       path: never;
-      id: number | string;
+      id: number;
     };
 
 function CommentListPagination({ path, id }: ConditionalCommentListPaginationProps) {
@@ -26,7 +26,7 @@ function CommentListPagination({ path, id }: ConditionalCommentListPaginationPro
 
   const { data: { pagination: { totalPages = 1, perPage = 10, currentPage = 1 } = {} } = {} } =
     useStorageBoardComments(storageId as number, id, params, {
-      enabled: !!storageId,
+      enabled: params.page !== 0,
       keepPreviousData: true
     });
 
@@ -37,7 +37,14 @@ function CommentListPagination({ path, id }: ConditionalCommentListPaginationPro
     }));
   };
 
-  return <Pagination count={totalPages * perPage} page={currentPage} onChange={handleChange} />;
+  return (
+    <Pagination
+      count={totalPages * perPage}
+      page={currentPage}
+      rowPerPage={perPage}
+      onChange={handleChange}
+    />
+  );
 }
 
 export default CommentListPagination;

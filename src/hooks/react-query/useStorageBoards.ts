@@ -9,13 +9,13 @@ import {
 import queryKeys from '@constants/react-query';
 
 export default function useStorageBoards(
-  id: number | string,
+  pathOrStorageId: string | number,
   params: FetchStorageBoardsParams,
   options?: Omit<UseQueryOptions<FetchStorageBoardsResponse>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery(
     queryKeys.storageBoards.storageBoardsByParams(params),
-    () => fetchStorageBoards(id, params),
+    () => fetchStorageBoards(pathOrStorageId, params),
     options
   );
 }

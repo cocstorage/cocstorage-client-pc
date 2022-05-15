@@ -25,7 +25,14 @@ function StorageBoardGridPagination({ path }: StorageBoardGridPaginationProps) {
     }));
   };
 
-  return <Pagination count={totalPages * perPage} page={currentPage} onChange={handleChange} />;
+  return (
+    <Pagination
+      count={totalPages * perPage}
+      page={currentPage}
+      rowPerPage={perPage}
+      onChange={handleChange}
+    />
+  );
 }
 
 export default StorageBoardGridPagination;
