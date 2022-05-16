@@ -35,13 +35,13 @@ function StorageBoard() {
           {path && id && (
             <>
               <Flexbox direction="vertical" gap={24}>
-                <CommentList path={String(path)} id={Number(id)} />
+                <CommentList id={Number(id)} />
                 <Box customStyle={{ margin: 'auto' }}>
-                  <CommentListPagination path={String(path)} id={Number(id)} />
+                  <CommentListPagination id={Number(id)} />
                 </Box>
               </Flexbox>
               <Box customStyle={{ margin: '35px 0 50px 0' }}>
-                <CommentForm path={String(path)} id={Number(id)} />
+                <CommentForm id={Number(id)} />
               </Box>
             </>
           )}

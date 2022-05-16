@@ -8,16 +8,14 @@ import { Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import Comment from '@components/UI/organisms/Comment';
 
-import useStorage from '@hooks/react-query/useStorage';
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
 import useStorageBoardComments from '@hooks/react-query/useStorageBoardComments';
 
 interface CommentListProps {
-  path: string;
   id: number;
 }
 
-function CommentList({ path, id }: CommentListProps) {
+function CommentList({ id }: CommentListProps) {
   const {
     theme: { palette }
   } = useTheme();
@@ -25,19 +23,16 @@ function CommentList({ path, id }: CommentListProps) {
 
   const isUpdatedCommentPageRef = useRef<boolean>(false);
 
-  const { data: { id: storageId } = {} } = useStorage(path);
+  const {
+    storage: { id: storageId = 0 } = {},
+    commentTotalCount = 0,
+    commentLatestPage
+  } = useStorageBoardData(id) || {};
 
-  const { commentTotalCount = 0, commentLatestPage } = useStorageBoardData(id) || {};
-
-  const { data: { comments = [] } = {} } = useStorageBoardComments(
-    storageId as number,
-    id,
-    params,
-    {
-      enabled: params.page !== 0,
-      keepPreviousData: true
-    }
-  );
+  const { data: { comments = [] } = {} } = useStorageBoardComments(storageId, id, params, {
+    enabled: params.page !== 0,
+    keepPreviousData: true
+  });
 
   useEffect(() => {
     if (!isUpdatedCommentPageRef.current && commentLatestPage) {

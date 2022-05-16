@@ -1,4 +1,8 @@
+import { useEffect, useRef } from 'react';
+
 import { useRouter } from 'next/router';
+
+import { useMutation } from 'react-query';
 
 import styled from '@emotion/styled';
 
@@ -8,14 +12,20 @@ import dayjs from 'dayjs';
 
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
 
+import { putStorageBoardViewCount } from '@api/v1/storage-boards';
+
 function StorageBoardContent() {
   const { query: { id = 0 } = {} } = useRouter();
   const {
     theme: { type, palette }
   } = useTheme();
 
+  const updatedViewCountRef = useRef<boolean>(false);
+
   const {
+    id: storageBoardId,
     user,
+    storage,
     subject = '',
     content = '',
     nickname,
@@ -26,6 +36,23 @@ function StorageBoardContent() {
     createdAt,
     isMember
   } = useStorageBoardData(Number(id)) || {};
+
+  const { mutate } = useMutation(
+    (data: { storageId: number; storageBoardId: number }) =>
+      putStorageBoardViewCount(data.storageId, data.storageBoardId),
+    {
+      onSuccess: () => {
+        updatedViewCountRef.current = false;
+      }
+    }
+  );
+
+  useEffect(() => {
+    if (!updatedViewCountRef.current && storageBoardId && storage && storage.id) {
+      updatedViewCountRef.current = true;
+      mutate({ storageId: storage.id, storageBoardId });
+    }
+  }, [mutate, storage, storageBoardId]);
 
   return (
     <>

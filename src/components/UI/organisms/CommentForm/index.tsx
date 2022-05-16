@@ -12,7 +12,6 @@ import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
 
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
-import useStorage from '@hooks/react-query/useStorage';
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
 import useStorageBoardComments from '@hooks/react-query/useStorageBoardComments';
 
@@ -25,11 +24,10 @@ import queryKeys from '@constants/react-query';
 import validators from '@constants/validators';
 
 interface CommentFormProps {
-  path: string;
   id: number;
 }
 
-function CommentForm({ path, id }: CommentFormProps) {
+function CommentForm({ id }: CommentFormProps) {
   const {
     theme: {
       palette: { box }
@@ -53,19 +51,17 @@ function CommentForm({ path, id }: CommentFormProps) {
 
   const queryClient = useQueryClient();
 
-  const { data: { id: storageId } = {} } = useStorage(path);
-
   const storageBoard = useStorageBoardData(id);
 
   const { data: { comments = [], pagination: { perPage = 0 } = {} } = {} } =
-    useStorageBoardComments(storageId as number, id, params, {
+    useStorageBoardComments(storageBoard?.storage.id as number, id, params, {
       enabled: params.page !== 0,
       keepPreviousData: true
     });
 
   const { mutate, isLoading } = useMutation(
     (data: PostStorageBoardCommentData) =>
-      postNonMemberStorageBoardComment(storageId as number, id, data),
+      postNonMemberStorageBoardComment(storageBoard?.storage.id as number, id, data),
     {
       onSuccess: () => {
         setContent('');
@@ -80,7 +76,9 @@ function CommentForm({ path, id }: CommentFormProps) {
             .then();
         } else {
           const newCommentLatestPage =
-            comments.length + 1 > perPage ? commentLatestPage + 1 : commentLatestPage;
+            params.page === commentLatestPage && comments.length + 1 > perPage
+              ? commentLatestPage + 1
+              : commentLatestPage;
 
           queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(id), {
             ...storageBoard,

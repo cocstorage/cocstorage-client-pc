@@ -42,6 +42,14 @@ export async function fetchStorageBoard(pathOrStorageId: number | string, id: nu
   return data;
 }
 
+export async function putStorageBoardViewCount(storageId: number | string, id: number) {
+  const { data } = await Axios.put<StorageBoard, null>(
+    `${BASE_PATH}/${storageId}/boards/${id}/view-count`
+  );
+
+  return data;
+}
+
 export interface FetchStorageBoardsParams {
   subject?: string | null;
   content?: string | null;
