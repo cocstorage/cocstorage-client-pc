@@ -4,7 +4,7 @@ import { Button, Flexbox, Grid, Icon, Tag, Typography, useTheme } from 'cocstora
 
 import { StorageBoardCard } from '@components/UI/molecules';
 
-import { fetchPopularStorageBoards } from '@api/v1/storage-boards';
+import { fetchPopularStorageBoards, fetchWorstStorageBoards } from '@api/v1/storage-boards';
 
 import queryKeys from '@constants/react-query';
 
@@ -13,12 +13,17 @@ function IndexBestWorstStorageBoardGrid() {
     theme: { type, palette }
   } = useTheme();
 
-  const { data: popularStorageBoards = [] } = useQuery(
+  const { data: { boards: bestBoards = [] } = {} } = useQuery(
     queryKeys.storageBoards.popularStorageBoards,
     fetchPopularStorageBoards
   );
 
-  if (popularStorageBoards.length === 0) return null;
+  const { data: { boards: worstBoards = [] } = {} } = useQuery(
+    queryKeys.storageBoards.worstStorageBoards,
+    fetchWorstStorageBoards
+  );
+
+  if (bestBoards.length === 0 || worstBoards.length === 0) return null;
 
   return (
     <Grid container columnGap={18} rowGap={30} customStyle={{ marginTop: 5 }}>
@@ -65,12 +70,12 @@ function IndexBestWorstStorageBoardGrid() {
             더보기
           </Button>
         </Flexbox>
-        {popularStorageBoards.length > 2 && (
+        {bestBoards.length > 2 && (
           <>
-            <StorageBoardCard variant="emphasize" storageBoard={popularStorageBoards[0]} />
+            <StorageBoardCard variant="emphasize" storageBoard={bestBoards[0]} hideSymbolismBadge />
             <Flexbox direction="vertical" gap={13}>
-              <StorageBoardCard variant="normal" storageBoard={popularStorageBoards[1]} />
-              <StorageBoardCard variant="normal" storageBoard={popularStorageBoards[2]} />
+              <StorageBoardCard variant="normal" storageBoard={bestBoards[1]} hideSymbolismBadge />
+              <StorageBoardCard variant="normal" storageBoard={bestBoards[2]} hideSymbolismBadge />
             </Flexbox>
           </>
         )}
@@ -110,7 +115,7 @@ function IndexBestWorstStorageBoardGrid() {
                 color: palette.secondary.red.main
               }}
             >
-              베스트
+              워스트
             </Tag>
             <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
               이건 좀...
@@ -127,12 +132,16 @@ function IndexBestWorstStorageBoardGrid() {
             더보기
           </Button>
         </Flexbox>
-        {popularStorageBoards.length > 2 && (
+        {worstBoards.length > 2 && (
           <>
-            <StorageBoardCard variant="emphasize" storageBoard={popularStorageBoards[0]} />
+            <StorageBoardCard
+              variant="emphasize"
+              storageBoard={worstBoards[0]}
+              hideSymbolismBadge
+            />
             <Flexbox direction="vertical" gap={13}>
-              <StorageBoardCard variant="normal" storageBoard={popularStorageBoards[1]} />
-              <StorageBoardCard variant="normal" storageBoard={popularStorageBoards[2]} />
+              <StorageBoardCard variant="normal" storageBoard={worstBoards[1]} hideSymbolismBadge />
+              <StorageBoardCard variant="normal" storageBoard={worstBoards[2]} hideSymbolismBadge />
             </Flexbox>
           </>
         )}

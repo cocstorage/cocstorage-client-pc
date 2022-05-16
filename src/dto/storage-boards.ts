@@ -24,6 +24,7 @@ export interface StorageBoard {
   createdAt: string;
   updatedAt: string;
   isPopular: boolean;
+  isWorst: boolean;
   scrapCode: string | null;
   sourceCode: string | null;
   thumbnailUrl: string | null;

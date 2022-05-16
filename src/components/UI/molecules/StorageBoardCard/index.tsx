@@ -19,14 +19,13 @@ import {
 
 export interface StorageBoardCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'emphasize' | 'normal' | 'compact';
-  badgeVariant?: string | 'latest' | 'popular' | 'worst';
   storageBoard: StorageBoard;
+  hideSymbolismBadge?: boolean;
   inStorage?: boolean;
 }
 
 function StorageBoardCard({
   variant = 'compact',
-  badgeVariant = 'latest',
   storageBoard: {
     user,
     storage: { name, avatarUrl },
@@ -35,9 +34,13 @@ function StorageBoardCard({
     viewCount = 0,
     commentTotalCount = 0,
     thumbUp = 0,
+    thumbDown = 0,
     thumbnailUrl,
+    isPopular,
+    isWorst,
     createdAt
   },
+  hideSymbolismBadge = false,
   inStorage = true,
   ...props
 }: StorageBoardCardProps) {
@@ -86,6 +89,33 @@ function StorageBoardCard({
               </Typography>
             </Storage>
             <Typography noWrap lineClamp={2} lineHeight="18px" customStyle={{ flex: 1 }}>
+              {dayjs().diff(createdAt, 'day') <= 1 && (
+                <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'middle' }}>
+                  NEW
+                </Badge>
+              )}
+              {!hideSymbolismBadge && isPopular && (
+                <Badge
+                  severity="info"
+                  startIcon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
+                  iconOnly
+                  customStyle={{
+                    marginRight: 4,
+                    verticalAlign: 'middle'
+                  }}
+                />
+              )}
+              {!hideSymbolismBadge && isWorst && (
+                <Badge
+                  severity="error"
+                  startIcon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
+                  iconOnly
+                  customStyle={{
+                    marginRight: 4,
+                    verticalAlign: 'middle'
+                  }}
+                />
+              )}
               {subject}
             </Typography>
           </Flexbox>
@@ -102,12 +132,22 @@ function StorageBoardCard({
                 {commentTotalCount.toLocaleString()}
               </Typography>
             </InfoLabel>
-            <InfoLabel>
-              <Icon name="ThumbsUpOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px">
-                {thumbUp.toLocaleString()}
-              </Typography>
-            </InfoLabel>
+            {isWorst && (
+              <InfoLabel>
+                <Icon name="ThumbsDownOutlined" width={14} height={14} />
+                <Typography component="span" fontSize="10px">
+                  {thumbDown.toLocaleString()}
+                </Typography>
+              </InfoLabel>
+            )}
+            {!isWorst && (
+              <InfoLabel>
+                <Icon name="ThumbsUpOutlined" width={14} height={14} />
+                <Typography component="span" fontSize="10px">
+                  {thumbUp.toLocaleString()}
+                </Typography>
+              </InfoLabel>
+            )}
           </Info>
         </Flexbox>
       </StyledStorageBoardCard>
@@ -131,6 +171,33 @@ function StorageBoardCard({
           customStyle={{ height: '100%' }}
         >
           <Typography noWrap lineClamp={2} lineHeight="18px" customStyle={{ flex: 1 }}>
+            {dayjs().diff(createdAt, 'day') <= 1 && (
+              <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'middle' }}>
+                NEW
+              </Badge>
+            )}
+            {!hideSymbolismBadge && isPopular && (
+              <Badge
+                severity="info"
+                startIcon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
+                iconOnly
+                customStyle={{
+                  marginRight: 4,
+                  verticalAlign: 'middle'
+                }}
+              />
+            )}
+            {!hideSymbolismBadge && isWorst && (
+              <Badge
+                severity="error"
+                startIcon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
+                iconOnly
+                customStyle={{
+                  marginRight: 4,
+                  verticalAlign: 'middle'
+                }}
+              />
+            )}
             {subject}
           </Typography>
           <Info>
@@ -146,12 +213,22 @@ function StorageBoardCard({
                 {commentTotalCount.toLocaleString()}
               </Typography>
             </InfoLabel>
-            <InfoLabel>
-              <Icon name="ThumbsUpOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px">
-                {thumbUp.toLocaleString()}
-              </Typography>
-            </InfoLabel>
+            {isWorst && (
+              <InfoLabel>
+                <Icon name="ThumbsDownOutlined" width={14} height={14} />
+                <Typography component="span" fontSize="10px">
+                  {thumbDown.toLocaleString()}
+                </Typography>
+              </InfoLabel>
+            )}
+            {!isWorst && (
+              <InfoLabel>
+                <Icon name="ThumbsUpOutlined" width={14} height={14} />
+                <Typography component="span" fontSize="10px">
+                  {thumbUp.toLocaleString()}
+                </Typography>
+              </InfoLabel>
+            )}
             <Storage>
               <RatioImage
                 width={14}
@@ -179,29 +256,19 @@ function StorageBoardCard({
         customStyle={{ height: '100%' }}
       >
         <Flexbox gap={4} alignment="center">
-          {badgeVariant === 'latest' && dayjs().diff(createdAt, 'day') <= 1 && (
-            <Badge severity="success">NEW</Badge>
-          )}
-          {badgeVariant === 'popular' && (
+          {dayjs().diff(createdAt, 'day') <= 1 && <Badge severity="success">NEW</Badge>}
+          {!hideSymbolismBadge && isPopular && (
             <Badge
               severity="info"
               startIcon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
               iconOnly
-              customStyle={{
-                width: 18,
-                height: 18
-              }}
             />
           )}
-          {badgeVariant === 'worst' && (
+          {!hideSymbolismBadge && isWorst && (
             <Badge
               severity="error"
               startIcon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
               iconOnly
-              customStyle={{
-                width: 18,
-                height: 18
-              }}
             />
           )}
           <Typography
@@ -229,12 +296,22 @@ function StorageBoardCard({
               {commentTotalCount.toLocaleString()}
             </Typography>
           </InfoLabel>
-          <InfoLabel>
-            <Icon name="ThumbsUpOutlined" width={14} height={14} />
-            <Typography component="span" fontSize="10px">
-              {thumbUp.toLocaleString()}
-            </Typography>
-          </InfoLabel>
+          {isWorst && (
+            <InfoLabel>
+              <Icon name="ThumbsDownOutlined" width={14} height={14} />
+              <Typography component="span" fontSize="10px">
+                {thumbDown.toLocaleString()}
+              </Typography>
+            </InfoLabel>
+          )}
+          {!isWorst && (
+            <InfoLabel>
+              <Icon name="ThumbsUpOutlined" width={14} height={14} />
+              <Typography component="span" fontSize="10px">
+                {thumbUp.toLocaleString()}
+              </Typography>
+            </InfoLabel>
+          )}
           {!inStorage && (
             <Storage>
               <RatioImage

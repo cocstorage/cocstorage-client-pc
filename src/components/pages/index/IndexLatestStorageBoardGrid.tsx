@@ -9,7 +9,7 @@ import { fetchLatestStorageBoards } from '@api/v1/storage-boards';
 import queryKeys from '@constants/react-query';
 
 function IndexLatestStorageBoardGrid() {
-  const { data: latestStorageBoards = [] } = useQuery(
+  const { data: { boards = [] } = {} } = useQuery(
     queryKeys.storageBoards.latestStorageBoards,
     fetchLatestStorageBoards
   );
@@ -20,7 +20,7 @@ function IndexLatestStorageBoardGrid() {
         최신 게시글
       </Typography>
       <Grid container columnGap={20} rowGap={20}>
-        {latestStorageBoards.map((storageBoard) => (
+        {boards.map((storageBoard) => (
           <Grid key={`latest-storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
             <StorageBoardCard storageBoard={storageBoard} inStorage={false} />
           </Grid>

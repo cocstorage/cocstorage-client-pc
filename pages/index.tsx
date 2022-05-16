@@ -14,7 +14,11 @@ import { Header } from '@components/UI/molecules';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { fetchNotices } from '@api/v1/notices';
-import { fetchLatestStorageBoards, fetchPopularStorageBoards } from '@api/v1/storage-boards';
+import {
+  fetchLatestStorageBoards,
+  fetchPopularStorageBoards,
+  fetchWorstStorageBoards
+} from '@api/v1/storage-boards';
 
 import queryKeys from '@constants/react-query';
 
@@ -48,6 +52,10 @@ export async function getServerSideProps() {
   await queryClient.prefetchQuery(
     queryKeys.storageBoards.popularStorageBoards,
     fetchPopularStorageBoards
+  );
+  await queryClient.prefetchQuery(
+    queryKeys.storageBoards.worstStorageBoards,
+    fetchWorstStorageBoards
   );
   await queryClient.prefetchQuery(
     queryKeys.storageBoards.latestStorageBoards,

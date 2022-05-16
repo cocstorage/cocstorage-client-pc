@@ -13,6 +13,7 @@ const storages = {
 const storageBoards = {
   latestStorageBoards: ['latestStorageBoards'],
   popularStorageBoards: ['popularStorageBoards'],
+  worstStorageBoards: ['worstStorageBoards'],
   storageBoardsByParams: (params: FetchStorageBoardsParams) => ['storageBoards', params],
   storageBoardById: (id: number) => ['storageBoard', id]
 };
