@@ -58,7 +58,7 @@ function ReplyForm({ storageId, id, commentId }: ReplyFormProps) {
         setContent('');
 
         return queryClient.invalidateQueries(
-          queryKeys.storageBoardComments.storageBoardCommentsByIdWithParams(id, params)
+          queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page || 1)
         );
       }
     }

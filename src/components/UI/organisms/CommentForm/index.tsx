@@ -71,7 +71,7 @@ function CommentForm({ id }: CommentFormProps) {
         if (params.page === commentLatestPage && comments.length + 1 <= perPage) {
           queryClient
             .invalidateQueries(
-              queryKeys.storageBoardComments.storageBoardCommentsByIdWithParams(id, params)
+              queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page)
             )
             .then();
         } else {

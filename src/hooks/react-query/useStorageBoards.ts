@@ -14,7 +14,7 @@ export default function useStorageBoards(
   options?: Omit<UseQueryOptions<FetchStorageBoardsResponse>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery(
-    queryKeys.storageBoards.storageBoardsByParams(params),
+    queryKeys.storageBoards.storageBoardsByIdWithPage(pathOrStorageId, params.page || 1),
     () => fetchStorageBoards(pathOrStorageId, params),
     options
   );

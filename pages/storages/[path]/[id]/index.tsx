@@ -1,8 +1,14 @@
+import { useCallback, useEffect } from 'react';
+
 import { GetServerSidePropsContext } from 'next';
 
 import { useRouter } from 'next/router';
 
 import { QueryClient, dehydrate } from 'react-query';
+
+import { useSetRecoilState } from 'recoil';
+
+import { storageBoardsParamsDefault, storageBoardsParamsState } from '@recoil/storageBoards/atoms';
 
 import { Box, Flexbox, Grid, Typography } from 'cocstorage-ui';
 
@@ -24,8 +30,28 @@ import queryKeys from '@constants/react-query';
 
 function StorageBoard() {
   const {
-    query: { path = '', id = 0 }
+    query: { path = '', id = 0 },
+    events
   } = useRouter();
+
+  const setParams = useSetRecoilState(storageBoardsParamsState);
+
+  const handleRouteChangeComplete = useCallback(
+    (url: string) => {
+      if (url.indexOf('/storages/') < 0) {
+        setParams(storageBoardsParamsDefault);
+      }
+    },
+    [setParams]
+  );
+
+  useEffect(() => {
+    events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    return () => {
+      events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, [events, handleRouteChangeComplete]);
 
   return (
     <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>

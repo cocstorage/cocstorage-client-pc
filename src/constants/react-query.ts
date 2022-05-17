@@ -1,6 +1,3 @@
-import { FetchStorageBoardCommentsParams } from '@api/v1/storage-board-comments';
-import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
-
 const storageCategories = {
   storageCategories: ['storageCategories']
 };
@@ -14,16 +11,12 @@ const storageBoards = {
   latestStorageBoards: ['latestStorageBoards'],
   popularStorageBoards: ['popularStorageBoards'],
   worstStorageBoards: ['worstStorageBoards'],
-  storageBoardsByParams: (params: FetchStorageBoardsParams) => ['storageBoards', params],
+  storageBoardsByIdWithPage: (id: number | string, page: number) => ['storageBoards', id, page],
   storageBoardById: (id: number) => ['storageBoard', id]
 };
 
 const storageBoardComments = {
-  storageBoardCommentsByIdWithParams: (id: number, params: FetchStorageBoardCommentsParams) => [
-    'storageBoardComments',
-    id,
-    params
-  ]
+  storageBoardCommentsByIdWithPage: (id: number, page: number) => ['storageBoardComments', id, page]
 };
 
 const issueKeywords = {

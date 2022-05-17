@@ -3,18 +3,13 @@ import { ChangeEvent, HTMLAttributes, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useQuery } from 'react-query';
-
 import { Box, Flexbox, Hidden, Icon, Tag, TextBar, Typography, useTheme } from 'cocstorage-ui';
 
 import { RatioImage } from '@components/UI/atoms';
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
+import { useStorageData } from '@hooks/react-query/useStorage';
 import useScrollTrigger from '@hooks/useScrollTrigger';
-
-import { fetchStorage } from '@api/v1/storages';
-
-import queryKeys from '@constants/react-query';
 
 import { HeaderInner, Logo, StyledHeader } from './Header.styles';
 
@@ -29,13 +24,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
     theme: { type, palette }
   } = useTheme();
 
-  const { data: { avatarUrl = '', name = '' } = {} } = useQuery(
-    queryKeys.storages.storageById(router.query.path as string),
-    () => fetchStorage(router.query.path as string),
-    {
-      enabled: JSON.stringify(router.query) !== '{}' && router.pathname === '/storages/[path]/[id]'
-    }
-  );
+  const { avatarUrl = '', name = '' } = useStorageData(router.query.path as string) || {};
 
   const [open, setOpen] = useState<boolean>(false);
   const [message] = useState<{

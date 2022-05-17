@@ -15,7 +15,7 @@ export default function useStorageBoardComments(
   options?: Omit<UseQueryOptions<FetchStorageBoardCommentsResponse>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery(
-    queryKeys.storageBoardComments.storageBoardCommentsByIdWithParams(id, params),
+    queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page || 1),
     () => fetchStorageBoardComments(storageId, id, params),
     options
   );
