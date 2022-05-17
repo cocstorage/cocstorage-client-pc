@@ -5,7 +5,7 @@ import { Button, Flexbox, Icon, Tag, Typography } from 'cocstorage-ui';
 export interface MessageProps extends HTMLAttributes<HTMLDivElement> {
   code?: string;
   title: string;
-  message: string;
+  message?: string;
   onClose?: () => void;
 }
 
@@ -30,11 +30,13 @@ function Message({ code, title, message, onClose, ...props }: MessageProps) {
               CODE: {code}
             </Tag>
           )}
-          <Typography
-            fontWeight={500}
-            lineHeight="18px"
-            dangerouslySetInnerHTML={{ __html: message }}
-          />
+          {message && (
+            <Typography
+              fontWeight={500}
+              lineHeight="18px"
+              dangerouslySetInnerHTML={{ __html: message }}
+            />
+          )}
         </Flexbox>
       </Flexbox>
       <Button onClick={onClose}>확인</Button>

@@ -6,7 +6,7 @@ interface MessageDialogProps {
   open: boolean;
   title: string;
   code?: string;
-  message: string;
+  message?: string;
   onClose: () => void;
 }
 

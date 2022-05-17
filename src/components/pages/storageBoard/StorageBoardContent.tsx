@@ -1,18 +1,29 @@
-import { useEffect, useRef } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 import styled from '@emotion/styled';
 
 import { Avatar, Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
+import type { AxiosError } from 'axios';
+
 import dayjs from 'dayjs';
+
+import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
 
-import { putStorageBoardViewCount } from '@api/v1/storage-boards';
+import { getErrorMessageByCode } from '@utils';
+
+import {
+  putNonMemberStorageBoardRecommend,
+  putStorageBoardViewCount
+} from '@api/v1/storage-boards';
+
+import queryKeys from '@constants/react-query';
 
 function StorageBoardContent() {
   const { query: { id = 0 } = {} } = useRouter();
@@ -20,7 +31,20 @@ function StorageBoardContent() {
     theme: { type, palette }
   } = useTheme();
 
+  const [open, setOpen] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<{
+    title: string;
+    code: string;
+    message: string;
+  }>({
+    title: '테스트',
+    code: '',
+    message: '테스트'
+  });
+
   const updatedViewCountRef = useRef<boolean>(false);
+
+  const queryClient = useQueryClient();
 
   const {
     id: storageBoardId,
@@ -46,6 +70,45 @@ function StorageBoardContent() {
       }
     }
   );
+
+  const { mutate: recommendMutate } = useMutation(
+    (data: { storageId: number; storageBoardId: number; type: 0 | 1 }) =>
+      putNonMemberStorageBoardRecommend(data.storageId, data.storageBoardId, data.type),
+    {
+      onSuccess: (data) => {
+        if (storageBoardId && data) {
+          queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(storageBoardId), data);
+        }
+      },
+      onError: (error) => {
+        const asError = error as AxiosError;
+
+        if (asError && asError.response) {
+          const { data = {} } = (asError || {}).response || {};
+
+          setErrorMessage({
+            title: getErrorMessageByCode(data.code),
+            code: '',
+            message: '다른 글도 한번 살펴보시는 건 어때요?'
+          });
+
+          setOpen(true);
+        } else {
+          setOpen(true);
+        }
+      }
+    }
+  );
+
+  const handleClickRecommend = (event: MouseEvent<HTMLButtonElement>) => {
+    const dataType = Number(event.currentTarget.getAttribute('data-type') || 0);
+
+    if (storageBoardId && storage && storage.id && (dataType === 0 || dataType === 1)) {
+      recommendMutate({ storageId: storage.id, storageBoardId, type: dataType });
+    }
+  };
+
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     if (!updatedViewCountRef.current && storageBoardId && storage && storage.id) {
@@ -149,6 +212,8 @@ function StorageBoardContent() {
             fontWeight: 700,
             color: palette.primary.main
           }}
+          data-type={0}
+          onClick={handleClickRecommend}
         >
           {thumbUp.toLocaleString()}
         </Button>
@@ -167,6 +232,8 @@ function StorageBoardContent() {
             borderBottomLeftRadius: 0,
             color: palette.text[type].text1
           }}
+          data-type={1}
+          onClick={handleClickRecommend}
         >
           {thumbDown.toLocaleString()}
         </Button>
@@ -179,6 +246,7 @@ function StorageBoardContent() {
           backgroundColor: palette.box.stroked.normal
         }}
       />
+      <MessageDialog open={open} onClose={handleClose} {...errorMessage} />
     </>
   );
 }

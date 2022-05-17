@@ -50,6 +50,23 @@ export async function putStorageBoardViewCount(storageId: number | string, id: n
   return data;
 }
 
+export async function putNonMemberStorageBoardRecommend(
+  storageId: number | string,
+  id: number,
+  type: 0 | 1
+) {
+  const { data } = await Axios.put<
+    StorageBoard,
+    {
+      type: 0 | 1;
+    }
+  >(`${BASE_PATH}/${storageId}/boards/non-members/${id}/recommend`, {
+    type
+  });
+
+  return data;
+}
+
 export interface FetchStorageBoardsParams {
   subject?: string | null;
   content?: string | null;

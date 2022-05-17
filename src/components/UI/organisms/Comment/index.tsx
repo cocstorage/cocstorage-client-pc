@@ -54,7 +54,7 @@ function Comment({
               <span key={`comment-content-${index}`}>{splitContent}</span>
             ))}
           </Typography>
-          <Flexbox direction="vertical" gap={11}>
+          <Flexbox direction="vertical" gap={15}>
             <Flexbox gap={12} alignment="center">
               <Typography
                 fontSize="12px"

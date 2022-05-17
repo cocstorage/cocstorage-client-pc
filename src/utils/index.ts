@@ -60,10 +60,10 @@ export function getErrorMessageByCode(code: string): string {
       errorMessage = '비밀번호가 일치하지 않아요.';
       break;
     case 'COC028':
-      errorMessage = '이미 추천을 누르셨어요.';
+      errorMessage = '이미 추천을 누르신 적이 있네요!';
       break;
     case 'COC029':
-      errorMessage = '이미 비추천을 누르셨어요.';
+      errorMessage = '이미 비추천을 누르신 적이 있네요!';
       break;
     default:
       break;
