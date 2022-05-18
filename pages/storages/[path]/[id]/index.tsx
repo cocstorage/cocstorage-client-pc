@@ -96,22 +96,27 @@ function StorageBoard() {
 }
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-  const queryClient = new QueryClient();
-  const path = String(query.path);
-  const id = Number(query.id);
+  try {
+    const queryClient = new QueryClient();
+    const path = String(query.path);
+    const id = Number(query.id);
 
-  const storage = await fetchStorage(path);
+    const storage = await fetchStorage(path);
+    const storageBoard = await fetchStorageBoard(storage.id, id);
 
-  await queryClient.setQueryData(queryKeys.storages.storageById(path), storage);
-  await queryClient.prefetchQuery(queryKeys.storageBoards.storageBoardById(id), () =>
-    fetchStorageBoard(storage.id, id)
-  );
+    await queryClient.setQueryData(queryKeys.storages.storageById(path), storage);
+    await queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(id), storageBoard);
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient)
-    }
-  };
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient)
+      }
+    };
+  } catch (error) {
+    return {
+      notFound: true
+    };
+  }
 }
 
 export default StorageBoard;
