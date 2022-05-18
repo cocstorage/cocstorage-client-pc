@@ -126,7 +126,7 @@ function CommentForm({ id }: CommentFormProps) {
       return;
     }
 
-    mutate({ nickname, password, content });
+    mutate({ nickname, password, content: content.replace(/\n/g, '\n') });
   };
 
   const handleClose = () => setOpen(false);
