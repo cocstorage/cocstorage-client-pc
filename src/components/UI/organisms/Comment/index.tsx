@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Avatar, Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
 
 import Reply from '@components/UI/molecules/Reply';
-import ReplyForm from '@components/UI/organisms/ReplyForm';
+import { CommentMenu, ReplyForm } from '@components/UI/organisms';
 
 import { StorageBoardComment } from '@dto/storage-board-comments';
 
@@ -28,8 +28,14 @@ function Comment({
   } = useTheme();
 
   const [open, setOpen] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleClick = () => setOpen(!open);
+
+  const handleClickMenu = () => setMenuOpen(true);
+  const handleCloseMenu = () => setMenuOpen(false);
 
   return (
     <>
@@ -95,14 +101,26 @@ function Comment({
             )}
           </Flexbox>
         </Flexbox>
-        <Flexbox alignment="center">
-          <Button
-            variant="transparent"
-            size="pico"
-            startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
-            iconOnly
-          />
-        </Flexbox>
+        {!isMember && (
+          <Flexbox alignment="center">
+            <Button
+              ref={buttonRef}
+              variant="transparent"
+              size="pico"
+              startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
+              onClick={handleClickMenu}
+              iconOnly
+            />
+            <CommentMenu
+              open={menuOpen}
+              anchorRef={buttonRef}
+              storageId={storageId}
+              id={id}
+              commentId={commentId}
+              onClose={handleCloseMenu}
+            />
+          </Flexbox>
+        )}
       </Flexbox>
       {open && (
         <Flexbox gap={18} direction="vertical" customStyle={{ margin: '15px 0' }}>
