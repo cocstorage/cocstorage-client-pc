@@ -15,13 +15,7 @@ import { Box, Flexbox, Grid, Typography } from 'cocstorage-ui';
 import { StorageBoardContent, StorageBoardRightMenu } from '@components/pages/storageBoard';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
-import {
-  CommentForm,
-  CommentList,
-  StorageBoardGrid,
-  StorageBoardGridPagination
-} from '@components/UI/organisms';
-import CommentListPagination from '@components/UI/organisms/CommentListPagination';
+import { CommentForm, CommentList, StorageBoardGrid } from '@components/UI/organisms';
 
 import { fetchStorageBoard } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
@@ -60,29 +54,19 @@ function StorageBoard() {
           <StorageBoardContent />
           {path && id && (
             <>
-              <Flexbox direction="vertical" gap={24}>
-                <CommentList id={Number(id)} />
-                <Box customStyle={{ margin: 'auto' }}>
-                  <CommentListPagination id={Number(id)} />
-                </Box>
-              </Flexbox>
+              <CommentList id={Number(id)} />
               <Box customStyle={{ margin: '35px 0 50px 0' }}>
                 <CommentForm id={Number(id)} />
               </Box>
             </>
           )}
           {path && (
-            <>
-              <Flexbox gap={20} direction="vertical">
-                <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
-                  이 게시판의 다른 글
-                </Typography>
-                <StorageBoardGrid path={String(path)} />
-              </Flexbox>
-              <Flexbox justifyContent="center" customStyle={{ margin: '50px 0 30px 0' }}>
-                <StorageBoardGridPagination path={String(path)} />
-              </Flexbox>
-            </>
+            <Flexbox gap={20} direction="vertical">
+              <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+                이 게시판의 다른 글
+              </Typography>
+              <StorageBoardGrid path={String(path)} />
+            </Flexbox>
           )}
         </Grid>
         <Grid item lgHidden customStyle={{ minWidth: 203 }}>

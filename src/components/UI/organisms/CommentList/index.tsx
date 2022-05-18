@@ -4,8 +4,9 @@ import { useRecoilState } from 'recoil';
 
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
-import { Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Flexbox, Icon, Pagination, Typography, useTheme } from 'cocstorage-ui';
 
+import Message from '@components/UI/molecules/Message';
 import Comment from '@components/UI/organisms/Comment';
 
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
@@ -29,10 +30,19 @@ function CommentList({ id }: CommentListProps) {
     commentLatestPage
   } = useStorageBoardData(id) || {};
 
-  const { data: { comments = [] } = {} } = useStorageBoardComments(storageId, id, params, {
+  const {
+    data: { comments = [], pagination: { totalPages = 0, perPage = 10, currentPage = 1 } = {} } = {}
+  } = useStorageBoardComments(storageId, id, params, {
     enabled: params.page !== 0,
     keepPreviousData: true
   });
+
+  const handleChange = (value: number) => {
+    setParams((prevParams) => ({
+      ...prevParams,
+      page: value
+    }));
+  };
 
   useEffect(() => {
     if (!isUpdatedCommentPageRef.current && commentLatestPage) {
@@ -51,8 +61,14 @@ function CommentList({ id }: CommentListProps) {
     };
   }, [commentLatestPage]);
 
+  if (comments.length === 0) {
+    return (
+      <Message title="댓글이 없네요!" message="첫 댓글의 주인공이 되어 주실래요?" hideButton />
+    );
+  }
+
   return (
-    <>
+    <Flexbox direction="vertical" gap={24}>
       <Flexbox gap={4}>
         <Icon name="CommentOutlined" width={20} height={20} />
         <Flexbox gap={6}>
@@ -81,7 +97,14 @@ function CommentList({ id }: CommentListProps) {
           />
         ))}
       </Flexbox>
-    </>
+      <Pagination
+        count={totalPages * perPage}
+        page={currentPage}
+        rowPerPage={perPage}
+        onChange={handleChange}
+        customStyle={{ margin: 'auto' }}
+      />
+    </Flexbox>
   );
 }
 

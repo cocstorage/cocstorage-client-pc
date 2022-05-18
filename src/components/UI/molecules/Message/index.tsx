@@ -7,10 +7,19 @@ export interface MessageProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   message?: string;
   buttonText?: string;
+  hideButton?: boolean;
   onClose?: () => void;
 }
 
-function Message({ code, title, message, buttonText = '확인', onClose, ...props }: MessageProps) {
+function Message({
+  code,
+  title,
+  message,
+  buttonText = '확인',
+  hideButton = false,
+  onClose,
+  ...props
+}: MessageProps) {
   return (
     <Flexbox direction="vertical" alignment="center" gap={30} {...props}>
       <Flexbox direction="vertical" alignment="center" gap={20}>
@@ -40,7 +49,7 @@ function Message({ code, title, message, buttonText = '확인', onClose, ...prop
           )}
         </Flexbox>
       </Flexbox>
-      <Button onClick={onClose}>{buttonText}</Button>
+      {!hideButton && <Button onClick={onClose}>{buttonText}</Button>}
     </Flexbox>
   );
 }

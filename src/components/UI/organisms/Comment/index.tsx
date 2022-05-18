@@ -51,7 +51,10 @@ function Comment({
           <Typography lineHeight="18px" customStyle={{ marginTop: 4 }}>
             {content.split('\n').map((splitContent, index) => (
               // eslint-disable-next-line react/no-array-index-key
-              <div key={`comment-content-${index}`}>{splitContent}</div>
+              <span key={`comment-content-${index}`}>
+                {splitContent}
+                <br />
+              </span>
             ))}
           </Typography>
           <Flexbox direction="vertical" gap={15}>

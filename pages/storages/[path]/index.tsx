@@ -10,7 +10,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { storageBoardsParamsDefault, storageBoardsParamsState } from '@recoil/storageBoards/atoms';
 
-import { Box, Flexbox } from 'cocstorage-ui';
+import { Flexbox } from 'cocstorage-ui';
 
 import {
   StorageBoardsIntro,
@@ -19,7 +19,7 @@ import {
 } from '@components/pages/storageBoards';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
-import { StorageBoardGrid, StorageBoardGridPagination } from '@components/UI/organisms';
+import { StorageBoardGrid } from '@components/UI/organisms';
 
 import { fetchStorageBoards } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
@@ -57,18 +57,7 @@ function StorageBoards() {
         <StorageBoardsIntro />
         <StorageBoardsTabs />
         <StorageBoardsNoticeAlert />
-        {path && (
-          <>
-            <StorageBoardGrid path={String(path)} />
-            <Box
-              customStyle={{
-                margin: '50px auto'
-              }}
-            >
-              <StorageBoardGridPagination path={String(path)} />
-            </Box>
-          </>
-        )}
+        {path && <StorageBoardGrid path={String(path)} />}
       </Flexbox>
     </GeneralTemplate>
   );
