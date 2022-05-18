@@ -1,3 +1,5 @@
+import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
+
 const storageCategories = {
   storageCategories: ['storageCategories']
 };
@@ -11,7 +13,11 @@ const storageBoards = {
   latestStorageBoards: ['latestStorageBoards'],
   popularStorageBoards: ['popularStorageBoards'],
   worstStorageBoards: ['worstStorageBoards'],
-  storageBoardsByIdWithPage: (id: number | string, page: number) => ['storageBoards', id, page],
+  storageBoardsByIdWithParams: (id: number | string, params: FetchStorageBoardsParams) => [
+    'storageBoards',
+    id,
+    params
+  ],
   storageBoardById: (id: number) => ['storageBoard', id]
 };
 

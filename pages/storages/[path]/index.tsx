@@ -79,8 +79,9 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const path = String(query.path);
 
   await queryClient.prefetchQuery(queryKeys.storages.storageById(path), () => fetchStorage(path));
-  await queryClient.prefetchQuery(queryKeys.storageBoards.storageBoardsByIdWithPage(path, 1), () =>
-    fetchStorageBoards(path, storageBoardsParamsDefault)
+  await queryClient.prefetchQuery(
+    queryKeys.storageBoards.storageBoardsByIdWithParams(path, storageBoardsParamsDefault),
+    () => fetchStorageBoards(path, storageBoardsParamsDefault)
   );
 
   return {
