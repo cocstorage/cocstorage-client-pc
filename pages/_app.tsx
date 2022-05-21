@@ -17,7 +17,7 @@ import dayjs from 'dayjs';
 
 import RelativeTime from 'dayjs/plugin/relativeTime';
 
-import MessageDialog from '@components/UI/organisms/MessageDialog';
+import { MessageDialog, PageProgress } from '@components/UI/organisms';
 
 import { getErrorMessageByCode } from '@utils';
 
@@ -136,6 +136,7 @@ function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient.current}>
           <ThemeProvider theme="light">
             <GlobalStyles />
+            <PageProgress />
             <Hydrate state={pageProps.dehydratedState}>
               <Component {...pageProps} />
             </Hydrate>

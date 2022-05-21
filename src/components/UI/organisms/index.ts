@@ -9,3 +9,4 @@ export { default as ReplyDeleteDialog } from './ReplyDeleteDialog';
 export { default as ReplyMenu } from './ReplyMenu';
 export { default as ReplyForm } from './ReplyForm';
 export { default as StorageBoardGrid } from './StorageBoardGrid';
+export { default as PageProgress } from './PageProgress';
