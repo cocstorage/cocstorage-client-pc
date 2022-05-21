@@ -75,10 +75,12 @@ function CommentForm({ id }: CommentFormProps) {
             )
             .then();
         } else {
-          const newCommentLatestPage =
+          let newCommentLatestPage =
             params.page === commentLatestPage && comments.length + 1 > perPage
               ? commentLatestPage + 1
               : commentLatestPage;
+
+          if (!params.page && !commentLatestPage) newCommentLatestPage = 1;
 
           queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(id), {
             ...storageBoard,

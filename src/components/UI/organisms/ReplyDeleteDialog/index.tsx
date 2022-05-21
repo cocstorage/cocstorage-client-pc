@@ -58,13 +58,14 @@ function ReplyDeleteDialog({
     message: ''
   });
 
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     (data: {
       storageId: number;
       id: number;
       commentId: number;
       replyId: number;
       password: string;
+      shouldBeHandledByGlobalErrorHandler?: boolean;
     }) =>
       deleteNonMemberStorageBoardReply(
         data.storageId,
@@ -105,7 +106,14 @@ function ReplyDeleteDialog({
       error: false,
       message: ''
     });
-    mutate({ storageId: storageId as number, id, commentId, replyId, password: value });
+    mutate({
+      storageId: storageId as number,
+      id,
+      commentId,
+      replyId,
+      password: value,
+      shouldBeHandledByGlobalErrorHandler: false
+    });
   };
 
   return (
@@ -127,7 +135,7 @@ function ReplyDeleteDialog({
             textAlign: 'right'
           }}
         >
-          <IconButton>
+          <IconButton onClick={onClose}>
             <Icon name="CloseOutlined" />
           </IconButton>
         </Box>
@@ -139,15 +147,20 @@ function ReplyDeleteDialog({
         >
           답글을 삭제하려면 비밀번호를 입력해 주세요.
         </Typography>
-        <TextBar
-          type="password"
-          fullWidth
-          size="big"
-          label="비밀번호"
-          value={value}
-          onChange={handleChange}
-          customStyle={{ marginTop: 30 }}
-        />
+        <Box component="form" customStyle={{ marginTop: 30 }}>
+          <Box customStyle={{ display: 'none' }}>
+            <input type="text" autoComplete="username" />
+          </Box>
+          <TextBar
+            type="password"
+            fullWidth
+            size="big"
+            label="비밀번호"
+            value={value}
+            onChange={handleChange}
+            autoComplete="current-password"
+          />
+        </Box>
         {errorMessage.error && (
           <Typography customStyle={{ marginTop: 10, color: secondary.red.main }}>
             {errorMessage.message}
@@ -180,7 +193,7 @@ function ReplyDeleteDialog({
               backgroundColor: secondary.red.main,
               color: text.dark.main
             }}
-            disabled={!value}
+            disabled={!value || isLoading}
           >
             삭제하기
           </Button>

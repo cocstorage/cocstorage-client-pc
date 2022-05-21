@@ -56,8 +56,14 @@ function CommentDeleteDialog({
     message: ''
   });
 
-  const { mutate } = useMutation(
-    (data: { storageId: number; id: number; commentId: number; password: string }) =>
+  const { mutate, isLoading } = useMutation(
+    (data: {
+      storageId: number;
+      id: number;
+      commentId: number;
+      password: string;
+      shouldBeHandledByGlobalErrorHandler?: boolean;
+    }) =>
       deleteNonMemberStorageBoardComment(data.storageId, data.id, data.commentId, data.password),
     {
       onSuccess: () => {
@@ -91,7 +97,13 @@ function CommentDeleteDialog({
       error: false,
       message: ''
     });
-    mutate({ storageId: storageId as number, id, commentId, password: value });
+    mutate({
+      storageId: storageId as number,
+      id,
+      commentId,
+      password: value,
+      shouldBeHandledByGlobalErrorHandler: false
+    });
   };
 
   return (
@@ -113,7 +125,7 @@ function CommentDeleteDialog({
             textAlign: 'right'
           }}
         >
-          <IconButton>
+          <IconButton onClick={onClose}>
             <Icon name="CloseOutlined" />
           </IconButton>
         </Box>
@@ -125,15 +137,25 @@ function CommentDeleteDialog({
         >
           댓글을 삭제하려면 비밀번호를 입력해 주세요.
         </Typography>
-        <TextBar
-          type="password"
-          fullWidth
-          size="big"
-          label="비밀번호"
-          value={value}
-          onChange={handleChange}
-          customStyle={{ marginTop: 30 }}
-        />
+        <Box
+          component="form"
+          customStyle={{
+            marginTop: 30
+          }}
+        >
+          <Box customStyle={{ display: 'none' }}>
+            <input type="text" autoComplete="username" />
+          </Box>
+          <TextBar
+            type="password"
+            fullWidth
+            size="big"
+            label="비밀번호"
+            value={value}
+            onChange={handleChange}
+            autoComplete="current-password"
+          />
+        </Box>
         {errorMessage.error && (
           <Typography customStyle={{ marginTop: 10, color: secondary.red.main }}>
             {errorMessage.message}
@@ -166,7 +188,7 @@ function CommentDeleteDialog({
               backgroundColor: secondary.red.main,
               color: text.dark.main
             }}
-            disabled={!value}
+            disabled={!value || isLoading}
           >
             삭제하기
           </Button>

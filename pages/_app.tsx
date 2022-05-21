@@ -50,7 +50,18 @@ function App({ Component, pageProps }: AppProps) {
         }
       },
       mutationCache: new MutationCache({
-        onError: (error) => {
+        onError: (
+          error,
+          query = {
+            shouldBeHandledByGlobalErrorHandler: true
+          }
+        ) => {
+          if (
+            !(query as { shouldBeHandledByGlobalErrorHandler: boolean })
+              .shouldBeHandledByGlobalErrorHandler
+          )
+            return;
+
           const asError = error as AxiosError;
 
           if (asError && asError.response) {
