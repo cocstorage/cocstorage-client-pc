@@ -2,20 +2,29 @@ import { RefObject, useState } from 'react';
 
 import { Icon, Menu, Typography } from 'cocstorage-ui';
 
-import CommentDeleteDialog from '@components/UI/organisms/CommentDeleteDialog';
+import ReplyDeleteDialog from '@components/UI/organisms/ReplyDeleteDialog';
 
-import { List, ListItem } from './CommentMenu.styles';
+import { List, ListItem } from './ReplyMenu.styles';
 
-interface CommentMenuProps {
+interface ReplyMenuProps {
   open: boolean;
   anchorRef: RefObject<HTMLElement>;
   storageId?: number;
   id: number;
   commentId: number;
+  replyId: number;
   onClose: () => void;
 }
 
-function CommentMenu({ open, anchorRef, storageId, id, commentId, onClose }: CommentMenuProps) {
+function ReplyMenu({
+  open,
+  anchorRef,
+  storageId,
+  id,
+  commentId,
+  replyId,
+  onClose
+}: ReplyMenuProps) {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
   const handleClick = () => setDialogOpen(true);
@@ -27,19 +36,20 @@ function CommentMenu({ open, anchorRef, storageId, id, commentId, onClose }: Com
         <List>
           <ListItem onClick={handleClick}>
             <Icon name="CloseOutlined" />
-            <Typography>댓글 삭제</Typography>
+            <Typography>답글 삭제</Typography>
           </ListItem>
         </List>
       </Menu>
-      <CommentDeleteDialog
+      <ReplyDeleteDialog
         open={dialogOpen}
         storageId={storageId}
         id={id}
         commentId={commentId}
+        replyId={replyId}
         onClose={handleClose}
       />
     </>
   );
 }
 
-export default CommentMenu;
+export default ReplyMenu;

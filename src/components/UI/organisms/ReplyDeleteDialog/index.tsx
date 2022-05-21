@@ -18,25 +18,27 @@ import {
   useTheme
 } from 'cocstorage-ui';
 
-import { deleteNonMemberStorageBoardComment } from '@api/v1/storage-board-comments';
+import { deleteNonMemberStorageBoardReply } from '@api/v1/storage-board-comment-replies';
 
 import queryKeys from '@constants/react-query';
 
-interface CommentDeleteDialogProps {
+interface ReplyDeleteDialogProps {
   open: boolean;
   storageId?: number;
   id: number;
   commentId: number;
+  replyId: number;
   onClose: () => void;
 }
 
-function CommentDeleteDialog({
+function ReplyDeleteDialog({
   open,
   storageId,
   id,
   commentId,
+  replyId,
   onClose
-}: CommentDeleteDialogProps) {
+}: ReplyDeleteDialogProps) {
   const {
     theme: {
       palette: { secondary, text }
@@ -57,8 +59,20 @@ function CommentDeleteDialog({
   });
 
   const { mutate } = useMutation(
-    (data: { storageId: number; id: number; commentId: number; password: string }) =>
-      deleteNonMemberStorageBoardComment(data.storageId, data.id, data.commentId, data.password),
+    (data: {
+      storageId: number;
+      id: number;
+      commentId: number;
+      replyId: number;
+      password: string;
+    }) =>
+      deleteNonMemberStorageBoardReply(
+        data.storageId,
+        data.id,
+        data.commentId,
+        data.replyId,
+        data.password
+      ),
     {
       onSuccess: () => {
         queryClient
@@ -91,7 +105,7 @@ function CommentDeleteDialog({
       error: false,
       message: ''
     });
-    mutate({ storageId: storageId as number, id, commentId, password: value });
+    mutate({ storageId: storageId as number, id, commentId, replyId, password: value });
   };
 
   return (
@@ -123,7 +137,7 @@ function CommentDeleteDialog({
           lineHeight="23px"
           customStyle={{ marginTop: 10, textAlign: 'center' }}
         >
-          댓글을 삭제하려면 비밀번호를 입력해 주세요.
+          답글을 삭제하려면 비밀번호를 입력해 주세요.
         </Typography>
         <TextBar
           type="password"
@@ -176,4 +190,4 @@ function CommentDeleteDialog({
   );
 }
 
-export default CommentDeleteDialog;
+export default ReplyDeleteDialog;

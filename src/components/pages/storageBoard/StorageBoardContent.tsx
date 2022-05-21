@@ -182,12 +182,6 @@ function StorageBoardContent() {
                 {viewCount.toLocaleString()}
               </Typography>
             </Flexbox>
-            <Button
-              variant="transparent"
-              size="pico"
-              startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
-              iconOnly
-            />
           </Flexbox>
         </Flexbox>
       </Flexbox>

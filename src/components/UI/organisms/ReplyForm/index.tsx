@@ -13,9 +13,9 @@ import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import {
-  PostStorageBoardCommentData,
+  PostStorageBoardReplyData,
   postNonMemberStorageBoardReply
-} from '@api/v1/storage-board-comments';
+} from '@api/v1/storage-board-comment-replies';
 
 import queryKeys from '@constants/react-query';
 import validators from '@constants/validators';
@@ -51,7 +51,7 @@ function ReplyForm({ storageId, id, commentId }: ReplyFormProps) {
   const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation(
-    (data: PostStorageBoardCommentData) =>
+    (data: PostStorageBoardReplyData) =>
       postNonMemberStorageBoardReply(storageId, id, commentId, data),
     {
       onSuccess: () => {

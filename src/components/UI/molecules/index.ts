@@ -5,4 +5,3 @@ export { default as StorageBoardCard } from './StorageBoardCard';
 export { default as SideAccordion } from './SideAccordion';
 export { default as IssueKeywordCard } from './IssueKeywordCard';
 export { default as Message } from './Message';
-export { default as Reply } from './Reply';

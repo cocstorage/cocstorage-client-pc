@@ -1,22 +1,46 @@
-import { memo } from 'react';
+import { memo, useRef, useState } from 'react';
 
 import { Avatar, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
 
-import { StorageBoardReply } from '@dto/storage-board-comments';
+import ReplyMenu from '@components/UI/organisms/ReplyMenu';
+
+import { StorageBoardReply } from '@dto/storage-board-comment-replies';
 
 interface ReplyProps {
+  storageId: number;
+  id: number;
   reply: StorageBoardReply;
 }
 
-function Reply({ reply: { user, nickname, content, createdAt, createdIp, isMember } }: ReplyProps) {
+function Reply({
+  storageId,
+  id,
+  reply: {
+    id: replyId,
+    storageBoardCommentId,
+    user,
+    nickname,
+    content,
+    createdAt,
+    createdIp,
+    isMember
+  }
+}: ReplyProps) {
   const {
     theme: {
       type,
       palette: { text }
     }
   } = useTheme();
+
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  const handleClickMenu = () => setMenuOpen(true);
+  const handleCloseMenu = () => setMenuOpen(false);
 
   return (
     <Flexbox
@@ -76,14 +100,27 @@ function Reply({ reply: { user, nickname, content, createdAt, createdIp, isMembe
           </Flexbox>
         </Flexbox>
       </Flexbox>
-      <Flexbox alignment="center">
-        <Button
-          variant="transparent"
-          size="pico"
-          startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
-          iconOnly
-        />
-      </Flexbox>
+      {!isMember && (
+        <Flexbox alignment="center">
+          <Button
+            ref={buttonRef}
+            variant="transparent"
+            size="pico"
+            startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
+            onClick={handleClickMenu}
+            iconOnly
+          />
+          <ReplyMenu
+            open={menuOpen}
+            anchorRef={buttonRef}
+            storageId={storageId}
+            id={id}
+            commentId={storageBoardCommentId}
+            replyId={replyId}
+            onClose={handleCloseMenu}
+          />
+        </Flexbox>
+      )}
     </Flexbox>
   );
 }

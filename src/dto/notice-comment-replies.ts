@@ -1,9 +1,8 @@
-import { NoticeCommentReply } from '@dto/notice-comment-replies';
 import { User } from '@dto/uesrs';
 
-export interface NoticeComment {
+export interface NoticeCommentReply {
   id: number;
-  noticeId: number;
+  noticeCommentId: number;
   user: User | null;
   nickname: string;
   content: string;
@@ -14,5 +13,4 @@ export interface NoticeComment {
   createdIp: string;
   createdAt: string;
   updatedAt: string;
-  replies: NoticeCommentReply[];
 }

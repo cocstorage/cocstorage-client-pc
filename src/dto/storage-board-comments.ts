@@ -1,3 +1,4 @@
+import { StorageBoardReply } from '@dto/storage-board-comment-replies';
 import { User } from '@dto/uesrs';
 
 export interface StorageBoardComment {
@@ -14,19 +15,4 @@ export interface StorageBoardComment {
   createdAt: string;
   updatedAt: string;
   replies: StorageBoardReply[];
-}
-
-export interface StorageBoardReply {
-  id: number;
-  storageBoardCommentId: number;
-  user: User | null;
-  nickname: string;
-  content: string;
-  thumbUp: number;
-  thumbDown: number;
-  isActive: boolean;
-  isMember: boolean;
-  createdIp: string;
-  createdAt: string;
-  updatedAt: string;
 }

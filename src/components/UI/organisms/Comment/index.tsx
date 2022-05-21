@@ -4,8 +4,7 @@ import { Avatar, Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocsto
 
 import dayjs from 'dayjs';
 
-import Reply from '@components/UI/molecules/Reply';
-import { CommentMenu, ReplyForm } from '@components/UI/organisms';
+import { CommentMenu, Reply, ReplyForm } from '@components/UI/organisms';
 
 import { StorageBoardComment } from '@dto/storage-board-comments';
 
@@ -142,7 +141,7 @@ function Comment({
             <ReplyForm storageId={storageId} id={id} commentId={commentId} />
           </Flexbox>
           {replies.map((reply) => (
-            <Reply key={`reply-${reply.id}`} reply={reply} />
+            <Reply key={`reply-${reply.id}`} storageId={storageId} id={id} reply={reply} />
           ))}
         </Flexbox>
       )}
