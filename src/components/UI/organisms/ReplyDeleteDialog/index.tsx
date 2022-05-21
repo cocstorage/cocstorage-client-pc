@@ -11,6 +11,7 @@ import {
   Button,
   Dialog,
   Flexbox,
+  Hidden,
   Icon,
   IconButton,
   TextBar,
@@ -148,9 +149,9 @@ function ReplyDeleteDialog({
           답글을 삭제하려면 비밀번호를 입력해 주세요.
         </Typography>
         <Box component="form" customStyle={{ marginTop: 30 }}>
-          <Box customStyle={{ display: 'none' }}>
+          <Hidden xsHidden>
             <input type="text" autoComplete="username" />
-          </Box>
+          </Hidden>
           <TextBar
             type="password"
             fullWidth

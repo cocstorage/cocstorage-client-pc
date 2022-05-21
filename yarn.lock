@@ -1915,10 +1915,10 @@ clean-webpack-plugin@^4.0.0:
   dependencies:
     del "^4.1.1"
 
-cocstorage-ui@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/cocstorage-ui/-/cocstorage-ui-0.1.2.tgz#41da9d50445132ee240a6a1dfd1009d541c46e40"
-  integrity sha512-/rjmAIL/VeCn0POWgOItKbjFzzZa8G6dstgYhx/jZV/J0VFIKyIsIqFPWUuXdGBBlabhBhCvTCZAZ4VO3dwRfw==
+cocstorage-ui@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/cocstorage-ui/-/cocstorage-ui-0.1.3.tgz#2be22148362d187b7a6afc262e9f7e223fd59710"
+  integrity sha512-puxy4zcZoY40BSweUrhFd2Hk7vNYee+xYLiO7SYbTNwDdrc0zKp3HcFaQyABGxmR2KLGWAFWpRE4MCI+4jmsWw==
 
 code-point-at@^1.0.0:
   version "1.1.0"

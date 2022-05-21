@@ -72,8 +72,12 @@ function StorageBoardContent() {
   );
 
   const { mutate: recommendMutate } = useMutation(
-    (data: { storageId: number; storageBoardId: number; type: 0 | 1 }) =>
-      putNonMemberStorageBoardRecommend(data.storageId, data.storageBoardId, data.type),
+    (data: {
+      storageId: number;
+      storageBoardId: number;
+      type: 0 | 1;
+      shouldBeHandledByGlobalErrorHandler?: boolean;
+    }) => putNonMemberStorageBoardRecommend(data.storageId, data.storageBoardId, data.type),
     {
       onSuccess: (data) => {
         if (storageBoardId && data) {
@@ -104,7 +108,12 @@ function StorageBoardContent() {
     const dataType = Number(event.currentTarget.getAttribute('data-type') || 0);
 
     if (storageBoardId && storage && storage.id && (dataType === 0 || dataType === 1)) {
-      recommendMutate({ storageId: storage.id, storageBoardId, type: dataType });
+      recommendMutate({
+        storageId: storage.id,
+        storageBoardId,
+        type: dataType,
+        shouldBeHandledByGlobalErrorHandler: false
+      });
     }
   };
 

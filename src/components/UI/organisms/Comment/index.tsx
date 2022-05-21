@@ -42,7 +42,7 @@ function Comment({
         {isMember && (user || {}).avatarUrl && (
           <Avatar width={30} height={30} src={(user || {}).avatarUrl || ''} alt="User Avatar" />
         )}
-        <Flexbox gap={8} direction="vertical" customStyle={{ flex: 1 }}>
+        <Flexbox direction="vertical" customStyle={{ flex: 1 }}>
           <Flexbox gap={4}>
             <Typography fontSize="12px" fontWeight={700} lineHeight="15px">
               {nickname || (user || {}).nickname}
@@ -62,7 +62,7 @@ function Comment({
               </span>
             ))}
           </Typography>
-          <Flexbox direction="vertical" gap={15}>
+          <Flexbox direction="vertical" gap={15} customStyle={{ marginTop: 8 }}>
             <Flexbox gap={12} alignment="center">
               <Typography
                 fontSize="12px"

@@ -11,6 +11,7 @@ import {
   Button,
   Dialog,
   Flexbox,
+  Hidden,
   Icon,
   IconButton,
   TextBar,
@@ -143,9 +144,9 @@ function CommentDeleteDialog({
             marginTop: 30
           }}
         >
-          <Box customStyle={{ display: 'none' }}>
+          <Hidden xsHidden>
             <input type="text" autoComplete="username" />
-          </Box>
+          </Hidden>
           <TextBar
             type="password"
             fullWidth

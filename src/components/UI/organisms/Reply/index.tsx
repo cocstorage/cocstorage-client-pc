@@ -59,14 +59,9 @@ function Reply({
       }}
     >
       {isMember && (user || {}).avatarUrl && (
-        <Avatar
-          width={30}
-          height={30}
-          src="https://static.cocstorage.com/images/zksw76puo6l255o5sabljom0gw8l"
-          alt="User Avatar"
-        />
+        <Avatar width={30} height={30} src={(user || {}).avatarUrl || ''} alt="User Avatar" />
       )}
-      <Flexbox gap={8} direction="vertical" customStyle={{ flex: 1 }}>
+      <Flexbox direction="vertical" customStyle={{ flex: 1 }}>
         <Flexbox gap={4}>
           <Typography fontSize="12px" fontWeight={700} lineHeight="15px">
             {nickname || (user || {}).nickname}
@@ -86,19 +81,16 @@ function Reply({
             </span>
           ))}
         </Typography>
-        <Flexbox direction="vertical" gap={11}>
-          <Flexbox gap={12} alignment="center">
-            <Typography
-              fontSize="12px"
-              lineHeight="15px"
-              customStyle={{
-                color: text[type].text1
-              }}
-            >
-              {dayjs(createdAt).fromNow()}
-            </Typography>
-          </Flexbox>
-        </Flexbox>
+        <Typography
+          fontSize="12px"
+          lineHeight="15px"
+          customStyle={{
+            marginTop: 8,
+            color: text[type].text1
+          }}
+        >
+          {dayjs(createdAt).fromNow()}
+        </Typography>
       </Flexbox>
       {!isMember && (
         <Flexbox alignment="center">
