@@ -5,7 +5,8 @@ import { useRouter } from 'next/router';
 
 import { Box, Flexbox, Hidden, Icon, Tag, TextBar, Typography, useTheme } from 'cocstorage-ui';
 
-import { RatioImage } from '@components/UI/atoms';
+import RatioImage from '@components/UI/atoms/RatioImage';
+import SystemMenu from '@components/UI/molecules/SystemMenu';
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import { useStorageData } from '@hooks/react-query/useStorage';
@@ -38,6 +39,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   });
 
   const [value, setValue] = useState<string>('');
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const isHome = useMemo(() => router.pathname === '/', [router.pathname]);
   const isStorages = useMemo(() => router.pathname.includes('/storages'), [router.pathname]);
@@ -47,6 +49,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   );
 
   const headerRef = useRef<HTMLHeadElement | null>(null);
+  const tagRef = useRef<HTMLDivElement | null>(null);
 
   const { scrollFixed } = useScrollTrigger({ trigger: scrollFixedTrigger, ref: headerRef });
 
@@ -56,6 +59,10 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setValue(event.currentTarget.value);
+
+  const handleOpenMenu = () => setMenuOpen(true);
+
+  const handleCloseMenu = () => setMenuOpen(false);
 
   return (
     <>
@@ -165,8 +172,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               </Link>
             </Flexbox>
             <Tag
+              ref={tagRef}
               variant="transparent"
-              startIcon={<Icon name="LoginOutlined" width={16} />}
+              startIcon={<Icon name="SettingOutlined" width={16} />}
               customStyle={{
                 height: 32,
                 padding: 0,
@@ -176,10 +184,11 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                 },
                 cursor: 'pointer'
               }}
-              onClick={handleOpen}
+              onClick={handleOpenMenu}
             >
-              <Hidden lgHidden>로그인</Hidden>
+              <Hidden lgHidden>설정</Hidden>
             </Tag>
+            <SystemMenu open={menuOpen} anchorRef={tagRef} onClose={handleCloseMenu} />
           </Flexbox>
         </HeaderInner>
       </StyledHeader>

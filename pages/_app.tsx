@@ -9,15 +9,13 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { RecoilRoot } from 'recoil';
 
-import { GlobalStyles, ThemeProvider } from 'cocstorage-ui';
-
 import type { AxiosError } from 'axios';
 
 import dayjs from 'dayjs';
 
 import RelativeTime from 'dayjs/plugin/relativeTime';
 
-import { MessageDialog, PageProgress } from '@components/UI/organisms';
+import { MessageDialog, PageProgress, ThemeRoot } from '@components/UI/organisms';
 
 import { getErrorMessageByCode } from '@utils';
 
@@ -134,14 +132,13 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <RecoilRoot>
         <QueryClientProvider client={queryClient.current}>
-          <ThemeProvider theme="light">
-            <GlobalStyles />
+          <ThemeRoot>
             <PageProgress />
             <Hydrate state={pageProps.dehydratedState}>
               <Component {...pageProps} />
             </Hydrate>
             <MessageDialog open={open} onClose={handleClose} {...errorMessage} />
-          </ThemeProvider>
+          </ThemeRoot>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </RecoilRoot>
