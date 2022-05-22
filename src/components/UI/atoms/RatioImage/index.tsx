@@ -1,10 +1,10 @@
-import { HTMLAttributes, useCallback, useMemo, useRef, useState } from 'react';
+import { HTMLAttributes, useRef, useState } from 'react';
 
 import { CSSObject } from '@emotion/styled';
 
-import { Avatar, Box, CSSValue } from 'cocstorage-ui';
+import { Avatar, Box, CSSValue, Icon } from 'cocstorage-ui';
 
-import { AvatarInner, AvatarWrapper } from './RatioImage.styles';
+import { RatioImageInner, RatioImageWrapper } from './RatioImage.styles';
 
 export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
   src: string;
@@ -13,6 +13,9 @@ export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
   height?: CSSValue;
   ratio?: '1:1' | '4:3' | '16:9';
   round?: CSSValue;
+  defaultIcon?: 'image' | 'user';
+  defaultIconWidth?: number;
+  defaultIconHeight?: number;
 }
 
 function RatioImage({
@@ -22,6 +25,9 @@ function RatioImage({
   height,
   ratio = '1:1',
   round = 6,
+  defaultIcon = 'image',
+  defaultIconWidth = 24,
+  defaultIconHeight = 24,
   ...props
 }: RatioImageProps) {
   const customStyleRef = useRef<CSSObject>({
@@ -35,31 +41,33 @@ function RatioImage({
 
   const [loadFailed, setLoadFailed] = useState<boolean>(false);
 
-  const handleError = useCallback(() => setLoadFailed(true), []);
-
-  const newSrc = useMemo<string>(() => {
-    if (!src || loadFailed) {
-      return 'https://static.cocstorage.com/assets/thumbnail.png';
-    }
-
-    return src;
-  }, [src, loadFailed]);
+  const handleError = () => setLoadFailed(true);
 
   return (
     <Box customStyle={{ width, height }}>
-      <AvatarWrapper ratio={ratio} round={round} {...props}>
-        <AvatarInner>
-          <Avatar
-            width={width}
-            height={height}
-            src={newSrc}
-            alt={alt}
-            round
-            onError={handleError}
-            customStyle={customStyleRef.current}
-          />
-        </AvatarInner>
-      </AvatarWrapper>
+      <RatioImageWrapper ratio={ratio} round={round} {...props}>
+        <RatioImageInner>
+          {!loadFailed && src && (
+            <Avatar
+              width={width}
+              height={height}
+              src={src}
+              alt={alt}
+              round
+              onError={handleError}
+              customStyle={customStyleRef.current}
+            />
+          )}
+          {(!src || loadFailed) && (
+            <Icon
+              name={defaultIcon === 'image' ? 'ImageOutlined' : 'UserFilled'}
+              customStyle={customStyleRef.current}
+              width={defaultIconWidth}
+              height={defaultIconHeight}
+            />
+          )}
+        </RatioImageInner>
+      </RatioImageWrapper>
     </Box>
   );
 }

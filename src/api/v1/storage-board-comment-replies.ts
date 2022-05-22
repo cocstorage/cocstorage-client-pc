@@ -1,4 +1,4 @@
-import { StorageBoardReply } from '@dto/storage-board-comment-replies';
+import { StorageBoardCommentReply } from '@dto/storage-board-comment-replies';
 import Axios from '@library/axios';
 
 const BASE_PATH = '/storages';
@@ -9,7 +9,7 @@ export async function postNonMemberStorageBoardReply(
   commentId: number,
   data: PostStorageBoardReplyData
 ) {
-  const { data: response } = await Axios.post<StorageBoardReply, PostStorageBoardReplyData>(
+  const { data: response } = await Axios.post<StorageBoardCommentReply, PostStorageBoardReplyData>(
     `${BASE_PATH}/${storageId}/boards/${id}/comments/${commentId}/replies/non-members`,
     data
   );
@@ -24,7 +24,7 @@ export async function deleteNonMemberStorageBoardReply(
   replyId: number,
   password: string
 ) {
-  const { data: response } = await Axios.delete<StorageBoardReply>(
+  const { data: response } = await Axios.delete<StorageBoardCommentReply>(
     `${BASE_PATH}/${storageId}/boards/${id}/comments/${commentId}/replies/non-members/${replyId}`,
     {
       data: {

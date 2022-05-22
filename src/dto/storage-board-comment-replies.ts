@@ -1,6 +1,6 @@
 import { User } from '@dto/uesrs';
 
-export interface StorageBoardReply {
+export interface StorageBoardCommentReply {
   id: number;
   storageBoardCommentId: number;
   user: User | null;

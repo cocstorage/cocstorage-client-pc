@@ -1,17 +1,18 @@
 import { memo, useRef, useState } from 'react';
 
-import { Avatar, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
 
+import RatioImage from '@components/UI/atoms/RatioImage';
 import ReplyMenu from '@components/UI/organisms/ReplyMenu';
 
-import { StorageBoardReply } from '@dto/storage-board-comment-replies';
+import { StorageBoardCommentReply } from '@dto/storage-board-comment-replies';
 
 interface ReplyProps {
   storageId: number;
   id: number;
-  reply: StorageBoardReply;
+  reply: StorageBoardCommentReply;
 }
 
 function Reply({
@@ -58,9 +59,16 @@ function Reply({
         }
       }}
     >
-      {isMember && (user || {}).avatarUrl && (
-        <Avatar width={30} height={30} src={(user || {}).avatarUrl || ''} alt="User Avatar" />
-      )}
+      <RatioImage
+        width={30}
+        height={30}
+        src={(user || {}).avatarUrl || ''}
+        alt="User Avatar Img"
+        round="50%"
+        defaultIcon="user"
+        defaultIconWidth={15}
+        defaultIconHeight={15}
+      />
       <Flexbox direction="vertical" customStyle={{ flex: 1 }}>
         <Flexbox gap={4}>
           <Typography fontSize="12px" fontWeight={700} lineHeight="15px">

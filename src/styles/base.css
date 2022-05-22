@@ -33,7 +33,3 @@
     font-display: swap;
     src: url('./fonts/SpoqaHanSansNeo-Thin.woff2') format('woff2')
 }
-
-#__next {
-    height: 100%;
-}

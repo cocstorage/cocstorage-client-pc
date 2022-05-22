@@ -4,17 +4,7 @@ import { useRouter } from 'next/router';
 
 import { useQuery } from 'react-query';
 
-import {
-  Box,
-  Button,
-  Flexbox,
-  Hidden,
-  Icon,
-  IconButton,
-  Menu,
-  Typography,
-  useTheme
-} from 'cocstorage-ui';
+import { Box, Button, Flexbox, Icon, IconButton, Menu, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
 
@@ -122,14 +112,6 @@ function StorageBoardsIntro() {
           </div>
         </Flexbox>
         <Flexbox gap={6} alignment="center">
-          <Button
-            variant="accent"
-            size="small"
-            startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
-            onClick={handleDialogOpen}
-          >
-            <Hidden lgHidden>게시글 작성</Hidden>
-          </Button>
           <Button
             size="small"
             startIcon={

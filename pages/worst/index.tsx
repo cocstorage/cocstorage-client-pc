@@ -8,14 +8,9 @@ import { useSetRecoilState } from 'recoil';
 
 import { worstParamsDefault, worstParamsState } from '@recoil/worst/atoms';
 
-import { Box, Grid } from 'cocstorage-ui';
+import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
-import {
-  WorstLeftMenu,
-  WorstNoticeAlert,
-  WorstStorageBoardList,
-  WorstTitle
-} from '@components/pages/worst';
+import { WorstLeftMenu, WorstStorageBoardList, WorstTitle } from '@components/pages/worst';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Header } from '@components/UI/molecules';
 import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
@@ -56,7 +51,9 @@ function Worst() {
           </Box>
         </Grid>
         <Grid component="section" item auto>
-          <WorstNoticeAlert />
+          <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
+            좀 더 편하게 보실 수 있도록 준비하고 있어요. 불편하시겠지만 조금만 기다려주세요!
+          </Alert>
           <WorstTitle />
           <WorstStorageBoardList />
         </Grid>

@@ -51,9 +51,6 @@ export async function deleteNonMemberStorageBoardComment(
 }
 
 export interface FetchStorageBoardCommentsParams {
-  subject?: string | null;
-  content?: string | null;
-  nickname?: string | null;
   page?: number;
   per?: number;
   orderBy?: string;

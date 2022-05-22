@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
 
-import { Avatar, Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
 
+import RatioImage from '@components/UI/atoms/RatioImage';
 import { CommentMenu, Reply, ReplyForm } from '@components/UI/organisms';
 
 import { StorageBoardComment } from '@dto/storage-board-comments';
@@ -39,9 +40,16 @@ function Comment({
   return (
     <>
       <Flexbox gap={10} customStyle={{ flex: 1 }}>
-        {isMember && (user || {}).avatarUrl && (
-          <Avatar width={30} height={30} src={(user || {}).avatarUrl || ''} alt="User Avatar" />
-        )}
+        <RatioImage
+          width={30}
+          height={30}
+          src={(user || {}).avatarUrl || ''}
+          alt="User Avatar Img"
+          round="50%"
+          defaultIcon="user"
+          defaultIconWidth={15}
+          defaultIconHeight={15}
+        />
         <Flexbox direction="vertical" customStyle={{ flex: 1 }}>
           <Flexbox gap={4}>
             <Typography fontSize="12px" fontWeight={700} lineHeight="15px">
@@ -94,7 +102,7 @@ function Comment({
                   }}
                   onClick={handleClick}
                 >
-                  {`답글 ${replies.length}개`}
+                  {open ? '답글 숨기기' : `답글 ${replies.length}개`}
                 </Typography>
               </Flexbox>
             )}

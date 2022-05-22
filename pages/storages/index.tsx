@@ -1,11 +1,10 @@
 import { QueryClient, dehydrate } from 'react-query';
 
-import { Box, Grid } from 'cocstorage-ui';
+import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
 import {
   StoragesCardGrid,
   StoragesLeftMenu,
-  StoragesNoticeAlert,
   StoragesPopularList,
   StoragesRightMenu
 } from '@components/pages/storages';
@@ -27,7 +26,9 @@ function Storages() {
           </Box>
         </Grid>
         <Grid component="section" item auto>
-          <StoragesNoticeAlert />
+          <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
+            게시판을 만들 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
+          </Alert>
           <StoragesPopularList />
           <StoragesCardGrid />
         </Grid>

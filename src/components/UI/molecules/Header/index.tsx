@@ -25,7 +25,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
     theme: { type, palette }
   } = useTheme();
 
-  const { avatarUrl = '', name = '' } = useStorageData(router.query.path as string) || {};
+  const { path, avatarUrl = '', name = '' } = useStorageData(router.query.path as string) || {};
 
   const [open, setOpen] = useState<boolean>(false);
   const [message] = useState<{
@@ -46,7 +46,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
     [router.pathname]
   );
   const isStorages = useMemo(() => router.pathname.includes('/storages'), [router.pathname]);
-  const isBoardDetail = useMemo(
+  const isStorageBoardDetail = useMemo(
     () => router.pathname === '/storages/[path]/[id]',
     [router.pathname]
   );
@@ -71,9 +71,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
     <>
       <StyledHeader ref={headerRef} scrollFixed={scrollFixed} {...props}>
         <HeaderInner scrollFixed={scrollFixed}>
-          <Link href="/">
-            <a>
-              {!isBoardDetail && (
+          {!isStorageBoardDetail && (
+            <Link href="/">
+              <a>
                 <Flexbox component="button" gap={8}>
                   <Logo
                     width={34}
@@ -87,8 +87,12 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                     </Typography>
                   </Hidden>
                 </Flexbox>
-              )}
-              {isBoardDetail && (
+              </a>
+            </Link>
+          )}
+          {isStorageBoardDetail && (
+            <Link href={`/storages/${path}`}>
+              <a>
                 <Flexbox gap={14} alignment="center">
                   <Logo
                     width={34}
@@ -116,9 +120,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                     </Typography>
                   </Flexbox>
                 </Flexbox>
-              )}
-            </a>
-          </Link>
+              </a>
+            </Link>
+          )}
           <Box
             component="button"
             onClick={handleOpen}

@@ -6,12 +6,13 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import styled from '@emotion/styled';
 
-import { Avatar, Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import type { AxiosError } from 'axios';
 
 import dayjs from 'dayjs';
 
+import RatioImage from '@components/UI/atoms/RatioImage';
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
@@ -37,9 +38,9 @@ function StorageBoardContent() {
     code: string;
     message: string;
   }>({
-    title: '테스트',
+    title: '알 수 없는 오류가 발생했어요.',
     code: '',
-    message: '테스트'
+    message: '문제가 지속된다면 관리자에게 문의해 주세요!'
   });
 
   const updatedViewCountRef = useRef<boolean>(false);
@@ -57,8 +58,7 @@ function StorageBoardContent() {
     thumbDown = 0,
     commentTotalCount = 0,
     viewCount = 0,
-    createdAt,
-    isMember
+    createdAt
   } = useStorageBoardData(Number(id)) || {};
 
   const { mutate } = useMutation(
@@ -134,14 +134,16 @@ function StorageBoardContent() {
         </Typography>
         <Flexbox justifyContent="space-between">
           <Flexbox gap={6}>
-            {isMember && (user || {}).avatarUrl && (
-              <Avatar
-                width={24}
-                height={24}
-                src={(user || {}).avatarUrl || ''}
-                alt="User Avatar Img"
-              />
-            )}
+            <RatioImage
+              width={24}
+              height={24}
+              src={(user || {}).avatarUrl || ''}
+              alt="User Avatar Img"
+              round="50%"
+              defaultIcon="user"
+              defaultIconWidth={12}
+              defaultIconHeight={12}
+            />
             <UserInfo>
               <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
                 {nickname || user?.nickname}

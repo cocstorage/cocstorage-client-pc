@@ -1,6 +1,6 @@
 import { User } from '@dto/uesrs';
 
-export interface NoticeReply {
+export interface NoticeCommentReply {
   id: number;
   noticeCommentId: number;
   user: User | null;

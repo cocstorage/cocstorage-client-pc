@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { useQuery } from 'react-query';
 
 import { Alert, Icon, IconButton } from 'cocstorage-ui';
@@ -12,16 +14,20 @@ function IndexNoticeAlert() {
   if (!notices.length) return null;
 
   return (
-    <Alert
-      severity="info"
-      action={
-        <IconButton>
-          <Icon name="CaretRightOutlined" />
-        </IconButton>
-      }
-    >
-      {notices[0].subject}
-    </Alert>
+    <Link href={`/notices/${notices[0].id}`}>
+      <a>
+        <Alert
+          severity="info"
+          action={
+            <IconButton>
+              <Icon name="CaretRightOutlined" />
+            </IconButton>
+          }
+        >
+          {notices[0].subject}
+        </Alert>
+      </a>
+    </Link>
   );
 }
 

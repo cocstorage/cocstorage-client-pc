@@ -1,5 +1,7 @@
 import { RefObject } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { ThemeType } from 'cocstorage-ui/dist/types';
 
 import { useRecoilState } from 'recoil';
@@ -12,7 +14,7 @@ import LocalStorage from '@library/localStorage';
 
 import { localStorageKeys } from '@constants/localStorage';
 
-import { List, ListItemGroup } from './SystemMenu.styles';
+import { List, ListItem, ListItemGroup } from './SystemMenu.styles';
 
 interface SystemMenuProps {
   open: boolean;
@@ -36,6 +38,7 @@ const options = [
 ];
 
 function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
+  const router = useRouter();
   const {
     theme: {
       type,
@@ -51,6 +54,8 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
     LocalStorage.set<ThemeType | 'system'>(localStorageKeys.theme, newValue);
   };
 
+  const handleClick = () => router.push('/notices');
+
   return (
     <Menu
       open={open}
@@ -61,6 +66,10 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
       }}
     >
       <List>
+        <ListItem onClick={handleClick}>
+          <Icon name="LoudSpeakerOutlined" color={text[type].text2} />
+          <Typography>새로운 소식</Typography>
+        </ListItem>
         <ListItemGroup>
           <Flexbox gap={8} alignment="center">
             <Icon name="StarOutlined" width={20} color={text[type].text2} />

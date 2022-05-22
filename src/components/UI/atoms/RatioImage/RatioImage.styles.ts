@@ -2,7 +2,7 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { RatioImageProps } from '.';
 
-export const AvatarWrapper = styled.div<Pick<RatioImageProps, 'ratio' | 'round'>>`
+export const RatioImageWrapper = styled.div<Pick<RatioImageProps, 'ratio' | 'round'>>`
   position: relative;
   overflow: hidden;
 
@@ -33,7 +33,7 @@ export const AvatarWrapper = styled.div<Pick<RatioImageProps, 'ratio' | 'round'>
       : {}};
 `;
 
-export const AvatarInner = styled.div`
+export const RatioImageInner = styled.div`
   position: absolute;
   top: 0;
   left: 0;

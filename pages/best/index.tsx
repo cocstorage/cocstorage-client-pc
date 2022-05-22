@@ -8,14 +8,9 @@ import { useSetRecoilState } from 'recoil';
 
 import { bestParamsDefault, bestParamsState } from '@recoil/best/atoms';
 
-import { Box, Grid } from 'cocstorage-ui';
+import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
-import {
-  BestLeftMenu,
-  BestNoticeAlert,
-  BestStorageBoardList,
-  BestTitle
-} from '@components/pages/best';
+import { BestLeftMenu, BestStorageBoardList, BestTitle } from '@components/pages/best';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Header } from '@components/UI/molecules';
 import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
@@ -56,7 +51,9 @@ function Best() {
           </Box>
         </Grid>
         <Grid component="section" item auto>
-          <BestNoticeAlert />
+          <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
+            좀 더 편하게 보실 수 있도록 준비하고 있어요. 불편하시겠지만 조금만 기다려주세요!
+          </Alert>
           <BestTitle />
           <BestStorageBoardList />
         </Grid>
