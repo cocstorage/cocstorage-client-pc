@@ -41,7 +41,10 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const [value, setValue] = useState<string>('');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-  const isHome = useMemo(() => router.pathname === '/', [router.pathname]);
+  const isHome = useMemo(
+    () => router.pathname === '/' || router.pathname === '/best' || router.pathname === '/worst',
+    [router.pathname]
+  );
   const isStorages = useMemo(() => router.pathname.includes('/storages'), [router.pathname]);
   const isBoardDetail = useMemo(
     () => router.pathname === '/storages/[path]/[id]',

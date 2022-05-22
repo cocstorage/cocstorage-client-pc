@@ -49,7 +49,7 @@ function StorageBoardsIntro() {
 
   return (
     <>
-      <Flexbox justifyContent="space-between">
+      <Flexbox component="section" justifyContent="space-between">
         <Flexbox gap={16} alignment="center">
           <RatioImage
             width={102}

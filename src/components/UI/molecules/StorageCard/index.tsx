@@ -6,7 +6,7 @@ import { RatioImage } from '@components/UI/atoms';
 
 import { StyledStorageCard } from './StorageCard.styles';
 
-interface StorageCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface StorageCardProps extends ButtonHTMLAttributes<HTMLDivElement> {
   src: string;
   name: string;
 }

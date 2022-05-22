@@ -8,7 +8,9 @@ import { QueryClient, dehydrate } from 'react-query';
 
 import { useSetRecoilState } from 'recoil';
 
+import { bestParamsDefault, bestParamsState } from '@recoil/best/atoms';
 import { storageBoardsParamsDefault, storageBoardsParamsState } from '@recoil/storageBoards/atoms';
+import { worstParamsDefault, worstParamsState } from '@recoil/worst/atoms';
 
 import { Box, Flexbox, Grid, Typography } from 'cocstorage-ui';
 
@@ -29,14 +31,18 @@ function StorageBoard() {
   } = useRouter();
 
   const setParams = useSetRecoilState(storageBoardsParamsState);
+  const setBestParams = useSetRecoilState(bestParamsState);
+  const setWorstParams = useSetRecoilState(worstParamsState);
 
   const handleRouteChangeComplete = useCallback(
     (url: string) => {
       if (url.indexOf('/storages/') < 0) {
         setParams(storageBoardsParamsDefault);
+        setBestParams(bestParamsDefault);
+        setWorstParams(worstParamsDefault);
       }
     },
-    [setParams]
+    [setParams, setBestParams, setWorstParams]
   );
 
   useEffect(() => {
@@ -50,7 +56,7 @@ function StorageBoard() {
   return (
     <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
       <Grid container columnGap={20}>
-        <Grid item auto>
+        <Grid component="section" item auto>
           <StorageBoardContent />
           {path && id && (
             <>
@@ -69,7 +75,7 @@ function StorageBoard() {
             </Flexbox>
           )}
         </Grid>
-        <Grid item lgHidden customStyle={{ minWidth: 203 }}>
+        <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
             <StorageBoardRightMenu />
           </Box>

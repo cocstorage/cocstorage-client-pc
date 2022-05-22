@@ -21,17 +21,17 @@ function Storages() {
   return (
     <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
       <Grid container columnGap={20}>
-        <Grid item customStyle={{ minWidth: 176, marginRight: 27 }}>
+        <Grid component="section" item customStyle={{ minWidth: 176, marginRight: 27 }}>
           <Box customStyle={{ position: 'fixed', width: 156 }}>
             <StoragesLeftMenu />
           </Box>
         </Grid>
-        <Grid item auto>
+        <Grid component="section" item auto>
           <StoragesNoticeAlert />
           <StoragesPopularList />
           <StoragesCardGrid />
         </Grid>
-        <Grid item lgHidden customStyle={{ minWidth: 203 }}>
+        <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
             <StoragesRightMenu />
           </Box>

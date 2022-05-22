@@ -2,7 +2,7 @@ import { Flexbox } from 'cocstorage-ui';
 
 import { SideAccordion, StorageCard } from '@components/UI/molecules';
 
-function IndexLeftMenu() {
+function BestLeftMenu() {
   return (
     <Flexbox direction="vertical" gap={30}>
       <SideAccordion title="인기 게시판">
@@ -33,4 +33,4 @@ function IndexLeftMenu() {
   );
 }
 
-export default IndexLeftMenu;
+export default BestLeftMenu;

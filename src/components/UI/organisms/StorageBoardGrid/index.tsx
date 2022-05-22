@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 
 import { storageBoardsParamsState } from '@recoil/storageBoards/atoms';
 
-import { Grid, Pagination } from 'cocstorage-ui';
+import { Flexbox, Grid, Pagination } from 'cocstorage-ui';
 
 import { Message, StorageBoardCard } from '@components/UI/molecules';
 
@@ -41,7 +41,7 @@ function StorageBoardGrid({ path }: StorageBoardGridProps) {
 
   return (
     <>
-      <Grid container columnGap={20} rowGap={20}>
+      <Grid component="section" container columnGap={20} rowGap={20}>
         {boards.map((storageBoard) => (
           <Grid key={`storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
             <Link href={`/storages/${storageBoard.storage.path}/${storageBoard.id}`}>
@@ -52,15 +52,19 @@ function StorageBoardGrid({ path }: StorageBoardGridProps) {
           </Grid>
         ))}
       </Grid>
-      <Pagination
-        count={totalPages * perPage}
-        page={currentPage}
-        rowPerPage={perPage}
-        onChange={handleChange}
+      <Flexbox
+        component="section"
         customStyle={{
           margin: '50px auto'
         }}
-      />
+      >
+        <Pagination
+          count={totalPages * perPage}
+          page={currentPage}
+          rowPerPage={perPage}
+          onChange={handleChange}
+        />
+      </Flexbox>
     </>
   );
 }

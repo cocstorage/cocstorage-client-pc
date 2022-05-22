@@ -93,7 +93,7 @@ function StorageBoardsTabs() {
   );
 }
 
-const Wrapper = styled.div<{
+const Wrapper = styled.section<{
   scrollFixed: boolean;
 }>`
   display: flex;

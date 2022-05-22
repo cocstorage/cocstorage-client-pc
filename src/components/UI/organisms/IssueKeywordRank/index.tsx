@@ -8,7 +8,7 @@ import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 
 import queryKeys from '@constants/react-query';
 
-function IndexRightMenu() {
+function IssueKeywordRank() {
   const { data: { ranks = [] } = {} } = useQuery(
     queryKeys.issueKeywords.issueKeywordRank,
     fetchIssueKeywordRank
@@ -30,4 +30,4 @@ function IndexRightMenu() {
   );
 }
 
-export default IndexRightMenu;
+export default IssueKeywordRank;

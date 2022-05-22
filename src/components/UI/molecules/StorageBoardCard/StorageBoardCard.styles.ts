@@ -2,7 +2,7 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { StorageBoardCardProps } from './index';
 
-export const StyledStorageBoardCard = styled.button<
+export const StyledStorageBoardCard = styled.div<
   Pick<StorageBoardCardProps, 'variant'> & {
     hasThumbnail: boolean;
   }

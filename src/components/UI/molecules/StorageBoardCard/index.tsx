@@ -17,7 +17,7 @@ import {
   UserInfo
 } from './StorageBoardCard.styles';
 
-export interface StorageBoardCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface StorageBoardCardProps extends ButtonHTMLAttributes<HTMLDivElement> {
   variant?: 'emphasize' | 'normal' | 'compact';
   storageBoard: StorageBoard;
   hideSymbolismBadge?: boolean;

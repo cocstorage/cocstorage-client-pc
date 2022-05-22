@@ -1,27 +1,36 @@
+import { useRouter } from 'next/router';
+
 import { useQuery } from 'react-query';
 
 import { Button, Flexbox, Grid, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
 
 import { StorageBoardCard } from '@components/UI/molecules';
 
-import { fetchPopularStorageBoards, fetchWorstStorageBoards } from '@api/v1/storage-boards';
+import {
+  fetchIndexPopularStorageBoards,
+  fetchIndexWorstStorageBoards
+} from '@api/v1/storage-boards';
 
 import queryKeys from '@constants/react-query';
 
 function IndexBestWorstStorageBoardGrid() {
+  const router = useRouter();
   const {
     theme: { type, palette }
   } = useTheme();
 
   const { data: { boards: bestBoards = [] } = {} } = useQuery(
-    queryKeys.storageBoards.popularStorageBoards,
-    fetchPopularStorageBoards
+    queryKeys.storageBoards.indexPopularStorageBoards,
+    fetchIndexPopularStorageBoards
   );
 
   const { data: { boards: worstBoards = [] } = {} } = useQuery(
-    queryKeys.storageBoards.worstStorageBoards,
-    fetchWorstStorageBoards
+    queryKeys.storageBoards.indexPopularStorageBoards,
+    fetchIndexWorstStorageBoards
   );
+
+  const handleClickMoreBest = () => router.push('/best');
+  const handleClickMoreWorst = () => router.push('/worst');
 
   if (bestBoards.length === 0 || worstBoards.length === 0) return null;
 
@@ -63,6 +72,7 @@ function IndexBestWorstStorageBoardGrid() {
             variant="transparent"
             size="pico"
             endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
+            onClick={handleClickMoreBest}
             customStyle={{
               color: palette.text[type].text1
             }}
@@ -118,13 +128,14 @@ function IndexBestWorstStorageBoardGrid() {
               워스트
             </Tag>
             <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
-              이건 좀...
+              와 이건 좀...
             </Typography>
           </Flexbox>
           <Button
             variant="transparent"
             size="pico"
             endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
+            onClick={handleClickMoreWorst}
             customStyle={{
               color: palette.text[type].text1
             }}

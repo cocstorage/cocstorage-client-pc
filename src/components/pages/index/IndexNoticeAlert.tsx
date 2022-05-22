@@ -15,8 +15,8 @@ function IndexNoticeAlert() {
     <Alert
       severity="info"
       action={
-        <IconButton rotation={180} aria-label="Notice Route">
-          <Icon name="CaretLeftOutlined" />
+        <IconButton>
+          <Icon name="CaretRightOutlined" />
         </IconButton>
       }
     >

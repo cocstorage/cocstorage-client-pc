@@ -4,14 +4,38 @@ import Axios from '@library/axios';
 
 const BASE_PATH = '/storages';
 
-export async function fetchPopularStorageBoards() {
-  const { data } = await Axios.get<FetchStorageBoardsResponse>(`${BASE_PATH}/boards/popular`);
+export async function fetchIndexPopularStorageBoards() {
+  const { data } = await Axios.get<FetchStorageBoardsResponse>(`${BASE_PATH}/boards/popular`, {
+    params: {
+      per: 3
+    }
+  });
 
   return data;
 }
 
-export async function fetchWorstStorageBoards() {
-  const { data } = await Axios.get<FetchStorageBoardsResponse>(`${BASE_PATH}/boards/worst`);
+export async function fetchIndexWorstStorageBoards() {
+  const { data } = await Axios.get<FetchStorageBoardsResponse>(`${BASE_PATH}/boards/worst`, {
+    params: {
+      per: 3
+    }
+  });
+
+  return data;
+}
+
+export async function fetchPopularStorageBoards(params?: FetchStorageBoardsParams) {
+  const { data } = await Axios.get<FetchStorageBoardsResponse>(`${BASE_PATH}/boards/popular`, {
+    params
+  });
+
+  return data;
+}
+
+export async function fetchWorstStorageBoards(params?: FetchStorageBoardsParams) {
+  const { data } = await Axios.get<FetchStorageBoardsResponse>(`${BASE_PATH}/boards/worst`, {
+    params
+  });
 
   return data;
 }

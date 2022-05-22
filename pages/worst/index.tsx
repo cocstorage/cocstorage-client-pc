@@ -1,40 +1,64 @@
+import { useCallback, useEffect } from 'react';
+
+import { useRouter } from 'next/router';
+
 import { QueryClient, dehydrate } from 'react-query';
+
+import { useSetRecoilState } from 'recoil';
+
+import { worstParamsDefault, worstParamsState } from '@recoil/worst/atoms';
 
 import { Box, Grid } from 'cocstorage-ui';
 
 import {
-  IndexBestWorstStorageBoardGrid,
-  IndexLatestStorageBoardGrid,
-  IndexLeftMenu,
-  IndexNoticeAlert
-} from '@components/pages/index';
+  WorstLeftMenu,
+  WorstNoticeAlert,
+  WorstStorageBoardList,
+  WorstTitle
+} from '@components/pages/worst';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Header } from '@components/UI/molecules';
 import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
-import { fetchNotices } from '@api/v1/notices';
-import {
-  fetchIndexPopularStorageBoards,
-  fetchIndexWorstStorageBoards,
-  fetchLatestStorageBoards
-} from '@api/v1/storage-boards';
+import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
 
 import queryKeys from '@constants/react-query';
 
-function Index() {
+function Worst() {
+  const { events } = useRouter();
+
+  const setParams = useSetRecoilState(worstParamsState);
+
+  const handleRouteChangeComplete = useCallback(
+    (url: string) => {
+      if (url.indexOf('/storages/') < 0) {
+        setParams(worstParamsDefault);
+      }
+    },
+    [setParams]
+  );
+
+  useEffect(() => {
+    events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    return () => {
+      events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, [events, handleRouteChangeComplete]);
+
   return (
     <GeneralTemplate header={<Header scrollFixedTrigger />}>
       <Grid container columnGap={20}>
         <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <IndexLeftMenu />
+            <WorstLeftMenu />
           </Box>
         </Grid>
         <Grid component="section" item auto>
-          <IndexNoticeAlert />
-          <IndexBestWorstStorageBoardGrid />
-          <IndexLatestStorageBoardGrid />
+          <WorstNoticeAlert />
+          <WorstTitle />
+          <WorstStorageBoardList />
         </Grid>
         <Grid component="section" item customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
@@ -50,19 +74,10 @@ export async function getServerSideProps() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(
-    queryKeys.storageBoards.indexPopularStorageBoards,
-    fetchIndexPopularStorageBoards
-  );
-  await queryClient.prefetchQuery(
-    queryKeys.storageBoards.indexWorstStorageBoards,
-    fetchIndexWorstStorageBoards
-  );
-  await queryClient.prefetchQuery(
-    queryKeys.storageBoards.latestStorageBoards,
-    fetchLatestStorageBoards
+    queryKeys.storageBoards.worstStorageBoards(worstParamsDefault),
+    () => fetchWorstStorageBoards(worstParamsDefault)
   );
   await queryClient.prefetchQuery(queryKeys.issueKeywords.issueKeywordRank, fetchIssueKeywordRank);
-  await queryClient.prefetchQuery(queryKeys.notices.notices, fetchNotices);
 
   return {
     props: {
@@ -71,4 +86,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default Index;
+export default Worst;
