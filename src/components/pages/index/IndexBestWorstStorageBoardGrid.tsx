@@ -26,7 +26,7 @@ function IndexBestWorstStorageBoardGrid() {
   );
 
   const { data: { boards: worstBoards = [] } = {} } = useQuery(
-    queryKeys.storageBoards.indexPopularStorageBoards,
+    queryKeys.storageBoards.indexWorstStorageBoards,
     fetchIndexWorstStorageBoards
   );
 

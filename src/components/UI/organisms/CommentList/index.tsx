@@ -89,12 +89,7 @@ function CommentList({ id }: CommentListProps) {
       </Flexbox>
       <Flexbox gap={18} direction="vertical">
         {comments.map((comment) => (
-          <Comment
-            key={`comment-${comment.id}`}
-            storageId={storageId as number}
-            id={id}
-            comment={comment}
-          />
+          <Comment key={`comment-${comment.id}`} storageId={storageId} id={id} comment={comment} />
         ))}
       </Flexbox>
       <Pagination

@@ -23,6 +23,18 @@ export async function fetchNotices(params?: FetchNoticesParams) {
   return data;
 }
 
+export async function fetchNotice(id: number) {
+  const { data } = await Axios.get<Notice>(`/admin/${BASE_PATH}/${id}`);
+
+  return data;
+}
+
+export async function putNoticeViewCount(id: number) {
+  const { data } = await Axios.put<Notice, null>(`/admin/${BASE_PATH}/${id}/view-count`);
+
+  return data;
+}
+
 export interface FetchNoticesResponse {
   notices: Notice[];
   pagination: Pagination;

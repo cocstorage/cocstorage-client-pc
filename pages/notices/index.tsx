@@ -17,7 +17,7 @@ function Notices() {
     <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
       <Flexbox gap={20} direction="vertical">
         <Typography fontSize="24px" fontWeight={700} lineHeight="30px">
-          공지사항
+          새로운 소식
         </Typography>
         <NoticesGrid />
       </Flexbox>

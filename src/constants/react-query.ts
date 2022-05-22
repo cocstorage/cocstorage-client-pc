@@ -40,7 +40,12 @@ const issueKeywords = {
 
 const notices = {
   indexNotice: ['indexNotice'],
-  noticesWithParams: (params: FetchNoticesParams) => ['notices', params]
+  noticesWithParams: (params: FetchNoticesParams) => ['notices', params],
+  noticeById: (id: number) => ['notice', id]
+};
+
+const noticeComments = {
+  noticeCommentsByIdWithPage: (id: number, page: number) => ['noticeComments', id, page]
 };
 
 const queryKeys = {
@@ -49,7 +54,8 @@ const queryKeys = {
   storageBoards,
   storageBoardComments,
   issueKeywords,
-  notices
+  notices,
+  noticeComments
 };
 
 export default queryKeys;

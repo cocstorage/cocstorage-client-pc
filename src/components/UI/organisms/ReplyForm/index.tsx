@@ -21,7 +21,7 @@ import queryKeys from '@constants/react-query';
 import validators from '@constants/validators';
 
 interface ReplyFormProps {
-  storageId: number;
+  storageId?: number;
   id: number;
   commentId: number;
 }
@@ -52,7 +52,7 @@ function ReplyForm({ storageId, id, commentId }: ReplyFormProps) {
 
   const { mutate, isLoading } = useMutation(
     (data: PostStorageBoardReplyData) =>
-      postNonMemberStorageBoardReply(storageId, id, commentId, data),
+      postNonMemberStorageBoardReply(storageId as number, id, commentId, data),
     {
       onSuccess: () => {
         setContent('');
