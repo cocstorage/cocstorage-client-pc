@@ -10,10 +10,10 @@ import { bestParamsDefault, bestParamsState } from '@recoil/best/atoms';
 
 import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
-import { BestLeftMenu, BestStorageBoardList, BestTitle } from '@components/pages/best';
+import { BestStorageBoardList, BestTitle } from '@components/pages/best';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Header } from '@components/UI/molecules';
-import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
+import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { fetchPopularStorageBoards } from '@api/v1/storage-boards';
@@ -47,7 +47,7 @@ function Best() {
       <Grid container columnGap={20}>
         <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <BestLeftMenu />
+            <SidePopularStorageList />
           </Box>
         </Grid>
         <Grid component="section" item auto>

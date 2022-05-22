@@ -5,11 +5,11 @@ import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 import {
   StoragesCardGrid,
   StoragesLeftMenu,
-  StoragesPopularList,
-  StoragesRightMenu
+  StoragesPopularList
 } from '@components/pages/storages';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
+import SidePopularStorageList from '@components/UI/organisms/SidePopularStorageList';
 
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 import { fetchStorages } from '@api/v1/storages';
@@ -34,7 +34,7 @@ function Storages() {
         </Grid>
         <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <StoragesRightMenu />
+            <SidePopularStorageList />
           </Box>
         </Grid>
       </Grid>

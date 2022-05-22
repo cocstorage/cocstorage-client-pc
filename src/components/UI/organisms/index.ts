@@ -11,3 +11,5 @@ export { default as ReplyForm } from './ReplyForm';
 export { default as StorageBoardGrid } from './StorageBoardGrid';
 export { default as PageProgress } from './PageProgress';
 export { default as ThemeRoot } from './ThemeRoot';
+export { default as SidePopularStorageList } from './SidePopularStorageList';
+export { default as IssueKeywordRank } from './IssueKeywordRank';

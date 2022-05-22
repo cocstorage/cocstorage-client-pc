@@ -10,10 +10,10 @@ import { worstParamsDefault, worstParamsState } from '@recoil/worst/atoms';
 
 import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
-import { WorstLeftMenu, WorstStorageBoardList, WorstTitle } from '@components/pages/worst';
+import { WorstStorageBoardList, WorstTitle } from '@components/pages/worst';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Header } from '@components/UI/molecules';
-import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
+import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
@@ -47,7 +47,7 @@ function Worst() {
       <Grid container columnGap={20}>
         <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <WorstLeftMenu />
+            <SidePopularStorageList />
           </Box>
         </Grid>
         <Grid component="section" item auto>

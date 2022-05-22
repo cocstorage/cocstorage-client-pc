@@ -5,12 +5,11 @@ import { Box, Grid } from 'cocstorage-ui';
 import {
   IndexBestWorstStorageBoardGrid,
   IndexLatestStorageBoardGrid,
-  IndexLeftMenu,
   IndexNoticeAlert
 } from '@components/pages/index';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Header } from '@components/UI/molecules';
-import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
+import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { fetchIndexNotice } from '@api/v1/notices';
@@ -28,7 +27,7 @@ function Index() {
       <Grid container columnGap={20}>
         <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <IndexLeftMenu />
+            <SidePopularStorageList />
           </Box>
         </Grid>
         <Grid component="section" item auto>

@@ -14,10 +14,15 @@ import { worstParamsDefault, worstParamsState } from '@recoil/worst/atoms';
 
 import { Box, Flexbox, Grid, Typography } from 'cocstorage-ui';
 
-import { StorageBoardContent, StorageBoardRightMenu } from '@components/pages/storageBoard';
+import { StorageBoardContent } from '@components/pages/storageBoard';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
-import { CommentForm, CommentList, StorageBoardGrid } from '@components/UI/organisms';
+import {
+  CommentForm,
+  CommentList,
+  SidePopularStorageList,
+  StorageBoardGrid
+} from '@components/UI/organisms';
 
 import { fetchStorageBoard } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
@@ -38,7 +43,13 @@ function StorageBoard() {
     (url: string) => {
       if (url.indexOf('/storages/') < 0) {
         setParams(storageBoardsParamsDefault);
+      }
+
+      if (url.indexOf('/best') < 0) {
         setBestParams(bestParamsDefault);
+      }
+
+      if (url.indexOf('/worst') < 0) {
         setWorstParams(worstParamsDefault);
       }
     },
@@ -77,7 +88,7 @@ function StorageBoard() {
         </Grid>
         <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
           <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <StorageBoardRightMenu />
+            <SidePopularStorageList />
           </Box>
         </Grid>
       </Grid>
