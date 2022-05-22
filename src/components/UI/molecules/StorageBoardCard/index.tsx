@@ -45,7 +45,6 @@ function StorageBoardCard({
   ...props
 }: StorageBoardCardProps) {
   const {
-    theme,
     theme: { type, palette }
   } = useTheme();
 
@@ -327,7 +326,7 @@ function StorageBoardCard({
             </Storage>
           )}
           {inStorage && (
-            <UserInfo theme={theme}>
+            <UserInfo>
               <Flexbox gap={4} alignment="center">
                 {user?.avatarUrl && (
                   <RatioImage

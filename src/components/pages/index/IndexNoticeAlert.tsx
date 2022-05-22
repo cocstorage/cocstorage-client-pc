@@ -2,12 +2,12 @@ import { useQuery } from 'react-query';
 
 import { Alert, Icon, IconButton } from 'cocstorage-ui';
 
-import { fetchNotices } from '@api/v1/notices';
+import { fetchIndexNotice } from '@api/v1/notices';
 
 import queryKeys from '@constants/react-query';
 
 function IndexNoticeAlert() {
-  const { data: { notices = [] } = {} } = useQuery(queryKeys.notices.notices, fetchNotices);
+  const { data: { notices = [] } = {} } = useQuery(queryKeys.notices.indexNotice, fetchIndexNotice);
 
   if (!notices.length) return null;
 
@@ -20,7 +20,7 @@ function IndexNoticeAlert() {
         </IconButton>
       }
     >
-      {notices[notices.length - 1].subject}
+      {notices[0].subject}
     </Alert>
   );
 }

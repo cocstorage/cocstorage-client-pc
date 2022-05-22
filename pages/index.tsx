@@ -13,7 +13,7 @@ import { Header } from '@components/UI/molecules';
 import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
-import { fetchNotices } from '@api/v1/notices';
+import { fetchIndexNotice } from '@api/v1/notices';
 import {
   fetchIndexPopularStorageBoards,
   fetchIndexWorstStorageBoards,
@@ -62,7 +62,7 @@ export async function getServerSideProps() {
     fetchLatestStorageBoards
   );
   await queryClient.prefetchQuery(queryKeys.issueKeywords.issueKeywordRank, fetchIssueKeywordRank);
-  await queryClient.prefetchQuery(queryKeys.notices.notices, fetchNotices);
+  await queryClient.prefetchQuery(queryKeys.notices.indexNotice, fetchIndexNotice);
 
   return {
     props: {

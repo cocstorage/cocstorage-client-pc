@@ -20,7 +20,7 @@ function BestStorageBoardList() {
   const {
     data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {}
   } = useQuery(
-    queryKeys.storageBoards.popularStorageBoards(params),
+    queryKeys.storageBoards.popularStorageBoardsWithParams(params),
     () => fetchPopularStorageBoards(params),
     {
       keepPreviousData: true

@@ -74,7 +74,7 @@ export async function getServerSideProps() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(
-    queryKeys.storageBoards.popularStorageBoards(bestParamsDefault),
+    queryKeys.storageBoards.popularStorageBoardsWithParams(bestParamsDefault),
     () => fetchPopularStorageBoards(bestParamsDefault)
   );
   await queryClient.prefetchQuery(queryKeys.issueKeywords.issueKeywordRank, fetchIssueKeywordRank);

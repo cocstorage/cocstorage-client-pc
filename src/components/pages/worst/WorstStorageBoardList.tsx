@@ -20,7 +20,7 @@ function WorstStorageBoardList() {
   const {
     data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {}
   } = useQuery(
-    queryKeys.storageBoards.worstStorageBoards(params),
+    queryKeys.storageBoards.worstStorageBoardsWithParams(params),
     () => fetchWorstStorageBoards(params),
     {
       keepPreviousData: true
@@ -39,7 +39,7 @@ function WorstStorageBoardList() {
       <Flexbox component="section" direction="vertical" gap={10} customStyle={{ marginTop: 30 }}>
         {boards.map((storageBoard, index) => (
           <Link
-            key={`best-storage-board-${storageBoard.id}`}
+            key={`worst-storage-board-${storageBoard.id}`}
             href={`/storages/${storageBoard.storage.path}/${storageBoard.id}`}
           >
             <a>

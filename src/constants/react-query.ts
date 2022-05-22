@@ -1,3 +1,4 @@
+import { FetchNoticesParams } from '@api/v1/notices';
 import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
 
 const storageCategories = {
@@ -12,8 +13,14 @@ const storages = {
 const storageBoards = {
   indexPopularStorageBoards: ['indexPopularStorageBoards'],
   indexWorstStorageBoards: ['indexWorstStorageBoards'],
-  popularStorageBoards: (params: FetchStorageBoardsParams) => ['popularStorageBoards', params],
-  worstStorageBoards: (params: FetchStorageBoardsParams) => ['worstStorageBoards', params],
+  popularStorageBoardsWithParams: (params: FetchStorageBoardsParams) => [
+    'popularStorageBoards',
+    params
+  ],
+  worstStorageBoardsWithParams: (params: FetchStorageBoardsParams) => [
+    'worstStorageBoards',
+    params
+  ],
   latestStorageBoards: ['latestStorageBoards'],
   storageBoardsByIdWithParams: (id: number | string, params: FetchStorageBoardsParams) => [
     'storageBoards',
@@ -32,7 +39,8 @@ const issueKeywords = {
 };
 
 const notices = {
-  notices: ['notices']
+  indexNotice: ['indexNotice'],
+  noticesWithParams: (params: FetchNoticesParams) => ['notices', params]
 };
 
 const queryKeys = {
