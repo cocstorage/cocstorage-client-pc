@@ -16,12 +16,12 @@ function Footer() {
       </Typography>
       <Links>
         <Typography component="div" fontSize="12px" color={palette.text[type].text2}>
-          <Link href="/">
+          <Link href="/policy">
             <a>이용약관</a>
           </Link>
         </Typography>
         <Typography component="div" fontSize="12px" color={palette.text[type].text2}>
-          <Link href="/">
+          <Link href="/privacy">
             <a>개인정보처리방침</a>
           </Link>
         </Typography>
