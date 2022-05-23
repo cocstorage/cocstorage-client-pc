@@ -130,6 +130,7 @@ const Content = styled.article`
   video,
   embed,
   iframe {
+    max-width: 100%;
     border-radius: 8px;
   }
 `;
