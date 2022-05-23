@@ -55,6 +55,8 @@ export default function useScrollTrigger<T extends HTMLElement>({
     };
   }, [trigger, handleScroll]);
 
+  useEffect(() => handleScroll(), [handleScroll]);
+
   return {
     scrollFixed
   };
