@@ -4,6 +4,7 @@ import { noticesParamsDefault } from '@recoil/notices/atoms';
 
 import { Flexbox, Typography } from 'cocstorage-ui';
 
+import { NoticesHead } from '@components/pages/notices';
 import NoticesGrid from '@components/pages/notices/NoticesGrid';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
@@ -14,14 +15,17 @@ import queryKeys from '@constants/react-query';
 
 function Notices() {
   return (
-    <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
-      <Flexbox gap={20} direction="vertical">
-        <Typography fontSize="24px" fontWeight={700} lineHeight="30px">
-          새로운 소식
-        </Typography>
-        <NoticesGrid />
-      </Flexbox>
-    </GeneralTemplate>
+    <>
+      <NoticesHead />
+      <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
+        <Flexbox gap={20} direction="vertical">
+          <Typography fontSize="24px" fontWeight={700} lineHeight="30px">
+            새로운 소식
+          </Typography>
+          <NoticesGrid />
+        </Flexbox>
+      </GeneralTemplate>
+    </>
   );
 }
 

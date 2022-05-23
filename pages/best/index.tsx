@@ -10,7 +10,7 @@ import { bestParamsDefault, bestParamsState } from '@recoil/best/atoms';
 
 import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
-import { BestStorageBoardList, BestTitle } from '@components/pages/best';
+import { BestHead, BestStorageBoardList, BestTitle } from '@components/pages/best';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Header } from '@components/UI/molecules';
 import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
@@ -43,27 +43,30 @@ function Best() {
   }, [events, handleRouteChangeComplete]);
 
   return (
-    <GeneralTemplate header={<Header scrollFixedTrigger />}>
-      <Grid container columnGap={20}>
-        <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-          <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <SidePopularStorageList />
-          </Box>
+    <>
+      <BestHead />
+      <GeneralTemplate header={<Header scrollFixedTrigger />}>
+        <Grid container columnGap={20}>
+          <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
+            <Box customStyle={{ position: 'fixed', width: 183 }}>
+              <SidePopularStorageList />
+            </Box>
+          </Grid>
+          <Grid component="section" item auto>
+            <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
+              좀 더 편하게 보실 수 있도록 준비하고 있어요. 불편하시겠지만 조금만 기다려주세요!
+            </Alert>
+            <BestTitle />
+            <BestStorageBoardList />
+          </Grid>
+          <Grid component="section" item customStyle={{ minWidth: 203 }}>
+            <Box customStyle={{ position: 'fixed', width: 183 }}>
+              <IssueKeywordRank />
+            </Box>
+          </Grid>
         </Grid>
-        <Grid component="section" item auto>
-          <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
-            좀 더 편하게 보실 수 있도록 준비하고 있어요. 불편하시겠지만 조금만 기다려주세요!
-          </Alert>
-          <BestTitle />
-          <BestStorageBoardList />
-        </Grid>
-        <Grid component="section" item customStyle={{ minWidth: 203 }}>
-          <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <IssueKeywordRank />
-          </Box>
-        </Grid>
-      </Grid>
-    </GeneralTemplate>
+      </GeneralTemplate>
+    </>
   );
 }
 

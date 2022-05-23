@@ -14,7 +14,7 @@ import { worstParamsDefault, worstParamsState } from '@recoil/worst/atoms';
 
 import { Box, Flexbox, Grid, Typography } from 'cocstorage-ui';
 
-import { StorageBoardContent } from '@components/pages/storageBoard';
+import { StorageBoardContent, StorageBoardHead } from '@components/pages/storageBoard';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
 import {
@@ -65,34 +65,37 @@ function StorageBoard() {
   }, [events, handleRouteChangeComplete]);
 
   return (
-    <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
-      <Grid container columnGap={20}>
-        <Grid component="section" item auto>
-          <StorageBoardContent />
-          {path && id && (
-            <>
-              <CommentList id={Number(id)} />
-              <Box customStyle={{ margin: '35px 0 50px 0' }}>
-                <CommentForm id={Number(id)} />
-              </Box>
-            </>
-          )}
-          {path && (
-            <Flexbox gap={20} direction="vertical">
-              <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
-                이 게시판의 다른 글
-              </Typography>
-              <StorageBoardGrid path={String(path)} />
-            </Flexbox>
-          )}
+    <>
+      <StorageBoardHead />
+      <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
+        <Grid container columnGap={20}>
+          <Grid component="section" item auto>
+            <StorageBoardContent />
+            {path && id && (
+              <>
+                <CommentList id={Number(id)} />
+                <Box customStyle={{ margin: '35px 0 50px 0' }}>
+                  <CommentForm id={Number(id)} />
+                </Box>
+              </>
+            )}
+            {path && (
+              <Flexbox gap={20} direction="vertical">
+                <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+                  이 게시판의 다른 글
+                </Typography>
+                <StorageBoardGrid path={String(path)} />
+              </Flexbox>
+            )}
+          </Grid>
+          <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
+            <Box customStyle={{ position: 'fixed', width: 183 }}>
+              <SidePopularStorageList />
+            </Box>
+          </Grid>
         </Grid>
-        <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-          <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <SidePopularStorageList />
-          </Box>
-        </Grid>
-      </Grid>
-    </GeneralTemplate>
+      </GeneralTemplate>
+    </>
   );
 }
 

@@ -2,8 +2,6 @@ import { useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useQuery } from 'react-query';
-
 import { Box, Button, Flexbox, Icon, IconButton, Menu, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
@@ -11,19 +9,16 @@ import dayjs from 'dayjs';
 import { RatioImage } from '@components/UI/atoms';
 import { MessageDialog } from '@components/UI/organisms';
 
-import { fetchStorage } from '@api/v1/storages';
-
-import queryKeys from '@constants/react-query';
+import useStorage from '@hooks/react-query/useStorage';
 
 function StorageBoardsIntro() {
-  const { query } = useRouter();
+  const { query = {} } = useRouter();
   const {
     theme: { type, palette }
   } = useTheme();
 
-  const { data: { path, name, avatarUrl, description, user, createdAt } = {} } = useQuery(
-    queryKeys.storages.storageById(query.path as string),
-    () => fetchStorage(query.path as string)
+  const { data: { path, name, avatarUrl, description, user, createdAt } = {} } = useStorage(
+    query.path as string
   );
 
   const [open, setOpen] = useState<boolean>(false);

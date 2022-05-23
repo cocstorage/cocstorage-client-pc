@@ -12,7 +12,11 @@ import { storageBoardsParamsDefault, storageBoardsParamsState } from '@recoil/st
 
 import { Alert, Flexbox, Icon } from 'cocstorage-ui';
 
-import { StorageBoardsIntro, StorageBoardsTabs } from '@components/pages/storageBoards';
+import {
+  StorageBoardsHead,
+  StorageBoardsIntro,
+  StorageBoardsTabs
+} from '@components/pages/storageBoards';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
 import { StorageBoardGrid } from '@components/UI/organisms';
@@ -48,16 +52,19 @@ function StorageBoards() {
   }, [events, handleRouteChangeComplete]);
 
   return (
-    <GeneralTemplate header={<Header />} footer={<Footer />}>
-      <Flexbox gap={20} direction="vertical">
-        <StorageBoardsIntro />
-        <StorageBoardsTabs />
-        <Alert severity="normal" icon={<Icon name="PinOutlined" width={16} height={16} />}>
-          게시글을 작성할 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
-        </Alert>
-        {path && <StorageBoardGrid path={String(path)} />}
-      </Flexbox>
-    </GeneralTemplate>
+    <>
+      <StorageBoardsHead />
+      <GeneralTemplate header={<Header />} footer={<Footer />}>
+        <Flexbox gap={20} direction="vertical">
+          <StorageBoardsIntro />
+          <StorageBoardsTabs />
+          <Alert severity="normal" icon={<Icon name="PinOutlined" width={16} height={16} />}>
+            게시글을 작성할 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
+          </Alert>
+          {path && <StorageBoardGrid path={String(path)} />}
+        </Flexbox>
+      </GeneralTemplate>
+    </>
   );
 }
 

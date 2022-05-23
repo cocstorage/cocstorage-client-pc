@@ -4,6 +4,7 @@ import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
 import {
   StoragesCardGrid,
+  StoragesHead,
   StoragesLeftMenu,
   StoragesPopularList
 } from '@components/pages/storages';
@@ -18,27 +19,30 @@ import queryKeys from '@constants/react-query';
 
 function Storages() {
   return (
-    <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
-      <Grid container columnGap={20}>
-        <Grid component="section" item customStyle={{ minWidth: 176, marginRight: 27 }}>
-          <Box customStyle={{ position: 'fixed', width: 156 }}>
-            <StoragesLeftMenu />
-          </Box>
+    <>
+      <StoragesHead />
+      <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
+        <Grid container columnGap={20}>
+          <Grid component="section" item customStyle={{ minWidth: 176, marginRight: 27 }}>
+            <Box customStyle={{ position: 'fixed', width: 156 }}>
+              <StoragesLeftMenu />
+            </Box>
+          </Grid>
+          <Grid component="section" item auto>
+            <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
+              게시판을 만들 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
+            </Alert>
+            <StoragesPopularList />
+            <StoragesCardGrid />
+          </Grid>
+          <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
+            <Box customStyle={{ position: 'fixed', width: 183 }}>
+              <SidePopularStorageList />
+            </Box>
+          </Grid>
         </Grid>
-        <Grid component="section" item auto>
-          <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
-            게시판을 만들 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
-          </Alert>
-          <StoragesPopularList />
-          <StoragesCardGrid />
-        </Grid>
-        <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-          <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <SidePopularStorageList />
-          </Box>
-        </Grid>
-      </Grid>
-    </GeneralTemplate>
+      </GeneralTemplate>
+    </>
   );
 }
 
