@@ -54,7 +54,13 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
     LocalStorage.set<ThemeType | 'system'>(localStorageKeys.theme, newValue);
   };
 
-  const handleClick = () => router.push('/notices');
+  const handleClick = () => {
+    router.push('/notices').then(() => {
+      const menu = document.getElementById('menu-root');
+
+      if (menu) menu.remove();
+    });
+  };
 
   return (
     <Menu
