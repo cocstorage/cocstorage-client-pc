@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import styled from '@emotion/styled';
 
-import { Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Box, Button, Flexbox, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
 
 import type { AxiosError } from 'axios';
 
@@ -58,6 +58,8 @@ function StorageBoardContent() {
     thumbDown = 0,
     commentTotalCount = 0,
     viewCount = 0,
+    sourceCode,
+    scrapCode,
     createdAt
   } = useStorageBoardData(Number(id)) || {};
 
@@ -118,6 +120,12 @@ function StorageBoardContent() {
   };
 
   const handleClose = () => setOpen(false);
+
+  const handleClickSource = () =>
+    window.open(
+      `https://gall.dcinside.com/board/view/?id=${sourceCode}&no=${scrapCode}&exception_mode=recommend&page=1`,
+      '_blank'
+    );
 
   useEffect(() => {
     if (!updatedViewCountRef.current && storageBoardId && storage && storage.id) {
@@ -204,6 +212,18 @@ function StorageBoardContent() {
           backgroundColor: palette.box.stroked.normal
         }}
       />
+      {sourceCode && (
+        <Flexbox gap={8} customStyle={{ marginBottom: 20, justifyContent: 'flex-end' }}>
+          <Tag
+            startIcon={<Icon name="LogoutOutlined" />}
+            onClick={handleClickSource}
+            customStyle={{ cursor: 'pointer' }}
+          >
+            출처 바로가기
+          </Tag>
+          <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
+        </Flexbox>
+      )}
       <Content dangerouslySetInnerHTML={{ __html: content }} />
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
