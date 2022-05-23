@@ -39,6 +39,48 @@ function StoragesPopularList() {
             </Box>
           </a>
         </Link>
+        <Link href="/storages/baseball">
+          <a>
+            <Box component="button">
+              <Avatar
+                width={81}
+                height={81}
+                round
+                src="https://static.cocstorage.com/images/uvx4jiy4ur5hm0t0vpbqb3lw1qq9"
+                alt="Storage Logo Img"
+              />
+              <Typography customStyle={{ marginTop: 6, textAlign: 'center' }}>야구</Typography>
+            </Box>
+          </a>
+        </Link>
+        <Link href="/storages/hotissue">
+          <a>
+            <Box component="button">
+              <Avatar
+                width={81}
+                height={81}
+                round
+                src="https://static.cocstorage.com/images/on6nrgp7utess2qf3lyj8ry921tm"
+                alt="Storage Logo Img"
+              />
+              <Typography customStyle={{ marginTop: 6, textAlign: 'center' }}>핫이슈</Typography>
+            </Box>
+          </a>
+        </Link>
+        <Link href="/storages/bitcoins">
+          <a>
+            <Box component="button">
+              <Avatar
+                width={81}
+                height={81}
+                round
+                src="https://static.cocstorage.com/images/58l159jwcs71iwkdx0kh4reg5ra6"
+                alt="Storage Logo Img"
+              />
+              <Typography customStyle={{ marginTop: 6, textAlign: 'center' }}>비트코인</Typography>
+            </Box>
+          </a>
+        </Link>
       </Flexbox>
     </Flexbox>
   );

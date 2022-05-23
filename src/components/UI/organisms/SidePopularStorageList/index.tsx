@@ -37,7 +37,7 @@ function SitePopularStorageList() {
           />
         </a>
       </Link>
-      <Link href="/storages/bitcoin">
+      <Link href="/storages/bitcoins">
         <a>
           <StorageCard
             src="https://static.cocstorage.com/images/58l159jwcs71iwkdx0kh4reg5ra6"

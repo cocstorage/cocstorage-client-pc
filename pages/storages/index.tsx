@@ -9,8 +9,8 @@ import {
   StoragesPopularList
 } from '@components/pages/storages';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
-import { Footer, Header } from '@components/UI/molecules';
-import SidePopularStorageList from '@components/UI/organisms/SidePopularStorageList';
+import { Header } from '@components/UI/molecules';
+import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
 
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 import { fetchStorages } from '@api/v1/storages';
@@ -21,7 +21,7 @@ function Storages() {
   return (
     <>
       <StoragesHead />
-      <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
+      <GeneralTemplate header={<Header scrollFixedTrigger />}>
         <Grid container columnGap={20}>
           <Grid component="section" item customStyle={{ minWidth: 176, marginRight: 27 }}>
             <Box customStyle={{ position: 'fixed', width: 156 }}>
@@ -37,7 +37,7 @@ function Storages() {
           </Grid>
           <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
             <Box customStyle={{ position: 'fixed', width: 183 }}>
-              <SidePopularStorageList />
+              <IssueKeywordRank />
             </Box>
           </Grid>
         </Grid>

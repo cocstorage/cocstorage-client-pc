@@ -15,7 +15,7 @@ function Custom500() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%'
+        height: '100vh'
       }}
     >
       <Message
