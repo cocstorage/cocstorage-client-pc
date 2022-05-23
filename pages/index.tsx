@@ -4,6 +4,7 @@ import { Box, Grid } from 'cocstorage-ui';
 
 import {
   IndexBestWorstStorageBoardGrid,
+  IndexHead,
   IndexLatestStorageBoardGrid,
   IndexNoticeAlert
 } from '@components/pages/index';
@@ -18,25 +19,28 @@ import queryKeys from '@constants/react-query';
 
 function Index() {
   return (
-    <GeneralTemplate header={<Header scrollFixedTrigger />}>
-      <Grid container columnGap={20}>
-        <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-          <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <SidePopularStorageList />
-          </Box>
+    <>
+      <IndexHead />
+      <GeneralTemplate header={<Header scrollFixedTrigger />}>
+        <Grid container columnGap={20}>
+          <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
+            <Box customStyle={{ position: 'fixed', width: 183 }}>
+              <SidePopularStorageList />
+            </Box>
+          </Grid>
+          <Grid component="section" item auto>
+            <IndexNoticeAlert />
+            <IndexBestWorstStorageBoardGrid />
+            <IndexLatestStorageBoardGrid />
+          </Grid>
+          <Grid component="section" item customStyle={{ minWidth: 203 }}>
+            <Box customStyle={{ position: 'fixed', width: 183 }}>
+              <IssueKeywordRank />
+            </Box>
+          </Grid>
         </Grid>
-        <Grid component="section" item auto>
-          <IndexNoticeAlert />
-          <IndexBestWorstStorageBoardGrid />
-          <IndexLatestStorageBoardGrid />
-        </Grid>
-        <Grid component="section" item customStyle={{ minWidth: 203 }}>
-          <Box customStyle={{ position: 'fixed', width: 183 }}>
-            <IssueKeywordRank />
-          </Box>
-        </Grid>
-      </Grid>
-    </GeneralTemplate>
+      </GeneralTemplate>
+    </>
   );
 }
 
