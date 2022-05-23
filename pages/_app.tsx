@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import Script from 'next/script';
 
 import { Hydrate, MutationCache, QueryCache, QueryClient, QueryClientProvider } from 'react-query';
 
@@ -126,6 +127,25 @@ function App({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png" />
       </Head>
+      {process.env.NODE_ENV === 'production' && (
+        <>
+          <Script
+            strategy="afterInteractive"
+            src="https://www.googletagmanager.com/gtag/js?id=G-20GMQTM36F"
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html:
+                'window.dataLayer = window.dataLayer || [];\n' +
+                '  function gtag(){dataLayer.push(arguments);}\n' +
+                '  gtag("js", new Date());\n' +
+                '  gtag("config", "G-20GMQTM36F");'
+            }}
+          />
+        </>
+      )}
       <RecoilRoot>
         <QueryClientProvider client={queryClient.current}>
           <ThemeRoot>

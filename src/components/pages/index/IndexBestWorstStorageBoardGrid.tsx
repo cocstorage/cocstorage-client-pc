@@ -65,7 +65,7 @@ function IndexBestWorstStorageBoardGrid() {
             >
               베스트
             </Tag>
-            <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+            <Typography fontSize="16px" fontWeight={700} lineHeight="15px">
               오 좋아요!
             </Typography>
           </Flexbox>
@@ -152,7 +152,7 @@ function IndexBestWorstStorageBoardGrid() {
             >
               워스트
             </Tag>
-            <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+            <Typography fontSize="16px" fontWeight={700} lineHeight="15px">
               와 이건 좀...
             </Typography>
           </Flexbox>
