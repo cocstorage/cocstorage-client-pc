@@ -58,7 +58,12 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
     router.push('/notices').then(() => {
       const menu = document.getElementById('menu-root');
 
-      if (menu) menu.remove();
+      if (menu) {
+        // UI 라이브러리 Menu 컴포넌트 버그로 인한 임시조치
+        // TODO UI 라이브러리 Menu 컴포넌트 버그 수정
+        menu.remove();
+        document.body.removeAttribute('style');
+      }
     });
   };
 
