@@ -22,7 +22,11 @@ export const List = styled.div<
     !disableToggle
       ? {
           maxHeight: toggleList ? toggleListMaxHeight : toggleListMaxHeight * 2,
-          overflowY: 'auto'
+          overflowY: 'auto',
+          scrollbarWidth: 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          }
         }
       : {}};
 `;

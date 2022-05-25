@@ -19,7 +19,10 @@ function CommentMenu({ open, anchorRef, storageId, id, commentId, onClose }: Com
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
   const handleClick = () => setDialogOpen(true);
-  const handleClose = () => setDialogOpen(false);
+  const handleClose = () => {
+    onClose();
+    setDialogOpen(false);
+  };
 
   return (
     <>
