@@ -83,7 +83,7 @@ function IndexBestWorstStorageBoardGrid() {
         </Flexbox>
         {bestBoards.length > 2 && (
           <>
-            <Link href={`/storages/${bestBoards[0].storage.path}/${worstBoards[0].id}`}>
+            <Link href={`/storages/${bestBoards[0].storage.path}/${bestBoards[0].id}`}>
               <a>
                 <StorageBoardCard
                   variant="emphasize"
