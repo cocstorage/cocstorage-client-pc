@@ -1,27 +1,38 @@
 import { GetServerSidePropsContext } from 'next';
 
+import { useRouter } from 'next/router';
+
 import { QueryClient, dehydrate } from 'react-query';
 
-import { Alert, Icon } from 'cocstorage-ui';
+import { Box } from 'cocstorage-ui';
 
 import { NoticeHead } from '@components/pages/notice';
 import NoticeContent from '@components/pages/notice/NoticeContent';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
+import { CommentForm, CommentList } from '@components/UI/organisms';
 
 import { fetchNotice } from '@api/v1/notices';
 
 import queryKeys from '@constants/react-query';
 
 function Notice() {
+  const {
+    query: { id = 0 }
+  } = useRouter();
   return (
     <>
       <NoticeHead />
       <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
         <NoticeContent />
-        <Alert icon={<Icon name="BulbOutlined" />}>
-          새로운 소식의 댓글/답글 기능은 준비 중이에요. 조금만 기다려 주세요!
-        </Alert>
+        {id && (
+          <>
+            <CommentList type="notice" id={Number(id)} />
+            <Box customStyle={{ margin: '35px 0 50px 0' }}>
+              <CommentForm type="notice" id={Number(id)} />
+            </Box>
+          </>
+        )}
       </GeneralTemplate>
     </>
   );

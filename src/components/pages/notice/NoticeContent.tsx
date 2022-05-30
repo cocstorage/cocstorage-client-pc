@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 
 import styled from '@emotion/styled';
 
@@ -10,9 +10,9 @@ import { Avatar, Box, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui'
 
 import dayjs from 'dayjs';
 
-import { fetchNotice, putNoticeViewCount } from '@api/v1/notices';
+import useNotice from '@hooks/react-query/useNotice';
 
-import queryKeys from '@constants/react-query';
+import { putNoticeViewCount } from '@api/v1/notices';
 
 function NoticeContent() {
   const { query: { id = 0 } = {} } = useRouter();
@@ -24,7 +24,7 @@ function NoticeContent() {
 
   const {
     data: { user, subject = '', content = '', commentTotalCount = 0, viewCount = 0, createdAt } = {}
-  } = useQuery(queryKeys.notices.noticeById(Number(id)), () => fetchNotice(Number(id)));
+  } = useNotice(Number(id));
 
   const { mutate } = useMutation((data: { id: number }) => putNoticeViewCount(data.id), {
     onSuccess: () => {

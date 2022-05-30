@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 
 import { useRecoilValue } from 'recoil';
 
+import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
 import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
@@ -13,26 +14,32 @@ import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import {
-  PostStorageBoardReplyData,
-  postNonMemberStorageBoardReply
+  PostNoticeCommentReplyData,
+  postNonMemberNoticeCommentReply
+} from '@api/v1/notice-comment-replies';
+import {
+  PostStorageBoardCommentReplyData,
+  postNonMemberStorageBoardCommentReply
 } from '@api/v1/storage-board-comment-replies';
 
 import queryKeys from '@constants/react-query';
 import validators from '@constants/validators';
 
 interface ReplyFormProps {
+  type?: 'storageBoard' | 'notice';
   storageId?: number;
   id: number;
   commentId: number;
 }
 
-function ReplyForm({ storageId, id, commentId }: ReplyFormProps) {
+function ReplyForm({ type = 'storageBoard', storageId, id, commentId }: ReplyFormProps) {
   const {
     theme: {
       palette: { box }
     }
   } = useTheme();
   const params = useRecoilValue(storageBoardCommentsParamsState);
+  const noticeCommentsParams = useRecoilValue(noticeCommentsParamsState);
 
   const [nickname, setNickname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -51,14 +58,27 @@ function ReplyForm({ storageId, id, commentId }: ReplyFormProps) {
   const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation(
-    (data: PostStorageBoardReplyData) =>
-      postNonMemberStorageBoardReply(storageId as number, id, commentId, data),
+    (data: PostStorageBoardCommentReplyData) =>
+      postNonMemberStorageBoardCommentReply(storageId as number, id, commentId, data),
     {
       onSuccess: () => {
         setContent('');
 
         return queryClient.invalidateQueries(
           queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page || 1)
+        );
+      }
+    }
+  );
+
+  const { mutate: noticeCommentReplyMutate, isLoading: noticeCommentReplyIsLoading } = useMutation(
+    (data: PostNoticeCommentReplyData) => postNonMemberNoticeCommentReply(id, commentId, data),
+    {
+      onSuccess: () => {
+        setContent('');
+
+        return queryClient.invalidateQueries(
+          queryKeys.noticeComments.noticeCommentsByIdWithPage(id, noticeCommentsParams.page || 1)
         );
       }
     }
@@ -97,7 +117,11 @@ function ReplyForm({ storageId, id, commentId }: ReplyFormProps) {
       return;
     }
 
-    mutate({ nickname, password, content });
+    if (type === 'storageBoard') {
+      mutate({ nickname, password, content });
+    } else if (type === 'notice') {
+      noticeCommentReplyMutate({ nickname, password, content });
+    }
   };
 
   const handleClose = () => setOpen(false);
@@ -150,7 +174,9 @@ function ReplyForm({ storageId, id, commentId }: ReplyFormProps) {
               margin: '17px 12px 17px 0'
             }}
             onClick={handleClick}
-            disabled={isLoading || !nickname || !password || !content}
+            disabled={
+              isLoading || noticeCommentReplyIsLoading || !nickname || !password || !content
+            }
           >
             작성
           </Button>

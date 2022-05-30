@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import { useRecoilValue } from 'recoil';
 
+import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
 import {
@@ -19,11 +20,13 @@ import {
   useTheme
 } from 'cocstorage-ui';
 
+import { deleteNonMemberNoticeComment } from '@api/v1/notice-comments';
 import { deleteNonMemberStorageBoardComment } from '@api/v1/storage-board-comments';
 
 import queryKeys from '@constants/react-query';
 
 interface CommentDeleteDialogProps {
+  type?: 'storageBoard' | 'notice';
   open: boolean;
   storageId?: number;
   id: number;
@@ -32,6 +35,7 @@ interface CommentDeleteDialogProps {
 }
 
 function CommentDeleteDialog({
+  type = 'storageBoard',
   open,
   storageId,
   id,
@@ -45,6 +49,7 @@ function CommentDeleteDialog({
   } = useTheme();
 
   const params = useRecoilValue(storageBoardCommentsParamsState);
+  const noticeCommentsParams = useRecoilValue(noticeCommentsParamsState);
 
   const queryClient = useQueryClient();
 
@@ -83,6 +88,30 @@ function CommentDeleteDialog({
     }
   );
 
+  const { mutate: noticeCommentMutate, isLoading: noticeCommentIsLoading } = useMutation(
+    (data: {
+      id: number;
+      commentId: number;
+      password: string;
+      shouldBeHandledByGlobalErrorHandler?: boolean;
+    }) => deleteNonMemberNoticeComment(data.id, data.commentId, data.password),
+    {
+      onSuccess: () => {
+        queryClient
+          .invalidateQueries(
+            queryKeys.noticeComments.noticeCommentsByIdWithPage(id, noticeCommentsParams.page || 1)
+          )
+          .then();
+        onClose();
+      },
+      onError: () =>
+        setErrorMessage({
+          error: true,
+          message: '비밀번호가 일치하지 않아요.'
+        })
+    }
+  );
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (errorMessage.error) {
       setErrorMessage({
@@ -98,13 +127,23 @@ function CommentDeleteDialog({
       error: false,
       message: ''
     });
-    mutate({
-      storageId: storageId as number,
-      id,
-      commentId,
-      password: value,
-      shouldBeHandledByGlobalErrorHandler: false
-    });
+
+    if (type === 'storageBoard') {
+      mutate({
+        storageId: storageId as number,
+        id,
+        commentId,
+        password: value,
+        shouldBeHandledByGlobalErrorHandler: false
+      });
+    } else if (type === 'notice') {
+      noticeCommentMutate({
+        id,
+        commentId,
+        password: value,
+        shouldBeHandledByGlobalErrorHandler: false
+      });
+    }
   };
 
   return (
@@ -189,7 +228,7 @@ function CommentDeleteDialog({
               backgroundColor: secondary.red.main,
               color: text.dark.main
             }}
-            disabled={!value || isLoading}
+            disabled={!value || isLoading || noticeCommentIsLoading}
           >
             삭제하기
           </Button>

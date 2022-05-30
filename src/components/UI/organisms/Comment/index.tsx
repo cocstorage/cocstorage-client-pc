@@ -7,22 +7,25 @@ import dayjs from 'dayjs';
 import RatioImage from '@components/UI/atoms/RatioImage';
 import { CommentMenu, Reply, ReplyForm } from '@components/UI/organisms';
 
+import { NoticeComment } from '@dto/notice-comments';
 import { StorageBoardComment } from '@dto/storage-board-comments';
 
 interface CommentProps {
-  storageId: number;
+  type?: 'storageBoard' | 'notice';
+  storageId?: number;
   id: number;
-  comment: StorageBoardComment;
+  comment: StorageBoardComment | NoticeComment;
 }
 
 function Comment({
+  type = 'storageBoard',
   storageId,
   id,
   comment: { id: commentId, user, nickname, content = '', replies, createdAt, createdIp, isMember }
 }: CommentProps) {
   const {
     theme: {
-      type,
+      type: themeType,
       palette: { text }
     }
   } = useTheme();
@@ -56,7 +59,7 @@ function Comment({
               {nickname || (user || {}).nickname}
             </Typography>
             {!user && createdIp && (
-              <Typography fontSize="10px" lineHeight="15px" color={text[type].text1}>
+              <Typography fontSize="10px" lineHeight="15px" color={text[themeType].text1}>
                 ({createdIp})
               </Typography>
             )}
@@ -76,7 +79,7 @@ function Comment({
                 fontSize="12px"
                 lineHeight="15px"
                 customStyle={{
-                  color: text[type].text1
+                  color: text[themeType].text1
                 }}
               >
                 {dayjs(createdAt).fromNow()}
@@ -84,7 +87,7 @@ function Comment({
               <Typography
                 fontSize="12px"
                 lineHeight="15px"
-                customStyle={{ cursor: 'pointer', color: text[type].text1 }}
+                customStyle={{ cursor: 'pointer', color: text[themeType].text1 }}
                 onClick={handleClick}
               >
                 답글달기
@@ -92,12 +95,14 @@ function Comment({
             </Flexbox>
             {replies.length > 0 && (
               <Flexbox gap={10} alignment="center">
-                <Box customStyle={{ width: 24, height: 1, backgroundColor: text[type].text3 }} />
+                <Box
+                  customStyle={{ width: 24, height: 1, backgroundColor: text[themeType].text3 }}
+                />
                 <Typography
                   fontSize="12px"
                   lineHeight="15px"
                   customStyle={{
-                    color: text[type].text1,
+                    color: text[themeType].text1,
                     cursor: 'pointer'
                   }}
                   onClick={handleClick}
@@ -119,6 +124,7 @@ function Comment({
               iconOnly
             />
             <CommentMenu
+              type={type}
               open={menuOpen}
               anchorRef={buttonRef}
               storageId={storageId}
@@ -142,14 +148,21 @@ function Comment({
                 marginTop: 10,
                 borderLeft: '1px solid',
                 borderBottom: '1px solid',
-                borderColor: text[type].text3
+                borderColor: text[themeType].text3
               }
             }}
           >
-            <ReplyForm storageId={storageId} id={id} commentId={commentId} />
+            <ReplyForm type={type} storageId={storageId} id={id} commentId={commentId} />
           </Flexbox>
           {replies.map((reply) => (
-            <Reply key={`reply-${reply.id}`} storageId={storageId} id={id} reply={reply} />
+            <Reply
+              key={`reply-${reply.id}`}
+              type={type}
+              storageId={storageId}
+              id={id}
+              commentId={commentId}
+              reply={reply}
+            />
           ))}
         </Flexbox>
       )}

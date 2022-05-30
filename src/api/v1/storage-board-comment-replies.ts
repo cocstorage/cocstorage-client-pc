@@ -3,21 +3,21 @@ import Axios from '@library/axios';
 
 const BASE_PATH = '/storages';
 
-export async function postNonMemberStorageBoardReply(
+export async function postNonMemberStorageBoardCommentReply(
   storageId: number,
   id: number,
   commentId: number,
-  data: PostStorageBoardReplyData
+  data: PostStorageBoardCommentReplyData
 ) {
-  const { data: response } = await Axios.post<StorageBoardCommentReply, PostStorageBoardReplyData>(
-    `${BASE_PATH}/${storageId}/boards/${id}/comments/${commentId}/replies/non-members`,
-    data
-  );
+  const { data: response } = await Axios.post<
+    StorageBoardCommentReply,
+    PostStorageBoardCommentReplyData
+  >(`${BASE_PATH}/${storageId}/boards/${id}/comments/${commentId}/replies/non-members`, data);
 
   return response;
 }
 
-export async function deleteNonMemberStorageBoardReply(
+export async function deleteNonMemberStorageBoardCommentReply(
   storageId: number,
   id: number,
   commentId: number,
@@ -36,7 +36,7 @@ export async function deleteNonMemberStorageBoardReply(
   return response;
 }
 
-export interface PostStorageBoardReplyData {
+export interface PostStorageBoardCommentReplyData {
   nickname?: string | null;
   password?: string | null;
   content: string | null;

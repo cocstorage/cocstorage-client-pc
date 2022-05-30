@@ -7,6 +7,7 @@ import CommentDeleteDialog from '@components/UI/organisms/CommentDeleteDialog';
 import { List, ListItem } from './CommentMenu.styles';
 
 interface CommentMenuProps {
+  type?: 'storageBoard' | 'notice';
   open: boolean;
   anchorRef: RefObject<HTMLElement>;
   storageId?: number;
@@ -15,7 +16,15 @@ interface CommentMenuProps {
   onClose: () => void;
 }
 
-function CommentMenu({ open, anchorRef, storageId, id, commentId, onClose }: CommentMenuProps) {
+function CommentMenu({
+  type = 'storageBoard',
+  open,
+  anchorRef,
+  storageId,
+  id,
+  commentId,
+  onClose
+}: CommentMenuProps) {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
   const handleClick = () => setDialogOpen(true);
@@ -35,6 +44,7 @@ function CommentMenu({ open, anchorRef, storageId, id, commentId, onClose }: Com
         </List>
       </Menu>
       <CommentDeleteDialog
+        type={type}
         open={dialogOpen}
         storageId={storageId}
         id={id}

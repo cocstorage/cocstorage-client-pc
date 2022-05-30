@@ -7,6 +7,7 @@ import ReplyDeleteDialog from '@components/UI/organisms/ReplyDeleteDialog';
 import { List, ListItem } from './ReplyMenu.styles';
 
 interface ReplyMenuProps {
+  type?: 'storageBoard' | 'notice';
   open: boolean;
   anchorRef: RefObject<HTMLElement>;
   storageId?: number;
@@ -17,6 +18,7 @@ interface ReplyMenuProps {
 }
 
 function ReplyMenu({
+  type = 'storageBoard',
   open,
   anchorRef,
   storageId,
@@ -28,7 +30,10 @@ function ReplyMenu({
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
   const handleClick = () => setDialogOpen(true);
-  const handleClose = () => setDialogOpen(false);
+  const handleClose = () => {
+    onClose();
+    setDialogOpen(false);
+  };
 
   return (
     <>
@@ -41,6 +46,7 @@ function ReplyMenu({
         </List>
       </Menu>
       <ReplyDeleteDialog
+        type={type}
         open={dialogOpen}
         storageId={storageId}
         id={id}

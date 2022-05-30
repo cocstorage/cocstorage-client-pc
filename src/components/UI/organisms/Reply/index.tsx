@@ -7,31 +7,27 @@ import dayjs from 'dayjs';
 import RatioImage from '@components/UI/atoms/RatioImage';
 import ReplyMenu from '@components/UI/organisms/ReplyMenu';
 
+import { NoticeCommentReply } from '@dto/notice-comment-replies';
 import { StorageBoardCommentReply } from '@dto/storage-board-comment-replies';
 
 interface ReplyProps {
-  storageId: number;
+  type?: 'storageBoard' | 'notice';
+  storageId?: number;
   id: number;
-  reply: StorageBoardCommentReply;
+  commentId: number;
+  reply: StorageBoardCommentReply | NoticeCommentReply;
 }
 
 function Reply({
+  type = 'storageBoard',
   storageId,
   id,
-  reply: {
-    id: replyId,
-    storageBoardCommentId,
-    user,
-    nickname,
-    content,
-    createdAt,
-    createdIp,
-    isMember
-  }
+  commentId,
+  reply: { id: replyId, user, nickname, content, createdAt, createdIp, isMember }
 }: ReplyProps) {
   const {
     theme: {
-      type,
+      type: themeType,
       palette: { text }
     }
   } = useTheme();
@@ -55,7 +51,7 @@ function Reply({
           marginTop: 10,
           borderLeft: '1px solid',
           borderBottom: '1px solid',
-          borderColor: text[type].text3
+          borderColor: text[themeType].text3
         }
       }}
     >
@@ -75,7 +71,7 @@ function Reply({
             {nickname || (user || {}).nickname}
           </Typography>
           {!user && createdIp && (
-            <Typography fontSize="10px" lineHeight="15px" color={text[type].text1}>
+            <Typography fontSize="10px" lineHeight="15px" color={text[themeType].text1}>
               ({createdIp})
             </Typography>
           )}
@@ -94,7 +90,7 @@ function Reply({
           lineHeight="15px"
           customStyle={{
             marginTop: 8,
-            color: text[type].text1
+            color: text[themeType].text1
           }}
         >
           {dayjs(createdAt).fromNow()}
@@ -111,11 +107,12 @@ function Reply({
             iconOnly
           />
           <ReplyMenu
+            type={type}
             open={menuOpen}
             anchorRef={buttonRef}
             storageId={storageId}
             id={id}
-            commentId={storageBoardCommentId}
+            commentId={commentId}
             replyId={replyId}
             onClose={handleCloseMenu}
           />

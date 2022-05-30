@@ -6,15 +6,19 @@ import styled from '@emotion/styled';
 
 import { useRecoilState } from 'recoil';
 
+import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
 import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
 
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
+import useNotice from '@hooks/react-query/useNotice';
+import useNoticeComments from '@hooks/react-query/useNoticeComments';
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
 import useStorageBoardComments from '@hooks/react-query/useStorageBoardComments';
 
+import { PostNoticeCommentData, postNonMemberNoticeComment } from '@api/v1/notice-comments';
 import {
   PostStorageBoardCommentData,
   postNonMemberStorageBoardComment
@@ -24,16 +28,18 @@ import queryKeys from '@constants/react-query';
 import validators from '@constants/validators';
 
 interface CommentFormProps {
+  type?: 'storageBoard' | 'notice';
   id: number;
 }
 
-function CommentForm({ id }: CommentFormProps) {
+function CommentForm({ type = 'storageBoard', id }: CommentFormProps) {
   const {
     theme: {
       palette: { box }
     }
   } = useTheme();
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
+  const [noticeCommentsParams, setNoticeCommentsParams] = useRecoilState(noticeCommentsParamsState);
 
   const [nickname, setNickname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -52,12 +58,25 @@ function CommentForm({ id }: CommentFormProps) {
   const queryClient = useQueryClient();
 
   const storageBoard = useStorageBoardData(id);
+  const { data: notice } = useNotice(id, {
+    enabled: type === 'notice'
+  });
 
   const { data: { comments = [], pagination: { perPage = 0 } = {} } = {} } =
     useStorageBoardComments(storageBoard?.storage.id as number, id, params, {
-      enabled: params.page !== 0,
+      enabled: type === 'storageBoard' && params.page !== 0,
       keepPreviousData: true
     });
+
+  const {
+    data: {
+      comments: noticeComments = [],
+      pagination: { perPage: noticeCommentsPerPage = 0 } = {}
+    } = {}
+  } = useNoticeComments(id, noticeCommentsParams, {
+    enabled: type === 'notice' && noticeCommentsParams.page !== 0,
+    keepPreviousData: true
+  });
 
   const { mutate, isLoading } = useMutation(
     (data: PostStorageBoardCommentData) =>
@@ -87,6 +106,45 @@ function CommentForm({ id }: CommentFormProps) {
             commentLatestPage: newCommentLatestPage
           });
           setParams((prevParams) => ({
+            ...prevParams,
+            page: newCommentLatestPage
+          }));
+        }
+      }
+    }
+  );
+
+  const { mutate: noticeCommentMutate, isLoading: noticeCommentIsLoading } = useMutation(
+    (data: PostNoticeCommentData) => postNonMemberNoticeComment(id, data),
+    {
+      onSuccess: () => {
+        setContent('');
+
+        const noticeCommentLatestPage = notice?.commentLatestPage || 0;
+
+        if (
+          noticeCommentsParams.page === noticeCommentLatestPage &&
+          noticeComments.length + 1 <= noticeCommentsPerPage
+        ) {
+          queryClient
+            .invalidateQueries(
+              queryKeys.noticeComments.noticeCommentsByIdWithPage(id, noticeCommentsParams.page)
+            )
+            .then();
+        } else {
+          let newCommentLatestPage =
+            noticeCommentsParams.page === noticeCommentLatestPage &&
+            noticeComments.length + 1 > noticeCommentsPerPage
+              ? noticeCommentLatestPage + 1
+              : noticeCommentLatestPage;
+
+          if (!noticeCommentsParams.page && !noticeCommentLatestPage) newCommentLatestPage = 1;
+
+          queryClient.setQueryData(queryKeys.notices.noticeById(id), {
+            ...notice,
+            commentLatestPage: newCommentLatestPage
+          });
+          setNoticeCommentsParams((prevParams) => ({
             ...prevParams,
             page: newCommentLatestPage
           }));
@@ -128,7 +186,11 @@ function CommentForm({ id }: CommentFormProps) {
       return;
     }
 
-    mutate({ nickname, password, content: content.replace(/\n/g, '\n') });
+    if (type === 'storageBoard') {
+      mutate({ nickname, password, content: content.replace(/\n/g, '\n') });
+    } else if (type === 'notice') {
+      noticeCommentMutate({ nickname, password, content: content.replace(/\n/g, '\n') });
+    }
   };
 
   const handleClose = () => setOpen(false);
@@ -181,7 +243,7 @@ function CommentForm({ id }: CommentFormProps) {
               margin: '17px 12px 17px 0'
             }}
             onClick={handleClick}
-            disabled={isLoading || !nickname || !password || !content}
+            disabled={isLoading || noticeCommentIsLoading || !nickname || !password || !content}
           >
             작성
           </Button>

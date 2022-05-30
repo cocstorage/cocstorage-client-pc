@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import { useRecoilValue } from 'recoil';
 
+import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
 import {
@@ -19,11 +20,13 @@ import {
   useTheme
 } from 'cocstorage-ui';
 
-import { deleteNonMemberStorageBoardReply } from '@api/v1/storage-board-comment-replies';
+import { deleteNonMemberNoticeCommentReply } from '@api/v1/notice-comment-replies';
+import { deleteNonMemberStorageBoardCommentReply } from '@api/v1/storage-board-comment-replies';
 
 import queryKeys from '@constants/react-query';
 
 interface ReplyDeleteDialogProps {
+  type?: 'storageBoard' | 'notice';
   open: boolean;
   storageId?: number;
   id: number;
@@ -33,6 +36,7 @@ interface ReplyDeleteDialogProps {
 }
 
 function ReplyDeleteDialog({
+  type = 'storageBoard',
   open,
   storageId,
   id,
@@ -47,6 +51,7 @@ function ReplyDeleteDialog({
   } = useTheme();
 
   const params = useRecoilValue(storageBoardCommentsParamsState);
+  const noticeCommentParams = useRecoilValue(noticeCommentsParamsState);
 
   const queryClient = useQueryClient();
 
@@ -68,7 +73,7 @@ function ReplyDeleteDialog({
       password: string;
       shouldBeHandledByGlobalErrorHandler?: boolean;
     }) =>
-      deleteNonMemberStorageBoardReply(
+      deleteNonMemberStorageBoardCommentReply(
         data.storageId,
         data.id,
         data.commentId,
@@ -80,6 +85,31 @@ function ReplyDeleteDialog({
         queryClient
           .invalidateQueries(
             queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page || 1)
+          )
+          .then();
+        onClose();
+      },
+      onError: () =>
+        setErrorMessage({
+          error: true,
+          message: '비밀번호가 일치하지 않아요.'
+        })
+    }
+  );
+
+  const { mutate: noticeCommentReplyMutate, isLoading: noticeCommentReplyIsLoading } = useMutation(
+    (data: {
+      id: number;
+      commentId: number;
+      replyId: number;
+      password: string;
+      shouldBeHandledByGlobalErrorHandler?: boolean;
+    }) => deleteNonMemberNoticeCommentReply(data.id, data.commentId, data.replyId, data.password),
+    {
+      onSuccess: () => {
+        queryClient
+          .invalidateQueries(
+            queryKeys.noticeComments.noticeCommentsByIdWithPage(id, noticeCommentParams.page || 1)
           )
           .then();
         onClose();
@@ -107,14 +137,25 @@ function ReplyDeleteDialog({
       error: false,
       message: ''
     });
-    mutate({
-      storageId: storageId as number,
-      id,
-      commentId,
-      replyId,
-      password: value,
-      shouldBeHandledByGlobalErrorHandler: false
-    });
+
+    if (type === 'storageBoard') {
+      mutate({
+        storageId: storageId as number,
+        id,
+        commentId,
+        replyId,
+        password: value,
+        shouldBeHandledByGlobalErrorHandler: false
+      });
+    } else if (type === 'notice') {
+      noticeCommentReplyMutate({
+        id,
+        commentId,
+        replyId,
+        password: value,
+        shouldBeHandledByGlobalErrorHandler: false
+      });
+    }
   };
 
   return (
@@ -194,7 +235,7 @@ function ReplyDeleteDialog({
               backgroundColor: secondary.red.main,
               color: text.dark.main
             }}
-            disabled={!value || isLoading}
+            disabled={!value || isLoading || noticeCommentReplyIsLoading}
           >
             삭제하기
           </Button>
