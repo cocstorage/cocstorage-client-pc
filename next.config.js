@@ -6,8 +6,10 @@ module.exports = withPWA({
     dest: 'public'
   },
   experimental: {
-    emotion: true,
     scrollRestoration: true
+  },
+  compiler: {
+    emotion: true
   },
   swcMinify: true,
   poweredByHeader: process.env.NODE_ENV === 'development',

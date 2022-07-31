@@ -6,8 +6,7 @@ import { QueryClient, dehydrate } from 'react-query';
 
 import { Box } from 'cocstorage-ui';
 
-import { NoticeHead } from '@components/pages/notice';
-import NoticeContent from '@components/pages/notice/NoticeContent';
+import { NoticeContent, NoticeHead } from '@components/pages/notice';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
 import { CommentForm, CommentList } from '@components/UI/organisms';

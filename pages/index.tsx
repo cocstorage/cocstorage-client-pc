@@ -9,7 +9,7 @@ import {
   IndexNoticeAlert
 } from '@components/pages/index';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
-import { Header } from '@components/UI/molecules';
+import Header from '@components/UI/molecules/Header';
 import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';

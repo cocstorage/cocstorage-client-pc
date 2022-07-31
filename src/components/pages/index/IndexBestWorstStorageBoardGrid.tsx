@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 
 import { Button, Flexbox, Grid, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
 
-import { StorageBoardCard } from '@components/UI/molecules';
+import StorageBoardCard from '@components/UI/molecules/StorageBoardCard';
 
 import {
   fetchIndexPopularStorageBoards,

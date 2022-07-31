@@ -4,8 +4,7 @@ import { noticesParamsDefault } from '@recoil/notices/atoms';
 
 import { Flexbox, Typography } from 'cocstorage-ui';
 
-import { NoticesHead } from '@components/pages/notices';
-import NoticesGrid from '@components/pages/notices/NoticesGrid';
+import { NoticesGrid, NoticesHead } from '@components/pages/notices';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
 

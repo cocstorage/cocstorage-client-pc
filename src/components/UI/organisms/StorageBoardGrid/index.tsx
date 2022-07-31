@@ -30,10 +30,10 @@ function StorageBoardGrid({ path }: StorageBoardGridProps) {
     }));
   };
 
-  if (boards.length === 0)
+  if (!boards.length)
     return (
       <Message
-        title="아직 등록된 글이 없네요."
+        title="아직 등록된 글이 없어요!"
         message="보고 계신 게시판의 첫 글을 작성해 보시는 건 어때요?<br />좋은 시작이 될 것 같아요!"
         hideButton
       />

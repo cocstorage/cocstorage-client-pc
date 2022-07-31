@@ -20,12 +20,13 @@ interface HeaderProps extends HTMLAttributes<HTMLHeadElement> {
 
 function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const router = useRouter();
+  const { query } = router;
 
   const {
     theme: { type, palette }
   } = useTheme();
 
-  const { path, avatarUrl = '', name = '' } = useStorageData(router.query.path as string) || {};
+  const { path, avatarUrl = '', name = '' } = useStorageData(String(query.path)) || {};
 
   const [open, setOpen] = useState<boolean>(false);
   const [message] = useState<{

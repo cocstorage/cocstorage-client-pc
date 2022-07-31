@@ -6,19 +6,19 @@ import { Box, Button, Flexbox, Icon, IconButton, Menu, Typography, useTheme } fr
 
 import dayjs from 'dayjs';
 
-import { RatioImage } from '@components/UI/atoms';
-import { MessageDialog } from '@components/UI/organisms';
+import RatioImage from '@components/UI/atoms/RatioImage';
+import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import useStorage from '@hooks/react-query/useStorage';
 
 function StorageBoardsIntro() {
-  const { query = {} } = useRouter();
+  const { query } = useRouter();
   const {
     theme: { type, palette }
   } = useTheme();
 
   const { data: { path, name, avatarUrl, description, user, createdAt } = {} } = useStorage(
-    query.path as string
+    String(query.path)
   );
 
   const [open, setOpen] = useState<boolean>(false);

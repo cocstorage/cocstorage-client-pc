@@ -9,7 +9,7 @@ import {
   StoragesPopularList
 } from '@components/pages/storages';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
-import { Header } from '@components/UI/molecules';
+import Header from '@components/UI/molecules/Header';
 import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
 
 import { fetchStorageCategories } from '@api/v1/storage-categories';

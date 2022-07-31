@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, memo } from 'react';
 
 import { Typography } from 'cocstorage-ui';
 
-import { RatioImage } from '@components/UI/atoms';
+import RatioImage from '@components/UI/atoms/RatioImage';
 
 import { StyledStorageCard } from './StorageCard.styles';
 

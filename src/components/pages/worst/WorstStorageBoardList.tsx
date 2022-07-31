@@ -8,7 +8,7 @@ import { worstParamsState } from '@recoil/worst/atoms';
 
 import { Flexbox, Pagination } from 'cocstorage-ui';
 
-import { StorageBoardCard } from '@components/UI/molecules';
+import StorageBoardCard from '@components/UI/molecules/StorageBoardCard';
 
 import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
 

@@ -12,8 +12,8 @@ import { storageBoardsParamsState } from '@recoil/storageBoards/atoms';
 
 import { Box, Button, Flexbox, Icon, Tab, Tabs } from 'cocstorage-ui';
 
-import { RatioImage } from '@components/UI/atoms';
-import { MessageDialog } from '@components/UI/organisms';
+import RatioImage from '@components/UI/atoms/RatioImage';
+import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
@@ -23,6 +23,7 @@ import queryKeys from '@constants/react-query';
 
 function StorageBoardsTabs() {
   const { query } = useRouter();
+  const { path } = query;
 
   const [params, setParams] = useRecoilState(storageBoardsParamsState);
 
@@ -32,9 +33,8 @@ function StorageBoardsTabs() {
 
   const { scrollFixed } = useScrollTrigger({ trigger: true, ref: tabsRef });
 
-  const { data: { avatarUrl } = {} } = useQuery(
-    queryKeys.storages.storageById(query.path as string),
-    () => fetchStorage(query.path as string)
+  const { data: { avatarUrl } = {} } = useQuery(queryKeys.storages.storageById(String(path)), () =>
+    fetchStorage(String(path))
   );
 
   const handleChange = (value: number | string) => {

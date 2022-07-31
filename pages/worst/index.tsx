@@ -12,7 +12,7 @@ import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
 import { WorstHead, WorstStorageBoardList, WorstTitle } from '@components/pages/worst';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
-import { Header } from '@components/UI/molecules';
+import Header from '@components/UI/molecules/Header';
 import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
 
 import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';

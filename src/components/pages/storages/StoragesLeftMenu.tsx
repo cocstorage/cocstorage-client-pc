@@ -10,7 +10,7 @@ import { selectedCategoryIdState } from '@recoil/storages/atoms';
 
 import { Typography } from 'cocstorage-ui';
 
-import { SideAccordion } from '@components/UI/molecules';
+import SideAccordion from '@components/UI/molecules/SideAccordion';
 
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 

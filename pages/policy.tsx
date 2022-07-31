@@ -1,6 +1,6 @@
 import { Flexbox, Typography } from 'cocstorage-ui';
 
-import { PolicyHead } from '@components/pages/policy';
+import PolicyHead from '@components/pages/policy/PolicyHead';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
 

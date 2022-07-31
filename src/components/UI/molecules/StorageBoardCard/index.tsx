@@ -4,7 +4,7 @@ import { Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
 
-import { RatioImage } from '@components/UI/atoms';
+import RatioImage from '@components/UI/atoms/RatioImage';
 
 import { StorageBoard } from '@dto/storage-boards';
 

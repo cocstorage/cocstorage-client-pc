@@ -19,7 +19,7 @@ import {
 } from '@components/pages/storageBoards';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, GoogleAdSense, Header } from '@components/UI/molecules';
-import { StorageBoardGrid } from '@components/UI/organisms';
+import StorageBoardGrid from '@components/UI/organisms/StorageBoardGrid';
 
 import { fetchStorageBoards } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
