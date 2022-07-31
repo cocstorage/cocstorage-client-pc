@@ -71,14 +71,10 @@ function StorageBoard() {
         <Grid container columnGap={20}>
           <Grid component="section" item auto>
             <StorageBoardContent />
-            {path && id && (
-              <>
-                <CommentList id={Number(id)} />
-                <Box customStyle={{ margin: '35px 0 20px 0' }}>
-                  <CommentForm id={Number(id)} />
-                </Box>
-              </>
-            )}
+            <CommentList id={Number(id)} />
+            <Box customStyle={{ margin: '35px 0 20px 0' }}>
+              <CommentForm id={Number(id)} />
+            </Box>
             <GoogleAdSense
               html={
                 '<ins class="adsbygoogle"\n' +
@@ -90,14 +86,12 @@ function StorageBoard() {
               }
               customStyle={{ marginBottom: 50 }}
             />
-            {path && (
-              <Flexbox gap={20} direction="vertical">
-                <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
-                  이 게시판의 다른 글
-                </Typography>
-                <StorageBoardGrid path={String(path)} />
-              </Flexbox>
-            )}
+            <Flexbox gap={20} direction="vertical">
+              <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+                이 게시판의 다른 글
+              </Typography>
+              <StorageBoardGrid path={String(path)} />
+            </Flexbox>
           </Grid>
           <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
             <Box customStyle={{ position: 'fixed', width: 183 }}>

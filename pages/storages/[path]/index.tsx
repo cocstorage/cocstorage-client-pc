@@ -18,7 +18,7 @@ import {
   StorageBoardsTabs
 } from '@components/pages/storageBoards';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
-import { Footer, Header } from '@components/UI/molecules';
+import { Footer, GoogleAdSense, Header } from '@components/UI/molecules';
 import { StorageBoardGrid } from '@components/UI/organisms';
 
 import { fetchStorageBoards } from '@api/v1/storage-boards';
@@ -61,7 +61,17 @@ function StorageBoards() {
           <Alert severity="normal" icon={<Icon name="PinOutlined" width={16} height={16} />}>
             게시글을 작성할 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
           </Alert>
-          {path && <StorageBoardGrid path={String(path)} />}
+          <StorageBoardGrid path={String(path)} />
+          <GoogleAdSense
+            html={
+              '<ins class="adsbygoogle"\n' +
+              '     style="display:block"\n' +
+              '     data-ad-client="ca-pub-5809905264951057"\n' +
+              '     data-ad-slot="2500107460"\n' +
+              '     data-ad-format="auto"\n' +
+              '     data-full-width-responsive="true"></ins>'
+            }
+          />
         </Flexbox>
       </GeneralTemplate>
     </>
