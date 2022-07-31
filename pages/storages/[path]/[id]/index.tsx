@@ -16,7 +16,7 @@ import { Box, Flexbox, Grid, Typography } from 'cocstorage-ui';
 
 import { StorageBoardContent, StorageBoardHead } from '@components/pages/storageBoard';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
-import { Footer, Header } from '@components/UI/molecules';
+import { Footer, GoogleAdSense, Header } from '@components/UI/molecules';
 import {
   CommentForm,
   CommentList,
@@ -74,11 +74,22 @@ function StorageBoard() {
             {path && id && (
               <>
                 <CommentList id={Number(id)} />
-                <Box customStyle={{ margin: '35px 0 50px 0' }}>
+                <Box customStyle={{ margin: '35px 0 20px 0' }}>
                   <CommentForm id={Number(id)} />
                 </Box>
               </>
             )}
+            <GoogleAdSense
+              html={
+                '<ins class="adsbygoogle"\n' +
+                '     style="display:block"\n' +
+                '     data-ad-client="ca-pub-5809905264951057"\n' +
+                '     data-ad-slot="8033291397"\n' +
+                '     data-ad-format="auto"\n' +
+                '     data-full-width-responsive="true"></ins>'
+              }
+              customStyle={{ marginBottom: 50 }}
+            />
             {path && (
               <Flexbox gap={20} direction="vertical">
                 <Typography fontSize="16px" fontWeight={700} lineHeight="20px">

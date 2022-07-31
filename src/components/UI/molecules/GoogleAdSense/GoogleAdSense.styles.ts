@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const StyledGoogleAdSense = styled.div`
   position: relative;
+  min-height: 100px;
   background-color: ${({
     theme: {
       palette: { background }
