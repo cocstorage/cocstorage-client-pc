@@ -130,6 +130,12 @@ function App({ Component, pageProps }: AppProps) {
       {process.env.NODE_ENV === 'production' && (
         <>
           <Script
+            async
+            strategy="afterInteractive"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5809905264951057"
+            crossOrigin="anonymous"
+          />
+          <Script
             strategy="afterInteractive"
             src="https://www.googletagmanager.com/gtag/js?id=G-20GMQTM36F"
           />

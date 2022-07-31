@@ -13,6 +13,7 @@ import type { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 
 import RatioImage from '@components/UI/atoms/RatioImage';
+import GoogleAdSense from '@components/UI/molecules/GoogleAdSense';
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
 import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
@@ -224,6 +225,16 @@ function StorageBoardContent() {
           <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
         </Flexbox>
       )}
+      <GoogleAdSense
+        html={
+          '<ins class="adsbygoogle"\n' +
+          '     style="display:block"\n' +
+          '     data-ad-client="ca-pub-5809905264951057"\n' +
+          '     data-ad-slot="3990104603"\n' +
+          '     data-ad-format="auto"\n' +
+          '     data-full-width-responsive="true"></ins>'
+        }
+      />
       <Content dangerouslySetInnerHTML={{ __html: content }} />
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
@@ -297,6 +308,7 @@ const UserInfo = styled.div`
 
 const Content = styled.article`
   position: relative;
+  margin-top: 20px;
 
   img,
   video,
