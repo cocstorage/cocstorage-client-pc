@@ -1897,10 +1897,10 @@ clean-webpack-plugin@^4.0.0:
   dependencies:
     del "^4.1.1"
 
-cocstorage-ui@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/cocstorage-ui/-/cocstorage-ui-0.1.6.tgz#e05052f0b369c9a1b4f94d11784e422efd3b2596"
-  integrity sha512-m2GztHgYCs0zlVPbCNRI75pBk4bbrchq4mbp2Rzh/Ik70WxMDV+HktJydWs74MUypu+RlBPXd7ZMLopfax+PQQ==
+cocstorage-ui@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/cocstorage-ui/-/cocstorage-ui-0.1.7.tgz#122874f0e0b5ae1c74095fa64d6406801963d3bd"
+  integrity sha512-GlhVWHfsonlKem2B7mZjjEWkN5pbpPkHGckGL6iarDaRYhg4JcQoq4sVmzRzOaAzkHzyLckLwJRgjtTyVxcs2Q==
 
 color-convert@^1.9.0:
   version "1.9.3"
