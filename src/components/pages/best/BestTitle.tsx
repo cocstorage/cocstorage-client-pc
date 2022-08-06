@@ -12,7 +12,7 @@ function BestTitle() {
       <IconButton onClick={handleClick}>
         <Icon name="CaretSemiLeftOutlined" width={20} height={20} />
       </IconButton>
-      <Typography fontSize="24px" fontWeight={700} lineHeight="30px">
+      <Typography variant="h1" fontWeight="bold">
         베스트 게시글
       </Typography>
     </Flexbox>

@@ -75,17 +75,20 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
           {!isStorageBoardDetail && (
             <Link href="/">
               <a>
-                <Flexbox component="button" gap={8}>
+                <Flexbox component="button" gap={8} alignment="center">
                   <Logo
                     width={34}
                     height={24}
-                    src="https://static.cocstorage.com/assets/logo.png"
+                    src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
                     alt="Logo Img"
                   />
                   <Hidden lgHidden>
-                    <Typography fontSize="18px">
-                      <strong>개념글’</strong>저장소
-                    </Typography>
+                    <Flexbox>
+                      <Typography variant="h3" fontWeight="bold">
+                        개념글’
+                      </Typography>
+                      <Typography variant="h3">저장소</Typography>
+                    </Flexbox>
                   </Hidden>
                 </Flexbox>
               </a>
@@ -98,7 +101,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                   <Logo
                     width={34}
                     height={24}
-                    src="https://static.cocstorage.com/assets/logo.png"
+                    src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
                     alt="Logo Img"
                   />
                   <Box
@@ -116,7 +119,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                       src={avatarUrl || ''}
                       alt="Storage Logo Img"
                     />
-                    <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+                    <Typography variant="h4" fontWeight="bold">
                       {name}
                     </Typography>
                   </Flexbox>

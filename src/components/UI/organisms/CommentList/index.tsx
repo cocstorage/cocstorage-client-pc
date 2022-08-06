@@ -121,13 +121,12 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
       <Flexbox gap={4}>
         <Icon name="CommentOutlined" width={20} height={20} />
         <Flexbox gap={6}>
-          <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+          <Typography variant="h4" fontWeight="bold">
             댓글
           </Typography>
           <Typography
-            fontSize="16px"
-            fontWeight={700}
-            lineHeight="20px"
+            variant="h4"
+            fontWeight="bold"
             customStyle={{
               color: palette.primary.main
             }}

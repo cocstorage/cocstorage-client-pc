@@ -138,7 +138,7 @@ function StorageBoardContent() {
   return (
     <>
       <Flexbox direction="vertical" gap={8}>
-        <Typography fontSize="22px" fontWeight={700} lineHeight="28px">
+        <Typography variant="h2" fontWeight="bold">
           {subject}
         </Typography>
         <Flexbox justifyContent="space-between">
@@ -154,10 +154,10 @@ function StorageBoardContent() {
               defaultIconHeight={12}
             />
             <UserInfo>
-              <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
+              <Typography variant="s1" color={palette.text[type].text1}>
                 {nickname || user?.nickname}
               </Typography>
-              <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
+              <Typography variant="s1" color={palette.text[type].text1}>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </UserInfo>
@@ -170,7 +170,7 @@ function StorageBoardContent() {
                 height={15}
                 color={palette.text[type].text1}
               />
-              <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
+              <Typography variant="s1" color={palette.text[type].text1}>
                 {thumbUp.toLocaleString()}
               </Typography>
             </Flexbox>
@@ -181,7 +181,7 @@ function StorageBoardContent() {
                 height={15}
                 color={palette.text[type].text1}
               />
-              <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
+              <Typography variant="s1" color={palette.text[type].text1}>
                 {thumbDown.toLocaleString()}
               </Typography>
             </Flexbox>
@@ -192,13 +192,13 @@ function StorageBoardContent() {
                 height={15}
                 color={palette.text[type].text1}
               />
-              <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
+              <Typography variant="s1" color={palette.text[type].text1}>
                 {commentTotalCount.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
               <Icon name="ViewOutlined" width={15} height={15} color={palette.text[type].text1} />
-              <Typography fontSize="12px" lineHeight="15px" color={palette.text[type].text1}>
+              <Typography variant="s1" color={palette.text[type].text1}>
                 {viewCount.toLocaleString()}
               </Typography>
             </Flexbox>
@@ -291,7 +291,7 @@ const UserInfo = styled.div`
   display: flex;
   align-items: center;
 
-  & > div:after {
+  & > span:after {
     content: '';
     display: inline-block;
     width: 2px;
@@ -301,7 +301,7 @@ const UserInfo = styled.div`
     background-color: ${({ theme: { type, palette } }) => palette.text[type].text1};
     vertical-align: middle;
   }
-  & > div:last-child:after {
+  & > span:last-child:after {
     display: none;
   }
 `;

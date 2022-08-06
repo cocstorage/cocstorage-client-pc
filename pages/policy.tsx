@@ -9,19 +9,12 @@ function Policy() {
     <>
       <PolicyHead />
       <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
-        <Typography
-          component="h1"
-          fontSize="24px"
-          fontWeight={700}
-          customStyle={{ textAlign: 'center' }}
-        >
+        <Typography variant="h1" fontWeight="bold" customStyle={{ textAlign: 'center' }}>
           이용약관
         </Typography>
         <Flexbox component="section" direction="vertical" gap={20} customStyle={{ marginTop: 20 }}>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제1조 (목적)
-            </Typography>
+            <Typography variant="h2">제1조 (목적)</Typography>
             <Typography>
               {`본 회원약관은 개념글 저장소가 운영하는 인터넷관련 서비스(이하 '서비스'라 한다)를
             이용함에 있어 관리자와 이용자(이하 '회원'이라 한다)의 권리, 의무 및 책임사항을 규정함을
@@ -29,9 +22,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제2조 (약관의 효력)
-            </Typography>
+            <Typography variant="h2">제2조 (약관의 효력)</Typography>
             <Typography>
               ① 본 약관은 개념글 저장소에 회원가입 시 회원들에게 통지하거나 공지사항에 등록함으로써
               효력을 발생합니다.
@@ -45,18 +36,14 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제3조 (약관 이외의 준칙)
-            </Typography>
+            <Typography variant="h2">제3조 (약관 이외의 준칙)</Typography>
             <Typography>
               이 약관에 명시되지 않은 사항이 전기 통신 기본법, 전기통신 사업법, 기타 관련 법령에
               규정되어 있는 경우 그 규정에 따릅니다.
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제4조 (용어의 정의)
-            </Typography>
+            <Typography variant="h2">제4조 (용어의 정의)</Typography>
             <Typography>
               ① 회원 : 개념글 저장소가 제공하는 서비스에 접속하여 본 약관에 따라 개념글 저장소의
               이용절차에 동의하고 개념글 저장소가 제공하는 서비스를 이용하는 이용자를 말합니다.
@@ -78,9 +65,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제5조 (회원가입)
-            </Typography>
+            <Typography variant="h2">제5조 (회원가입)</Typography>
             <Typography>
               {`① 회원이 되고자 하는 자는 개념글 저장소가 정한 가입 양식에 따라 회원정보를 기입하고
             '확인', '가입' 등의 버튼을 누르는 방법으로 회원가입을 신청합니다.`}
@@ -97,9 +82,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제6조 (회원탈퇴 및 자격 상실 등)
-            </Typography>
+            <Typography variant="h2">제6조 (회원탈퇴 및 자격 상실 등)</Typography>
             <Typography>
               ① 회원은 개념글 저장소에 언제든지 자신의 회원 등록 말소(회원탈퇴)를 요청할 수 있으며
               개념글 저장소는 위 요청을 받은 즉시 해당 회원의 회원 등록 말소를 위한 절차를 밟습니다.
@@ -124,9 +107,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제7조 (서비스의 제공 및 변경)
-            </Typography>
+            <Typography variant="h2">제7조 (서비스의 제공 및 변경)</Typography>
             <Typography>① 개념글 저장소는 회원에게 아래와 같은 서비스를 제공합니다.</Typography>
             <Typography>1. 커뮤니티 서비스(게시판)</Typography>
             <Typography>
@@ -145,9 +126,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제8조 (서비스 제공의 중지)
-            </Typography>
+            <Typography variant="h2">제8조 (서비스 제공의 중지)</Typography>
             <Typography>
               ① 개념글 저장소는 컴퓨터 등 정보통신설비의 보수점검·교체 및 고장, 통신의 두절 등의
               사유가 발생한 경우에는 서비스의 제공을 일시적으로 중단할 수 있고, 새로운 서비스로의
@@ -162,9 +141,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제9조 (회원에 대한 통지)
-            </Typography>
+            <Typography variant="h2">제9조 (회원에 대한 통지)</Typography>
             <Typography>
               ① 개념글 저장소가 특정 회원에게 서비스에 관한 통지를 하는 경우 회원정보에 등록된
               메일주소를 사용할 수 있습니다.
@@ -175,9 +152,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제10조 (개념글 저장소의 의무)
-            </Typography>
+            <Typography variant="h2">제10조 (개념글 저장소의 의무)</Typography>
             <Typography>
               ① 개념글 저장소는 법령과 본 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며 본
               약관이 정하는 바에 따라 지속적이고, 안정적으로 서비스를 제공하기 위해 노력합니다.
@@ -191,9 +166,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제11조 (개인정보보호)
-            </Typography>
+            <Typography variant="h2">제11조 (개인정보보호)</Typography>
             <Typography>
               ① 개념글 저장소는 이용자의 정보수집시 서비스의 제공에 필요한 최소한의 정보를
               수집합니다.
@@ -216,9 +189,7 @@ function Policy() {
             <Typography>4. 기타 관계법령에서 정한 절차에 따른 요청이 있는 경우</Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제12조 (회원의 의무)
-            </Typography>
+            <Typography variant="h2">제12조 (회원의 의무)</Typography>
             <Typography>
               ① 회원은 관계법령, 이 약관의 규정, 이용안내 및 주의사항 등 개념글 저장소가 통지하는
               사항을 준수하여야 하며, 기타 개념글 저장소의 업무에 방해되는 행위를 하여서는 안됩니다.
@@ -269,9 +240,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제13조 (게시물 또는 내용물의 제한 및 삭제)
-            </Typography>
+            <Typography variant="h2">제13조 (게시물 또는 내용물의 제한 및 삭제)</Typography>
             <Typography>
               ① 개념글 저장소는 서비스의 게시물 또는 내용물이 제12조의 규정에 위반되거나 소정의
               게시기간을 초과하는 경우 사전 통지나 동의 없이 이를 삭제할 수 있습니다.
@@ -285,9 +254,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제14조 (게시물에 대한 권리·의무)
-            </Typography>
+            <Typography variant="h2">제14조 (게시물에 대한 권리·의무)</Typography>
             <Typography>
               ① 게시물에 대한 저작권을 포함한 모든 권리 및 책임은 이를 게시한 회원에게 있습니다. 단,
               개념글 저장소는 서비스의 운영, 전시, 전송, 배포, 홍보의 목적으로 회원의 별도의 허락
@@ -305,18 +272,14 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제15조 (양도금지)
-            </Typography>
+            <Typography variant="h2">제15조 (양도금지)</Typography>
             <Typography>
               회원이 서비스의 이용권한, 기타 이용계약상 지위를 타인에게 양도, 증여할 수 없으며, 이를
               담보로 제공할 수 없습니다.
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제16조 (면책·배상)
-            </Typography>
+            <Typography variant="h2">제16조 (면책·배상)</Typography>
             <Typography>
               ① 개념글 저장소는 회원이 서비스에 게재한 정보, 자료, 사실의 정확성, 신뢰성 등 그
               내용에 관하여는 어떠한 책임을 부담하지 아니하고, 회원은 자기의 책임아래 서비스를
@@ -341,9 +304,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제17조 (광고게재 및 광고주와의 거래)
-            </Typography>
+            <Typography variant="h2">제17조 (광고게재 및 광고주와의 거래)</Typography>
             <Typography>
               ① 개념글 저장소는 천재지변 또는 이에 준하는 불가항력으로 인하여 서비스를 제공할 수
               없는 경우에는 서비스 제공 장애로 인한 관한 책임이 면제됩니다.
@@ -366,9 +327,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              제18조 (재판관할)
-            </Typography>
+            <Typography variant="h2">제18조 (재판관할)</Typography>
             <Typography>
               개념글 저장소와 회원 간에 발생한 서비스 이용에 관한 분쟁에 대하여는 대한민국 법을
               적용하며, 본 분쟁으로 인한 소는 민사소송법상의 관한을 가지는 대한민국의 법원에
@@ -376,9 +335,7 @@ function Policy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              부 칙
-            </Typography>
+            <Typography variant="h2">부 칙</Typography>
             <Typography>본 약관은 2020년 2월 23일부터 시행합니다.</Typography>
           </Flexbox>
         </Flexbox>

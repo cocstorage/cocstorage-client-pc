@@ -31,7 +31,7 @@ function NoticeCard({
         gap={8}
         customStyle={{ height: '100%' }}
       >
-        <Typography noWrap lineClamp={2} lineHeight="18px" customStyle={{ flex: 1 }}>
+        <Typography noWrap lineClamp={2} customStyle={{ flex: 1 }}>
           {dayjs().diff(createdAt, 'day') <= 1 && (
             <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'middle' }}>
               NEW
@@ -42,15 +42,11 @@ function NoticeCard({
         <Info>
           <InfoLabel>
             <Icon name="ViewOutlined" width={14} height={14} />
-            <Typography component="span" fontSize="10px">
-              {viewCount.toLocaleString()}
-            </Typography>
+            <Typography variant="s2">{viewCount.toLocaleString()}</Typography>
           </InfoLabel>
           <InfoLabel>
             <Icon name="CommentOutlined" width={14} height={14} />
-            <Typography component="span" fontSize="10px">
-              {commentTotalCount.toLocaleString()}
-            </Typography>
+            <Typography variant="s2">{commentTotalCount.toLocaleString()}</Typography>
           </InfoLabel>
           <UserInfo>
             <Flexbox gap={4} alignment="center">
@@ -63,12 +59,12 @@ function NoticeCard({
                   round="50%"
                 />
               )}
-              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
+              <Typography variant="s2" color={palette.text[type].text1}>
                 {user?.nickname}
               </Typography>
             </Flexbox>
             <Dot />
-            <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
+            <Typography variant="s2" color={palette.text[type].text1}>
               {dayjs(createdAt).fromNow()}
             </Typography>
           </UserInfo>

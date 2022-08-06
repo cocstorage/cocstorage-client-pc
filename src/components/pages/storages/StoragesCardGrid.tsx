@@ -48,7 +48,7 @@ function StoragesCardGrid() {
         if (categoryStorages.length > 0) {
           return (
             <Grid key={`storage-category-${category.id}`} item xs={1} lg={2}>
-              <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+              <Typography variant="p1" fontWeight="bold">
                 {category.name}
               </Typography>
               <Grid container columnGap={20} rowGap={12} customStyle={{ marginTop: 20 }}>

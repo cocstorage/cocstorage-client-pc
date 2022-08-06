@@ -48,7 +48,7 @@ function SideAccordion({
   return (
     <StyledSideAccordion {...props}>
       <Flexbox alignment="center" justifyContent="space-between">
-        <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+        <Typography variant="h4" fontWeight="bold">
           {title}
         </Typography>
         {openToggleButton && !disableToggle && (

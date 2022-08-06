@@ -15,9 +15,7 @@ function StorageCard({ src, name, ...props }: StorageCardProps) {
   return (
     <StyledStorageCard {...props}>
       <RatioImage width={36} height={36} round={6} src={src} alt="Storage Logo Img" />
-      <Typography component="div" lineHeight="14px">
-        {name}
-      </Typography>
+      <Typography>{name}</Typography>
     </StyledStorageCard>
   );
 }

@@ -55,7 +55,6 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
   };
 
   const handleClick = () => {
-    onClose();
     router.push('/notices').then();
   };
 
@@ -76,7 +75,7 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
         <ListItemGroup>
           <Flexbox gap={8} alignment="center">
             <Icon name="StarOutlined" width={20} color={text[type].text2} />
-            <Typography lineHeight="20px">테마</Typography>
+            <Typography>테마</Typography>
           </Flexbox>
           <Dropdown fullWidth options={options} value={theme} onChange={handleTheme} />
         </ListItemGroup>

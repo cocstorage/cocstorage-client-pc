@@ -45,7 +45,7 @@ function StorageBoardsIntro() {
           />
           <div>
             <Flexbox alignment="center" gap={6}>
-              <Typography fontSize="20px" fontWeight={700} lineHeight="25px">
+              <Typography variant="h2" fontWeight="bold">
                 {name}
               </Typography>
               <IconButton ref={buttonRef}>
@@ -61,47 +61,39 @@ function StorageBoardsIntro() {
               <Menu anchorRef={buttonRef} centered open={open} onClose={handleMenuClose}>
                 <Flexbox gap={10} direction="vertical" customStyle={{ padding: 20 }}>
                   <Flexbox>
-                    <Typography fontWeight={500} lineHeight="18px" customStyle={{ width: 54 }}>
+                    <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                       관리자
                     </Typography>
-                    <Typography lineHeight="18px" color={palette.text[type].text1}>
+                    <Typography color={palette.text[type].text1}>
                       {(user || {}).nickname}
                     </Typography>
                   </Flexbox>
                   <Flexbox>
-                    <Typography fontWeight={500} lineHeight="18px" customStyle={{ width: 54 }}>
+                    <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                       개설일
                     </Typography>
-                    <Typography lineHeight="18px" color={palette.text[type].text1}>
+                    <Typography color={palette.text[type].text1}>
                       {dayjs(createdAt).format('YYYY. MM. DD')}
                     </Typography>
                   </Flexbox>
                   <Flexbox>
-                    <Typography fontWeight={500} lineHeight="18px" customStyle={{ width: 54 }}>
+                    <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                       URL
                     </Typography>
-                    <Typography lineHeight="18px" color={palette.text[type].text1}>
+                    <Typography color={palette.text[type].text1}>
                       {`https://www.cocstorage.com/storages/${path}`}
                     </Typography>
                   </Flexbox>
                 </Flexbox>
               </Menu>
             </Flexbox>
-            <Typography
-              lineHeight="18px"
-              color={palette.text[type].text1}
-              customStyle={{ marginTop: 2 }}
-            >
+            <Typography color={palette.text[type].text1} customStyle={{ marginTop: 2 }}>
               {description}
             </Typography>
             <Box customStyle={{ marginTop: 16 }}>
               <Flexbox alignment="center" gap={6}>
-                <Typography fontWeight={500} lineHeight="18px">
-                  관리자
-                </Typography>
-                <Typography lineHeight="18px" color={palette.text[type].text1}>
-                  {(user || {}).nickname}
-                </Typography>
+                <Typography fontWeight="medium">관리자</Typography>
+                <Typography color={palette.text[type].text1}>{(user || {}).nickname}</Typography>
               </Flexbox>
             </Box>
           </div>

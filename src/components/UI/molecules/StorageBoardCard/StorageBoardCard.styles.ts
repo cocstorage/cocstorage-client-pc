@@ -42,19 +42,20 @@ export const StyledStorageBoardCard = styled.div<
       : {}}
 `;
 
-export const Storage = styled.span`
+export const Storage = styled.div`
   display: flex;
+  align-items: center;
   gap: 4px;
 `;
 
 export const Info = styled.div`
   display: flex;
-  align-items: center;
   gap: 12px;
 `;
 
-export const InfoLabel = styled.span`
+export const InfoLabel = styled.div`
   display: flex;
+  align-items: center;
   gap: 2.5px;
 `;
 

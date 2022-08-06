@@ -32,7 +32,7 @@ function Message({
             textAlign: 'center'
           }}
         >
-          <Typography fontSize={22} fontWeight={700} lineHeight="28px">
+          <Typography variant="h2" fontWeight="bold">
             {title}
           </Typography>
           {code && (
@@ -41,11 +41,7 @@ function Message({
             </Tag>
           )}
           {message && (
-            <Typography
-              fontWeight={500}
-              lineHeight="18px"
-              dangerouslySetInnerHTML={{ __html: message }}
-            />
+            <Typography fontWeight="medium" dangerouslySetInnerHTML={{ __html: message }} />
           )}
         </Flexbox>
       </Flexbox>

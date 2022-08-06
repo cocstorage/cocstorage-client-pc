@@ -20,7 +20,7 @@ function IndexLatestStorageBoardGrid() {
 
   return (
     <Flexbox direction="vertical" gap={18} customStyle={{ marginTop: 30 }}>
-      <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+      <Typography variant="h4" fontWeight="bold">
         최신 게시글
       </Typography>
       <Grid container columnGap={20} rowGap={20}>

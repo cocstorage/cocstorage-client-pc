@@ -170,9 +170,8 @@ function CommentDeleteDialog({
           </IconButton>
         </Box>
         <Typography
-          fontSize="18px"
-          fontWeight={700}
-          lineHeight="23px"
+          variant="h3"
+          fontWeight="bold"
           customStyle={{ marginTop: 10, textAlign: 'center' }}
         >
           댓글을 삭제하려면 비밀번호를 입력해 주세요.

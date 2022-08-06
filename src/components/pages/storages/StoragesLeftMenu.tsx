@@ -39,7 +39,7 @@ function StoragesLeftMenu() {
           data-category-id={category.id}
           onClick={handleClick}
         >
-          <Typography fontSize="16px" fontWeight={500} lineHeight="20px">
+          <Typography variant="p1" fontWeight="medium">
             {category.name}
           </Typography>
         </Category>

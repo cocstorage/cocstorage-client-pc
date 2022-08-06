@@ -87,7 +87,7 @@ function StorageBoard() {
               customStyle={{ marginBottom: 50 }}
             />
             <Flexbox gap={20} direction="vertical">
-              <Typography fontSize="16px" fontWeight={700} lineHeight="20px">
+              <Typography variant="p1" fontWeight="bold">
                 이 게시판의 다른 글
               </Typography>
               <StorageBoardGrid path={String(path)} />

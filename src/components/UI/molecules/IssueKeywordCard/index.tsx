@@ -30,9 +30,7 @@ function IssueKeywordCard({
         {number}
       </Tag>
       <Keyword>
-        <Typography component="div" fontWeight={700} lineHeight="18px">
-          {keyword}
-        </Typography>
+        <Typography fontWeight="bold">{keyword}</Typography>
       </Keyword>
       {isNew && <Badge severity="warning">NEW</Badge>}
       {isUp && <Badge severity="success" startIcon={<Icon name="ArrowDropUpSpecify_12_12" />} />}

@@ -26,11 +26,11 @@ function PageProgress() {
 
     progressingTimerRef.current = setInterval(() => {
       setValue((prevValue) => {
-        if (prevValue <= 100) {
+        if (prevValue < 100) {
           const diff = Math.random() * 10;
           return Math.min(prevValue + diff, 100);
         }
-        return prevValue;
+        return 100;
       });
     }, 500);
   };

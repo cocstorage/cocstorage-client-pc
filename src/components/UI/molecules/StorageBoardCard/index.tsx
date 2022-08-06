@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, memo, useMemo } from 'react';
 
-import { Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Avatar, Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
 
@@ -76,18 +76,14 @@ function StorageBoardCard({
         >
           <Flexbox direction="vertical" gap={8}>
             <Storage>
-              <RatioImage
-                width={14}
-                height={14}
-                src={avatarUrl || ''}
-                alt="Storage Logo Img"
-                round={6}
-              />
-              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
+              {avatarUrl && (
+                <Avatar width={14} height={14} src={avatarUrl || ''} alt="Storage Logo Img" round />
+              )}
+              <Typography variant="s2" color={palette.text[type].text1}>
                 {name}
               </Typography>
             </Storage>
-            <Typography noWrap lineClamp={2} lineHeight="18px" customStyle={{ flex: 1 }}>
+            <Typography noWrap lineClamp={2} customStyle={{ flex: 1 }}>
               {dayjs().diff(createdAt, 'day') <= 1 && (
                 <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'middle' }}>
                   NEW
@@ -121,30 +117,22 @@ function StorageBoardCard({
           <Info>
             <InfoLabel>
               <Icon name="ViewOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px">
-                {viewCount.toLocaleString()}
-              </Typography>
+              <Typography variant="s2">{viewCount.toLocaleString()}</Typography>
             </InfoLabel>
             <InfoLabel>
               <Icon name="CommentOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px">
-                {commentTotalCount.toLocaleString()}
-              </Typography>
+              <Typography variant="s2">{commentTotalCount.toLocaleString()}</Typography>
             </InfoLabel>
             {isWorst && (
               <InfoLabel>
                 <Icon name="ThumbsDownOutlined" width={14} height={14} />
-                <Typography component="span" fontSize="10px">
-                  {thumbDown.toLocaleString()}
-                </Typography>
+                <Typography variant="s2">{thumbDown.toLocaleString()}</Typography>
               </InfoLabel>
             )}
             {!isWorst && (
               <InfoLabel>
                 <Icon name="ThumbsUpOutlined" width={14} height={14} />
-                <Typography component="span" fontSize="10px">
-                  {thumbUp.toLocaleString()}
-                </Typography>
+                <Typography variant="s2">{thumbUp.toLocaleString()}</Typography>
               </InfoLabel>
             )}
           </Info>
@@ -169,7 +157,7 @@ function StorageBoardCard({
           gap={8}
           customStyle={{ height: '100%' }}
         >
-          <Typography noWrap lineClamp={2} lineHeight="18px" customStyle={{ flex: 1 }}>
+          <Typography noWrap lineClamp={2} customStyle={{ flex: 1 }}>
             {dayjs().diff(createdAt, 'day') <= 1 && (
               <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'middle' }}>
                 NEW
@@ -202,41 +190,29 @@ function StorageBoardCard({
           <Info>
             <InfoLabel>
               <Icon name="ViewOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px">
-                {viewCount.toLocaleString()}
-              </Typography>
+              <Typography variant="s2">{viewCount.toLocaleString()}</Typography>
             </InfoLabel>
             <InfoLabel>
               <Icon name="CommentOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px">
-                {commentTotalCount.toLocaleString()}
-              </Typography>
+              <Typography variant="s2">{commentTotalCount.toLocaleString()}</Typography>
             </InfoLabel>
             {isWorst && (
               <InfoLabel>
                 <Icon name="ThumbsDownOutlined" width={14} height={14} />
-                <Typography component="span" fontSize="10px">
-                  {thumbDown.toLocaleString()}
-                </Typography>
+                <Typography variant="s2">{thumbDown.toLocaleString()}</Typography>
               </InfoLabel>
             )}
             {!isWorst && (
               <InfoLabel>
                 <Icon name="ThumbsUpOutlined" width={14} height={14} />
-                <Typography component="span" fontSize="10px">
-                  {thumbUp.toLocaleString()}
-                </Typography>
+                <Typography variant="s2">{thumbUp.toLocaleString()}</Typography>
               </InfoLabel>
             )}
             <Storage>
-              <RatioImage
-                width={14}
-                height={14}
-                src={avatarUrl || ''}
-                alt="Storage Logo Img"
-                round={6}
-              />
-              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
+              {avatarUrl && (
+                <Avatar width={14} height={14} src={avatarUrl || ''} alt="Storage Logo Img" round />
+              )}
+              <Typography variant="s2" color={palette.text[type].text1}>
                 {name}
               </Typography>
             </Storage>
@@ -273,7 +249,6 @@ function StorageBoardCard({
           <Typography
             noWrap
             lineClamp={1}
-            lineHeight="18px"
             customStyle={{
               flex: 1,
               textAlign: 'left'
@@ -285,42 +260,30 @@ function StorageBoardCard({
         <Info>
           <InfoLabel>
             <Icon name="ViewOutlined" width={14} height={14} />
-            <Typography component="span" fontSize="10px">
-              {viewCount.toLocaleString()}
-            </Typography>
+            <Typography variant="s2">{viewCount.toLocaleString()}</Typography>
           </InfoLabel>
           <InfoLabel>
             <Icon name="CommentOutlined" width={14} height={14} />
-            <Typography component="span" fontSize="10px">
-              {commentTotalCount.toLocaleString()}
-            </Typography>
+            <Typography variant="s2">{commentTotalCount.toLocaleString()}</Typography>
           </InfoLabel>
           {isWorst && (
             <InfoLabel>
               <Icon name="ThumbsDownOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px">
-                {thumbDown.toLocaleString()}
-              </Typography>
+              <Typography variant="s2">{thumbDown.toLocaleString()}</Typography>
             </InfoLabel>
           )}
           {!isWorst && (
             <InfoLabel>
               <Icon name="ThumbsUpOutlined" width={14} height={14} />
-              <Typography component="span" fontSize="10px">
-                {thumbUp.toLocaleString()}
-              </Typography>
+              <Typography variant="s2">{thumbUp.toLocaleString()}</Typography>
             </InfoLabel>
           )}
           {!inStorage && (
             <Storage>
-              <RatioImage
-                width={14}
-                height={14}
-                src={avatarUrl || ''}
-                alt="Storage Logo Img"
-                round={6}
-              />
-              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
+              {avatarUrl && (
+                <Avatar width={14} height={14} src={avatarUrl || ''} alt="Storage Logo Img" round />
+              )}
+              <Typography variant="s2" color={palette.text[type].text1}>
                 {name}
               </Typography>
             </Storage>
@@ -337,12 +300,12 @@ function StorageBoardCard({
                     round="50%"
                   />
                 )}
-                <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
+                <Typography variant="s2" color={palette.text[type].text1}>
                   {user?.nickname || nickname}
                 </Typography>
               </Flexbox>
               <Dot />
-              <Typography component="span" fontSize="10px" color={palette.text[type].text1}>
+              <Typography variant="s2" color={palette.text[type].text1}>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </UserInfo>

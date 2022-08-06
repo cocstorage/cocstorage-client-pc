@@ -9,12 +9,7 @@ function Privacy() {
     <>
       <PrivacyHead />
       <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
-        <Typography
-          component="h1"
-          fontSize="24px"
-          fontWeight={700}
-          customStyle={{ textAlign: 'center' }}
-        >
+        <Typography variant="h1" fontWeight="bold" customStyle={{ textAlign: 'center' }}>
           개인정보처리방침
         </Typography>
         <Flexbox component="section" direction="vertical" gap={20} customStyle={{ marginTop: 20 }}>
@@ -25,9 +20,7 @@ function Privacy() {
           있으며 이를 개정하는 경우 홈페이지 공지를 통해 이용자에게 고지합니다.`}
           </Typography>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              1. 개인정보 수집에 대한 동의
-            </Typography>
+            <Typography variant="h2">1. 개인정보 수집에 대한 동의</Typography>
             <Typography>
               개념글 저장소는 이용자가 회원가입을 할 경우(이하 “회원”이라 함) 개인정보 수집에 대하여
               동의를 받고 있습니다. 회원가입 절차 중 이용약관 및 개인정보처리방침에 개인정보 수집
@@ -36,9 +29,7 @@ function Privacy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              2. 개인정보 수집항목 및 수집방법
-            </Typography>
+            <Typography variant="h2">2. 개인정보 수집항목 및 수집방법</Typography>
             <Typography>
               개념글 저장소는 원활한 서비스 제공을 위해 최소한의 개인정보를 수집하고있습니다.
             </Typography>
@@ -50,9 +41,7 @@ function Privacy() {
             <Typography>- 서비스 이용 기록, IP주소</Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              3. 개인정보의 수집목적 및 이용목적
-            </Typography>
+            <Typography variant="h2">3. 개인정보의 수집목적 및 이용목적</Typography>
             <Typography>
               개념글 저장소는 정보서비스 목적 이외에는 귀하의 개인정보를 이용하지 않습니다. 다만
               정보서비스의 질을 높이기 위한 통계분석, 설문조사 및 공지를 위해 이용할 수 있으며
@@ -69,9 +58,7 @@ function Privacy() {
             <Typography>- 부정 이용 방지, 통계학적 분석에 사용</Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              4. 개인정보 처리 및 보유 기간
-            </Typography>
+            <Typography variant="h2">4. 개인정보 처리 및 보유 기간</Typography>
             <Typography>
               개념글 저장소는 회원의 회원가입일로부터 회원탈퇴와 같은 개인정보 수집, 이용, 제공에
               대한 동의 철회 시까지 회원의 개인정보를 보유 및 이용하게 됩니다. 회원의 개인정보는
@@ -119,9 +106,7 @@ function Privacy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              5. 개인정보의 파기절차 및 방법
-            </Typography>
+            <Typography variant="h2">5. 개인정보의 파기절차 및 방법</Typography>
             <Typography>개념글 저장소의 개인정보 파기절차 및 방법은 다음과 같습니다.</Typography>
             <Typography>[절차]</Typography>
             <Typography>
@@ -142,7 +127,7 @@ function Privacy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
+            <Typography variant="h2">
               6. 개인정보 보관 및 보호를 위한 기술적, 관리적 대책
             </Typography>
             <Typography>
@@ -162,7 +147,7 @@ function Privacy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
+            <Typography variant="h2">
               7. 개인정보 자동 수집 장치의 설치, 운영 및 거부에 관한 사항
             </Typography>
             <Typography>
@@ -201,9 +186,7 @@ function Privacy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              8. 개인정보 보호책임자
-            </Typography>
+            <Typography variant="h2">8. 개인정보 보호책임자</Typography>
             <Typography>
               개념글 저장소는 회원의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여
               개인정보 보호책임자를 지정하고 있습니다.
@@ -229,9 +212,7 @@ function Privacy() {
             </Typography>
           </Flexbox>
           <Flexbox direction="vertical" gap={8}>
-            <Typography component="h2" fontSize="18px">
-              부칙
-            </Typography>
+            <Typography variant="h2">부칙</Typography>
             <Typography>
               이 개인정보처리방침은 2020년 2월 23일부터 적용되며, 개인정보처리방침 내용에 변경이
               있을 경우 개정 최소 7일전, 회원의 권리에 중대한 변경이 발생할 경우에는 최소 30일전에

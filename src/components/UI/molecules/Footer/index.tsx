@@ -1,29 +1,46 @@
-import Link from 'next/link';
+import { MouseEvent } from 'react';
+
+import { useRouter } from 'next/router';
 
 import { Typography, useTheme } from 'cocstorage-ui';
 
 import { Links, StyledFooter } from './Footer.styles';
 
 function Footer() {
+  const router = useRouter();
   const {
     theme: { type, palette }
   } = useTheme();
 
+  const handleClick = (event: MouseEvent<HTMLSpanElement>) => {
+    const dataPathName = event.currentTarget.getAttribute('data-pathname');
+
+    if (!dataPathName) return;
+
+    router.push(dataPathName).then();
+  };
+
   return (
     <StyledFooter>
-      <Typography component="div" fontSize="12px" color={palette.text[type].text2}>
+      <Typography variant="s1" color={palette.text[type].text2}>
         ⓒ 개념글 저장소 All Rights Reserved.
       </Typography>
       <Links>
-        <Typography component="div" fontSize="12px" color={palette.text[type].text2}>
-          <Link href="/policy">
-            <a>이용약관</a>
-          </Link>
+        <Typography
+          variant="s1"
+          color={palette.text[type].text2}
+          data-pathname="/policy"
+          onClick={handleClick}
+        >
+          이용약관
         </Typography>
-        <Typography component="div" fontSize="12px" color={palette.text[type].text2}>
-          <Link href="/privacy">
-            <a>개인정보처리방침</a>
-          </Link>
+        <Typography
+          variant="s1"
+          color={palette.text[type].text2}
+          data-pathname="/privacy"
+          onClick={handleClick}
+        >
+          개인정보처리방침
         </Typography>
       </Links>
     </StyledFooter>

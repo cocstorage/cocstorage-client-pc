@@ -66,17 +66,17 @@ function Reply({
         defaultIconHeight={15}
       />
       <Flexbox direction="vertical" customStyle={{ flex: 1 }}>
-        <Flexbox gap={4}>
-          <Typography fontSize="12px" fontWeight={700} lineHeight="15px">
+        <Flexbox gap={4} alignment="center">
+          <Typography variant="s1" fontWeight="bold">
             {nickname || (user || {}).nickname}
           </Typography>
           {!user && createdIp && (
-            <Typography fontSize="10px" lineHeight="15px" color={text[themeType].text1}>
+            <Typography variant="s2" color={text[themeType].text1}>
               ({createdIp})
             </Typography>
           )}
         </Flexbox>
-        <Typography lineHeight="18px" customStyle={{ marginTop: 4 }}>
+        <Typography customStyle={{ marginTop: 4 }}>
           {content.split('\n').map((splitContent, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <span key={`reply-content-${index}`}>
@@ -86,8 +86,7 @@ function Reply({
           ))}
         </Typography>
         <Typography
-          fontSize="12px"
-          lineHeight="15px"
+          variant="s1"
           customStyle={{
             marginTop: 8,
             color: text[themeType].text1
