@@ -8,10 +8,6 @@ import { themeState } from '@recoil/common/atoms';
 
 import { ThemeProvider } from 'cocstorage-ui';
 
-import LocalStorage from '@library/localStorage';
-
-import { localStorageKeys } from '@constants/localStorage';
-
 type ThemeRootProps = HTMLAttributes<HTMLDivElement>;
 
 function ThemeRoot({ children }: PropsWithChildren<ThemeRootProps>) {
@@ -27,19 +23,6 @@ function ThemeRoot({ children }: PropsWithChildren<ThemeRootProps>) {
       setThemeType(theme);
     }
   }, [theme, setTheme]);
-
-  useEffect(() => {
-    const localSaveTheme = LocalStorage.get<ThemeType | 'system'>(localStorageKeys.theme);
-
-    if (localSaveTheme === 'system') {
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setThemeType(isDark ? 'dark' : 'light');
-      setTheme(localSaveTheme);
-    } else if (localSaveTheme) {
-      setThemeType(localSaveTheme);
-      setTheme(localSaveTheme);
-    }
-  }, [setTheme]);
 
   return <ThemeProvider theme={themeType}>{children}</ThemeProvider>;
 }

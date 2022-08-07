@@ -39,6 +39,28 @@ const LocalStorage = (() => {
           initLocalStorage.setItem(key, JSON.stringify(value));
         }
       }
+    },
+    remove(key: string) {
+      if (localStorage) {
+        localStorage.removeItem(key);
+      } else {
+        const initLocalStorage = LocalStorage.getInstance();
+
+        if (initLocalStorage) {
+          initLocalStorage.removeItem(key);
+        }
+      }
+    },
+    clear() {
+      if (localStorage) {
+        localStorage.clear();
+      } else {
+        const initLocalStorage = LocalStorage.getInstance();
+
+        if (initLocalStorage) {
+          initLocalStorage.clear();
+        }
+      }
     }
   };
 })();

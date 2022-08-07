@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { useRecoilState } from 'recoil';
 
-import { storageBoardsParamsState } from '@recoil/storageBoards/atoms';
+import { storageBoardsParamsStateFamily } from '@recoil/storageBoards/atoms';
 
 import { Flexbox, Grid, Pagination } from 'cocstorage-ui';
 
@@ -15,7 +15,7 @@ interface StorageBoardGridProps {
 }
 
 function StorageBoardGrid({ path }: StorageBoardGridProps) {
-  const [params, setParams] = useRecoilState(storageBoardsParamsState);
+  const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(path));
 
   const {
     data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {}
@@ -25,8 +25,11 @@ function StorageBoardGrid({ path }: StorageBoardGridProps) {
 
   const handleChange = (value: number) => {
     setParams((prevParams) => ({
-      ...prevParams,
-      page: value
+      path: prevParams.path,
+      params: {
+        ...prevParams.params,
+        page: value
+      }
     }));
   };
 

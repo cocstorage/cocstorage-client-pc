@@ -1,12 +1,6 @@
-import { useCallback, useEffect } from 'react';
-
-import { useRouter } from 'next/router';
-
 import { QueryClient, dehydrate } from 'react-query';
 
-import { useSetRecoilState } from 'recoil';
-
-import { worstParamsDefault, worstParamsState } from '@recoil/worst/atoms';
+import { worstParamsDefault } from '@recoil/worst/atoms';
 
 import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
@@ -21,27 +15,6 @@ import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
 import queryKeys from '@constants/react-query';
 
 function Worst() {
-  const { events } = useRouter();
-
-  const setParams = useSetRecoilState(worstParamsState);
-
-  const handleRouteChangeComplete = useCallback(
-    (url: string) => {
-      if (url.indexOf('/storages/') < 0) {
-        setParams(worstParamsDefault);
-      }
-    },
-    [setParams]
-  );
-
-  useEffect(() => {
-    events.on('routeChangeComplete', handleRouteChangeComplete);
-
-    return () => {
-      events.off('routeChangeComplete', handleRouteChangeComplete);
-    };
-  }, [events, handleRouteChangeComplete]);
-
   return (
     <>
       <WorstHead />

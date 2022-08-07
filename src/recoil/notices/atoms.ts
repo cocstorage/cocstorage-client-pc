@@ -9,6 +9,6 @@ export const noticesParamsDefault: FetchNoticesParams = {
 };
 
 export const noticesParamsState = atom({
-  key: 'noticesParams',
+  key: 'noticesParamsState',
   default: noticesParamsDefault
 });

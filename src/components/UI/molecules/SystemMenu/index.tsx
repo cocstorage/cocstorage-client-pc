@@ -10,10 +10,6 @@ import { themeState } from '@recoil/common/atoms';
 
 import { Dropdown, Flexbox, Icon, Menu, Typography, useTheme } from 'cocstorage-ui';
 
-import LocalStorage from '@library/localStorage';
-
-import { localStorageKeys } from '@constants/localStorage';
-
 import { List, ListItem, ListItemGroup } from './SystemMenu.styles';
 
 interface SystemMenuProps {
@@ -51,7 +47,6 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
   const handleTheme = (value: string | number) => {
     const newValue = value as ThemeType | 'system';
     setTheme(newValue);
-    LocalStorage.set<ThemeType | 'system'>(localStorageKeys.theme, newValue);
   };
 
   const handleClick = () => {

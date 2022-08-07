@@ -54,7 +54,7 @@ function Comment({
           defaultIconHeight={15}
         />
         <Flexbox direction="vertical" customStyle={{ flex: 1 }}>
-          <Flexbox gap={4} alignment="center">
+          <Flexbox gap={4} alignment="flex-end">
             <Typography variant="s1" fontWeight="bold">
               {nickname || (user || {}).nickname}
             </Typography>

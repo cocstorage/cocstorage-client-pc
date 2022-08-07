@@ -8,6 +8,6 @@ export const worstParamsDefault: FetchStorageBoardsParams = {
 };
 
 export const worstParamsState = atom({
-  key: 'worstParams',
+  key: 'worstParamsState',
   default: worstParamsDefault
 });

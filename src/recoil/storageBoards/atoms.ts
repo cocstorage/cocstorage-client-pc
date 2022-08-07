@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atomFamily } from 'recoil';
 
 import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
 
@@ -11,7 +11,13 @@ export const storageBoardsParamsDefault: FetchStorageBoardsParams = {
   orderBy: 'latest'
 };
 
-export const storageBoardsParamsState = atom({
-  key: 'storageBoardsParams',
-  default: storageBoardsParamsDefault
+export const storageBoardsParamsStateFamily = atomFamily<
+  { path: string; params: FetchStorageBoardsParams },
+  string
+>({
+  key: 'storageBoardsParamsStateFamily',
+  default: (path) => ({
+    path,
+    params: storageBoardsParamsDefault
+  })
 });

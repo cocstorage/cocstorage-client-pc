@@ -8,7 +8,7 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { useRecoilState } from 'recoil';
 
-import { storageBoardsParamsState } from '@recoil/storageBoards/atoms';
+import { storageBoardsParamsStateFamily } from '@recoil/storageBoards/atoms';
 
 import { Box, Button, Flexbox, Icon, Tab, Tabs } from 'cocstorage-ui';
 
@@ -25,7 +25,7 @@ function StorageBoardsTabs() {
   const { query } = useRouter();
   const { path } = query;
 
-  const [params, setParams] = useRecoilState(storageBoardsParamsState);
+  const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(String(path)));
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -39,9 +39,12 @@ function StorageBoardsTabs() {
 
   const handleChange = (value: number | string) => {
     setParams((prevParams) => ({
-      ...prevParams,
-      page: 1,
-      orderBy: String(value)
+      path: prevParams.path,
+      params: {
+        ...prevParams.params,
+        page: 1,
+        orderBy: String(value)
+      }
     }));
   };
 

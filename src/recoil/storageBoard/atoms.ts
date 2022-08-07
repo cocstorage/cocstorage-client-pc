@@ -9,6 +9,6 @@ export const storageBoardCommentsParamsDefault: FetchStorageBoardCommentsParams 
 };
 
 export const storageBoardCommentsParamsState = atom({
-  key: 'storageBoardCommentsParams',
+  key: 'storageBoardCommentsParamsState',
   default: storageBoardCommentsParamsDefault
 });

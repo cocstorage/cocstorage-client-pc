@@ -1,12 +1,6 @@
-import { useCallback, useEffect } from 'react';
-
-import { useRouter } from 'next/router';
-
 import { QueryClient, dehydrate } from 'react-query';
 
-import { useSetRecoilState } from 'recoil';
-
-import { bestParamsDefault, bestParamsState } from '@recoil/best/atoms';
+import { bestParamsDefault } from '@recoil/best/atoms';
 
 import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
 
@@ -21,27 +15,6 @@ import { fetchPopularStorageBoards } from '@api/v1/storage-boards';
 import queryKeys from '@constants/react-query';
 
 function Best() {
-  const { events } = useRouter();
-
-  const setParams = useSetRecoilState(bestParamsState);
-
-  const handleRouteChangeComplete = useCallback(
-    (url: string) => {
-      if (url.indexOf('/storages/') < 0) {
-        setParams(bestParamsDefault);
-      }
-    },
-    [setParams]
-  );
-
-  useEffect(() => {
-    events.on('routeChangeComplete', handleRouteChangeComplete);
-
-    return () => {
-      events.off('routeChangeComplete', handleRouteChangeComplete);
-    };
-  }, [events, handleRouteChangeComplete]);
-
   return (
     <>
       <BestHead />
