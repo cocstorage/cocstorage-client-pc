@@ -11,6 +11,7 @@ import { Alert, Flexbox, Icon } from 'cocstorage-ui';
 import {
   StorageBoardsHead,
   StorageBoardsIntro,
+  StorageBoardsNoticeDialog,
   StorageBoardsTabs
 } from '@components/pages/storageBoards';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
@@ -50,6 +51,7 @@ function StorageBoards() {
           />
         </Flexbox>
       </GeneralTemplate>
+      <StorageBoardsNoticeDialog />
     </>
   );
 }
