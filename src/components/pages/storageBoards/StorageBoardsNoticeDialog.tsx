@@ -52,12 +52,12 @@ function StorageBoardsNoticeDialog() {
         </Flexbox>
         <Typography customStyle={{ marginTop: 16, '& > strong': { fontWeight: 700 } }}>
           보고 계신 <strong>{name}</strong> 게시판은 특정 인기 커뮤니티의 인기 게시글들이 미러링
-          되고 있는 게시판이며, <strong>{name}</strong> 게시판 내의 게시글들은 개념글 저장소의
-          유저가 작성한 게시글이 아니에요!
+          되고 있는 게시판이에요. 여기에 등록되는 게시글들은 개념글 저장소의 유저가 작성한 게시글이
+          아니에요!
         </Typography>
         <Typography customStyle={{ marginTop: 16 }}>
-          유머러스한 게시글이 아닌, 개인정보침해가 우려되는 게시글의 경우 아래의 이메일로 신고해
-          주시면, 신속하게 도와드릴게요.
+          혹여나 유머러스한 게시글이 아닌 개인정보침해가 우려되는 게시글을 발견하시는 경우, 아래의
+          이메일로 신고해 주시면, 신속하게 도와드릴게요.
         </Typography>
         <Box customStyle={{ marginTop: 16, textAlign: 'center' }}>
           <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>

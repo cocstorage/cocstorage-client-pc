@@ -1,8 +1,6 @@
-import styled, { CSSObject } from '@emotion/styled';
+import styled from '@emotion/styled';
 
-export const StyledNoticeCard = styled.div<{
-  hasThumbnail: boolean;
-}>`
+export const StyledNoticeCard = styled.div`
   display: grid;
   align-items: center;
   width: 100%;
@@ -10,13 +8,7 @@ export const StyledNoticeCard = styled.div<{
   cursor: pointer;
   grid-template-columns: 82px 1fr;
   min-height: 60px;
-
-  ${({ hasThumbnail }): CSSObject =>
-    hasThumbnail
-      ? {
-          columnGap: 14
-        }
-      : {}}
+  column-gap: 14px;
 `;
 
 export const Info = styled.div`

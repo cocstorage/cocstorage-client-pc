@@ -23,7 +23,7 @@ function NoticeCard({
   } = useTheme();
 
   return (
-    <StyledNoticeCard hasThumbnail={!!thumbnailUrl} {...props}>
+    <StyledNoticeCard {...props}>
       <RatioImage ratio="4:3" src={thumbnailUrl || ''} alt="Thumbnail Img" width={82} round={6} />
       <Flexbox
         direction="vertical"
