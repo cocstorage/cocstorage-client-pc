@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import { Button, Flexbox, Grid, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
 
 import StorageBoardCard from '@components/UI/molecules/StorageBoardCard';
+import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/StorageBoardCardSkeleton';
 
 import {
   fetchIndexPopularStorageBoards,
@@ -20,20 +21,18 @@ function IndexBestWorstStorageBoardGrid() {
     theme: { type, palette }
   } = useTheme();
 
-  const { data: { boards: bestBoards = [] } = {} } = useQuery(
+  const { data: { boards: bestBoards = [] } = {}, isLoading: isLoadingBest } = useQuery(
     queryKeys.storageBoards.indexPopularStorageBoards,
     fetchIndexPopularStorageBoards
   );
 
-  const { data: { boards: worstBoards = [] } = {} } = useQuery(
+  const { data: { boards: worstBoards = [] } = {}, isLoading: isLoadingWorst } = useQuery(
     queryKeys.storageBoards.indexWorstStorageBoards,
     fetchIndexWorstStorageBoards
   );
 
   const handleClickMoreBest = () => router.push('/best');
   const handleClickMoreWorst = () => router.push('/worst');
-
-  if (bestBoards.length === 0 || worstBoards.length === 0) return null;
 
   return (
     <Grid container columnGap={18} rowGap={30} customStyle={{ marginTop: 5 }}>
@@ -81,7 +80,16 @@ function IndexBestWorstStorageBoardGrid() {
             더보기
           </Button>
         </Flexbox>
-        {bestBoards.length > 2 && (
+        {isLoadingBest && (
+          <>
+            <StorageBoardCardSkeleton variant="emphasize" />
+            <Flexbox direction="vertical" gap={13}>
+              <StorageBoardCardSkeleton variant="normal" />
+              <StorageBoardCardSkeleton variant="normal" />
+            </Flexbox>
+          </>
+        )}
+        {!isLoadingBest && bestBoards.length > 2 && (
           <>
             <Link href={`/storages/${bestBoards[0].storage.path}/${bestBoards[0].id}`}>
               <a>
@@ -168,7 +176,16 @@ function IndexBestWorstStorageBoardGrid() {
             더보기
           </Button>
         </Flexbox>
-        {worstBoards.length > 2 && (
+        {isLoadingWorst && (
+          <>
+            <StorageBoardCardSkeleton variant="emphasize" />
+            <Flexbox direction="vertical" gap={13}>
+              <StorageBoardCardSkeleton variant="normal" />
+              <StorageBoardCardSkeleton variant="normal" />
+            </Flexbox>
+          </>
+        )}
+        {!isLoadingWorst && worstBoards.length > 2 && (
           <>
             <Link href={`/storages/${worstBoards[0].storage.path}/${worstBoards[0].id}`}>
               <a>
