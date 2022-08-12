@@ -7,6 +7,7 @@ import { storageBoardsParamsStateFamily } from '@recoil/storageBoards/atoms';
 import { Flexbox, Grid, Pagination } from 'cocstorage-ui';
 
 import { Message, StorageBoardCard } from '@components/UI/molecules';
+import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/StorageBoardCardSkeleton';
 
 import useStorageBoards from '@hooks/react-query/useStorageBoards';
 
@@ -18,7 +19,8 @@ function StorageBoardGrid({ path }: StorageBoardGridProps) {
   const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(path));
 
   const {
-    data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {}
+    data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {},
+    isLoading
   } = useStorageBoards(path, params, {
     keepPreviousData: true
   });
@@ -33,7 +35,7 @@ function StorageBoardGrid({ path }: StorageBoardGridProps) {
     }));
   };
 
-  if (!boards.length)
+  if (!isLoading && !boards.length)
     return (
       <Message
         title="아직 등록된 글이 없어요!"
@@ -45,15 +47,23 @@ function StorageBoardGrid({ path }: StorageBoardGridProps) {
   return (
     <>
       <Grid component="section" container columnGap={20} rowGap={20}>
-        {boards.map((storageBoard) => (
-          <Grid key={`storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
-            <Link href={`/storages/${storageBoard.storage.path}/${storageBoard.id}`}>
-              <a>
-                <StorageBoardCard storageBoard={storageBoard} />
-              </a>
-            </Link>
-          </Grid>
-        ))}
+        {isLoading &&
+          Array.from({ length: 20 }).map((_, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Grid key={`storage-board-skeleton-${index}`} item xs={1} sm={1} md={1} lg={2}>
+              <StorageBoardCardSkeleton />
+            </Grid>
+          ))}
+        {!isLoading &&
+          boards.map((storageBoard) => (
+            <Grid key={`storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
+              <Link href={`/storages/${storageBoard.storage.path}/${storageBoard.id}`}>
+                <a>
+                  <StorageBoardCard storageBoard={storageBoard} />
+                </a>
+              </Link>
+            </Grid>
+          ))}
       </Grid>
       <Flexbox
         component="section"
