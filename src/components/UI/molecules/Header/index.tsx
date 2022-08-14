@@ -155,7 +155,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                 <a>
                   <Tag
                     variant={isHome ? 'semiAccent' : 'transparent'}
-                    startIcon={<Icon name={isHome ? 'HomeFilled' : 'HomeOutlined'} width={16} />}
+                    startIcon={
+                      <Icon name={isHome ? 'HomeFilled' : 'HomeOutlined'} width={16} height={16} />
+                    }
                     customStyle={{
                       display: 'flex',
                       alignItems: 'center',
@@ -172,7 +174,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                 <a>
                   <Tag
                     variant={isStorages ? 'semiAccent' : 'transparent'}
-                    startIcon={<Icon name="CommunityFilled" width={16} />}
+                    startIcon={<Icon name="CommunityFilled" width={16} height={16} />}
                     customStyle={{
                       height: 32,
                       cursor: 'pointer'
@@ -186,7 +188,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
             <Tag
               ref={tagRef}
               variant="transparent"
-              startIcon={<Icon name="SettingOutlined" width={16} />}
+              startIcon={<Icon name="SettingOutlined" width={16} height={16} />}
               customStyle={{
                 height: 32,
                 padding: 0,
