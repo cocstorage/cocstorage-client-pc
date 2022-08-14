@@ -20,9 +20,9 @@ function StorageBoardCardSkeleton({ variant }: Pick<StorageBoardCardProps, 'vari
             <Skeleton width="100%" maxWidth={200} height={17.5} disableAspectRatio />
           </Flexbox>
           <Flexbox gap={12}>
-            <Skeleton width={30} height={14} disableAspectRatio />
-            <Skeleton width={30} height={14} disableAspectRatio />
-            <Skeleton width={30} height={14} disableAspectRatio />
+            <Skeleton width={30} height={18} disableAspectRatio />
+            <Skeleton width={30} height={18} disableAspectRatio />
+            <Skeleton width={30} height={18} disableAspectRatio />
           </Flexbox>
         </Flexbox>
       </StyledStorageBoardCard>
@@ -41,10 +41,10 @@ function StorageBoardCardSkeleton({ variant }: Pick<StorageBoardCardProps, 'vari
         >
           <Skeleton width="100%" maxWidth={200} height={17.5} disableAspectRatio />
           <Flexbox gap={12}>
-            <Skeleton width={30} height={14} disableAspectRatio />
-            <Skeleton width={30} height={14} disableAspectRatio />
-            <Skeleton width={30} height={14} disableAspectRatio />
-            <Skeleton width={50} height={14} disableAspectRatio />
+            <Skeleton width={30} height={16} disableAspectRatio />
+            <Skeleton width={30} height={16} disableAspectRatio />
+            <Skeleton width={30} height={16} disableAspectRatio />
+            <Skeleton width={50} height={16} disableAspectRatio />
           </Flexbox>
         </Flexbox>
       </StyledStorageBoardCard>
