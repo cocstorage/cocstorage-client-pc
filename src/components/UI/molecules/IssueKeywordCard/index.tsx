@@ -24,7 +24,8 @@ function IssueKeywordCard({
           display: 'flex',
           justifyContent: 'center',
           width: 24,
-          height: 24
+          height: 24,
+          lineHeight: '24px'
         }}
       >
         {number}
