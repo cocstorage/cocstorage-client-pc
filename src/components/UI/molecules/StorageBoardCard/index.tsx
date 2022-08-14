@@ -123,22 +123,22 @@ function StorageBoardCard({
           </Flexbox>
           <Info>
             <InfoLabel>
-              <Icon name="ViewOutlined" width={14} height={14} />
+              <Icon name="ViewOutlined" width={18} height={18} />
               <Typography variant="s2">{viewCount.toLocaleString()}</Typography>
             </InfoLabel>
             <InfoLabel>
-              <Icon name="CommentOutlined" width={14} height={14} />
+              <Icon name="CommentOutlined" width={18} height={18} />
               <Typography variant="s2">{commentTotalCount.toLocaleString()}</Typography>
             </InfoLabel>
             {isWorst && (
               <InfoLabel>
-                <Icon name="ThumbsDownOutlined" width={14} height={14} />
+                <Icon name="ThumbsDownOutlined" width={18} height={18} />
                 <Typography variant="s2">{thumbDown.toLocaleString()}</Typography>
               </InfoLabel>
             )}
             {!isWorst && (
               <InfoLabel>
-                <Icon name="ThumbsUpOutlined" width={14} height={14} />
+                <Icon name="ThumbsUpOutlined" width={18} height={18} />
                 <Typography variant="s2">{thumbUp.toLocaleString()}</Typography>
               </InfoLabel>
             )}
@@ -196,22 +196,22 @@ function StorageBoardCard({
           </Typography>
           <Info>
             <InfoLabel>
-              <Icon name="ViewOutlined" width={14} height={14} />
+              <Icon name="ViewOutlined" width={16} height={16} />
               <Typography variant="s2">{viewCount.toLocaleString()}</Typography>
             </InfoLabel>
             <InfoLabel>
-              <Icon name="CommentOutlined" width={14} height={14} />
+              <Icon name="CommentOutlined" width={16} height={16} />
               <Typography variant="s2">{commentTotalCount.toLocaleString()}</Typography>
             </InfoLabel>
             {isWorst && (
               <InfoLabel>
-                <Icon name="ThumbsDownOutlined" width={14} height={14} />
+                <Icon name="ThumbsDownOutlined" width={16} height={16} />
                 <Typography variant="s2">{thumbDown.toLocaleString()}</Typography>
               </InfoLabel>
             )}
             {!isWorst && (
               <InfoLabel>
-                <Icon name="ThumbsUpOutlined" width={14} height={14} />
+                <Icon name="ThumbsUpOutlined" width={16} height={16} />
                 <Typography variant="s2">{thumbUp.toLocaleString()}</Typography>
               </InfoLabel>
             )}

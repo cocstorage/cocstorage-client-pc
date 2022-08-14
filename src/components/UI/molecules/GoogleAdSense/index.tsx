@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { CustomStyle } from 'cocstorage-ui';
+import { Box, CustomStyle } from 'cocstorage-ui';
 
 import { StyledGoogleAdSense } from './GoogleAdSense.styles';
 
@@ -16,7 +16,11 @@ function GoogleAdSense({ html, customStyle }: GoogleAdSenseProps) {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
   // eslint-disable-next-line react/no-danger
-  return <StyledGoogleAdSense dangerouslySetInnerHTML={{ __html: html }} css={customStyle} />;
+  return (
+    <Box css={customStyle}>
+      <StyledGoogleAdSense dangerouslySetInnerHTML={{ __html: html }} />
+    </Box>
+  );
 }
 
 export default GoogleAdSense;
