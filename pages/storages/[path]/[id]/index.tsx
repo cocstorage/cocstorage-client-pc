@@ -47,9 +47,7 @@ function StorageBoard() {
                 '     data-full-width-responsive="true"></ins>'
               }
               customStyle={{
-                marginBottom: 50,
-                borderRadius: 10,
-                overflow: 'hidden'
+                marginBottom: 50
               }}
             />
             <Flexbox gap={20} direction="vertical">

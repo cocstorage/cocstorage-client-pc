@@ -235,10 +235,6 @@ function StorageBoardContent() {
           '     data-ad-format="auto"\n' +
           '     data-full-width-responsive="true"></ins>'
         }
-        customStyle={{
-          borderRadius: 8,
-          overflow: 'hidden'
-        }}
       />
       <Content
         // TODO 추후 UI 라이브러리 반영
