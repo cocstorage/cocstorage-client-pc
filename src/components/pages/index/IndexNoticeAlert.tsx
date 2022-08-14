@@ -18,6 +18,7 @@ function IndexNoticeAlert() {
       <a>
         <Alert
           severity="info"
+          icon={<Icon name="LoudSpeakerOutlined" />}
           action={
             <IconButton>
               <Icon name="CaretRightOutlined" />

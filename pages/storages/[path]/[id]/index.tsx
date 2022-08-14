@@ -46,7 +46,11 @@ function StorageBoard() {
                 '     data-ad-format="auto"\n' +
                 '     data-full-width-responsive="true"></ins>'
               }
-              customStyle={{ marginBottom: 50 }}
+              customStyle={{
+                marginBottom: 50,
+                borderRadius: 10,
+                overflow: 'hidden'
+              }}
             />
             <Flexbox gap={20} direction="vertical">
               <Typography variant="p1" fontWeight="bold">

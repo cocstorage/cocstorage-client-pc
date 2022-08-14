@@ -48,6 +48,10 @@ function StorageBoards() {
               '     data-ad-format="auto"\n' +
               '     data-full-width-responsive="true"></ins>'
             }
+            customStyle={{
+              borderRadius: 12,
+              overflow: 'hidden'
+            }}
           />
         </Flexbox>
       </GeneralTemplate>

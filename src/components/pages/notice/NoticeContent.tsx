@@ -91,7 +91,14 @@ function NoticeContent() {
           backgroundColor: palette.box.stroked.normal
         }}
       />
-      <Content dangerouslySetInnerHTML={{ __html: content }} />
+      <Content
+        // TODO 추후 UI 라이브러리 반영
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        component="article"
+        lineHeight="main"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
       <Box
         customStyle={{
           margin: '20px 0',
@@ -123,7 +130,7 @@ const UserInfo = styled.div`
   }
 `;
 
-const Content = styled.article`
+const Content = styled(Typography)`
   position: relative;
 
   img,

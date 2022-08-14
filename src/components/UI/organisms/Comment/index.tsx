@@ -65,7 +65,7 @@ function Comment({
               </Typography>
             )}
           </Flexbox>
-          <Typography customStyle={{ marginTop: 4 }}>
+          <Typography lineHeight="main" customStyle={{ marginTop: 4 }}>
             {content.split('\n').map((splitContent, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <span key={`comment-content-${index}`}>
@@ -134,7 +134,7 @@ function Comment({
         )}
       </Flexbox>
       {open && (
-        <Flexbox gap={18} direction="vertical" customStyle={{ margin: '15px 0' }}>
+        <Flexbox gap={18} direction="vertical" customStyle={{ margin: '15px 0 0 40px' }}>
           <Flexbox
             gap={10}
             customStyle={{

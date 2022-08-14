@@ -149,6 +149,7 @@ function StorageBoardContent() {
               src={(user || {}).avatarUrl || ''}
               alt="User Avatar Img"
               round="50%"
+              disableAspectRatio
               defaultIcon="user"
               defaultIconWidth={12}
               defaultIconHeight={12}
@@ -234,8 +235,19 @@ function StorageBoardContent() {
           '     data-ad-format="auto"\n' +
           '     data-full-width-responsive="true"></ins>'
         }
+        customStyle={{
+          borderRadius: 8,
+          overflow: 'hidden'
+        }}
       />
-      <Content dangerouslySetInnerHTML={{ __html: content }} />
+      <Content
+        // TODO 추후 UI 라이브러리 반영
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        component="article"
+        lineHeight="main"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
           size="small"
@@ -306,7 +318,7 @@ const UserInfo = styled.div`
   }
 `;
 
-const Content = styled.article`
+const Content = styled(Typography)`
   position: relative;
   margin-top: 20px;
 

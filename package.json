@@ -18,14 +18,14 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "axios": "^0.26.1",
-    "cocstorage-ui": "^0.1.11",
+    "cocstorage-ui": "^0.1.12",
     "dayjs": "^1.11.1",
     "next": "^12.2.4",
     "next-pwa": "^5.5.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.35.0",
-    "recoil": "^0.7.4"
+    "recoil": "^0.7.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

@@ -44,6 +44,8 @@ export const RatioImageInner = styled.div`
   transform: translate(50%, 50%);
 `;
 
+export const Image = styled.img``;
+
 export const ImageWrapper = styled(Box)<Pick<RatioImageProps, 'round'>>`
   display: flex;
   align-items: center;

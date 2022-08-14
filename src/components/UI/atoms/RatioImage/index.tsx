@@ -1,8 +1,8 @@
 import { HTMLAttributes, useRef, useState } from 'react';
 
-import { Avatar, Box, CSSValue, CustomStyle, Icon } from 'cocstorage-ui';
+import { Box, CSSValue, CustomStyle, Icon } from 'cocstorage-ui';
 
-import { ImageWrapper, RatioImageInner, RatioImageWrapper } from './RatioImage.styles';
+import { Image, ImageWrapper, RatioImageInner, RatioImageWrapper } from './RatioImage.styles';
 
 export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
   src: string;
@@ -47,7 +47,7 @@ function RatioImage({
     return (
       <ImageWrapper round={round} {...props} customStyle={{ width, height }}>
         {!loadFailed && src && (
-          <Avatar width={width} height={height} src={src} alt={alt} round onError={handleError} />
+          <Image width={width} height={height} src={src} alt={alt} onError={handleError} />
         )}
         {(!src || loadFailed) && (
           <Icon
@@ -65,14 +65,13 @@ function RatioImage({
       <RatioImageWrapper ratio={ratio} round={round} {...props}>
         <RatioImageInner>
           {!loadFailed && src && (
-            <Avatar
+            <Image
               width={width}
               height={height}
               src={src}
               alt={alt}
-              round
               onError={handleError}
-              customStyle={customStyleRef.current}
+              css={customStyleRef.current}
             />
           )}
           {(!src || loadFailed) && (

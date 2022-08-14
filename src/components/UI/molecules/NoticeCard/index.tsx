@@ -52,11 +52,12 @@ function NoticeCard({
             <Flexbox gap={4} alignment="center">
               {user?.avatarUrl && (
                 <RatioImage
-                  src={user?.avatarUrl || ''}
-                  alt="User Avatar Img"
                   width={14}
                   height={14}
+                  src={user?.avatarUrl || ''}
+                  alt="User Avatar Img"
                   round="50%"
+                  disableAspectRatio
                 />
               )}
               <Typography variant="s2" color={palette.text[type].text1}>

@@ -6,7 +6,7 @@ function CommentSkeleton() {
       <Skeleton width={30} height={30} disableAspectRatio customStyle={{ borderRadius: '50%' }} />
       <Flexbox direction="vertical" gap={4} customStyle={{ flex: 1 }}>
         <Skeleton width="100%" maxWidth={50} height={15} disableAspectRatio />
-        <Flexbox direction="vertical" gap={4}>
+        <Flexbox direction="vertical" gap={8}>
           <Skeleton width="100%" maxWidth={200} height={18} disableAspectRatio />
           <Skeleton width="100%" maxWidth={120} height={18} disableAspectRatio />
           <Skeleton width="100%" maxWidth={150} height={18} disableAspectRatio />

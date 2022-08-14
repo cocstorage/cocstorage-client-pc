@@ -1904,10 +1904,10 @@ clean-webpack-plugin@^4.0.0:
   dependencies:
     del "^4.1.1"
 
-cocstorage-ui@^0.1.11:
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/cocstorage-ui/-/cocstorage-ui-0.1.11.tgz#57acffd699954f3b5003528a75fb38c7467faaa6"
-  integrity sha512-Vswp4iu5AVe40KqfYPhnXKZdvKZnYbQilID7R3DXbDQDMX3+yqQgZAlkoHZLWlZbdb73cFxC+3gECuFZOZMPKg==
+cocstorage-ui@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/cocstorage-ui/-/cocstorage-ui-0.1.12.tgz#4b666d928b3fb3ccde36e1c226d7c5c4cfa4df25"
+  integrity sha512-rvMG/cvv/pjPdI82YeWu5b3SX3XgPrNUYW9OusZbDVUh4eU3ZzokNC7XqhQkpJtBNBT5m4TsythIQxzqbdAjsg==
 
 color-convert@^1.9.0:
   version "1.9.3"
@@ -3673,10 +3673,10 @@ react@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
 
-recoil@^0.7.4:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.4.tgz#d6508fa656d9c93e66fdf334e1f723a9e98801cf"
-  integrity sha512-sCXvQGMfSprkNU4ZRkJV4B0qFQSURJMgsICqY1952WRlg66NMwYqi6n67vhnhn0qw4zHU1gHXJuMvRDaiRNFZw==
+recoil@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.5.tgz#9a33a03350cfd99e08bdd5b73bfc8b8b9ee751b9"
+  integrity sha512-GVShsj5+M/2GULWBs5WBJGcsNis/d3YvDiaKjYh3mLKXftjtmk9kfaQ8jwjoIXySCwn8/RhgJ4Sshwgzj2UpFA==
   dependencies:
     hamt_plus "1.0.2"
 
