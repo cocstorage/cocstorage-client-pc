@@ -9,6 +9,7 @@ import { Flexbox, Icon, Pagination, Typography, useTheme } from 'cocstorage-ui';
 
 import Message from '@components/UI/molecules/Message';
 import Comment from '@components/UI/organisms/Comment';
+import CommentSkeleton from '@components/UI/organisms/Comment/CommentSkeleton';
 
 import useNotice from '@hooks/react-query/useNotice';
 import useNoticeComments from '@hooks/react-query/useNoticeComments';
@@ -45,7 +46,11 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
   });
 
   const {
-    data: { comments = [], pagination: { totalPages = 0, perPage = 10, currentPage = 1 } = {} } = {}
+    data: {
+      comments = [],
+      pagination: { totalPages = 1, perPage = 10, currentPage = 1 } = {}
+    } = {},
+    isLoading
   } = useStorageBoardComments(storageId, id, params, {
     enabled: type === 'storageBoard' && params.page !== 0,
     keepPreviousData: true
@@ -55,7 +60,7 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
     data: {
       comments: noticeComments = [],
       pagination: {
-        totalPages: noticeCommentsTotalPages = 0,
+        totalPages: noticeCommentsTotalPages = 1,
         perPage: noticeCommentsPerPage = 10,
         currentPage: noticeCommentsCurrentPage = 1
       } = {}
@@ -108,8 +113,9 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
   }, [commentLatestPage, noticeCommentLatestPage]);
 
   if (
-    (type === 'storageBoard' && comments.length === 0) ||
-    (type === 'notice' && noticeComments.length === 0)
+    !isLoading &&
+    ((type === 'storageBoard' && comments.length === 0) ||
+      (type === 'notice' && noticeComments.length === 0))
   ) {
     return (
       <Message title="댓글이 없네요!" message="첫 댓글의 주인공이 되어 주실래요?" hideButton />
@@ -136,24 +142,31 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
         </Flexbox>
       </Flexbox>
       <Flexbox gap={18} direction="vertical">
-        {comments.map((comment) => (
-          <Comment
-            key={`comment-${comment.id}`}
-            type={type}
-            storageId={storageId}
-            id={id}
-            comment={comment}
-          />
-        ))}
-        {noticeComments.map((noticeComment) => (
-          <Comment
-            key={`notice-comment-${noticeComment.id}`}
-            type={type}
-            storageId={storageId}
-            id={id}
-            comment={noticeComment}
-          />
-        ))}
+        {isLoading &&
+          Array.from({ length: 10 }).map((_, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <CommentSkeleton key={`comment-skeleton-${index}`} />
+          ))}
+        {!isLoading &&
+          comments.map((comment) => (
+            <Comment
+              key={`comment-${comment.id}`}
+              type={type}
+              storageId={storageId}
+              id={id}
+              comment={comment}
+            />
+          ))}
+        {!isLoading &&
+          noticeComments.map((noticeComment) => (
+            <Comment
+              key={`notice-comment-${noticeComment.id}`}
+              type={type}
+              storageId={storageId}
+              id={id}
+              comment={noticeComment}
+            />
+          ))}
       </Flexbox>
       {type === 'storageBoard' && (
         <Pagination

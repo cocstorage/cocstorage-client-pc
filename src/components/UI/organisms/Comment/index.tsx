@@ -49,6 +49,7 @@ function Comment({
           src={(user || {}).avatarUrl || ''}
           alt="User Avatar Img"
           round="50%"
+          disableAspectRatio
           defaultIcon="user"
           defaultIconWidth={15}
           defaultIconHeight={15}

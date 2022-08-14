@@ -14,7 +14,14 @@ interface StorageCardProps extends ButtonHTMLAttributes<HTMLDivElement> {
 function StorageCard({ src, name, ...props }: StorageCardProps) {
   return (
     <StyledStorageCard {...props}>
-      <RatioImage width={36} height={36} round={6} src={src} alt="Storage Logo Img" />
+      <RatioImage
+        width={36}
+        height={36}
+        round={6}
+        src={src}
+        alt="Storage Logo Img"
+        disableAspectRatio
+      />
       <Typography>{name}</Typography>
     </StyledStorageCard>
   );

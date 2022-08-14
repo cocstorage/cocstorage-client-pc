@@ -1,10 +1,8 @@
 import { HTMLAttributes, useRef, useState } from 'react';
 
-import { CSSObject } from '@emotion/styled';
+import { Avatar, Box, CSSValue, CustomStyle, Icon } from 'cocstorage-ui';
 
-import { Avatar, Box, CSSValue, Icon } from 'cocstorage-ui';
-
-import { RatioImageInner, RatioImageWrapper } from './RatioImage.styles';
+import { ImageWrapper, RatioImageInner, RatioImageWrapper } from './RatioImage.styles';
 
 export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
   src: string;
@@ -13,6 +11,7 @@ export interface RatioImageProps extends HTMLAttributes<HTMLDivElement> {
   height?: CSSValue;
   ratio?: '1:1' | '4:3' | '16:9';
   round?: CSSValue;
+  disableAspectRatio?: boolean;
   defaultIcon?: 'image' | 'user';
   defaultIconWidth?: number;
   defaultIconHeight?: number;
@@ -25,12 +24,13 @@ function RatioImage({
   height,
   ratio = '1:1',
   round = 6,
+  disableAspectRatio = false,
   defaultIcon = 'image',
   defaultIconWidth = 24,
   defaultIconHeight = 24,
   ...props
 }: RatioImageProps) {
-  const customStyleRef = useRef<CSSObject>({
+  const customStyleRef = useRef<CustomStyle>({
     position: 'absolute',
     top: 0,
     left: 0,
@@ -42,6 +42,23 @@ function RatioImage({
   const [loadFailed, setLoadFailed] = useState<boolean>(false);
 
   const handleError = () => setLoadFailed(true);
+
+  if (disableAspectRatio) {
+    return (
+      <ImageWrapper round={round} {...props} customStyle={{ width, height }}>
+        {!loadFailed && src && (
+          <Avatar width={width} height={height} src={src} alt={alt} round onError={handleError} />
+        )}
+        {(!src || loadFailed) && (
+          <Icon
+            name={defaultIcon === 'image' ? 'ImageOutlined' : 'UserFilled'}
+            width={defaultIconWidth}
+            height={defaultIconHeight}
+          />
+        )}
+      </ImageWrapper>
+    );
+  }
 
   return (
     <Box customStyle={{ width, height }}>
@@ -61,9 +78,9 @@ function RatioImage({
           {(!src || loadFailed) && (
             <Icon
               name={defaultIcon === 'image' ? 'ImageOutlined' : 'UserFilled'}
-              customStyle={customStyleRef.current}
               width={defaultIconWidth}
               height={defaultIconHeight}
+              customStyle={customStyleRef.current}
             />
           )}
         </RatioImageInner>

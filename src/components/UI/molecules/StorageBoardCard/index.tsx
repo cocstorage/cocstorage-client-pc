@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, memo, useMemo } from 'react';
 
-import { Avatar, Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import dayjs from 'dayjs';
 
@@ -77,7 +77,14 @@ function StorageBoardCard({
           <Flexbox direction="vertical" gap={8}>
             <Storage>
               {avatarUrl && (
-                <Avatar width={14} height={14} src={avatarUrl || ''} alt="Storage Logo Img" round />
+                <RatioImage
+                  width={14}
+                  height={14}
+                  src={avatarUrl || ''}
+                  alt="Storage Logo Img"
+                  round={6}
+                  disableAspectRatio
+                />
               )}
               <Typography variant="s2" color={palette.text[type].text1}>
                 {name}
@@ -210,7 +217,14 @@ function StorageBoardCard({
             )}
             <Storage>
               {avatarUrl && (
-                <Avatar width={14} height={14} src={avatarUrl || ''} alt="Storage Logo Img" round />
+                <RatioImage
+                  width={14}
+                  height={14}
+                  src={avatarUrl || ''}
+                  alt="Storage Logo Img"
+                  round={6}
+                  disableAspectRatio
+                />
               )}
               <Typography variant="s2" color={palette.text[type].text1}>
                 {name}
@@ -281,7 +295,14 @@ function StorageBoardCard({
           {!inStorage && (
             <Storage>
               {avatarUrl && (
-                <Avatar width={14} height={14} src={avatarUrl || ''} alt="Storage Logo Img" round />
+                <RatioImage
+                  width={14}
+                  height={14}
+                  src={avatarUrl || ''}
+                  alt="Storage Logo Img"
+                  round={6}
+                  disableAspectRatio
+                />
               )}
               <Typography variant="s2" color={palette.text[type].text1}>
                 {name}
@@ -298,6 +319,7 @@ function StorageBoardCard({
                     width={14}
                     height={14}
                     round="50%"
+                    disableAspectRatio
                   />
                 )}
                 <Typography variant="s2" color={palette.text[type].text1}>

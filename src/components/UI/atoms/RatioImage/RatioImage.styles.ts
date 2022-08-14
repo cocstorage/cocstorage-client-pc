@@ -1,5 +1,7 @@
 import styled, { CSSObject } from '@emotion/styled';
 
+import { Box } from 'cocstorage-ui';
+
 import { RatioImageProps } from '.';
 
 export const RatioImageWrapper = styled.div<Pick<RatioImageProps, 'ratio' | 'round'>>`
@@ -40,4 +42,20 @@ export const RatioImageInner = styled.div`
   right: 0;
   bottom: 0;
   transform: translate(50%, 50%);
+`;
+
+export const ImageWrapper = styled(Box)<Pick<RatioImageProps, 'round'>>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  background-color: ${({ theme: { palette } }) => palette.background.fg1};
+
+  ${({ round }): CSSObject =>
+    round
+      ? {
+          borderRadius: round
+        }
+      : {}};
 `;

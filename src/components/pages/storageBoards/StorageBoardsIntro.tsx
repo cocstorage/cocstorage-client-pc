@@ -42,6 +42,7 @@ function StorageBoardsIntro() {
             round={6}
             src={avatarUrl || ''}
             alt="Storage Logo Img"
+            disableAspectRatio
           />
           <div>
             <Flexbox alignment="center" gap={6}>

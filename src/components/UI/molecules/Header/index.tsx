@@ -118,6 +118,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                       round={4}
                       src={avatarUrl || ''}
                       alt="Storage Logo Img"
+                      disableAspectRatio
                     />
                     <Typography variant="h4" fontWeight="bold">
                       {name}
