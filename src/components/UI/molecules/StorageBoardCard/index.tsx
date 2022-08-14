@@ -92,7 +92,7 @@ function StorageBoardCard({
             </Storage>
             <Typography noWrap lineClamp={2} customStyle={{ flex: 1 }}>
               {dayjs().diff(createdAt, 'day') <= 1 && (
-                <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'middle' }}>
+                <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'bottom' }}>
                   NEW
                 </Badge>
               )}
@@ -166,7 +166,7 @@ function StorageBoardCard({
         >
           <Typography noWrap lineClamp={2} customStyle={{ flex: 1 }}>
             {dayjs().diff(createdAt, 'day') <= 1 && (
-              <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'middle' }}>
+              <Badge severity="success" customStyle={{ marginRight: 4, verticalAlign: 'bottom' }}>
                 NEW
               </Badge>
             )}
