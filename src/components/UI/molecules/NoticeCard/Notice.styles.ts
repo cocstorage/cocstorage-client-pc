@@ -19,13 +19,13 @@ export const Info = styled.div`
 
 export const InfoLabel = styled.span`
   display: flex;
+  align-items: center;
   gap: 2.5px;
 `;
 
 export const UserInfo = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1px;
 `;
 
 export const Dot = styled.div`
