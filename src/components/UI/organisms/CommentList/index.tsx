@@ -126,7 +126,7 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
     <Flexbox direction="vertical" gap={24}>
       <Flexbox gap={4}>
         <Icon name="CommentOutlined" width={20} height={20} />
-        <Flexbox gap={6}>
+        <Flexbox gap={6} alignment="center">
           <Typography variant="h4" fontWeight="bold">
             댓글
           </Typography>

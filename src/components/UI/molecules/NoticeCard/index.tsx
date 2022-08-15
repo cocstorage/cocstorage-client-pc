@@ -41,11 +41,11 @@ function NoticeCard({
         </Typography>
         <Info>
           <InfoLabel>
-            <Icon name="ViewOutlined" width={14} height={14} />
+            <Icon name="ViewOutlined" width={16} height={16} />
             <Typography variant="s2">{viewCount.toLocaleString()}</Typography>
           </InfoLabel>
           <InfoLabel>
-            <Icon name="CommentOutlined" width={14} height={14} />
+            <Icon name="CommentOutlined" width={16} height={16} />
             <Typography variant="s2">{commentTotalCount.toLocaleString()}</Typography>
           </InfoLabel>
           <UserInfo>
