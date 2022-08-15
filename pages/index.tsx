@@ -12,6 +12,7 @@ import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import Header from '@components/UI/molecules/Header';
 import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
 
+import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { fetchIndexNotice } from '@api/v1/notices';
 
 import queryKeys from '@constants/react-query';
@@ -47,6 +48,7 @@ export async function getServerSideProps() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery(queryKeys.notices.indexNotice, fetchIndexNotice);
+  await queryClient.prefetchQuery(queryKeys.issueKeywords.issueKeywordRank, fetchIssueKeywordRank);
 
   return {
     props: {

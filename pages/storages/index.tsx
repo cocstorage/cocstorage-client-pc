@@ -12,6 +12,7 @@ import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import Header from '@components/UI/molecules/Header';
 import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
 
+import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 import { fetchStorages } from '@api/v1/storages';
 
@@ -54,6 +55,7 @@ export async function getServerSideProps() {
     fetchStorageCategories
   );
   await queryClient.prefetchQuery(queryKeys.storages.storages, fetchStorages);
+  await queryClient.prefetchQuery(queryKeys.issueKeywords.issueKeywordRank, fetchIssueKeywordRank);
 
   return {
     props: {
