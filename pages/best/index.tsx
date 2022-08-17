@@ -9,7 +9,6 @@ import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Header } from '@components/UI/molecules';
 import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
 
-import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { fetchPopularStorageBoards } from '@api/v1/storage-boards';
 
 import queryKeys from '@constants/react-query';
@@ -50,7 +49,6 @@ export async function getServerSideProps() {
     queryKeys.storageBoards.popularStorageBoardsWithParams(bestParamsDefault),
     () => fetchPopularStorageBoards(bestParamsDefault)
   );
-  await queryClient.prefetchQuery(queryKeys.issueKeywords.issueKeywordRank, fetchIssueKeywordRank);
 
   return {
     props: {
