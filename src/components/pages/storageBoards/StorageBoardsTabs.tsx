@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil';
 
 import { storageBoardsParamsStateFamily } from '@recoil/storageBoards/atoms';
 
-import { Box, Button, Flexbox, Icon, Tab, Tabs } from 'cocstorage-ui';
+import { Box, Button, Flexbox, Icon, Tab, Tabs, useTheme } from 'cocstorage-ui';
 
 import RatioImage from '@components/UI/atoms/RatioImage';
 import MessageDialog from '@components/UI/organisms/MessageDialog';
@@ -24,6 +24,12 @@ import queryKeys from '@constants/react-query';
 function StorageBoardsTabs() {
   const { query } = useRouter();
   const { path } = query;
+
+  const {
+    theme: {
+      breakpoints: { xl }
+    }
+  } = useTheme();
 
   const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(String(path)));
 
@@ -54,34 +60,41 @@ function StorageBoardsTabs() {
   return (
     <>
       <Wrapper scrollFixed={scrollFixed}>
-        <Flexbox gap={30} alignment="center">
+        <Flexbox
+          justifyContent="space-between"
+          alignment="center"
+          customStyle={{ width: '100%', maxWidth: xl - 40, margin: 'auto' }}
+        >
+          <Flexbox gap={30} alignment="center">
+            {scrollFixed && (
+              <RatioImage
+                width={24}
+                height={24}
+                round={6}
+                src={avatarUrl || ''}
+                alt="Storage Logo Img"
+              />
+            )}
+            <Tabs ref={tabsRef} onChange={handleChange} value={params.orderBy || 'latest'}>
+              <Tab text="최신" value="latest" />
+              <Tab text="베스트" value="popular" />
+              <Tab text="워스트" value="worst" />
+            </Tabs>
+          </Flexbox>
           {scrollFixed && (
-            <RatioImage
-              width={24}
-              height={24}
-              round={6}
-              src={avatarUrl || ''}
-              alt="Storage Logo Img"
+            <Button
+              variant="accent"
+              size="pico"
+              startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
+              iconOnly
+              onClick={handleClick}
+              customStyle={{
+                height: 'fit-content',
+                padding: 5
+              }}
             />
           )}
-          <Tabs ref={tabsRef} onChange={handleChange} value={params.orderBy || 'latest'}>
-            <Tab text="최신" value="latest" />
-            <Tab text="베스트" value="popular" />
-            <Tab text="워스트" value="worst" />
-          </Tabs>
         </Flexbox>
-        {scrollFixed && (
-          <Button
-            variant="accent"
-            size="pico"
-            startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
-            iconOnly
-            onClick={handleClick}
-            customStyle={{
-              padding: 5
-            }}
-          />
-        )}
       </Wrapper>
       {scrollFixed && (
         <Box customStyle={{ height: tabsRef.current ? tabsRef.current?.clientHeight : 40 }} />
