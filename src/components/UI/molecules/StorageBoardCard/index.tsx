@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, memo, useMemo } from 'react';
+import { HTMLAttributes, memo, useMemo } from 'react';
 
 import { Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
@@ -17,7 +17,7 @@ import {
   UserInfo
 } from './StorageBoardCard.styles';
 
-export interface StorageBoardCardProps extends ButtonHTMLAttributes<HTMLDivElement> {
+export interface StorageBoardCardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'emphasize' | 'normal' | 'compact';
   storageBoard: StorageBoard;
   hideSymbolismBadge?: boolean;
@@ -45,7 +45,10 @@ function StorageBoardCard({
   ...props
 }: StorageBoardCardProps) {
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: { text }
+    }
   } = useTheme();
 
   const round = useMemo<number>(() => {
@@ -86,7 +89,7 @@ function StorageBoardCard({
                   disableAspectRatio
                 />
               )}
-              <Typography variant="s2" color={palette.text[type].text1}>
+              <Typography variant="s2" color={text[type].text1}>
                 {name}
               </Typography>
             </Storage>
@@ -226,7 +229,7 @@ function StorageBoardCard({
                   disableAspectRatio
                 />
               )}
-              <Typography variant="s2" color={palette.text[type].text1}>
+              <Typography variant="s2" color={text[type].text1}>
                 {name}
               </Typography>
             </Storage>
@@ -304,7 +307,7 @@ function StorageBoardCard({
                   disableAspectRatio
                 />
               )}
-              <Typography variant="s2" color={palette.text[type].text1}>
+              <Typography variant="s2" color={text[type].text1}>
                 {name}
               </Typography>
             </Storage>
@@ -322,12 +325,12 @@ function StorageBoardCard({
                     disableAspectRatio
                   />
                 )}
-                <Typography variant="s2" color={palette.text[type].text1}>
+                <Typography variant="s2" color={text[type].text1}>
                   {user?.nickname || nickname}
                 </Typography>
               </Flexbox>
               <Dot />
-              <Typography variant="s2" color={palette.text[type].text1}>
+              <Typography variant="s2" color={text[type].text1}>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </UserInfo>

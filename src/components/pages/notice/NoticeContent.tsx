@@ -17,7 +17,10 @@ import { putNoticeViewCount } from '@api/v1/notices';
 function NoticeContent() {
   const { query: { id = 0 } = {} } = useRouter();
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: { text, box }
+    }
   } = useTheme();
 
   const updatedViewCountRef = useRef<boolean>(false);
@@ -54,29 +57,24 @@ function NoticeContent() {
               alt="User Avatar Img"
             />
             <UserInfo>
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Typography variant="s1" color={text[type].text1}>
                 {user?.nickname}
               </Typography>
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Typography variant="s1" color={text[type].text1}>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </UserInfo>
           </Flexbox>
           <Flexbox gap={12}>
             <Flexbox gap={4} alignment="center">
-              <Icon
-                name="CommentOutlined"
-                width={15}
-                height={15}
-                color={palette.text[type].text1}
-              />
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Icon name="CommentOutlined" width={15} height={15} color={text[type].text1} />
+              <Typography variant="s1" color={text[type].text1}>
                 {commentTotalCount.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
-              <Icon name="ViewOutlined" width={15} height={15} color={palette.text[type].text1} />
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Icon name="ViewOutlined" width={15} height={15} color={text[type].text1} />
+              <Typography variant="s1" color={text[type].text1}>
                 {viewCount.toLocaleString()}
               </Typography>
             </Flexbox>
@@ -88,13 +86,10 @@ function NoticeContent() {
           margin: '20px 0',
           width: '100%',
           height: 1,
-          backgroundColor: palette.box.stroked.normal
+          backgroundColor: box.stroked.normal
         }}
       />
       <Content
-        // TODO 추후 UI 라이브러리 반영
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         component="article"
         lineHeight="main"
         dangerouslySetInnerHTML={{ __html: content }}
@@ -104,7 +99,7 @@ function NoticeContent() {
           margin: '20px 0',
           width: '100%',
           height: 1,
-          backgroundColor: palette.box.stroked.normal
+          backgroundColor: box.stroked.normal
         }}
       />
     </>

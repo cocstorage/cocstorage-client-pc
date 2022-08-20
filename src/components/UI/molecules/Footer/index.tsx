@@ -9,7 +9,10 @@ import { Links, StyledFooter } from './Footer.styles';
 function Footer() {
   const router = useRouter();
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: { text }
+    }
   } = useTheme();
 
   const handleClick = (event: MouseEvent<HTMLSpanElement>) => {
@@ -22,13 +25,13 @@ function Footer() {
 
   return (
     <StyledFooter>
-      <Typography variant="s1" color={palette.text[type].text2}>
+      <Typography variant="s1" color={text[type].text2}>
         ⓒ 개념글 저장소 All Rights Reserved.
       </Typography>
       <Links>
         <Typography
           variant="s1"
-          color={palette.text[type].text2}
+          color={text[type].text2}
           data-pathname="/policy"
           onClick={handleClick}
         >
@@ -36,7 +39,7 @@ function Footer() {
         </Typography>
         <Typography
           variant="s1"
-          color={palette.text[type].text2}
+          color={text[type].text2}
           data-pathname="/privacy"
           onClick={handleClick}
         >

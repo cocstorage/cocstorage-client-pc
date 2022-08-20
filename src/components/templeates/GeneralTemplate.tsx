@@ -2,7 +2,7 @@ import { PropsWithChildren, ReactElement } from 'react';
 
 import styled from '@emotion/styled';
 
-export interface GeneralTemplateProps {
+interface GeneralTemplateProps {
   header?: ReactElement;
   footer?: ReactElement;
 }

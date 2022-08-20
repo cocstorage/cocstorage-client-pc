@@ -14,7 +14,13 @@ import useStorage from '@hooks/react-query/useStorage';
 function StorageBoardsIntro() {
   const { query } = useRouter();
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: {
+        text,
+        secondary: { yellow }
+      }
+    }
   } = useTheme();
 
   const { data: { path, name, avatarUrl, description, user, createdAt } = {} } = useStorage(
@@ -55,7 +61,7 @@ function StorageBoardsIntro() {
                   width={20}
                   height={20}
                   onClick={handleMenuOpen}
-                  color={palette.text[type].text1}
+                  color={text[type].text1}
                   customStyle={{ display: 'block' }}
                 />
               </IconButton>
@@ -65,15 +71,13 @@ function StorageBoardsIntro() {
                     <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                       관리자
                     </Typography>
-                    <Typography color={palette.text[type].text1}>
-                      {(user || {}).nickname}
-                    </Typography>
+                    <Typography color={text[type].text1}>{(user || {}).nickname}</Typography>
                   </Flexbox>
                   <Flexbox>
                     <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                       개설일
                     </Typography>
-                    <Typography color={palette.text[type].text1}>
+                    <Typography color={text[type].text1}>
                       {dayjs(createdAt).format('YYYY. MM. DD')}
                     </Typography>
                   </Flexbox>
@@ -81,20 +85,20 @@ function StorageBoardsIntro() {
                     <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                       URL
                     </Typography>
-                    <Typography color={palette.text[type].text1}>
+                    <Typography color={text[type].text1}>
                       {`https://www.cocstorage.com/storages/${path}`}
                     </Typography>
                   </Flexbox>
                 </Flexbox>
               </Menu>
             </Flexbox>
-            <Typography color={palette.text[type].text1} customStyle={{ marginTop: 2 }}>
+            <Typography color={text[type].text1} customStyle={{ marginTop: 2 }}>
               {description}
             </Typography>
             <Box customStyle={{ marginTop: 16 }}>
               <Flexbox alignment="center" gap={6}>
                 <Typography fontWeight="medium">관리자</Typography>
-                <Typography color={palette.text[type].text1}>{(user || {}).nickname}</Typography>
+                <Typography color={text[type].text1}>{(user || {}).nickname}</Typography>
               </Flexbox>
             </Box>
           </div>
@@ -102,14 +106,7 @@ function StorageBoardsIntro() {
         <Flexbox gap={6} alignment="center">
           <Button
             size="small"
-            startIcon={
-              <Icon
-                name="StarOutlined"
-                width={15}
-                height={15}
-                color={palette.secondary.yellow.main}
-              />
-            }
+            startIcon={<Icon name="StarOutlined" width={15} height={15} color={yellow.main} />}
             iconOnly
             onClick={handleDialogOpen}
           />

@@ -4,8 +4,6 @@ import { useRouter } from 'next/router';
 
 import { QueryClient, dehydrate } from 'react-query';
 
-import { Box } from 'cocstorage-ui';
-
 import { NoticeContent, NoticeHead } from '@components/pages/notice';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
@@ -27,9 +25,7 @@ function Notice() {
         {id && (
           <>
             <CommentList type="notice" id={Number(id)} />
-            <Box customStyle={{ margin: '35px 0 50px 0' }}>
-              <CommentForm type="notice" id={Number(id)} />
-            </Box>
+            <CommentForm type="notice" id={Number(id)} customStyle={{ margin: '35px 0 50px 0' }} />
           </>
         )}
       </GeneralTemplate>

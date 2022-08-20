@@ -1,6 +1,6 @@
 import { QueryClient, dehydrate } from 'react-query';
 
-import { Box, Grid } from 'cocstorage-ui';
+import { Grid } from 'cocstorage-ui';
 
 import {
   IndexBestWorstStorageBoardGrid,
@@ -23,9 +23,7 @@ function Index() {
       <GeneralTemplate header={<Header scrollFixedTrigger />}>
         <Grid container columnGap={20}>
           <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-            <Box customStyle={{ position: 'fixed', width: 183 }}>
-              <SidePopularStorageList />
-            </Box>
+            <SidePopularStorageList customStyle={{ position: 'fixed', width: 183 }} />
           </Grid>
           <Grid component="section" item auto>
             <IndexNoticeAlert />
@@ -33,9 +31,7 @@ function Index() {
             <IndexLatestStorageBoardGrid />
           </Grid>
           <Grid component="section" item customStyle={{ minWidth: 203 }}>
-            <Box customStyle={{ position: 'fixed', width: 183 }}>
-              <IssueKeywordRank />
-            </Box>
+            <IssueKeywordRank customStyle={{ position: 'fixed', width: 183 }} />
           </Grid>
         </Grid>
       </GeneralTemplate>

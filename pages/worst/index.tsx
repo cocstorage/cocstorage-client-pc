@@ -2,7 +2,7 @@ import { QueryClient, dehydrate } from 'react-query';
 
 import { worstParamsDefault } from '@recoil/worst/atoms';
 
-import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
+import { Alert, Grid, Icon } from 'cocstorage-ui';
 
 import { WorstHead, WorstStorageBoardList, WorstTitle } from '@components/pages/worst';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
@@ -20,9 +20,7 @@ function Worst() {
       <GeneralTemplate header={<Header scrollFixedTrigger />}>
         <Grid container columnGap={20}>
           <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-            <Box customStyle={{ position: 'fixed', width: 183 }}>
-              <SidePopularStorageList />
-            </Box>
+            <SidePopularStorageList customStyle={{ position: 'fixed', width: 183 }} />
           </Grid>
           <Grid component="section" item auto>
             <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
@@ -32,9 +30,7 @@ function Worst() {
             <WorstStorageBoardList />
           </Grid>
           <Grid component="section" item customStyle={{ minWidth: 203 }}>
-            <Box customStyle={{ position: 'fixed', width: 183 }}>
-              <IssueKeywordRank />
-            </Box>
+            <IssueKeywordRank customStyle={{ position: 'fixed', width: 183 }} />
           </Grid>
         </Grid>
       </GeneralTemplate>

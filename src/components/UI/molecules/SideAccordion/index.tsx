@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-import { Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Button, CustomStyle, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import { List, StyledSideAccordion } from './SideAccordion.styles';
 
@@ -8,6 +8,7 @@ export interface SideAccordionProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   listGap?: number;
   disableToggle?: boolean;
+  customStyle?: CustomStyle;
 }
 
 function SideAccordion({
@@ -15,10 +16,14 @@ function SideAccordion({
   title,
   listGap = 12,
   disableToggle = false,
+  customStyle,
   ...props
 }: PropsWithChildren<SideAccordionProps>) {
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: { text }
+    }
   } = useTheme();
 
   const [openToggleButton, setOpenToggleButton] = useState<boolean>(true);
@@ -46,7 +51,7 @@ function SideAccordion({
   }, [disableToggle, toggleCount]);
 
   return (
-    <StyledSideAccordion {...props}>
+    <StyledSideAccordion {...props} css={customStyle}>
       <Flexbox alignment="center" justifyContent="space-between">
         <Typography variant="h4" fontWeight="bold">
           {title}
@@ -64,7 +69,7 @@ function SideAccordion({
             }
             onClick={handleClick}
             customStyle={{
-              color: palette.text[type].text1
+              color: text[type].text1
             }}
           >
             {toggleList ? '펼치기' : '접기'}

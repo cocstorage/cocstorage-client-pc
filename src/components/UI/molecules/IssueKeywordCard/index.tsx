@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, memo } from 'react';
+import { HTMLAttributes, memo } from 'react';
 
 import { Badge, Icon, Tag, Typography } from 'cocstorage-ui';
 
@@ -6,7 +6,7 @@ import { IssueKeyword } from '@dto/issue-keywords';
 
 import { Keyword, StyledIssueKeywordCard } from './IssueKeywordCard.styles';
 
-interface IssueKeywordCardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IssueKeywordCardProps extends HTMLAttributes<HTMLDivElement> {
   issueKeyword: IssueKeyword;
   isTopTier?: boolean;
 }

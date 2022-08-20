@@ -9,7 +9,7 @@ import { useRecoilState } from 'recoil';
 import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
-import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
+import { Button, CustomStyle, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
 
 import MessageDialog from '@components/UI/organisms/MessageDialog';
 
@@ -30,9 +30,10 @@ import validators from '@constants/validators';
 interface CommentFormProps {
   type?: 'storageBoard' | 'notice';
   id: number;
+  customStyle?: CustomStyle;
 }
 
-function CommentForm({ type = 'storageBoard', id }: CommentFormProps) {
+function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProps) {
   const {
     theme: {
       palette: { box }
@@ -40,6 +41,9 @@ function CommentForm({ type = 'storageBoard', id }: CommentFormProps) {
   } = useTheme();
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
   const [noticeCommentsParams, setNoticeCommentsParams] = useRecoilState(noticeCommentsParamsState);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const [newCustomStyle] = useState({ ...customStyle, flexGrow: 1 });
 
   const [nickname, setNickname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -197,12 +201,7 @@ function CommentForm({ type = 'storageBoard', id }: CommentFormProps) {
 
   return (
     <>
-      <Flexbox
-        gap={20}
-        customStyle={{
-          flexGrow: 1
-        }}
-      >
+      <Flexbox gap={20} customStyle={newCustomStyle}>
         <form>
           <Flexbox gap={8} direction="vertical" justifyContent="space-between">
             <TextBar

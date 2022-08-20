@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import { QueryClient, dehydrate } from 'react-query';
 
-import { Box, Flexbox, Grid, Typography } from 'cocstorage-ui';
+import { Flexbox, Grid, Typography } from 'cocstorage-ui';
 
 import { StorageBoardContent, StorageBoardHead } from '@components/pages/storageBoard';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
@@ -34,9 +34,7 @@ function StorageBoard() {
           <Grid component="section" item auto>
             <StorageBoardContent />
             <CommentList id={Number(id)} />
-            <Box customStyle={{ margin: '35px 0 20px 0' }}>
-              <CommentForm id={Number(id)} />
-            </Box>
+            <CommentForm id={Number(id)} customStyle={{ margin: '35px 0 20px 0' }} />
             <GoogleAdSense
               html={
                 '<ins class="adsbygoogle"\n' +
@@ -58,9 +56,7 @@ function StorageBoard() {
             </Flexbox>
           </Grid>
           <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-            <Box customStyle={{ position: 'fixed', width: 183 }}>
-              <SidePopularStorageList />
-            </Box>
+            <SidePopularStorageList customStyle={{ position: 'fixed', width: 183 }} />
           </Grid>
         </Grid>
       </GeneralTemplate>

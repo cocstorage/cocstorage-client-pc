@@ -23,7 +23,9 @@ interface CommentListProps {
 
 function CommentList({ type = 'storageBoard', id }: CommentListProps) {
   const {
-    theme: { palette }
+    theme: {
+      palette: { primary }
+    }
   } = useTheme();
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
   const [noticeCommentsParams, setNoticeCommentsParams] = useRecoilState(noticeCommentsParamsState);
@@ -134,7 +136,7 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
             variant="h4"
             fontWeight="bold"
             customStyle={{
-              color: palette.primary.main
+              color: primary.main
             }}
           >
             {(commentTotalCount || noticeCommentTotalCount).toLocaleString()}

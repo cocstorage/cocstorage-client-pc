@@ -1,10 +1,16 @@
 import Link from 'next/link';
 
+import { CustomStyle } from 'cocstorage-ui';
+
 import { SideAccordion, StorageCard } from '@components/UI/molecules';
 
-function SitePopularStorageList() {
+interface SidePopularStorageListProps {
+  customStyle?: CustomStyle;
+}
+
+function SidePopularStorageListProps({ customStyle }: SidePopularStorageListProps) {
   return (
-    <SideAccordion title="인기 게시판">
+    <SideAccordion title="인기 게시판" css={customStyle}>
       <Link href="/storages/ibroadcast">
         <a>
           <StorageCard
@@ -49,4 +55,4 @@ function SitePopularStorageList() {
   );
 }
 
-export default SitePopularStorageList;
+export default SidePopularStorageListProps;

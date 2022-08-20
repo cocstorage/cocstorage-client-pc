@@ -31,7 +31,12 @@ function StoragesLeftMenu() {
   };
 
   return (
-    <SideAccordion title="카테고리" listGap={2} disableToggle>
+    <SideAccordion
+      title="카테고리"
+      listGap={2}
+      disableToggle
+      customStyle={{ position: 'fixed', width: 156 }}
+    >
       {categories.map((category) => (
         <Category
           key={`category-${category.id}`}

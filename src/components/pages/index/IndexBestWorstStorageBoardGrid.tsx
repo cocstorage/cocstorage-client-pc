@@ -18,7 +18,13 @@ import queryKeys from '@constants/react-query';
 function IndexBestWorstStorageBoardGrid() {
   const router = useRouter();
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: {
+        text,
+        secondary: { red }
+      }
+    }
   } = useTheme();
 
   const { data: { boards: bestBoards = [] } = {}, isLoading: isLoadingBest } = useQuery(
@@ -65,7 +71,7 @@ function IndexBestWorstStorageBoardGrid() {
               베스트
             </Tag>
             <Typography variant="h4" fontWeight="bold">
-              오 좋아요!
+              ㅇㄱㄹㅇ
             </Typography>
           </Flexbox>
           <Button
@@ -74,7 +80,7 @@ function IndexBestWorstStorageBoardGrid() {
             endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
             onClick={handleClickMoreBest}
             customStyle={{
-              color: palette.text[type].text1
+              color: text[type].text1
             }}
           >
             더보기
@@ -139,14 +145,7 @@ function IndexBestWorstStorageBoardGrid() {
           <Flexbox alignment="center" justifyContent="space-between" gap={8}>
             <Tag
               variant="semiAccent"
-              startIcon={
-                <Icon
-                  name="ThumbsDownOutlined"
-                  width={14}
-                  height={14}
-                  color={palette.secondary.red.main}
-                />
-              }
+              startIcon={<Icon name="ThumbsDownOutlined" width={14} height={14} color={red.main} />}
               customStyle={{
                 padding: '0 6px',
                 height: 21,
@@ -154,14 +153,14 @@ function IndexBestWorstStorageBoardGrid() {
                 fontSize: 12,
                 lineHeight: '18px',
                 letterSpacing: '-0.6px',
-                backgroundColor: palette.secondary.red.bg,
-                color: palette.secondary.red.main
+                backgroundColor: red.bg,
+                color: red.main
               }}
             >
               워스트
             </Tag>
             <Typography variant="h4" fontWeight="bold">
-              선 넘네...
+              와 선 넘네
             </Typography>
           </Flexbox>
           <Button
@@ -170,7 +169,7 @@ function IndexBestWorstStorageBoardGrid() {
             endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
             onClick={handleClickMoreWorst}
             customStyle={{
-              color: palette.text[type].text1
+              color: text[type].text1
             }}
           >
             더보기

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useQuery } from 'react-query';
 
-import { Flexbox } from 'cocstorage-ui';
+import { CustomStyle, Flexbox } from 'cocstorage-ui';
 
 import { Footer, IssueKeywordCard, SideAccordion } from '@components/UI/molecules';
 import IssueKeywordCardSkeleton from '@components/UI/molecules/IssueKeywordCard/IssueKeywordCardSkeleton';
@@ -13,7 +13,11 @@ import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 
 import queryKeys from '@constants/react-query';
 
-function IssueKeywordRank() {
+interface IssueKeywordRankProps {
+  customStyle?: CustomStyle;
+}
+
+function IssueKeywordRank({ customStyle }: IssueKeywordRankProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [message] = useState<{
     title: string;
@@ -35,7 +39,7 @@ function IssueKeywordRank() {
 
   return (
     <>
-      <Flexbox direction="vertical" gap={20}>
+      <Flexbox direction="vertical" gap={20} customStyle={customStyle}>
         <SideAccordion title="지금 막 뜨고 있어요!" disableToggle>
           {isLoading &&
             Array.from({ length: 10 }).map((_, index) => (

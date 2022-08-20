@@ -19,7 +19,10 @@ function NoticeCard({
   ...props
 }: NoticeCardProps) {
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: { text }
+    }
   } = useTheme();
 
   return (
@@ -60,12 +63,12 @@ function NoticeCard({
                   disableAspectRatio
                 />
               )}
-              <Typography variant="s2" color={palette.text[type].text1}>
+              <Typography variant="s2" color={text[type].text1}>
                 {user?.nickname}
               </Typography>
             </Flexbox>
             <Dot />
-            <Typography variant="s2" color={palette.text[type].text1}>
+            <Typography variant="s2" color={text[type].text1}>
               {dayjs(createdAt).fromNow()}
             </Typography>
           </UserInfo>

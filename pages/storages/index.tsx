@@ -1,6 +1,6 @@
 import { QueryClient, dehydrate } from 'react-query';
 
-import { Alert, Box, Grid, Icon } from 'cocstorage-ui';
+import { Alert, Grid, Icon } from 'cocstorage-ui';
 
 import {
   StoragesCardGrid,
@@ -24,9 +24,7 @@ function Storages() {
       <GeneralTemplate header={<Header scrollFixedTrigger />}>
         <Grid container columnGap={20}>
           <Grid component="section" item customStyle={{ minWidth: 176, marginRight: 27 }}>
-            <Box customStyle={{ position: 'fixed', width: 156 }}>
-              <StoragesLeftMenu />
-            </Box>
+            <StoragesLeftMenu />
           </Grid>
           <Grid component="section" item auto>
             <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
@@ -36,9 +34,7 @@ function Storages() {
             <StoragesCardGrid />
           </Grid>
           <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-            <Box customStyle={{ position: 'fixed', width: 183 }}>
-              <IssueKeywordRank />
-            </Box>
+            <IssueKeywordRank customStyle={{ position: 'fixed', width: 183 }} />
           </Grid>
         </Grid>
       </GeneralTemplate>

@@ -30,7 +30,10 @@ import queryKeys from '@constants/react-query';
 function StorageBoardContent() {
   const { query: { id = 0 } = {} } = useRouter();
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: { primary, text, box }
+    }
   } = useTheme();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -155,51 +158,36 @@ function StorageBoardContent() {
               defaultIconHeight={12}
             />
             <UserInfo>
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Typography variant="s1" color={text[type].text1}>
                 {nickname || user?.nickname}
               </Typography>
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Typography variant="s1" color={text[type].text1}>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </UserInfo>
           </Flexbox>
           <Flexbox gap={12}>
             <Flexbox gap={4} alignment="center">
-              <Icon
-                name="ThumbsUpOutlined"
-                width={15}
-                height={15}
-                color={palette.text[type].text1}
-              />
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Icon name="ThumbsUpOutlined" width={15} height={15} color={text[type].text1} />
+              <Typography variant="s1" color={text[type].text1}>
                 {thumbUp.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
-              <Icon
-                name="ThumbsDownOutlined"
-                width={15}
-                height={15}
-                color={palette.text[type].text1}
-              />
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Icon name="ThumbsDownOutlined" width={15} height={15} color={text[type].text1} />
+              <Typography variant="s1" color={text[type].text1}>
                 {thumbDown.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
-              <Icon
-                name="CommentOutlined"
-                width={15}
-                height={15}
-                color={palette.text[type].text1}
-              />
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Icon name="CommentOutlined" width={15} height={15} color={text[type].text1} />
+              <Typography variant="s1" color={text[type].text1}>
                 {commentTotalCount.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
-              <Icon name="ViewOutlined" width={15} height={15} color={palette.text[type].text1} />
-              <Typography variant="s1" color={palette.text[type].text1}>
+              <Icon name="ViewOutlined" width={15} height={15} color={text[type].text1} />
+              <Typography variant="s1" color={text[type].text1}>
                 {viewCount.toLocaleString()}
               </Typography>
             </Flexbox>
@@ -211,7 +199,7 @@ function StorageBoardContent() {
           margin: '20px 0',
           width: '100%',
           height: 1,
-          backgroundColor: palette.box.stroked.normal
+          backgroundColor: box.stroked.normal
         }}
       />
       {sourceCode && (
@@ -237,9 +225,6 @@ function StorageBoardContent() {
         }
       />
       <Content
-        // TODO 추후 UI 라이브러리 반영
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         component="article"
         lineHeight="main"
         dangerouslySetInnerHTML={{ __html: content }}
@@ -247,14 +232,12 @@ function StorageBoardContent() {
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
           size="small"
-          startIcon={
-            <Icon name="ThumbsUpFilled" width={15} height={15} color={palette.primary.main} />
-          }
+          startIcon={<Icon name="ThumbsUpFilled" width={15} height={15} color={primary.main} />}
           customStyle={{
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
             fontWeight: 700,
-            color: palette.primary.main
+            color: primary.main
           }}
           data-type={0}
           onClick={handleClickRecommend}
@@ -264,17 +247,12 @@ function StorageBoardContent() {
         <Button
           size="small"
           startIcon={
-            <Icon
-              name="ThumbsDownOutlined"
-              width={15}
-              height={15}
-              color={palette.text[type].text1}
-            />
+            <Icon name="ThumbsDownOutlined" width={15} height={15} color={text[type].text1} />
           }
           customStyle={{
             borderTopLeftRadius: 0,
             borderBottomLeftRadius: 0,
-            color: palette.text[type].text1
+            color: text[type].text1
           }}
           data-type={1}
           onClick={handleClickRecommend}
@@ -287,7 +265,7 @@ function StorageBoardContent() {
           margin: '20px 0',
           width: '100%',
           height: 1,
-          backgroundColor: palette.box.stroked.normal
+          backgroundColor: box.stroked.normal
         }}
       />
       <MessageDialog open={open} onClose={handleClose} {...errorMessage} />

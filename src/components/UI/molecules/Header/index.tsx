@@ -23,7 +23,10 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const { query } = router;
 
   const {
-    theme: { type, palette }
+    theme: {
+      type,
+      palette: { text, box }
+    }
   } = useTheme();
 
   const { path, avatarUrl = '', name = '' } = useStorageData(String(query.path)) || {};
@@ -108,7 +111,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                     customStyle={{
                       width: 1,
                       height: 16,
-                      backgroundColor: palette.box.stroked.normal
+                      backgroundColor: box.stroked.normal
                     }}
                   />
                   <Flexbox gap={10} alignment="center">
@@ -143,7 +146,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               onChange={handleChange}
               placeholder="검색"
               customStyle={{
-                backgroundColor: palette.box.filled.normal,
+                backgroundColor: box.filled.normal,
                 borderColor: 'transparent'
               }}
               disabled
@@ -192,9 +195,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               customStyle={{
                 height: 32,
                 padding: 0,
-                color: palette.text[type].main,
+                color: text[type].main,
                 '& svg path': {
-                  fill: palette.text[type].main
+                  fill: text[type].main
                 },
                 cursor: 'pointer'
               }}
