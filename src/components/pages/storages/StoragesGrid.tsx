@@ -15,7 +15,7 @@ import { fetchStorages } from '@api/v1/storages';
 
 import queryKeys from '@constants/react-query';
 
-function StoragesCardGrid() {
+function StoragesGrid() {
   const selectedCategoryId = useRecoilValue<number>(selectedCategoryIdState);
 
   const { data: { categories = [] } = {} } = useQuery(
@@ -72,4 +72,4 @@ function StoragesCardGrid() {
   );
 }
 
-export default StoragesCardGrid;
+export default StoragesGrid;

@@ -3,7 +3,7 @@ import { QueryClient, dehydrate } from 'react-query';
 import { Alert, Grid, Icon } from 'cocstorage-ui';
 
 import {
-  StoragesCardGrid,
+  StoragesGrid,
   StoragesHead,
   StoragesLeftMenu,
   StoragesPopularList
@@ -31,7 +31,7 @@ function Storages() {
               게시판을 만들 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
             </Alert>
             <StoragesPopularList />
-            <StoragesCardGrid />
+            <StoragesGrid />
           </Grid>
           <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
             <IssueKeywordRank customStyle={{ position: 'fixed', width: 183 }} />
