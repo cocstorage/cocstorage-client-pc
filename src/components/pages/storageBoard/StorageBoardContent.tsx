@@ -48,6 +48,7 @@ function StorageBoardContent() {
   });
 
   const updatedViewCountRef = useRef<boolean>(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const queryClient = useQueryClient();
 
@@ -138,6 +139,20 @@ function StorageBoardContent() {
     }
   }, [mutate, storage, storageBoardId]);
 
+  // TODO video autoplay 가 동작하지 않는 문제, 서버 쪽 크롤링 로직 확인 후 수정
+  // 임시 처리
+  useEffect(() => {
+    if (content && contentRef.current) {
+      const videos = contentRef.current.getElementsByTagName('video');
+
+      if (videos.length) {
+        for (let i = 0; i < videos.length; i += 1) {
+          videos[i].play();
+        }
+      }
+    }
+  }, [content]);
+
   return (
     <>
       <Flexbox direction="vertical" gap={8}>
@@ -225,6 +240,7 @@ function StorageBoardContent() {
         }
       />
       <Content
+        ref={contentRef}
         component="article"
         lineHeight="main"
         dangerouslySetInnerHTML={{ __html: content }}
