@@ -66,7 +66,8 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
         perPage: noticeCommentsPerPage = 10,
         currentPage: noticeCommentsCurrentPage = 1
       } = {}
-    } = {}
+    } = {},
+    isLoading: isLoadingNoticeComments
   } = useNoticeComments(id, noticeCommentsParams, {
     enabled: type === 'notice' && noticeCommentsParams.page !== 0,
     keepPreviousData: true
@@ -116,6 +117,7 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
 
   if (
     !isLoading &&
+    !isLoadingNoticeComments &&
     ((type === 'storageBoard' && comments.length === 0) ||
       (type === 'notice' && noticeComments.length === 0))
   ) {
@@ -144,12 +146,14 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
         </Flexbox>
       </Flexbox>
       <Flexbox gap={18} direction="vertical">
-        {isLoading &&
+        {type === 'storageBoard' &&
+          isLoading &&
           Array.from({ length: 10 }).map((_, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <CommentSkeleton key={`comment-skeleton-${index}`} />
           ))}
-        {!isLoading &&
+        {type === 'storageBoard' &&
+          !isLoading &&
           comments.map((comment) => (
             <Comment
               key={`comment-${comment.id}`}
@@ -159,7 +163,14 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
               comment={comment}
             />
           ))}
-        {!isLoading &&
+        {type === 'notice' &&
+          isLoadingNoticeComments &&
+          Array.from({ length: 10 }).map((_, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <CommentSkeleton key={`comment-skeleton-${index}`} />
+          ))}
+        {type === 'notice' &&
+          !isLoadingNoticeComments &&
           noticeComments.map((noticeComment) => (
             <Comment
               key={`notice-comment-${noticeComment.id}`}
