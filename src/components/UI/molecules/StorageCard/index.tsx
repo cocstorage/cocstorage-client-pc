@@ -1,12 +1,10 @@
-import { ButtonHTMLAttributes, memo } from 'react';
+import { HTMLAttributes, memo } from 'react';
 
-import { Typography } from 'cocstorage-ui';
-
-import RatioImage from '@components/UI/atoms/RatioImage';
+import { Image, Typography } from 'cocstorage-ui';
 
 import { StyledStorageCard } from './StorageCard.styles';
 
-interface StorageCardProps extends ButtonHTMLAttributes<HTMLDivElement> {
+interface StorageCardProps extends HTMLAttributes<HTMLDivElement> {
   src: string;
   name: string;
 }
@@ -14,14 +12,7 @@ interface StorageCardProps extends ButtonHTMLAttributes<HTMLDivElement> {
 function StorageCard({ src, name, ...props }: StorageCardProps) {
   return (
     <StyledStorageCard {...props}>
-      <RatioImage
-        width={36}
-        height={36}
-        round={6}
-        src={src}
-        alt="Storage Logo Img"
-        disableAspectRatio
-      />
+      <Image width={36} height={36} round={6} src={src} alt="Storage Logo Img" disableAspectRatio />
       <Typography>{name}</Typography>
     </StyledStorageCard>
   );

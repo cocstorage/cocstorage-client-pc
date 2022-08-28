@@ -2,15 +2,14 @@ import { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 
 import styled from '@emotion/styled';
 
 import { Avatar, Box, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
-import dayjs from 'dayjs';
-
-import useNotice from '@hooks/react-query/useNotice';
+import useNotice from '@hooks/query/useNotice';
 
 import { putNoticeViewCount } from '@api/v1/notices';
 
@@ -23,7 +22,7 @@ function NoticeContent() {
     }
   } = useTheme();
 
-  const updatedViewCountRef = useRef<boolean>(false);
+  const updatedViewCountRef = useRef(false);
 
   const {
     data: { user, subject = '', content = '', commentTotalCount = 0, viewCount = 0, createdAt } = {}

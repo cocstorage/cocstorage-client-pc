@@ -1,4 +1,4 @@
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { Alert, Grid, Icon } from 'cocstorage-ui';
 
@@ -15,7 +15,7 @@ import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 import { fetchStorages } from '@api/v1/storages';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function Storages() {
   return (

@@ -1,10 +1,9 @@
 import { memo, useRef, useState } from 'react';
 
-import { Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
-
 import dayjs from 'dayjs';
 
-import RatioImage from '@components/UI/atoms/RatioImage';
+import { Button, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
+
 import ReplyMenu from '@components/UI/organisms/ReplyMenu';
 
 import { NoticeCommentReply } from '@dto/notice-comment-replies';
@@ -32,9 +31,9 @@ function Reply({
     }
   } = useTheme();
 
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleClickMenu = () => setMenuOpen(true);
   const handleCloseMenu = () => setMenuOpen(false);
@@ -55,15 +54,17 @@ function Reply({
         }
       }}
     >
-      <RatioImage
+      <Image
         width={30}
         height={30}
         src={(user || {}).avatarUrl || ''}
         alt="User Avatar Img"
         round="50%"
-        defaultIcon="user"
-        defaultIconWidth={15}
-        defaultIconHeight={15}
+        fallback={{
+          iconName: 'UserFilled',
+          width: 15,
+          height: 15
+        }}
       />
       <Flexbox direction="vertical" customStyle={{ flex: 1 }}>
         <Flexbox gap={4} alignment="center">

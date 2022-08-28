@@ -1,24 +1,15 @@
-import { useCallback, useRef, useState } from 'react';
-
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 
-import { Hydrate, MutationCache, QueryCache, QueryClient, QueryClientProvider } from 'react-query';
-
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import dayjs from 'dayjs';
+import RelativeTime from 'dayjs/plugin/relativeTime';
 
 import { RecoilRoot } from 'recoil';
 
-import type { AxiosError } from 'axios';
-
-import dayjs from 'dayjs';
-
-import RelativeTime from 'dayjs/plugin/relativeTime';
-
-import { MessageDialog, PageProgress, ThemeRoot } from '@components/UI/organisms';
-
-import { getErrorMessageByCode } from '@utils';
+import { ErrorBoundary, FeedbackDialog, PageProgress, ThemeRoot } from '@components/UI/organisms';
 
 import 'dayjs/locale/ko';
 import '@styles/base.css';
@@ -26,82 +17,18 @@ import '@styles/base.css';
 dayjs.locale('ko');
 dayjs.extend(RelativeTime);
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+      retry: 1
+    }
+  }
+});
+
 function App({ Component, pageProps }: AppProps) {
-  const [open, setOpen] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<{
-    title: string;
-    code: string;
-    message: string;
-  }>({
-    title: '알 수 없는 오류가 발생했어요.',
-    code: '',
-    message: '문제가 지속된다면 관리자에게 문의해 주세요!'
-  });
-
-  const queryClient = useRef<QueryClient>(
-    new QueryClient({
-      defaultOptions: {
-        queries: {
-          refetchOnMount: false,
-          refetchOnReconnect: false,
-          refetchOnWindowFocus: false,
-          retry: 1
-        }
-      },
-      mutationCache: new MutationCache({
-        onError: (
-          error,
-          query = {
-            shouldBeHandledByGlobalErrorHandler: true
-          }
-        ) => {
-          if (
-            !(query as { shouldBeHandledByGlobalErrorHandler: boolean })
-              .shouldBeHandledByGlobalErrorHandler
-          )
-            return;
-
-          const asError = error as AxiosError;
-
-          if (asError && asError.response) {
-            const { data = {} } = (asError || {}).response || {};
-
-            setErrorMessage({
-              title: getErrorMessageByCode(data.code),
-              code: data.code ? data.code : 'NONE',
-              message: '문제가 지속된다면 위의 코드와 함께 관리자에게 문의해 주세요!'
-            });
-
-            setOpen(true);
-          } else {
-            setOpen(true);
-          }
-        }
-      }),
-      queryCache: new QueryCache({
-        onError: (error) => {
-          const asError = error as AxiosError;
-
-          if (asError && asError.response) {
-            const { data = {} } = (asError || {}).response || {};
-
-            setErrorMessage({
-              title: getErrorMessageByCode(data.code),
-              code: data.code ? data.code : 'NONE',
-              message: '문제가 지속된다면 위의 코드와 함께 관리자에게 문의해 주세요!'
-            });
-
-            setOpen(true);
-          } else {
-            setOpen(true);
-          }
-        }
-      })
-    })
-  );
-
-  const handleClose = useCallback(() => setOpen(false), []);
-
   return (
     <>
       <Head>
@@ -152,18 +79,20 @@ function App({ Component, pageProps }: AppProps) {
           />
         </>
       )}
-      <RecoilRoot>
-        <QueryClientProvider client={queryClient.current}>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
           <ThemeRoot>
-            <PageProgress />
             <Hydrate state={pageProps.dehydratedState}>
-              <Component {...pageProps} />
+              <ErrorBoundary>
+                <PageProgress />
+                <Component {...pageProps} />
+                <FeedbackDialog />
+              </ErrorBoundary>
             </Hydrate>
-            <MessageDialog open={open} onClose={handleClose} {...errorMessage} />
           </ThemeRoot>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </RecoilRoot>
+        </RecoilRoot>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </>
   );
 }

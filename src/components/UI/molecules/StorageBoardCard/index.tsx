@@ -1,10 +1,8 @@
 import { HTMLAttributes, memo, useMemo } from 'react';
 
-import { Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
-
 import dayjs from 'dayjs';
 
-import RatioImage from '@components/UI/atoms/RatioImage';
+import { Badge, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
 
 import { StorageBoard } from '@dto/storage-boards';
 
@@ -65,11 +63,12 @@ function StorageBoardCard({
   if (variant === 'emphasize') {
     return (
       <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-        <RatioImage
+        <Image
           ratio="16:9"
           src={thumbnailUrl || ''}
           alt="Thumbnail Img"
           width={183}
+          height="auto"
           round={round}
         />
         <Flexbox
@@ -80,7 +79,7 @@ function StorageBoardCard({
           <Flexbox direction="vertical" gap={8}>
             <Storage>
               {avatarUrl && (
-                <RatioImage
+                <Image
                   width={14}
                   height={14}
                   src={avatarUrl || ''}
@@ -154,11 +153,12 @@ function StorageBoardCard({
   if (variant === 'normal') {
     return (
       <StyledStorageBoardCard variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-        <RatioImage
+        <Image
           ratio="4:3"
           src={thumbnailUrl || ''}
           alt="Thumbnail Img"
           width={82}
+          height="auto"
           round={round}
         />
         <Flexbox
@@ -220,7 +220,7 @@ function StorageBoardCard({
             )}
             <Storage>
               {avatarUrl && (
-                <RatioImage
+                <Image
                   width={14}
                   height={14}
                   src={avatarUrl || ''}
@@ -298,7 +298,7 @@ function StorageBoardCard({
           {!inStorage && (
             <Storage>
               {avatarUrl && (
-                <RatioImage
+                <Image
                   width={14}
                   height={14}
                   src={avatarUrl || ''}
@@ -316,7 +316,7 @@ function StorageBoardCard({
             <UserInfo>
               <Flexbox gap={4} alignment="center">
                 {user?.avatarUrl && (
-                  <RatioImage
+                  <Image
                     src={user?.avatarUrl || ''}
                     alt="User Avatar Img"
                     width={14}
@@ -338,11 +338,12 @@ function StorageBoardCard({
         </Info>
       </Flexbox>
       {thumbnailUrl && (
-        <RatioImage
+        <Image
           ratio="16:9"
           src={thumbnailUrl || ''}
           alt="Thumbnail Img"
           width={61}
+          height="auto"
           round={round}
         />
       )}

@@ -19,7 +19,7 @@ function Custom500() {
       }}
     >
       <Message
-        title="서버에서 오류가 발생했어요."
+        title="알 수 없는 오류가 발생했어요."
         message="요청을 처리하지 못했어요.<br />잠시 후에 다시 시도해 주세요!"
         buttonText="홈으로"
         onClose={handleClose}

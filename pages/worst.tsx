@@ -1,4 +1,4 @@
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { worstParamsDefault } from '@recoil/worst/atoms';
 
@@ -11,7 +11,7 @@ import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organis
 
 import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function Worst() {
   return (

@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 
 import { useRouter } from 'next/router';
 
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { NoticeContent, NoticeHead } from '@components/pages/notice';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
@@ -11,7 +11,7 @@ import { CommentForm, CommentList } from '@components/UI/organisms';
 
 import { fetchNotice } from '@api/v1/notices';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function Notice() {
   const {

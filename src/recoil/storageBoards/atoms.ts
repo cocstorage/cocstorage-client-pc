@@ -4,7 +4,7 @@ import LocalStorage from '@library/localStorage';
 
 import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
 
-import { localStorageKeys } from '@constants/localStorage';
+import localStorageKeys from '@constants/localStorageKeys';
 
 export const storageBoardsParamsDefault: FetchStorageBoardsParams = {
   subject: null,
@@ -19,7 +19,7 @@ export const storageBoardsParamsStateFamily = atomFamily<
   { path: string; params: FetchStorageBoardsParams },
   string
 >({
-  key: 'storageBoardsParamsStateFamily',
+  key: 'storageBoards/paramsStateFamily',
   default: (path) => ({
     path,
     params: storageBoardsParamsDefault
@@ -27,7 +27,7 @@ export const storageBoardsParamsStateFamily = atomFamily<
 });
 
 export const storageBoardsDialogDisablePathsState = atom<string[]>({
-  key: 'storageBoardsDialogDisablePathsState',
+  key: 'storageBoards/dialogDisablePathsState',
   default: [],
   effects: [
     ({ onSet, setSelf }) => {

@@ -1,4 +1,4 @@
-export { default as MessageDialog } from './MessageDialog';
+export { default as FeedbackDialog } from './FeedbackDialog';
 export { default as Comment } from './Comment';
 export { default as CommentList } from './CommentList';
 export { default as CommentForm } from './CommentForm';
@@ -13,3 +13,4 @@ export { default as PageProgress } from './PageProgress';
 export { default as ThemeRoot } from './ThemeRoot';
 export { default as SidePopularStorageList } from './SidePopularStorageList';
 export { default as IssueKeywordRank } from './IssueKeywordRank';
+export { default as ErrorBoundary } from './ErrorBoundary';

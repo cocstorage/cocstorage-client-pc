@@ -1,10 +1,10 @@
-import { UseQueryOptions, useQuery, useQueryClient } from 'react-query';
+import { UseQueryOptions, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { StorageBoard } from '@dto/storage-boards';
 
 import { fetchStorageBoard } from '@api/v1/storage-boards';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 export function useStorageBoardData(id: number) {
   const queryClient = useQueryClient();

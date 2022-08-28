@@ -1,4 +1,4 @@
-import { UseQueryOptions, useQuery } from 'react-query';
+import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 import {
   FetchStorageBoardCommentsParams,
@@ -6,7 +6,7 @@ import {
   fetchStorageBoardComments
 } from '@api/v1/storage-board-comments';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 export default function useStorageBoardComments(
   storageId: number,

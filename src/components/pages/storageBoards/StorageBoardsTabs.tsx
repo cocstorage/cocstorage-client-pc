@@ -1,25 +1,23 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import styled, { CSSObject } from '@emotion/styled';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
+import { commonFeedbackDialogState } from '@recoil/common/atoms';
 import { storageBoardsParamsStateFamily } from '@recoil/storageBoards/atoms';
 
-import { Box, Button, Flexbox, Icon, Tab, Tabs, useTheme } from 'cocstorage-ui';
-
-import RatioImage from '@components/UI/atoms/RatioImage';
-import MessageDialog from '@components/UI/organisms/MessageDialog';
+import { Box, Button, Flexbox, Icon, Image, Tab, Tabs, useTheme } from 'cocstorage-ui';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
 import { fetchStorage } from '@api/v1/storages';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function StorageBoardsTabs() {
   const { query } = useRouter();
@@ -33,11 +31,11 @@ function StorageBoardsTabs() {
 
   const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(String(path)));
 
-  const [open, setOpen] = useState<boolean>(false);
+  const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
-  const tabsRef = useRef<HTMLDivElement | null>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
 
-  const { scrollFixed } = useScrollTrigger({ trigger: true, ref: tabsRef });
+  const { triggered } = useScrollTrigger({ trigger: true, ref: tabsRef });
 
   const { data: { avatarUrl } = {} } = useQuery(queryKeys.storages.storageById(String(path)), () =>
     fetchStorage(String(path))
@@ -54,20 +52,25 @@ function StorageBoardsTabs() {
     }));
   };
 
-  const handleClick = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClick = () =>
+    setCommonFeedbackDialogState((prevState) => ({
+      ...prevState,
+      open: true,
+      title: '준비 중인 기능이에요!',
+      message: '조금만 기다려주세요!'
+    }));
 
   return (
     <>
-      <Wrapper scrollFixed={scrollFixed}>
+      <Wrapper triggered={triggered}>
         <Flexbox
           justifyContent="space-between"
           alignment="center"
           customStyle={{ width: '100%', maxWidth: xl - 40, margin: 'auto' }}
         >
           <Flexbox gap={30} alignment="center">
-            {scrollFixed && (
-              <RatioImage
+            {triggered && (
+              <Image
                 width={24}
                 height={24}
                 round={6}
@@ -81,7 +84,7 @@ function StorageBoardsTabs() {
               <Tab text="워스트" value="worst" />
             </Tabs>
           </Flexbox>
-          {scrollFixed && (
+          {triggered && (
             <Button
               variant="accent"
               size="pico"
@@ -96,21 +99,15 @@ function StorageBoardsTabs() {
           )}
         </Flexbox>
       </Wrapper>
-      {scrollFixed && (
+      {triggered && (
         <Box customStyle={{ height: tabsRef.current ? tabsRef.current?.clientHeight : 40 }} />
       )}
-      <MessageDialog
-        open={open}
-        title="준비 중인 기능이에요."
-        message="조금만 기다려 주세요!"
-        onClose={handleClose}
-      />
     </>
   );
 }
 
 const Wrapper = styled.section<{
-  scrollFixed: boolean;
+  triggered: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -120,8 +117,8 @@ const Wrapper = styled.section<{
   border-bottom: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
   background-color: ${({ theme: { palette } }) => palette.background.bg};
 
-  ${({ scrollFixed }): CSSObject =>
-    scrollFixed
+  ${({ triggered }): CSSObject =>
+    triggered
       ? {
           position: 'fixed',
           top: 0,

@@ -11,10 +11,10 @@ import Message from '@components/UI/molecules/Message';
 import Comment from '@components/UI/organisms/Comment';
 import CommentSkeleton from '@components/UI/organisms/Comment/CommentSkeleton';
 
-import useNotice from '@hooks/react-query/useNotice';
-import useNoticeComments from '@hooks/react-query/useNoticeComments';
-import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
-import useStorageBoardComments from '@hooks/react-query/useStorageBoardComments';
+import useNotice from '@hooks/query/useNotice';
+import useNoticeComments from '@hooks/query/useNoticeComments';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
+import useStorageBoardComments from '@hooks/query/useStorageBoardComments';
 
 interface CommentListProps {
   type?: 'storageBoard' | 'notice';
@@ -30,7 +30,7 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
   const [noticeCommentsParams, setNoticeCommentsParams] = useRecoilState(noticeCommentsParamsState);
 
-  const isUpdatedCommentPageRef = useRef<boolean>(false);
+  const isUpdatedCommentPageRef = useRef(false);
 
   const {
     storage: { id: storageId = 0 } = {},

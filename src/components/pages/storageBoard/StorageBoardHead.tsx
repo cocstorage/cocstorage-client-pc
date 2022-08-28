@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { useTheme } from 'cocstorage-ui';
 
-import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 
 function StorageBoardHead() {
   const { query: { path = '', id = 0 } = {} } = useRouter();

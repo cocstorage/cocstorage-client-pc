@@ -1,10 +1,10 @@
-import { UseQueryOptions, useQuery } from 'react-query';
+import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 import { Notice } from '@dto/notices';
 
 import { fetchNotice } from '@api/v1/notices';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 export default function useNotice(
   id: number,

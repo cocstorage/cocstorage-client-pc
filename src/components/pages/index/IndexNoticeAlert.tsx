@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { Alert, Icon, IconButton } from 'cocstorage-ui';
 
 import { fetchIndexNotice } from '@api/v1/notices';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function IndexNoticeAlert() {
   const { data: { notices = [] } = {} } = useQuery(queryKeys.notices.indexNotice, fetchIndexNotice);

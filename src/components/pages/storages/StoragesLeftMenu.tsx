@@ -1,12 +1,12 @@
 import { MouseEvent } from 'react';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import styled, { CSSObject } from '@emotion/styled';
 
 import { useRecoilState } from 'recoil';
 
-import { selectedCategoryIdState } from '@recoil/storages/atoms';
+import { storagesSelectedCategoryIdState } from '@recoil/storages/atoms';
 
 import { Typography } from 'cocstorage-ui';
 
@@ -14,10 +14,12 @@ import SideAccordion from '@components/UI/molecules/SideAccordion';
 
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function StoragesLeftMenu() {
-  const [selectedCategoryId, setSelectedCategoryId] = useRecoilState(selectedCategoryIdState);
+  const [selectedCategoryId, setSelectedCategoryId] = useRecoilState(
+    storagesSelectedCategoryIdState
+  );
 
   const { data: { categories = [] } = {} } = useQuery(
     queryKeys.storageCategories.storageCategories,

@@ -9,10 +9,10 @@ export default function useScrollTrigger<T extends HTMLElement>({
   trigger = true,
   ref
 }: UseScrollTriggerProps<T>): {
-  scrollFixed: boolean;
+  triggered: boolean;
 } {
-  const [scrollFixed, setScrollFixed] = useState<boolean>(false);
-  const [fixedTop, setFixedTop] = useState<number>(0);
+  const [triggered, setTriggered] = useState(false);
+  const [fixedTop, setFixedTop] = useState(0);
 
   const handleScroll = useCallback(() => {
     if (!ref || !ref.current) return;
@@ -23,13 +23,13 @@ export default function useScrollTrigger<T extends HTMLElement>({
 
     const offsetTop = top + scrollY;
 
-    if (offsetTop >= 0 && offsetTop < scrollTop && !scrollFixed) {
-      setScrollFixed(true);
+    if (offsetTop >= 0 && offsetTop < scrollTop && !triggered) {
+      setTriggered(true);
       setFixedTop(offsetTop);
-    } else if (scrollTop <= fixedTop && scrollFixed) {
-      setScrollFixed(false);
+    } else if (scrollTop <= fixedTop && triggered) {
+      setTriggered(false);
     }
-  }, [scrollFixed, fixedTop, ref]);
+  }, [triggered, fixedTop, ref]);
 
   useEffect(() => {
     if (trigger) {
@@ -56,6 +56,6 @@ export default function useScrollTrigger<T extends HTMLElement>({
   }, [trigger, handleScroll]);
 
   return {
-    scrollFixed
+    triggered
   };
 }

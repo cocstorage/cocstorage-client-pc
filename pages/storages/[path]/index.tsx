@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 
 import { useRouter } from 'next/router';
 
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { storageBoardsParamsDefault } from '@recoil/storageBoards/atoms';
 
@@ -21,7 +21,7 @@ import StorageBoardGrid from '@components/UI/organisms/StorageBoardGrid';
 import { fetchStorageBoards } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function StorageBoards() {
   const {

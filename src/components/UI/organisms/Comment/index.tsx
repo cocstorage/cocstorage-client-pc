@@ -1,10 +1,9 @@
 import { useRef, useState } from 'react';
 
-import { Box, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
-
 import dayjs from 'dayjs';
 
-import RatioImage from '@components/UI/atoms/RatioImage';
+import { Box, Button, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
+
 import { CommentMenu, Reply, ReplyForm } from '@components/UI/organisms';
 
 import { NoticeComment } from '@dto/notice-comments';
@@ -30,10 +29,10 @@ function Comment({
     }
   } = useTheme();
 
-  const [open, setOpen] = useState<boolean>(false);
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleClick = () => setOpen(!open);
 
@@ -43,16 +42,18 @@ function Comment({
   return (
     <>
       <Flexbox gap={10} customStyle={{ flex: 1 }}>
-        <RatioImage
+        <Image
           width={30}
           height={30}
           src={(user || {}).avatarUrl || ''}
           alt="User Avatar Img"
           round="50%"
           disableAspectRatio
-          defaultIcon="user"
-          defaultIconWidth={15}
-          defaultIconHeight={15}
+          fallback={{
+            iconName: 'UserFilled',
+            width: 15,
+            height: 15
+          }}
         />
         <Flexbox direction="vertical" customStyle={{ flex: 1 }}>
           <Flexbox gap={4} alignment="center">

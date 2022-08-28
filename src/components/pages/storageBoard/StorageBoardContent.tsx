@@ -1,31 +1,32 @@
-import { MouseEvent, useEffect, useRef, useState } from 'react';
+import { MouseEvent, useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 
 import styled from '@emotion/styled';
 
-import { Box, Button, Flexbox, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
+import { useSetRecoilState } from 'recoil';
+
+import { commonFeedbackDialogState } from '@recoil/common/atoms';
+
+import { Box, Button, Flexbox, Icon, Image, Tag, Typography, useTheme } from 'cocstorage-ui';
 
 import type { AxiosError } from 'axios';
 
-import dayjs from 'dayjs';
-
-import RatioImage from '@components/UI/atoms/RatioImage';
 import GoogleAdSense from '@components/UI/molecules/GoogleAdSense';
-import MessageDialog from '@components/UI/organisms/MessageDialog';
 
-import { useStorageBoardData } from '@hooks/react-query/useStorageBoard';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 
-import { getErrorMessageByCode } from '@utils';
+import getErrorMessageByCode from '@utils/getErrorMessageByCode';
 
 import {
   putNonMemberStorageBoardRecommend,
   putStorageBoardViewCount
 } from '@api/v1/storage-boards';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function StorageBoardContent() {
   const { query: { id = 0 } = {} } = useRouter();
@@ -36,18 +37,9 @@ function StorageBoardContent() {
     }
   } = useTheme();
 
-  const [open, setOpen] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<{
-    title: string;
-    code: string;
-    message: string;
-  }>({
-    title: '알 수 없는 오류가 발생했어요.',
-    code: '',
-    message: '문제가 지속된다면 관리자에게 문의해 주세요!'
-  });
+  const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
-  const updatedViewCountRef = useRef<boolean>(false);
+  const updatedViewCountRef = useRef(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const queryClient = useQueryClient();
@@ -79,12 +71,8 @@ function StorageBoardContent() {
   );
 
   const { mutate: recommendMutate } = useMutation(
-    (data: {
-      storageId: number;
-      storageBoardId: number;
-      type: 0 | 1;
-      shouldBeHandledByGlobalErrorHandler?: boolean;
-    }) => putNonMemberStorageBoardRecommend(data.storageId, data.storageBoardId, data.type),
+    (data: { storageId: number; storageBoardId: number; type: 0 | 1 }) =>
+      putNonMemberStorageBoardRecommend(data.storageId, data.storageBoardId, data.type),
     {
       onSuccess: (data) => {
         if (storageBoardId && data) {
@@ -97,15 +85,12 @@ function StorageBoardContent() {
         if (asError && asError.response) {
           const { data = {} } = (asError || {}).response || {};
 
-          setErrorMessage({
+          setCommonFeedbackDialogState({
+            open: true,
             title: getErrorMessageByCode(data.code),
             code: '',
             message: '다른 글도 한번 살펴보시는 건 어때요?'
           });
-
-          setOpen(true);
-        } else {
-          setOpen(true);
         }
       }
     }
@@ -118,13 +103,10 @@ function StorageBoardContent() {
       recommendMutate({
         storageId: storage.id,
         storageBoardId,
-        type: dataType,
-        shouldBeHandledByGlobalErrorHandler: false
+        type: dataType
       });
     }
   };
-
-  const handleClose = () => setOpen(false);
 
   const handleClickSource = () =>
     window.open(
@@ -161,16 +143,18 @@ function StorageBoardContent() {
         </Typography>
         <Flexbox justifyContent="space-between">
           <Flexbox gap={6}>
-            <RatioImage
+            <Image
               width={24}
               height={24}
               src={(user || {}).avatarUrl || ''}
               alt="User Avatar Img"
               round="50%"
               disableAspectRatio
-              defaultIcon="user"
-              defaultIconWidth={12}
-              defaultIconHeight={12}
+              fallback={{
+                iconName: 'UserFilled',
+                width: 12,
+                height: 12
+              }}
             />
             <UserInfo>
               <Typography variant="s1" color={text[type].text1}>
@@ -284,7 +268,6 @@ function StorageBoardContent() {
           backgroundColor: box.stroked.normal
         }}
       />
-      <MessageDialog open={open} onClose={handleClose} {...errorMessage} />
     </>
   );
 }

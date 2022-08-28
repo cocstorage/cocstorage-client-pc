@@ -26,13 +26,13 @@ function SideAccordion({
     }
   } = useTheme();
 
-  const [openToggleButton, setOpenToggleButton] = useState<boolean>(true);
+  const [openToggleButton, setOpenToggleButton] = useState(true);
 
-  const [toggleList, setToggleList] = useState<boolean>(true);
-  const [toggleListMaxHeight, setToggleListMaxHeight] = useState<number>(144);
-  const [toggleCount] = useState<number>(5);
+  const [toggleList, setToggleList] = useState(true);
+  const [toggleListMaxHeight, setToggleListMaxHeight] = useState(144);
+  const [toggleCount] = useState(5);
 
-  const listRef = useRef<HTMLDivElement | null>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => setToggleList(!toggleList);
 

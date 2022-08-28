@@ -1,7 +1,7 @@
 import styled, { CSSObject } from '@emotion/styled';
 
 export const StyledHeader = styled.header<{
-  scrollFixed?: boolean;
+  triggered?: boolean;
 }>`
   display: flex;
   justify-content: center;
@@ -11,8 +11,8 @@ export const StyledHeader = styled.header<{
 
   background-color: ${({ theme: { palette } }) => palette.background.bg};
 
-  ${({ theme: { palette }, scrollFixed }): CSSObject =>
-    scrollFixed
+  ${({ theme: { palette }, triggered }): CSSObject =>
+    triggered
       ? {
           position: 'fixed',
           top: 0,
@@ -35,7 +35,7 @@ export const StyledHeader = styled.header<{
 `;
 
 export const HeaderInner = styled.div<{
-  scrollFixed?: boolean;
+  triggered?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -44,8 +44,8 @@ export const HeaderInner = styled.div<{
   max-width: ${({ theme: { breakpoints } }) => `${breakpoints.xl}px`};
   gap: 8px;
 
-  ${({ scrollFixed }): CSSObject =>
-    scrollFixed
+  ${({ triggered }): CSSObject =>
+    triggered
       ? {
           padding: '0 20px'
         }

@@ -1,4 +1,4 @@
-import { localStorageKeys } from '@constants/localStorage';
+import localStorageKeys from '@constants/localStorageKeys';
 
 const LocalStorage = (() => {
   let localStorage: Storage | null;

@@ -1,4 +1,4 @@
-import { UseQueryOptions, useQuery } from 'react-query';
+import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 import {
   FetchNoticeCommentsParams,
@@ -6,7 +6,7 @@ import {
   fetchNoticeComments
 } from '@api/v1/notice-comments';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 export default function useNoticeComments(
   id: number,

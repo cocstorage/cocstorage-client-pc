@@ -9,7 +9,7 @@ import { Flexbox, Grid, Pagination } from 'cocstorage-ui';
 import { Message, StorageBoardCard } from '@components/UI/molecules';
 import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/StorageBoardCardSkeleton';
 
-import useStorageBoards from '@hooks/react-query/useStorageBoards';
+import useStorageBoards from '@hooks/query/useStorageBoards';
 
 interface StorageBoardGridProps {
   path: string;

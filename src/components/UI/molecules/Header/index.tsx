@@ -3,13 +3,25 @@ import { ChangeEvent, HTMLAttributes, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Box, Flexbox, Hidden, Icon, Tag, TextBar, Typography, useTheme } from 'cocstorage-ui';
+import { useSetRecoilState } from 'recoil';
 
-import RatioImage from '@components/UI/atoms/RatioImage';
+import { commonFeedbackDialogState } from '@recoil/common/atoms';
+
+import {
+  Box,
+  Flexbox,
+  Hidden,
+  Icon,
+  Image,
+  Tag,
+  TextBar,
+  Typography,
+  useTheme
+} from 'cocstorage-ui';
+
 import SystemMenu from '@components/UI/molecules/SystemMenu';
-import MessageDialog from '@components/UI/organisms/MessageDialog';
 
-import { useStorageData } from '@hooks/react-query/useStorage';
+import { useStorageData } from '@hooks/query/useStorage';
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
 import { HeaderInner, Logo, StyledHeader } from './Header.styles';
@@ -22,28 +34,19 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const router = useRouter();
   const { query } = router;
 
+  const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
+
   const {
     theme: {
-      type,
+      type: themeType,
       palette: { text, box }
     }
   } = useTheme();
 
   const { path, avatarUrl = '', name = '' } = useStorageData(String(query.path)) || {};
 
-  const [open, setOpen] = useState<boolean>(false);
-  const [message] = useState<{
-    title: string;
-    code: string;
-    message: string;
-  }>({
-    title: '준비 중인 기능이에요.',
-    code: '',
-    message: '조금만 기다려 주세요!'
-  });
-
-  const [value, setValue] = useState<string>('');
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [value, setValue] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const isHome = useMemo(
     () => router.pathname === '/' || router.pathname === '/best' || router.pathname === '/worst',
@@ -55,14 +58,18 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
     [router.pathname]
   );
 
-  const headerRef = useRef<HTMLHeadElement | null>(null);
-  const tagRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLHeadElement>(null);
+  const tagRef = useRef<HTMLDivElement>(null);
 
-  const { scrollFixed } = useScrollTrigger({ trigger: scrollFixedTrigger, ref: headerRef });
+  const { triggered } = useScrollTrigger({ trigger: scrollFixedTrigger, ref: headerRef });
 
-  const handleOpen = () => setOpen(true);
-
-  const handleClose = () => setOpen(false);
+  const handleClick = () =>
+    setCommonFeedbackDialogState((prevState) => ({
+      ...prevState,
+      open: true,
+      title: '준비 중인 기능이에요!',
+      message: '조금만 기다려주세요!'
+    }));
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setValue(event.currentTarget.value);
@@ -73,8 +80,8 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
 
   return (
     <>
-      <StyledHeader ref={headerRef} scrollFixed={scrollFixed} {...props}>
-        <HeaderInner scrollFixed={scrollFixed}>
+      <StyledHeader ref={headerRef} triggered={triggered} {...props}>
+        <HeaderInner triggered={triggered}>
           {!isStorageBoardDetail && (
             <Link href="/">
               <a>
@@ -115,7 +122,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                     }}
                   />
                   <Flexbox gap={10} alignment="center">
-                    <RatioImage
+                    <Image
                       width={24}
                       height={24}
                       round={4}
@@ -133,7 +140,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
           )}
           <Box
             component="button"
-            onClick={handleOpen}
+            onClick={handleClick}
             customStyle={{
               minWidth: 280
             }}
@@ -195,9 +202,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               customStyle={{
                 height: 32,
                 padding: 0,
-                color: text[type].main,
+                color: text[themeType].main,
                 '& svg path': {
-                  fill: text[type].main
+                  fill: text[themeType].main
                 },
                 cursor: 'pointer'
               }}
@@ -209,10 +216,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
           </Flexbox>
         </HeaderInner>
       </StyledHeader>
-      {scrollFixed && (
+      {triggered && (
         <Box customStyle={{ height: headerRef.current ? headerRef.current?.clientHeight : 70 }} />
       )}
-      <MessageDialog open={open} {...message} onClose={handleClose} />
     </>
   );
 }

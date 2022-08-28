@@ -9,6 +9,6 @@ export const noticeCommentsParamsDefault: FetchNoticeCommentsParams = {
 };
 
 export const noticeCommentsParamsState = atom({
-  key: 'noticeCommentsParamsState',
+  key: 'notice/commentsParamsState',
   default: noticeCommentsParamsDefault
 });

@@ -1,4 +1,4 @@
-export function getErrorMessageByCode(code: string): string {
+export default function getErrorMessageByCode(code: string): string {
   let errorMessage = '알 수 없는 오류가 발생했어요.';
 
   switch (code) {

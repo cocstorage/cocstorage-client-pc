@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilState } from 'recoil';
 
@@ -12,7 +12,7 @@ import StorageBoardCard from '@components/UI/molecules/StorageBoardCard';
 
 import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function WorstStorageBoardList() {
   const [params, setParams] = useRecoilState(worstParamsState);

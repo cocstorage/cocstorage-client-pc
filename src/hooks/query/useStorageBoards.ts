@@ -1,4 +1,4 @@
-import { UseQueryOptions, useQuery } from 'react-query';
+import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 import {
   FetchStorageBoardsParams,
@@ -6,7 +6,7 @@ import {
   fetchStorageBoards
 } from '@api/v1/storage-boards';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 export default function useStorageBoards(
   pathOrStorageId: string | number,

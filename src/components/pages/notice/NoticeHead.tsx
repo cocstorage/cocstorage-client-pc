@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { useTheme } from 'cocstorage-ui';
 
 import { fetchNotice } from '@api/v1/notices';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function NoticeHead() {
   const { query: { id = 0 } = {} } = useRouter();

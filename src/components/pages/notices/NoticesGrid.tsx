@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilState } from 'recoil';
 
@@ -12,7 +12,7 @@ import { NoticeCard } from '@components/UI/molecules';
 
 import { fetchNotices } from '@api/v1/notices';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function NoticesGrid() {
   const [params, setParams] = useRecoilState(noticesParamsState);

@@ -1,17 +1,18 @@
 import { ChangeEvent, useState } from 'react';
 
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import styled from '@emotion/styled';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { commonFeedbackDialogState } from '@recoil/common/atoms';
 import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
 import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
 
-import MessageDialog from '@components/UI/organisms/MessageDialog';
+import validators from '@utils/validators';
 
 import {
   PostNoticeCommentReplyData,
@@ -22,8 +23,7 @@ import {
   postNonMemberStorageBoardCommentReply
 } from '@api/v1/storage-board-comment-replies';
 
-import queryKeys from '@constants/react-query';
-import validators from '@constants/validators';
+import queryKeys from '@constants/queryKeys';
 
 interface ReplyFormProps {
   type?: 'storageBoard' | 'notice';
@@ -40,20 +40,11 @@ function ReplyForm({ type = 'storageBoard', storageId, id, commentId }: ReplyFor
   } = useTheme();
   const params = useRecoilValue(storageBoardCommentsParamsState);
   const noticeCommentsParams = useRecoilValue(noticeCommentsParamsState);
+  const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
-  const [nickname, setNickname] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [content, setContent] = useState<string>('');
-  const [open, setOpen] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<{
-    title: string;
-    code: string;
-    message: string;
-  }>({
-    title: '알 수 없는 오류가 발생했어요.',
-    code: '',
-    message: '문제가 지속된다면 관리자에게 문의해 주세요!'
-  });
+  const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
+  const [content, setContent] = useState('');
 
   const queryClient = useQueryClient();
 
@@ -98,22 +89,22 @@ function ReplyForm({ type = 'storageBoard', storageId, id, commentId }: ReplyFor
 
   const handleClick = () => {
     if (!validators.nickname(nickname)) {
-      setErrorMessage({
+      setCommonFeedbackDialogState({
+        open: true,
         title: '닉네임이 올바르지 않아요',
         code: '',
         message:
           '한글 또는 영문 대소문자 2자 이상 10자 이하로 입력해 주세요.<br />특수문자는 포함할 수 없어요!'
       });
-      setOpen(true);
       return;
     }
     if (!validators.password(password)) {
-      setErrorMessage({
+      setCommonFeedbackDialogState({
+        open: true,
         title: '비밀번호가 올바르지 않아요.',
         code: '',
         message: '7자 이상으로 입력해 주세요!'
       });
-      setOpen(true);
       return;
     }
 
@@ -124,66 +115,59 @@ function ReplyForm({ type = 'storageBoard', storageId, id, commentId }: ReplyFor
     }
   };
 
-  const handleClose = () => setOpen(false);
-
   return (
-    <>
-      <Flexbox
-        gap={20}
-        customStyle={{
-          flexGrow: 1
-        }}
-      >
-        <form>
-          <Flexbox gap={8} direction="vertical" justifyContent="space-between">
-            <TextBar
-              size="small"
-              value={nickname}
-              placeholder="닉네임"
-              onChange={handleChange}
-              autoComplete="username"
-              customStyle={{
-                maxWidth: 173,
-                borderColor: box.stroked.normal
-              }}
-            />
-            <TextBar
-              type="password"
-              size="small"
-              placeholder="비밀번호"
-              value={password}
-              onChange={handleChange}
-              autoComplete="current-password"
-              customStyle={{
-                maxWidth: 173,
-                borderColor: box.stroked.normal
-              }}
-            />
-          </Flexbox>
-        </form>
-        <ReplyBar>
-          <ReplyTextArea
-            onChange={handleChangeContent}
-            value={content}
-            placeholder="내용을 입력해주세요."
-          />
-          <Button
-            variant="accent"
-            startIcon={<Icon name="SendFilled" width={18} height={18} />}
+    <Flexbox
+      gap={20}
+      customStyle={{
+        flexGrow: 1
+      }}
+    >
+      <form>
+        <Flexbox gap={8} direction="vertical" justifyContent="space-between">
+          <TextBar
+            size="small"
+            value={nickname}
+            placeholder="닉네임"
+            onChange={handleChange}
+            autoComplete="username"
             customStyle={{
-              margin: '17px 12px 17px 0'
+              maxWidth: 173,
+              borderColor: box.stroked.normal
             }}
-            onClick={handleClick}
-            disabled={
-              isLoading || noticeCommentReplyIsLoading || !nickname || !password || !content
-            }
-          >
-            작성
-          </Button>
-        </ReplyBar>
-      </Flexbox>
-      <MessageDialog open={open} {...errorMessage} onClose={handleClose} />
-    </>
+          />
+          <TextBar
+            type="password"
+            size="small"
+            placeholder="비밀번호"
+            value={password}
+            onChange={handleChange}
+            autoComplete="current-password"
+            customStyle={{
+              maxWidth: 173,
+              borderColor: box.stroked.normal
+            }}
+          />
+        </Flexbox>
+      </form>
+      <ReplyBar>
+        <ReplyTextArea
+          onChange={handleChangeContent}
+          value={content}
+          placeholder="내용을 입력해주세요."
+        />
+        <Button
+          variant="accent"
+          startIcon={<Icon name="SendFilled" width={18} height={18} />}
+          customStyle={{
+            margin: '17px 12px 17px 0'
+          }}
+          onClick={handleClick}
+          disabled={isLoading || noticeCommentReplyIsLoading || !nickname || !password || !content}
+        >
+          작성
+        </Button>
+      </ReplyBar>
+    </Flexbox>
   );
 }
 

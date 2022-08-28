@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useRecoilValue } from 'recoil';
 
@@ -23,7 +23,7 @@ import {
 import { deleteNonMemberNoticeComment } from '@api/v1/notice-comments';
 import { deleteNonMemberStorageBoardComment } from '@api/v1/storage-board-comments';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 interface CommentDeleteDialogProps {
   type?: 'storageBoard' | 'notice';
@@ -53,7 +53,7 @@ function CommentDeleteDialog({
 
   const queryClient = useQueryClient();
 
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState('');
   const [errorMessage, setErrorMessage] = useState<{
     error: boolean;
     message: string;

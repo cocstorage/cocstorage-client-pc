@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { Button, Flexbox, Grid, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
 
@@ -13,7 +13,7 @@ import {
   fetchIndexWorstStorageBoards
 } from '@api/v1/storage-boards';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function IndexBestWorstStorageBoardGrid() {
   const router = useRouter();

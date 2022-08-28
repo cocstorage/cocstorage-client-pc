@@ -8,10 +8,10 @@ import { LinearProgress } from 'cocstorage-ui';
 
 function PageProgress() {
   const router = useRouter();
-  const [value, setValue] = useState<number>(0);
-  const [isDone, setIsDone] = useState<boolean>(false);
-  const [hide, setHide] = useState<boolean>(true);
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [value, setValue] = useState(0);
+  const [isDone, setIsDone] = useState(false);
+  const [hide, setHide] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
 
   const portalRef = useRef<HTMLElement | null>(null);
 

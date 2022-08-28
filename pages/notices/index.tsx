@@ -1,4 +1,4 @@
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { noticesParamsDefault } from '@recoil/notices/atoms';
 
@@ -10,7 +10,7 @@ import { Footer, Header } from '@components/UI/molecules';
 
 import { fetchNotices } from '@api/v1/notices';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function Notices() {
   return (

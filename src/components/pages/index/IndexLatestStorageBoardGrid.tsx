@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { Flexbox, Grid, Typography } from 'cocstorage-ui';
 
@@ -9,7 +9,7 @@ import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/
 
 import { fetchLatestStorageBoards } from '@api/v1/storage-boards';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function IndexLatestStorageBoardGrid() {
   const { data: { boards = [] } = {}, isLoading } = useQuery(

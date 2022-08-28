@@ -27,7 +27,7 @@ function ReplyMenu({
   replyId,
   onClose
 }: ReplyMenuProps) {
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleClick = () => setDialogOpen(true);
   const handleClose = () => {

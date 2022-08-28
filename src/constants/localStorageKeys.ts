@@ -1,7 +1,9 @@
 const theme = 'theme' as const;
 const storageBoardsDisableDialogPaths = 'storageBoardsDisableDialogPaths' as const;
 
-export const localStorageKeys = {
+const localStorageKeys = {
   theme,
   storageBoardsDisableDialogPaths
 };
+
+export default localStorageKeys;

@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 
 import { useRouter } from 'next/router';
 
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { Flexbox, Grid, Typography } from 'cocstorage-ui';
 
@@ -19,7 +19,7 @@ import {
 import { fetchStorageBoard } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function StorageBoard() {
   const {

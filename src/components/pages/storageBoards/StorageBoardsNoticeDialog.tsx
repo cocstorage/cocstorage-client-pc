@@ -8,7 +8,7 @@ import { storageBoardsDialogDisablePathsState } from '@recoil/storageBoards/atom
 
 import { Box, Button, Dialog, Flexbox, Icon, Tag, Typography } from 'cocstorage-ui';
 
-import useStorage from '@hooks/react-query/useStorage';
+import useStorage from '@hooks/query/useStorage';
 
 function StorageBoardsNoticeDialog() {
   const {

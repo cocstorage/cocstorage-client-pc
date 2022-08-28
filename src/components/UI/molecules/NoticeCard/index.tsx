@@ -1,10 +1,8 @@
 import { ButtonHTMLAttributes, memo } from 'react';
 
-import { Badge, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
-
 import dayjs from 'dayjs';
 
-import RatioImage from '@components/UI/atoms/RatioImage';
+import { Badge, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
 
 import { Notice } from '@dto/notices';
 
@@ -27,7 +25,14 @@ function NoticeCard({
 
   return (
     <StyledNoticeCard {...props}>
-      <RatioImage ratio="4:3" src={thumbnailUrl || ''} alt="Thumbnail Img" width={82} round={6} />
+      <Image
+        ratio="4:3"
+        src={thumbnailUrl || ''}
+        alt="Thumbnail Img"
+        width={82}
+        height="auto"
+        round={6}
+      />
       <Flexbox
         direction="vertical"
         justifyContent="space-between"
@@ -54,7 +59,7 @@ function NoticeCard({
           <UserInfo>
             <Flexbox gap={4} alignment="center">
               {user?.avatarUrl && (
-                <RatioImage
+                <Image
                   width={14}
                   height={14}
                   src={user?.avatarUrl || ''}

@@ -1,4 +1,4 @@
-import { QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { Grid } from 'cocstorage-ui';
 
@@ -14,7 +14,7 @@ import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organis
 
 import { fetchIndexNotice } from '@api/v1/notices';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function Index() {
   return (

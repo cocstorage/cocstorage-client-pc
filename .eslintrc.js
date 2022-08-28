@@ -43,12 +43,22 @@ module.exports = {
             position: 'after'
           },
           {
-            pattern: 'react-query',
+            pattern: '@tanstack/query',
             group: 'external',
             position: 'before'
           },
           {
-            pattern: 'react-query/**',
+            pattern: '@tanstack/query/**',
+            group: 'external',
+            position: 'before'
+          },
+          {
+            pattern: '@tanstack/query-devtools',
+            group: 'external',
+            position: 'before'
+          },
+          {
+            pattern: '@tanstack/query-devtools/**',
             group: 'external',
             position: 'before'
           },
@@ -74,16 +84,6 @@ module.exports = {
           },
           {
             pattern: 'axios',
-            group: 'external',
-            position: 'after'
-          },
-          {
-            pattern: 'dayjs',
-            group: 'external',
-            position: 'after'
-          },
-          {
-            pattern: 'dayjs/**',
             group: 'external',
             position: 'after'
           },

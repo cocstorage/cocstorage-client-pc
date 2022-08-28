@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilValue } from 'recoil';
 
-import { selectedCategoryIdState } from '@recoil/storages/atoms';
+import { storagesSelectedCategoryIdState } from '@recoil/storages/atoms';
 
 import { Grid, Typography } from 'cocstorage-ui';
 
@@ -13,10 +13,10 @@ import { StorageCard } from '@components/UI/molecules';
 import { fetchStorageCategories } from '@api/v1/storage-categories';
 import { fetchStorages } from '@api/v1/storages';
 
-import queryKeys from '@constants/react-query';
+import queryKeys from '@constants/queryKeys';
 
 function StoragesGrid() {
-  const selectedCategoryId = useRecoilValue<number>(selectedCategoryIdState);
+  const selectedCategoryId = useRecoilValue(storagesSelectedCategoryIdState);
 
   const { data: { categories = [] } = {} } = useQuery(
     queryKeys.storageCategories.storageCategories,
