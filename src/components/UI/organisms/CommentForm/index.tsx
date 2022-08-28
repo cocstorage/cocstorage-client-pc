@@ -163,7 +163,6 @@ function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProp
       setCommonFeedbackDialogState({
         open: true,
         title: '닉네임이 올바르지 않아요',
-        code: '',
         message:
           '한글 또는 영문 대소문자 2자 이상 10자 이하로 입력해 주세요.<br />특수문자는 포함할 수 없어요!'
       });
@@ -173,7 +172,6 @@ function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProp
       setCommonFeedbackDialogState({
         open: true,
         title: '비밀번호가 올바르지 않아요.',
-        code: '',
         message: '7자 이상으로 입력해 주세요!'
       });
       return;

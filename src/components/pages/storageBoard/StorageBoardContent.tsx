@@ -88,7 +88,6 @@ function StorageBoardContent() {
           setCommonFeedbackDialogState({
             open: true,
             title: getErrorMessageByCode(data.code),
-            code: '',
             message: '다른 글도 한번 살펴보시는 건 어때요?'
           });
         }

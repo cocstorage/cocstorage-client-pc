@@ -27,12 +27,11 @@ function IssueKeywordRank({ customStyle }: IssueKeywordRankProps) {
   );
 
   const handleClick = () =>
-    setCommonFeedbackDialogState((prevState) => ({
-      ...prevState,
+    setCommonFeedbackDialogState({
       open: true,
       title: '준비 중인 기능이에요!',
       message: '조금만 기다려주세요!'
-    }));
+    });
 
   return (
     <Flexbox direction="vertical" gap={20} customStyle={customStyle}>
