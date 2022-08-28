@@ -27,10 +27,10 @@ function NoticeCard({
     <StyledNoticeCard {...props}>
       <Image
         ratio="4:3"
-        src={thumbnailUrl || ''}
-        alt="Thumbnail Img"
         width={82}
         height="auto"
+        src={thumbnailUrl || ''}
+        alt="Thumbnail Img"
         round={6}
       />
       <Flexbox

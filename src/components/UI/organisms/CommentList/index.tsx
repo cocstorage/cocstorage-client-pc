@@ -116,10 +116,8 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
   }, [commentLatestPage, noticeCommentLatestPage]);
 
   if (
-    !isLoading &&
-    !isLoadingNoticeComments &&
-    ((type === 'storageBoard' && comments.length === 0) ||
-      (type === 'notice' && noticeComments.length === 0))
+    (!isLoading && type === 'storageBoard' && comments.length === 0) ||
+    (!isLoadingNoticeComments && type === 'notice' && noticeComments.length === 0)
   ) {
     return (
       <Message title="댓글이 없네요!" message="첫 댓글의 주인공이 되어 주실래요?" hideButton />
