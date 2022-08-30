@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 
 import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
-import { Flexbox, Icon, Pagination, Typography, useTheme } from 'cocstorage-ui';
+import { Box, Flexbox, Icon, Pagination, Typography, useTheme } from 'cocstorage-ui';
 
 import Message from '@components/UI/molecules/Message';
 import Comment from '@components/UI/organisms/Comment';
@@ -29,13 +29,13 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
   } = useTheme();
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
   const [noticeCommentsParams, setNoticeCommentsParams] = useRecoilState(noticeCommentsParamsState);
-
-  const isUpdatedCommentPageRef = useRef(false);
+  const resetParams = useResetRecoilState(storageBoardCommentsParamsState);
+  const resetNoticeCommentsParams = useResetRecoilState(noticeCommentsParamsState);
 
   const {
     storage: { id: storageId = 0 } = {},
     commentTotalCount = 0,
-    commentLatestPage
+    commentLatestPage = 0
   } = useStorageBoardData(id) || {};
 
   const {
@@ -44,7 +44,8 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
       commentLatestPage: noticeCommentLatestPage = 0
     } = {}
   } = useNotice(Number(id), {
-    enabled: type === 'notice'
+    enabled: type === 'notice' && !!noticeCommentsParams.page,
+    keepPreviousData: true
   });
 
   const {
@@ -54,7 +55,7 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
     } = {},
     isLoading
   } = useStorageBoardComments(storageId, id, params, {
-    enabled: type === 'storageBoard' && params.page !== 0,
+    enabled: type === 'storageBoard' && !!params.page,
     keepPreviousData: true
   });
 
@@ -88,39 +89,43 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
   };
 
   useEffect(() => {
-    if (type === 'storageBoard' && !isUpdatedCommentPageRef.current && commentLatestPage) {
-      isUpdatedCommentPageRef.current = true;
-
+    if (type === 'storageBoard') {
       setParams((prevParams) => ({
         ...prevParams,
-        page: commentLatestPage
+        page: commentLatestPage || 1
       }));
     }
   }, [setParams, commentLatestPage, type]);
 
   useEffect(() => {
-    if (type === 'notice' && !isUpdatedCommentPageRef.current && noticeCommentLatestPage) {
-      isUpdatedCommentPageRef.current = true;
-
+    if (type === 'notice') {
       setNoticeCommentsParams((prevParams) => ({
         ...prevParams,
-        page: noticeCommentLatestPage
+        page: noticeCommentLatestPage || 1
       }));
     }
   }, [setNoticeCommentsParams, noticeCommentLatestPage, type]);
 
   useEffect(() => {
     return () => {
-      isUpdatedCommentPageRef.current = false;
+      resetParams();
     };
-  }, [commentLatestPage, noticeCommentLatestPage]);
+  }, [resetParams]);
+
+  useEffect(() => {
+    return () => {
+      resetNoticeCommentsParams();
+    };
+  }, [resetNoticeCommentsParams]);
 
   if (
     (!isLoading && type === 'storageBoard' && comments.length === 0) ||
     (!isLoadingNoticeComments && type === 'notice' && noticeComments.length === 0)
   ) {
     return (
-      <Message title="댓글이 없네요!" message="첫 댓글의 주인공이 되어 주실래요?" hideButton />
+      <Box component="section">
+        <Message title="댓글이 없네요!" message="첫 댓글의 주인공이 되어 주실래요?" hideButton />
+      </Box>
     );
   }
 
