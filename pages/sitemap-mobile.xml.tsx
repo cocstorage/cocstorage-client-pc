@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { fetchRSSMobile } from '@api/v1/rss';
+import { fetchRSSMobile } from '@api/rss';
 
 function SitemapMobile() {
   return null;

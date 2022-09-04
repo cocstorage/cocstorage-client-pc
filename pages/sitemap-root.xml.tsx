@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { fetchSitemapRoot } from '@api/v1/sitemap';
+import { fetchSitemapRoot } from '@api/sitemap';
 
 function SitemapRoot() {
   return null;

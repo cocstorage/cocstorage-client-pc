@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { fetchRSSRoot } from '@api/v1/rss';
+import { fetchRSSRoot } from '@api/rss';
 
 function RSSRoot() {
   return null;

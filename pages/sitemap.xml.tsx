@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { fetchSitemap } from '@api/v1/sitemap';
+import { fetchSitemap } from '@api/sitemap';
 
 function Sitemap() {
   return null;
