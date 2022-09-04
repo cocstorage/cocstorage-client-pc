@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { useRecoilState, useResetRecoilState } from 'recoil';
 
 import { noticeCommentsParamsState } from '@recoil/notice/atoms';
@@ -18,15 +20,18 @@ import useStorageBoardComments from '@hooks/query/useStorageBoardComments';
 
 interface CommentListProps {
   type?: 'storageBoard' | 'notice';
-  id: number;
 }
 
-function CommentList({ type = 'storageBoard', id }: CommentListProps) {
+function CommentList({ type = 'storageBoard' }: CommentListProps) {
+  const router = useRouter();
+  const { id } = router.query;
+
   const {
     theme: {
       palette: { primary }
     }
   } = useTheme();
+
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
   const [noticeCommentsParams, setNoticeCommentsParams] = useRecoilState(noticeCommentsParamsState);
   const resetParams = useResetRecoilState(storageBoardCommentsParamsState);
@@ -34,9 +39,9 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
 
   const {
     storage: { id: storageId = 0 } = {},
-    commentTotalCount = 0,
-    commentLatestPage = 0
-  } = useStorageBoardData(id) || {};
+    commentLatestPage = 0,
+    commentTotalCount = 0
+  } = useStorageBoardData(Number(id)) || {};
 
   const {
     data: {
@@ -54,7 +59,7 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
       pagination: { totalPages = 1, perPage = 10, currentPage = 1 } = {}
     } = {},
     isLoading
-  } = useStorageBoardComments(storageId, id, params, {
+  } = useStorageBoardComments(storageId, Number(id), params, {
     enabled: type === 'storageBoard' && !!params.page,
     keepPreviousData: true
   });
@@ -69,8 +74,8 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
       } = {}
     } = {},
     isLoading: isLoadingNoticeComments
-  } = useNoticeComments(id, noticeCommentsParams, {
-    enabled: type === 'notice' && noticeCommentsParams.page !== 0,
+  } = useNoticeComments(Number(id), noticeCommentsParams, {
+    enabled: type === 'notice' && !!noticeCommentsParams.page,
     keepPreviousData: true
   });
 
@@ -158,13 +163,7 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
         {type === 'storageBoard' &&
           !isLoading &&
           comments.map((comment) => (
-            <Comment
-              key={`comment-${comment.id}`}
-              type={type}
-              storageId={storageId}
-              id={id}
-              comment={comment}
-            />
+            <Comment key={`comment-${comment.id}`} type={type} comment={comment} />
           ))}
         {type === 'notice' &&
           isLoadingNoticeComments &&
@@ -178,8 +177,6 @@ function CommentList({ type = 'storageBoard', id }: CommentListProps) {
             <Comment
               key={`notice-comment-${noticeComment.id}`}
               type={type}
-              storageId={storageId}
-              id={id}
               comment={noticeComment}
             />
           ))}

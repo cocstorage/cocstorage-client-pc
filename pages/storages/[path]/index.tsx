@@ -1,7 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { useRouter } from 'next/router';
-
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { storageBoardsParamsDefault } from '@recoil/storageBoards/atoms';
@@ -24,10 +22,6 @@ import { fetchStorage } from '@api/v1/storages';
 import queryKeys from '@constants/queryKeys';
 
 function StorageBoards() {
-  const {
-    query: { path = '' }
-  } = useRouter();
-
   return (
     <>
       <StorageBoardsHead />
@@ -38,7 +32,7 @@ function StorageBoards() {
           <Alert severity="normal" icon={<Icon name="PinOutlined" width={16} height={16} />}>
             게시글을 작성할 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
           </Alert>
-          <StorageBoardGrid path={String(path)} />
+          <StorageBoardGrid />
           <GoogleAdSense
             html={
               '<ins class="adsbygoogle"\n' +

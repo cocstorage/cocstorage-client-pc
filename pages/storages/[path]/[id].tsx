@@ -1,7 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { useRouter } from 'next/router';
-
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { Flexbox, Grid, Typography } from 'cocstorage-ui';
@@ -22,10 +20,6 @@ import { fetchStorage } from '@api/v1/storages';
 import queryKeys from '@constants/queryKeys';
 
 function StorageBoard() {
-  const {
-    query: { path = '', id = 0 }
-  } = useRouter();
-
   return (
     <>
       <StorageBoardHead />
@@ -33,8 +27,8 @@ function StorageBoard() {
         <Grid container columnGap={20}>
           <Grid component="section" item auto>
             <StorageBoardContent />
-            <CommentList id={Number(id)} />
-            <CommentForm id={Number(id)} customStyle={{ margin: '35px 0 20px 0' }} />
+            <CommentList />
+            <CommentForm customStyle={{ margin: '35px 0 20px 0' }} />
             <GoogleAdSense
               html={
                 '<ins class="adsbygoogle"\n' +
@@ -52,7 +46,7 @@ function StorageBoard() {
               <Typography variant="p1" fontWeight="bold">
                 이 게시판의 다른 글
               </Typography>
-              <StorageBoardGrid path={String(path)} />
+              <StorageBoardGrid />
             </Flexbox>
           </Grid>
           <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
@@ -70,11 +64,12 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     const path = String(query.path);
     const id = Number(query.id);
 
-    const storage = await fetchStorage(path);
-    const storageBoard = await fetchStorageBoard(storage.id, id);
-
-    await queryClient.setQueryData(queryKeys.storages.storageById(path), storage);
-    await queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(id), storageBoard);
+    const storage = await queryClient.fetchQuery(queryKeys.storages.storageById(path), () =>
+      fetchStorage(path)
+    );
+    await queryClient.fetchQuery(queryKeys.storageBoards.storageBoardById(id), () =>
+      fetchStorageBoard(storage.id, id)
+    );
 
     return {
       props: {

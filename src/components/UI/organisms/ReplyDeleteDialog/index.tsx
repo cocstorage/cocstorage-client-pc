@@ -1,5 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useRecoilValue } from 'recoil';
@@ -20,16 +22,22 @@ import {
   useTheme
 } from 'cocstorage-ui';
 
-import { deleteNonMemberNoticeCommentReply } from '@api/v1/notice-comment-replies';
-import { deleteNonMemberStorageBoardCommentReply } from '@api/v1/storage-board-comment-replies';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
+
+import {
+  DeleteNoticeCommentReplyData,
+  deleteNonMemberNoticeCommentReply
+} from '@api/v1/notice-comment-replies';
+import {
+  DeleteStorageBoardCommentReplyData,
+  deleteNonMemberStorageBoardCommentReply
+} from '@api/v1/storage-board-comment-replies';
 
 import queryKeys from '@constants/queryKeys';
 
 interface ReplyDeleteDialogProps {
   type?: 'storageBoard' | 'notice';
   open: boolean;
-  storageId?: number;
-  id: number;
   commentId: number;
   replyId: number;
   onClose: () => void;
@@ -38,12 +46,13 @@ interface ReplyDeleteDialogProps {
 function ReplyDeleteDialog({
   type = 'storageBoard',
   open,
-  storageId,
-  id,
   commentId,
   replyId,
   onClose
 }: ReplyDeleteDialogProps) {
+  const router = useRouter();
+  const { id } = router.query;
+
   const {
     theme: {
       palette: { secondary, text }
@@ -52,8 +61,6 @@ function ReplyDeleteDialog({
 
   const params = useRecoilValue(storageBoardCommentsParamsState);
   const noticeCommentParams = useRecoilValue(noticeCommentsParamsState);
-
-  const queryClient = useQueryClient();
 
   const [value, setValue] = useState('');
   const [errorMessage, setErrorMessage] = useState<{
@@ -64,27 +71,20 @@ function ReplyDeleteDialog({
     message: ''
   });
 
+  const queryClient = useQueryClient();
+
+  const { storage: { id: storageId = 0 } = {} } = useStorageBoardData(Number(id)) || {};
+
   const { mutate, isLoading } = useMutation(
-    (data: {
-      storageId: number;
-      id: number;
-      commentId: number;
-      replyId: number;
-      password: string;
-      shouldBeHandledByGlobalErrorHandler?: boolean;
-    }) =>
-      deleteNonMemberStorageBoardCommentReply(
-        data.storageId,
-        data.id,
-        data.commentId,
-        data.replyId,
-        data.password
-      ),
+    (data: DeleteStorageBoardCommentReplyData) => deleteNonMemberStorageBoardCommentReply(data),
     {
       onSuccess: () => {
         queryClient
           .invalidateQueries(
-            queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page || 1)
+            queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(
+              Number(id),
+              params.page || 1
+            )
           )
           .then();
         onClose();
@@ -98,18 +98,15 @@ function ReplyDeleteDialog({
   );
 
   const { mutate: noticeCommentReplyMutate, isLoading: noticeCommentReplyIsLoading } = useMutation(
-    (data: {
-      id: number;
-      commentId: number;
-      replyId: number;
-      password: string;
-      shouldBeHandledByGlobalErrorHandler?: boolean;
-    }) => deleteNonMemberNoticeCommentReply(data.id, data.commentId, data.replyId, data.password),
+    (data: DeleteNoticeCommentReplyData) => deleteNonMemberNoticeCommentReply(data),
     {
       onSuccess: () => {
         queryClient
           .invalidateQueries(
-            queryKeys.noticeComments.noticeCommentsByIdWithPage(id, noticeCommentParams.page || 1)
+            queryKeys.noticeComments.noticeCommentsByIdWithPage(
+              Number(id),
+              noticeCommentParams.page || 1
+            )
           )
           .then();
         onClose();
@@ -140,20 +137,18 @@ function ReplyDeleteDialog({
 
     if (type === 'storageBoard') {
       mutate({
-        storageId: storageId as number,
-        id,
+        storageId,
+        id: Number(id),
         commentId,
         replyId,
-        password: value,
-        shouldBeHandledByGlobalErrorHandler: false
+        password: value
       });
     } else if (type === 'notice') {
       noticeCommentReplyMutate({
-        id,
+        id: Number(id),
         commentId,
         replyId,
-        password: value,
-        shouldBeHandledByGlobalErrorHandler: false
+        password: value
       });
     }
   };

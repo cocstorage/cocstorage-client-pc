@@ -1,5 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import styled from '@emotion/styled';
@@ -11,6 +13,8 @@ import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
 import { Button, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
+
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 
 import validators from '@utils/validators';
 
@@ -27,17 +31,19 @@ import queryKeys from '@constants/queryKeys';
 
 interface ReplyFormProps {
   type?: 'storageBoard' | 'notice';
-  storageId?: number;
-  id: number;
   commentId: number;
 }
 
-function ReplyForm({ type = 'storageBoard', storageId, id, commentId }: ReplyFormProps) {
+function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
+  const router = useRouter();
+  const { id } = router.query;
+
   const {
     theme: {
       palette: { box }
     }
   } = useTheme();
+
   const params = useRecoilValue(storageBoardCommentsParamsState);
   const noticeCommentsParams = useRecoilValue(noticeCommentsParamsState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
@@ -48,28 +54,37 @@ function ReplyForm({ type = 'storageBoard', storageId, id, commentId }: ReplyFor
 
   const queryClient = useQueryClient();
 
+  const { storage: { id: storageId = 0 } = {} } = useStorageBoardData(Number(id)) || {};
+
   const { mutate, isLoading } = useMutation(
     (data: PostStorageBoardCommentReplyData) =>
-      postNonMemberStorageBoardCommentReply(storageId as number, id, commentId, data),
+      postNonMemberStorageBoardCommentReply(storageId, Number(id), commentId, data),
     {
       onSuccess: () => {
         setContent('');
 
         return queryClient.invalidateQueries(
-          queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page || 1)
+          queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(
+            Number(id),
+            params.page || 1
+          )
         );
       }
     }
   );
 
   const { mutate: noticeCommentReplyMutate, isLoading: noticeCommentReplyIsLoading } = useMutation(
-    (data: PostNoticeCommentReplyData) => postNonMemberNoticeCommentReply(id, commentId, data),
+    (data: PostNoticeCommentReplyData) =>
+      postNonMemberNoticeCommentReply(Number(id), commentId, data),
     {
       onSuccess: () => {
         setContent('');
 
         return queryClient.invalidateQueries(
-          queryKeys.noticeComments.noticeCommentsByIdWithPage(id, noticeCommentsParams.page || 1)
+          queryKeys.noticeComments.noticeCommentsByIdWithPage(
+            Number(id),
+            noticeCommentsParams.page || 1
+          )
         );
       }
     }

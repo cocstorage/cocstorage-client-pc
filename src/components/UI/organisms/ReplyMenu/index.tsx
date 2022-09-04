@@ -10,8 +10,6 @@ interface ReplyMenuProps {
   type?: 'storageBoard' | 'notice';
   open: boolean;
   anchorRef: RefObject<HTMLElement>;
-  storageId?: number;
-  id: number;
   commentId: number;
   replyId: number;
   onClose: () => void;
@@ -21,8 +19,6 @@ function ReplyMenu({
   type = 'storageBoard',
   open,
   anchorRef,
-  storageId,
-  id,
   commentId,
   replyId,
   onClose
@@ -48,8 +44,6 @@ function ReplyMenu({
       <ReplyDeleteDialog
         type={type}
         open={dialogOpen}
-        storageId={storageId}
-        id={id}
         commentId={commentId}
         replyId={replyId}
         onClose={handleClose}

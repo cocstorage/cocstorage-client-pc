@@ -10,8 +10,6 @@ interface CommentMenuProps {
   type?: 'storageBoard' | 'notice';
   open: boolean;
   anchorRef: RefObject<HTMLElement>;
-  storageId?: number;
-  id: number;
   commentId: number;
   onClose: () => void;
 }
@@ -20,8 +18,6 @@ function CommentMenu({
   type = 'storageBoard',
   open,
   anchorRef,
-  storageId,
-  id,
   commentId,
   onClose
 }: CommentMenuProps) {
@@ -46,8 +42,6 @@ function CommentMenu({
       <CommentDeleteDialog
         type={type}
         open={dialogOpen}
-        storageId={storageId}
-        id={id}
         commentId={commentId}
         onClose={handleClose}
       />

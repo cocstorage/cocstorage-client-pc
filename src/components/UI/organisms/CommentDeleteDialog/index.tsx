@@ -1,8 +1,10 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+
+import { useRouter } from 'next/router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
@@ -20,16 +22,20 @@ import {
   useTheme
 } from 'cocstorage-ui';
 
-import { deleteNonMemberNoticeComment } from '@api/v1/notice-comments';
-import { deleteNonMemberStorageBoardComment } from '@api/v1/storage-board-comments';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
+import useStorageBoardComments from '@hooks/query/useStorageBoardComments';
+
+import { DeleteNoticeCommentData, deleteNonMemberNoticeComment } from '@api/v1/notice-comments';
+import {
+  DeleteStorageBoardCommentData,
+  deleteNonMemberStorageBoardComment
+} from '@api/v1/storage-board-comments';
 
 import queryKeys from '@constants/queryKeys';
 
 interface CommentDeleteDialogProps {
   type?: 'storageBoard' | 'notice';
   open: boolean;
-  storageId?: number;
-  id: number;
   commentId: number;
   onClose: () => void;
 }
@@ -37,23 +43,32 @@ interface CommentDeleteDialogProps {
 function CommentDeleteDialog({
   type = 'storageBoard',
   open,
-  storageId,
-  id,
   commentId,
   onClose
 }: CommentDeleteDialogProps) {
+  const router = useRouter();
+  const { id } = router.query;
+
   const {
     theme: {
       palette: { secondary, text }
     }
   } = useTheme();
 
-  const params = useRecoilValue(storageBoardCommentsParamsState);
+  const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
   const noticeCommentsParams = useRecoilValue(noticeCommentsParamsState);
 
   const queryClient = useQueryClient();
 
-  const [value, setValue] = useState('');
+  const { storage: { id: storageId = 0 } = {}, commentLatestPage = 0 } =
+    useStorageBoardData(Number(id)) || {};
+
+  const { data: { comments = [] } = {} } = useStorageBoardComments(storageId, Number(id), params, {
+    enabled: type === 'storageBoard' && !!params.page,
+    keepPreviousData: true
+  });
+
+  const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<{
     error: boolean;
     message: string;
@@ -63,21 +78,23 @@ function CommentDeleteDialog({
   });
 
   const { mutate, isLoading } = useMutation(
-    (data: {
-      storageId: number;
-      id: number;
-      commentId: number;
-      password: string;
-      shouldBeHandledByGlobalErrorHandler?: boolean;
-    }) =>
-      deleteNonMemberStorageBoardComment(data.storageId, data.id, data.commentId, data.password),
+    (data: DeleteStorageBoardCommentData) => deleteNonMemberStorageBoardComment(data),
     {
       onSuccess: () => {
-        queryClient
-          .invalidateQueries(
-            queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page || 1)
-          )
-          .then();
+        const { page = 0 } = params;
+
+        if (page > 1 && page === commentLatestPage && comments.length - 1 <= 0) {
+          setParams((prevParams) => ({
+            ...prevParams,
+            page: commentLatestPage - 1 ? commentLatestPage - 1 : 1
+          }));
+        } else {
+          queryClient
+            .invalidateQueries(
+              queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(Number(id), page || 1)
+            )
+            .then();
+        }
         onClose();
       },
       onError: () =>
@@ -89,17 +106,15 @@ function CommentDeleteDialog({
   );
 
   const { mutate: noticeCommentMutate, isLoading: noticeCommentIsLoading } = useMutation(
-    (data: {
-      id: number;
-      commentId: number;
-      password: string;
-      shouldBeHandledByGlobalErrorHandler?: boolean;
-    }) => deleteNonMemberNoticeComment(data.id, data.commentId, data.password),
+    (data: DeleteNoticeCommentData) => deleteNonMemberNoticeComment(data),
     {
       onSuccess: () => {
         queryClient
           .invalidateQueries(
-            queryKeys.noticeComments.noticeCommentsByIdWithPage(id, noticeCommentsParams.page || 1)
+            queryKeys.noticeComments.noticeCommentsByIdWithPage(
+              Number(id),
+              noticeCommentsParams.page || 1
+            )
           )
           .then();
         onClose();
@@ -119,7 +134,7 @@ function CommentDeleteDialog({
         message: ''
       });
     }
-    setValue(event.currentTarget.value);
+    setPassword(event.currentTarget.value);
   };
 
   const handleClick = () => {
@@ -130,21 +145,29 @@ function CommentDeleteDialog({
 
     if (type === 'storageBoard') {
       mutate({
-        storageId: storageId as number,
-        id,
+        storageId,
+        id: Number(id),
         commentId,
-        password: value,
-        shouldBeHandledByGlobalErrorHandler: false
+        password
       });
     } else if (type === 'notice') {
       noticeCommentMutate({
-        id,
+        id: Number(id),
         commentId,
-        password: value,
-        shouldBeHandledByGlobalErrorHandler: false
+        password
       });
     }
   };
+
+  useEffect(() => {
+    if (!open) {
+      setErrorMessage({
+        error: false,
+        message: ''
+      });
+      setPassword('');
+    }
+  }, [open]);
 
   return (
     <Dialog
@@ -190,7 +213,7 @@ function CommentDeleteDialog({
             fullWidth
             size="big"
             label="비밀번호"
-            value={value}
+            value={password}
             onChange={handleChange}
             autoComplete="current-password"
           />
@@ -227,7 +250,7 @@ function CommentDeleteDialog({
               backgroundColor: secondary.red.main,
               color: text.dark.main
             }}
-            disabled={!value || isLoading || noticeCommentIsLoading}
+            disabled={!password || isLoading || noticeCommentIsLoading}
           >
             삭제하기
           </Button>

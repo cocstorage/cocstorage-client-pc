@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 
 import dayjs from 'dayjs';
 
@@ -11,15 +11,11 @@ import { StorageBoardComment } from '@dto/storage-board-comments';
 
 interface CommentProps {
   type?: 'storageBoard' | 'notice';
-  storageId?: number;
-  id: number;
   comment: StorageBoardComment | NoticeComment;
 }
 
 function Comment({
   type = 'storageBoard',
-  storageId,
-  id,
   comment: { id: commentId, user, nickname, content = '', replies, createdAt, createdIp, isMember }
 }: CommentProps) {
   const {
@@ -126,8 +122,6 @@ function Comment({
               type={type}
               open={menuOpen}
               anchorRef={buttonRef}
-              storageId={storageId}
-              id={id}
               commentId={commentId}
               onClose={handleCloseMenu}
             />
@@ -151,17 +145,10 @@ function Comment({
               }
             }}
           >
-            <ReplyForm type={type} storageId={storageId} id={id} commentId={commentId} />
+            <ReplyForm type={type} commentId={commentId} />
           </Flexbox>
           {replies.map((reply) => (
-            <Reply
-              key={`reply-${reply.id}`}
-              type={type}
-              storageId={storageId}
-              id={id}
-              commentId={commentId}
-              reply={reply}
-            />
+            <Reply key={`reply-${reply.id}`} type={type} commentId={commentId} reply={reply} />
           ))}
         </Flexbox>
       )}
@@ -169,4 +156,4 @@ function Comment({
   );
 }
 
-export default Comment;
+export default memo(Comment);

@@ -1,7 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { useRouter } from 'next/router';
-
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { NoticeContent, NoticeHead } from '@components/pages/notice';
@@ -14,20 +12,13 @@ import { fetchNotice } from '@api/v1/notices';
 import queryKeys from '@constants/queryKeys';
 
 function Notice() {
-  const {
-    query: { id = 0 }
-  } = useRouter();
   return (
     <>
       <NoticeHead />
       <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
         <NoticeContent />
-        {id && (
-          <>
-            <CommentList type="notice" id={Number(id)} />
-            <CommentForm type="notice" id={Number(id)} customStyle={{ margin: '35px 0 50px 0' }} />
-          </>
-        )}
+        <CommentList type="notice" />
+        <CommentForm type="notice" customStyle={{ margin: '35px 0 50px 0' }} />
       </GeneralTemplate>
     </>
   );
@@ -38,9 +29,7 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     const id = Number(query.id);
     const queryClient = new QueryClient();
 
-    const notice = await fetchNotice(id);
-
-    queryClient.setQueryData(queryKeys.notices.noticeById(id), notice);
+    await queryClient.fetchQuery(queryKeys.notices.noticeById(id), () => fetchNotice(id));
 
     return {
       props: {

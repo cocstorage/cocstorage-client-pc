@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { useRecoilState } from 'recoil';
 
@@ -11,17 +12,16 @@ import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/
 
 import useStorageBoards from '@hooks/query/useStorageBoards';
 
-interface StorageBoardGridProps {
-  path: string;
-}
+function StorageBoardGrid() {
+  const router = useRouter();
+  const { path } = router.query;
 
-function StorageBoardGrid({ path }: StorageBoardGridProps) {
-  const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(path));
+  const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(String(path)));
 
   const {
     data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {},
     isLoading
-  } = useStorageBoards(path, params, {
+  } = useStorageBoards(String(path), params, {
     keepPreviousData: true
   });
 

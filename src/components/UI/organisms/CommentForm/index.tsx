@@ -1,5 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import styled from '@emotion/styled';
@@ -29,16 +31,19 @@ import queryKeys from '@constants/queryKeys';
 
 interface CommentFormProps {
   type?: 'storageBoard' | 'notice';
-  id: number;
   customStyle?: CustomStyle;
 }
 
-function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProps) {
+function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
+  const router = useRouter();
+  const { id } = router.query;
+
   const {
     theme: {
       palette: { box }
     }
   } = useTheme();
+
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
   const [noticeCommentsParams, setNoticeCommentsParams] = useRecoilState(noticeCommentsParamsState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
@@ -48,16 +53,18 @@ function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProp
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [content, setContent] = useState('');
+
   const queryClient = useQueryClient();
 
-  const storageBoard = useStorageBoardData(id);
-  const { data: notice } = useNotice(id, {
+  const storageBoard = useStorageBoardData(Number(id));
+
+  const { data: notice } = useNotice(Number(id), {
     enabled: type === 'notice'
   });
 
   const { data: { comments = [], pagination: { perPage = 0 } = {} } = {} } =
-    useStorageBoardComments(storageBoard?.storage.id as number, id, params, {
-      enabled: type === 'storageBoard' && params.page !== 0,
+    useStorageBoardComments(storageBoard?.storage.id as number, Number(id), params, {
+      enabled: type === 'storageBoard' && !!params.page,
       keepPreviousData: true
     });
 
@@ -66,24 +73,27 @@ function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProp
       comments: noticeComments = [],
       pagination: { perPage: noticeCommentsPerPage = 0 } = {}
     } = {}
-  } = useNoticeComments(id, noticeCommentsParams, {
-    enabled: type === 'notice' && noticeCommentsParams.page !== 0,
+  } = useNoticeComments(Number(id), noticeCommentsParams, {
+    enabled: type === 'notice' && !!noticeCommentsParams.page,
     keepPreviousData: true
   });
 
   const { mutate, isLoading } = useMutation(
     (data: PostStorageBoardCommentData) =>
-      postNonMemberStorageBoardComment(storageBoard?.storage.id as number, id, data),
+      postNonMemberStorageBoardComment(storageBoard?.storage.id as number, Number(id), data),
     {
       onSuccess: () => {
         setContent('');
 
-        const commentLatestPage = storageBoard?.commentLatestPage || 0;
+        const commentLatestPage = storageBoard?.commentLatestPage || 1;
 
         if (params.page === commentLatestPage && comments.length + 1 <= perPage) {
           queryClient
             .invalidateQueries(
-              queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(id, params.page)
+              queryKeys.storageBoardComments.storageBoardCommentsByIdWithPage(
+                Number(id),
+                params.page || 1
+              )
             )
             .then();
         } else {
@@ -94,7 +104,7 @@ function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProp
 
           if (!params.page && !commentLatestPage) newCommentLatestPage = 1;
 
-          queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(id), {
+          queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(Number(id)), {
             ...storageBoard,
             commentLatestPage: newCommentLatestPage
           });
@@ -108,12 +118,12 @@ function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProp
   );
 
   const { mutate: noticeCommentMutate, isLoading: noticeCommentIsLoading } = useMutation(
-    (data: PostNoticeCommentData) => postNonMemberNoticeComment(id, data),
+    (data: PostNoticeCommentData) => postNonMemberNoticeComment(Number(id), data),
     {
       onSuccess: () => {
         setContent('');
 
-        const noticeCommentLatestPage = notice?.commentLatestPage || 0;
+        const noticeCommentLatestPage = notice?.commentLatestPage || 1;
 
         if (
           noticeCommentsParams.page === noticeCommentLatestPage &&
@@ -121,7 +131,10 @@ function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProp
         ) {
           queryClient
             .invalidateQueries(
-              queryKeys.noticeComments.noticeCommentsByIdWithPage(id, noticeCommentsParams.page)
+              queryKeys.noticeComments.noticeCommentsByIdWithPage(
+                Number(id),
+                noticeCommentsParams.page || 1
+              )
             )
             .then();
         } else {
@@ -133,7 +146,7 @@ function CommentForm({ type = 'storageBoard', id, customStyle }: CommentFormProp
 
           if (!noticeCommentsParams.page && !noticeCommentLatestPage) newCommentLatestPage = 1;
 
-          queryClient.setQueryData(queryKeys.notices.noticeById(id), {
+          queryClient.setQueryData(queryKeys.notices.noticeById(Number(id)), {
             ...notice,
             commentLatestPage: newCommentLatestPage
           });

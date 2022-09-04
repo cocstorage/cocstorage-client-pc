@@ -29,7 +29,9 @@ import {
 import queryKeys from '@constants/queryKeys';
 
 function StorageBoardContent() {
-  const { query: { id = 0 } = {} } = useRouter();
+  const router = useRouter();
+  const { id } = router.query;
+
   const {
     theme: {
       type,
@@ -294,11 +296,14 @@ const Content = styled(Typography)`
   position: relative;
   margin-top: 20px;
 
+  * {
+    max-width: 100%;
+  }
+
   img,
   video,
   embed,
   iframe {
-    max-width: 100%;
     border-radius: 8px;
   }
 `;

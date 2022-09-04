@@ -11,16 +11,12 @@ import { StorageBoardCommentReply } from '@dto/storage-board-comment-replies';
 
 interface ReplyProps {
   type?: 'storageBoard' | 'notice';
-  storageId?: number;
-  id: number;
   commentId: number;
   reply: StorageBoardCommentReply | NoticeCommentReply;
 }
 
 function Reply({
   type = 'storageBoard',
-  storageId,
-  id,
   commentId,
   reply: { id: replyId, user, nickname, content, createdAt, createdIp, isMember }
 }: ReplyProps) {
@@ -110,8 +106,6 @@ function Reply({
             type={type}
             open={menuOpen}
             anchorRef={buttonRef}
-            storageId={storageId}
-            id={id}
             commentId={commentId}
             replyId={replyId}
             onClose={handleCloseMenu}
