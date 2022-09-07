@@ -49,8 +49,7 @@ function CommentList({ type = 'storageBoard' }: CommentListProps) {
       commentLatestPage: noticeCommentLatestPage = 0
     } = {}
   } = useNotice(Number(id), {
-    enabled: type === 'notice' && !!noticeCommentsParams.page,
-    keepPreviousData: true
+    enabled: type === 'notice' && !!noticeCommentsParams.page
   });
 
   const {

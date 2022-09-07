@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, memo } from 'react';
+import { HTMLAttributes, memo } from 'react';
 
 import dayjs from 'dayjs';
 
@@ -8,7 +8,7 @@ import { Notice } from '@dto/notices';
 
 import { Dot, Info, InfoLabel, StyledNoticeCard, UserInfo } from './Notice.styles';
 
-export interface NoticeCardProps extends ButtonHTMLAttributes<HTMLDivElement> {
+export interface NoticeCardProps extends HTMLAttributes<HTMLDivElement> {
   notice: Notice;
 }
 
