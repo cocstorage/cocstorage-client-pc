@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import Script from 'next/script';
 
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -10,7 +9,7 @@ import RelativeTime from 'dayjs/plugin/relativeTime';
 import { RecoilRoot } from 'recoil';
 
 import { FeedbackDialog, PageProgress } from '@components/UI/organisms';
-import { ErrorBoundary, ThemeRoot } from '@components/UI/utils';
+import { ErrorBoundary, GoogleScript, ThemeRoot } from '@components/utils';
 
 import 'dayjs/locale/ko';
 import '@styles/base.css';
@@ -56,32 +55,8 @@ function App({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png" />
       </Head>
-      {process.env.NODE_ENV === 'production' && (
-        <>
-          <Script
-            async
-            strategy="afterInteractive"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5809905264951057"
-            crossOrigin="anonymous"
-          />
-          <Script
-            strategy="afterInteractive"
-            src="https://www.googletagmanager.com/gtag/js?id=G-20GMQTM36F"
-          />
-          <Script
-            id="gtag-init"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html:
-                'window.dataLayer = window.dataLayer || [];\n' +
-                '  function gtag(){dataLayer.push(arguments);}\n' +
-                '  gtag("js", new Date());\n' +
-                '  gtag("config", "G-20GMQTM36F");'
-            }}
-          />
-        </>
-      )}
       <ErrorBoundary>
+        <GoogleScript />
         <QueryClientProvider client={queryClient}>
           <RecoilRoot>
             <ThemeRoot>
