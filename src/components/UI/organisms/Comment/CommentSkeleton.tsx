@@ -3,7 +3,7 @@ import { Flexbox, Skeleton } from 'cocstorage-ui';
 function CommentSkeleton() {
   return (
     <Flexbox gap={10} customStyle={{ flex: 1 }}>
-      <Skeleton width={30} height={30} disableAspectRatio customStyle={{ borderRadius: '50%' }} />
+      <Skeleton width={30} height={30} disableAspectRatio round="50%" />
       <Flexbox direction="vertical" gap={4} customStyle={{ flex: 1 }}>
         <Skeleton width="100%" maxWidth={50} height={15} disableAspectRatio />
         <Flexbox direction="vertical" gap={8}>

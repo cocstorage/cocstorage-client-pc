@@ -8,7 +8,7 @@ function StorageBoardCardSkeleton({ variant }: Pick<StorageBoardCardProps, 'vari
   if (variant === 'emphasize') {
     return (
       <Wrapper variant={variant} hasThumbnail>
-        <Skeleton ratio="16:9" maxWidth={183} customStyle={{ borderRadius: 8 }} />
+        <Skeleton ratio="16:9" maxWidth={183} round={12} />
         <Flexbox
           direction="vertical"
           justifyContent="space-between"
@@ -32,7 +32,7 @@ function StorageBoardCardSkeleton({ variant }: Pick<StorageBoardCardProps, 'vari
   if (variant === 'normal') {
     return (
       <Wrapper variant={variant} hasThumbnail>
-        <Skeleton ratio="4:3" maxWidth={82} customStyle={{ borderRadius: 8 }} />
+        <Skeleton ratio="4:3" maxWidth={82} round={6} />
         <Flexbox
           direction="vertical"
           justifyContent="space-between"
@@ -62,7 +62,7 @@ function StorageBoardCardSkeleton({ variant }: Pick<StorageBoardCardProps, 'vari
           <Skeleton width={50} height={14} disableAspectRatio />
         </Flexbox>
       </Flexbox>
-      <Skeleton ratio="16:9" customStyle={{ borderRadius: 8 }} />
+      <Skeleton ratio="16:9" round={8} />
     </Wrapper>
   );
 }
