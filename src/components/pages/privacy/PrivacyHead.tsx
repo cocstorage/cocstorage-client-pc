@@ -5,7 +5,7 @@ import { useTheme } from 'cocstorage-ui';
 function PrivacyHead() {
   const {
     theme: {
-      palette: { primary }
+      palette: { background }
     }
   } = useTheme();
 
@@ -29,8 +29,8 @@ function PrivacyHead() {
       <meta property="twitter:url" content="https://www.cocstorage.com/privacy" />
       <meta property="twitter:card" content="summary" />
       <meta name="apple-mobile-web-app-title" content="개인정보처리방침 : 개념글 저장소" />
-      <meta name="theme-color" content={primary.main} />
-      <meta name="msapplication-TileColor" content={primary.main} />
+      <meta name="theme-color" content={background.bg} />
+      <meta name="msapplication-TileColor" content={background.bg} />
       <title>개인정보처리방침 : 개념글 저장소</title>
       <link rel="canonical" href="https://www.cocstorage.com/privacy" />
     </Head>

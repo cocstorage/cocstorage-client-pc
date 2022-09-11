@@ -10,7 +10,7 @@ function StorageBoardHead() {
 
   const {
     theme: {
-      palette: { primary }
+      palette: { background }
     }
   } = useTheme();
 
@@ -48,8 +48,8 @@ function StorageBoardHead() {
         name="apple-mobile-web-app-title"
         content={`${subject} : ${(storage || {}).name} : 개념글 저장소`}
       />
-      <meta name="theme-color" content={primary.main} />
-      <meta name="msapplication-TileColor" content={primary.main} />
+      <meta name="theme-color" content={background.bg} />
+      <meta name="msapplication-TileColor" content={background.bg} />
       <title>{`${subject} : ${(storage || {}).name} : 개념글 저장소`}</title>
       <link rel="canonical" href={`https://www.cocstorage.com/storages/${path}/${id}`} />
     </Head>

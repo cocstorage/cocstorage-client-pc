@@ -13,7 +13,7 @@ function NoticeHead() {
   const { query: { id = 0 } = {} } = useRouter();
   const {
     theme: {
-      palette: { primary }
+      palette: { background }
     }
   } = useTheme();
 
@@ -44,8 +44,8 @@ function NoticeHead() {
         name="apple-mobile-web-app-title"
         content={`${subject} : 새로운 소식 : 개념글 저장소`}
       />
-      <meta name="theme-color" content={primary.main} />
-      <meta name="msapplication-TileColor" content={primary.main} />
+      <meta name="theme-color" content={background.bg} />
+      <meta name="msapplication-TileColor" content={background.bg} />
       <title>{`${subject} : 새로운 소식 : 개념글 저장소`}</title>
       <link rel="canonical" href={`https://www.cocstorage.com/notices/${id}`} />
     </Head>
