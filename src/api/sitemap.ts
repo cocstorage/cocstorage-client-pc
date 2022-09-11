@@ -19,13 +19,3 @@ export async function fetchSitemapRoot() {
 
   return data;
 }
-
-export async function fetchSitemapMobile() {
-  const { data } = await axios.get('https://api.cocstorage.com/sitemap-mobile.xml', {
-    headers: {
-      'X-Api-Key': process.env.X_API_KEY as string
-    }
-  });
-
-  return data;
-}
