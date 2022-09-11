@@ -2,7 +2,17 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { StorageBoardCardProps } from './index';
 
-export const StyledStorageBoardCard = styled.div<
+export const StyledStorageBoardCard = styled.div`
+  & a:visited .subject {
+    color: ${({
+      theme: {
+        palette: { primary }
+      }
+    }) => primary.sub1};
+  }
+`;
+
+export const Wrapper = styled.div<
   Pick<StorageBoardCardProps, 'variant'> & {
     hasThumbnail: boolean;
   }

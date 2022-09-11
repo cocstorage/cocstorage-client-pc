@@ -15,8 +15,6 @@ import { Box, Button, Flexbox, Icon, Image, Tag, Typography, useTheme } from 'co
 
 import type { AxiosError } from 'axios';
 
-import GoogleAdSense from '@components/UI/molecules/GoogleAdSense';
-
 import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 
 import getErrorMessageByCode from '@utils/getErrorMessageByCode';
@@ -57,6 +55,7 @@ function StorageBoardContent() {
     thumbDown = 0,
     commentTotalCount = 0,
     viewCount = 0,
+    createdIp,
     sourceCode,
     scrapCode,
     createdAt
@@ -161,6 +160,11 @@ function StorageBoardContent() {
               <Typography variant="s1" color={text[mode].text1}>
                 {nickname || user?.nickname}
               </Typography>
+              {createdIp && (
+                <Typography variant="s1" color={text[mode].text1}>
+                  {`(${createdIp})`}
+                </Typography>
+              )}
               <Typography variant="s1" color={text[mode].text1}>
                 {dayjs(createdAt).fromNow()}
               </Typography>
@@ -214,16 +218,6 @@ function StorageBoardContent() {
           <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
         </Flexbox>
       )}
-      <GoogleAdSense
-        html={
-          '<ins class="adsbygoogle"\n' +
-          '     style="display:block"\n' +
-          '     data-ad-client="ca-pub-5809905264951057"\n' +
-          '     data-ad-slot="3990104603"\n' +
-          '     data-ad-format="auto"\n' +
-          '     data-full-width-responsive="true"></ins>'
-        }
-      />
       <Content
         ref={contentRef}
         component="article"

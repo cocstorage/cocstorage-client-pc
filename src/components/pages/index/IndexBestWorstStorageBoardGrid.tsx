@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useQuery } from '@tanstack/react-query';
@@ -97,34 +96,10 @@ function IndexBestWorstStorageBoardGrid() {
         )}
         {!isLoadingBest && bestBoards.length > 2 && (
           <>
-            <Link href={`/storages/${bestBoards[0].storage.path}/${bestBoards[0].id}`}>
-              <a>
-                <StorageBoardCard
-                  variant="emphasize"
-                  storageBoard={bestBoards[0]}
-                  hideSymbolismBadge
-                />
-              </a>
-            </Link>
+            <StorageBoardCard variant="emphasize" storageBoard={bestBoards[0]} hideSymbolismBadge />
             <Flexbox direction="vertical" gap={13}>
-              <Link href={`/storages/${bestBoards[1].storage.path}/${bestBoards[1].id}`}>
-                <a>
-                  <StorageBoardCard
-                    variant="normal"
-                    storageBoard={bestBoards[1]}
-                    hideSymbolismBadge
-                  />
-                </a>
-              </Link>
-              <Link href={`/storages/${bestBoards[2].storage.path}/${bestBoards[2].id}`}>
-                <a>
-                  <StorageBoardCard
-                    variant="normal"
-                    storageBoard={bestBoards[2]}
-                    hideSymbolismBadge
-                  />
-                </a>
-              </Link>
+              <StorageBoardCard variant="normal" storageBoard={bestBoards[1]} hideSymbolismBadge />
+              <StorageBoardCard variant="normal" storageBoard={bestBoards[2]} hideSymbolismBadge />
             </Flexbox>
           </>
         )}
@@ -186,34 +161,14 @@ function IndexBestWorstStorageBoardGrid() {
         )}
         {!isLoadingWorst && worstBoards.length > 2 && (
           <>
-            <Link href={`/storages/${worstBoards[0].storage.path}/${worstBoards[0].id}`}>
-              <a>
-                <StorageBoardCard
-                  variant="emphasize"
-                  storageBoard={worstBoards[0]}
-                  hideSymbolismBadge
-                />
-              </a>
-            </Link>
+            <StorageBoardCard
+              variant="emphasize"
+              storageBoard={worstBoards[0]}
+              hideSymbolismBadge
+            />
             <Flexbox direction="vertical" gap={13}>
-              <Link href={`/storages/${worstBoards[1].storage.path}/${worstBoards[1].id}`}>
-                <a>
-                  <StorageBoardCard
-                    variant="normal"
-                    storageBoard={worstBoards[1]}
-                    hideSymbolismBadge
-                  />
-                </a>
-              </Link>
-              <Link href={`/storages/${worstBoards[2].storage.path}/${worstBoards[2].id}`}>
-                <a>
-                  <StorageBoardCard
-                    variant="normal"
-                    storageBoard={worstBoards[2]}
-                    hideSymbolismBadge
-                  />
-                </a>
-              </Link>
+              <StorageBoardCard variant="normal" storageBoard={worstBoards[1]} hideSymbolismBadge />
+              <StorageBoardCard variant="normal" storageBoard={worstBoards[2]} hideSymbolismBadge />
             </Flexbox>
           </>
         )}

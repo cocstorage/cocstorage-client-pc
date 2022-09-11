@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { GetServerSidePropsContext } from 'next';
 
 import { QueryClient, dehydrate } from '@tanstack/react-query';
@@ -20,6 +22,13 @@ import { fetchStorage } from '@api/v1/storages';
 import queryKeys from '@constants/queryKeys';
 
 function StorageBoard() {
+  useEffect(() => {
+    return () => {
+      const rootElement = document.getElementById('__next');
+      if (rootElement) rootElement.removeAttribute('style');
+    };
+  }, []);
+
   return (
     <>
       <StorageBoardHead />

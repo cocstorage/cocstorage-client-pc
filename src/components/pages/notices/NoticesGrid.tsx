@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilState } from 'recoil';
@@ -35,11 +33,7 @@ function NoticesGrid() {
       <Grid component="section" container columnGap={20} rowGap={14}>
         {notices.map((notice) => (
           <Grid key={`notice-${notice.id}`} item xs={1} sm={1} md={1} lg={2}>
-            <Link href={`/notices/${notice.id}`}>
-              <a>
-                <NoticeCard notice={notice} />
-              </a>
-            </Link>
+            <NoticeCard notice={notice} />
           </Grid>
         ))}
       </Grid>

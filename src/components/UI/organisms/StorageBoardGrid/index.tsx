@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useRecoilState } from 'recoil';
@@ -57,11 +56,7 @@ function StorageBoardGrid() {
         {!isLoading &&
           boards.map((storageBoard) => (
             <Grid key={`storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
-              <Link href={`/storages/${storageBoard.storage.path}/${storageBoard.id}`}>
-                <a>
-                  <StorageBoardCard storageBoard={storageBoard} />
-                </a>
-              </Link>
+              <StorageBoardCard storageBoard={storageBoard} />
             </Grid>
           ))}
       </Grid>

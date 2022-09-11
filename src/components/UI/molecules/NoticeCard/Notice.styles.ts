@@ -1,6 +1,16 @@
 import styled from '@emotion/styled';
 
 export const StyledNoticeCard = styled.div`
+  & a:visited .subject {
+    color: ${({
+      theme: {
+        palette: { primary }
+      }
+    }) => primary.sub1};
+  }
+`;
+
+export const Wrapper = styled.div`
   display: grid;
   align-items: center;
   width: 100%;

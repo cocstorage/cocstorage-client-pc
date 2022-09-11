@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilState } from 'recoil';
@@ -38,17 +36,10 @@ function BestStorageBoardList() {
     <>
       <Flexbox component="section" direction="vertical" gap={10} customStyle={{ marginTop: 30 }}>
         {boards.map((storageBoard, index) => (
-          <Link
-            key={`best-storage-board-${storageBoard.id}`}
-            href={`/storages/${storageBoard.storage.path}/${storageBoard.id}`}
-          >
-            <a>
-              <StorageBoardCard
-                variant={index < 3 && params.page === 1 ? 'emphasize' : 'normal'}
-                storageBoard={storageBoard}
-              />
-            </a>
-          </Link>
+          <StorageBoardCard
+            variant={index < 3 && params.page === 1 ? 'emphasize' : 'normal'}
+            storageBoard={storageBoard}
+          />
         ))}
       </Flexbox>
       <Flexbox

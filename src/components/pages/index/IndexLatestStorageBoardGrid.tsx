@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { useQuery } from '@tanstack/react-query';
 
 import { Flexbox, Grid, Typography } from 'cocstorage-ui';
@@ -33,11 +31,7 @@ function IndexLatestStorageBoardGrid() {
         {!isLoading &&
           boards.map((storageBoard) => (
             <Grid key={`latest-storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
-              <Link href={`/storages/${storageBoard.storage.path}/${storageBoard.id}`}>
-                <a>
-                  <StorageBoardCard storageBoard={storageBoard} inStorage={false} />
-                </a>
-              </Link>
+              <StorageBoardCard storageBoard={storageBoard} inStorage={false} />
             </Grid>
           ))}
       </Grid>
