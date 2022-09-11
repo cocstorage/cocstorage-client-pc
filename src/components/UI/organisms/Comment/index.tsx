@@ -20,7 +20,7 @@ function Comment({
 }: CommentProps) {
   const {
     theme: {
-      type: themeType,
+      mode,
       palette: { text }
     }
   } = useTheme();
@@ -57,7 +57,7 @@ function Comment({
               {nickname || (user || {}).nickname}
             </Typography>
             {!user && createdIp && (
-              <Typography variant="s2" color={text[themeType].text1}>
+              <Typography variant="s2" color={text[mode].text1}>
                 ({createdIp})
               </Typography>
             )}
@@ -76,14 +76,14 @@ function Comment({
               <Typography
                 variant="s1"
                 customStyle={{
-                  color: text[themeType].text1
+                  color: text[mode].text1
                 }}
               >
                 {dayjs(createdAt).fromNow()}
               </Typography>
               <Typography
                 variant="s1"
-                customStyle={{ cursor: 'pointer', color: text[themeType].text1 }}
+                customStyle={{ cursor: 'pointer', color: text[mode].text1 }}
                 onClick={handleClick}
               >
                 답글달기
@@ -91,13 +91,11 @@ function Comment({
             </Flexbox>
             {replies.length > 0 && (
               <Flexbox gap={10} alignment="center">
-                <Box
-                  customStyle={{ width: 24, height: 1, backgroundColor: text[themeType].text3 }}
-                />
+                <Box customStyle={{ width: 24, height: 1, backgroundColor: text[mode].text3 }} />
                 <Typography
                   variant="s1"
                   customStyle={{
-                    color: text[themeType].text1,
+                    color: text[mode].text1,
                     cursor: 'pointer'
                   }}
                   onClick={handleClick}
@@ -141,7 +139,7 @@ function Comment({
                 marginTop: 10,
                 borderLeft: '1px solid',
                 borderBottom: '1px solid',
-                borderColor: text[themeType].text3
+                borderColor: text[mode].text3
               }
             }}
           >

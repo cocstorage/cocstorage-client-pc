@@ -19,7 +19,7 @@ function IndexBestWorstStorageBoardGrid() {
   const router = useRouter();
   const {
     theme: {
-      type,
+      mode,
       palette: {
         text,
         secondary: { red }
@@ -80,7 +80,7 @@ function IndexBestWorstStorageBoardGrid() {
             endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
             onClick={handleClickMoreBest}
             customStyle={{
-              color: text[type].text1
+              color: text[mode].text1
             }}
           >
             더보기
@@ -169,7 +169,7 @@ function IndexBestWorstStorageBoardGrid() {
             endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
             onClick={handleClickMoreWorst}
             customStyle={{
-              color: text[type].text1
+              color: text[mode].text1
             }}
           >
             더보기

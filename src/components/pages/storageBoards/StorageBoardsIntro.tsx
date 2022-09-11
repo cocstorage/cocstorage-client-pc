@@ -26,7 +26,7 @@ function StorageBoardsIntro() {
   const { query } = useRouter();
   const {
     theme: {
-      type: themeType,
+      mode,
       palette: {
         text,
         secondary: { yellow }
@@ -75,7 +75,7 @@ function StorageBoardsIntro() {
                 width={20}
                 height={20}
                 onClick={handleMenuOpen}
-                color={text[themeType].text1}
+                color={text[mode].text1}
                 customStyle={{ display: 'block' }}
               />
             </IconButton>
@@ -85,13 +85,13 @@ function StorageBoardsIntro() {
                   <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                     관리자
                   </Typography>
-                  <Typography color={text[themeType].text1}>{(user || {}).nickname}</Typography>
+                  <Typography color={text[mode].text1}>{(user || {}).nickname}</Typography>
                 </Flexbox>
                 <Flexbox>
                   <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                     개설일
                   </Typography>
-                  <Typography color={text[themeType].text1}>
+                  <Typography color={text[mode].text1}>
                     {dayjs(createdAt).format('YYYY. MM. DD')}
                   </Typography>
                 </Flexbox>
@@ -99,20 +99,20 @@ function StorageBoardsIntro() {
                   <Typography fontWeight="medium" customStyle={{ width: 54 }}>
                     URL
                   </Typography>
-                  <Typography color={text[themeType].text1}>
+                  <Typography color={text[mode].text1}>
                     {`https://www.cocstorage.com/storages/${path}`}
                   </Typography>
                 </Flexbox>
               </Flexbox>
             </Menu>
           </Flexbox>
-          <Typography color={text[themeType].text1} customStyle={{ marginTop: 2 }}>
+          <Typography color={text[mode].text1} customStyle={{ marginTop: 2 }}>
             {description}
           </Typography>
           <Box customStyle={{ marginTop: 16 }}>
             <Flexbox alignment="center" gap={6}>
               <Typography fontWeight="medium">관리자</Typography>
-              <Typography color={text[themeType].text1}>{(user || {}).nickname}</Typography>
+              <Typography color={text[mode].text1}>{(user || {}).nickname}</Typography>
             </Flexbox>
           </Box>
         </div>

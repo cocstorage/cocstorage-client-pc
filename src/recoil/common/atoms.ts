@@ -1,4 +1,4 @@
-import { ThemeType } from 'cocstorage-ui/dist/types';
+import { ThemeMode } from 'cocstorage-ui/dist/types';
 
 import { atom } from 'recoil';
 
@@ -6,14 +6,14 @@ import LocalStorage from '@library/localStorage';
 
 import localStorageKeys from '@constants/localStorageKeys';
 
-export const themeDefault: ThemeType | 'system' = 'system';
+export const themeDefault: ThemeMode | 'system' = 'system';
 
-export const themeState = atom<ThemeType | 'system'>({
+export const themeState = atom<ThemeMode | 'system'>({
   key: 'common/themeState',
   default: themeDefault,
   effects: [
     ({ onSet, setSelf }) => {
-      const theme = LocalStorage.get<ThemeType | 'system'>(localStorageKeys.theme) || 'system';
+      const theme = LocalStorage.get<ThemeMode | 'system'>(localStorageKeys.theme) || 'system';
 
       setSelf(theme);
 

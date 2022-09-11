@@ -21,7 +21,7 @@ function SideAccordion({
 }: PropsWithChildren<SideAccordionProps>) {
   const {
     theme: {
-      type,
+      mode,
       palette: { text }
     }
   } = useTheme();
@@ -69,7 +69,7 @@ function SideAccordion({
             }
             onClick={handleClick}
             customStyle={{
-              color: text[type].text1
+              color: text[mode].text1
             }}
           >
             {toggleList ? '펼치기' : '접기'}

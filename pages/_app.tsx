@@ -9,7 +9,8 @@ import RelativeTime from 'dayjs/plugin/relativeTime';
 
 import { RecoilRoot } from 'recoil';
 
-import { ErrorBoundary, FeedbackDialog, PageProgress, ThemeRoot } from '@components/UI/organisms';
+import { FeedbackDialog, PageProgress } from '@components/UI/organisms';
+import { ErrorBoundary, ThemeRoot } from '@components/UI/utils';
 
 import 'dayjs/locale/ko';
 import '@styles/base.css';
@@ -80,20 +81,20 @@ function App({ Component, pageProps }: AppProps) {
           />
         </>
       )}
-      <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
-          <ThemeRoot>
-            <Hydrate state={pageProps.dehydratedState}>
-              <ErrorBoundary>
+      <ErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <RecoilRoot>
+            <ThemeRoot>
+              <Hydrate state={pageProps.dehydratedState}>
                 <PageProgress />
                 <Component {...pageProps} />
                 <FeedbackDialog />
-              </ErrorBoundary>
-            </Hydrate>
-          </ThemeRoot>
-        </RecoilRoot>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+              </Hydrate>
+            </ThemeRoot>
+          </RecoilRoot>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </ErrorBoundary>
     </>
   );
 }

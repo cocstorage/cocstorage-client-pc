@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { ThemeType } from 'cocstorage-ui/dist/types';
+import { ThemeMode } from 'cocstorage-ui/dist/types';
 
 import { useRecoilState } from 'recoil';
 
@@ -37,7 +37,7 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
   const router = useRouter();
   const {
     theme: {
-      type,
+      mode,
       palette: { text }
     }
   } = useTheme();
@@ -45,13 +45,11 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
   const [theme, setTheme] = useRecoilState(themeState);
 
   const handleTheme = (value: string | number) => {
-    const newValue = value as ThemeType | 'system';
+    const newValue = value as ThemeMode | 'system';
     setTheme(newValue);
   };
 
-  const handleClick = () => {
-    router.push('/notices').then();
-  };
+  const handleClick = () => router.push('/notices');
 
   return (
     <Menu
@@ -64,12 +62,12 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
     >
       <List>
         <ListItem onClick={handleClick}>
-          <Icon name="LoudSpeakerOutlined" color={text[type].text2} />
+          <Icon name="LoudSpeakerOutlined" color={text[mode].text2} />
           <Typography>새로운 소식</Typography>
         </ListItem>
         <ListItemGroup>
           <Flexbox gap={8} alignment="center">
-            <Icon name="StarOutlined" width={20} color={text[type].text2} />
+            <Icon name="StarOutlined" width={20} color={text[mode].text2} />
             <Typography>테마</Typography>
           </Flexbox>
           <Dropdown fullWidth options={options} value={theme} onChange={handleTheme} />

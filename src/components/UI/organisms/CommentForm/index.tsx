@@ -267,10 +267,20 @@ const CommentTextArea = styled.textarea`
   font-size: 14px;
   line-height: 18px;
   background-color: inherit;
-  color: ${({ theme: { type, palette } }) => palette.text[type].main};
+  color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].main};
 
   &::placeholder {
-    color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+    color: ${({
+      theme: {
+        mode,
+        palette: { text }
+      }
+    }) => text[mode].text1};
   }
 `;
 

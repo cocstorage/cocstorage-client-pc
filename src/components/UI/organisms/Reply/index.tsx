@@ -22,7 +22,7 @@ function Reply({
 }: ReplyProps) {
   const {
     theme: {
-      type: themeType,
+      mode,
       palette: { text }
     }
   } = useTheme();
@@ -46,7 +46,7 @@ function Reply({
           marginTop: 10,
           borderLeft: '1px solid',
           borderBottom: '1px solid',
-          borderColor: text[themeType].text3
+          borderColor: text[mode].text3
         }
       }}
     >
@@ -68,7 +68,7 @@ function Reply({
             {nickname || (user || {}).nickname}
           </Typography>
           {!user && createdIp && (
-            <Typography variant="s2" color={text[themeType].text1}>
+            <Typography variant="s2" color={text[mode].text1}>
               ({createdIp})
             </Typography>
           )}
@@ -86,7 +86,7 @@ function Reply({
           variant="s1"
           customStyle={{
             marginTop: 8,
-            color: text[themeType].text1
+            color: text[mode].text1
           }}
         >
           {dayjs(createdAt).fromNow()}

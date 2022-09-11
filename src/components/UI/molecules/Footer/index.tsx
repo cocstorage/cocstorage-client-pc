@@ -10,7 +10,7 @@ function Footer() {
   const router = useRouter();
   const {
     theme: {
-      type,
+      mode,
       palette: { text }
     }
   } = useTheme();
@@ -25,13 +25,13 @@ function Footer() {
 
   return (
     <StyledFooter>
-      <Typography variant="s1" color={text[type].text2}>
+      <Typography variant="s1" color={text[mode].text2}>
         ⓒ 개념글 저장소 All Rights Reserved.
       </Typography>
       <Links>
         <Typography
           variant="s1"
-          color={text[type].text2}
+          color={text[mode].text2}
           data-pathname="/policy"
           onClick={handleClick}
         >
@@ -39,7 +39,7 @@ function Footer() {
         </Typography>
         <Typography
           variant="s1"
-          color={text[type].text2}
+          color={text[mode].text2}
           data-pathname="/privacy"
           onClick={handleClick}
         >

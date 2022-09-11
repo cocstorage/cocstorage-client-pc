@@ -17,7 +17,7 @@ function NoticeContent() {
   const { query: { id = 0 } = {} } = useRouter();
   const {
     theme: {
-      type,
+      mode,
       palette: { text, box }
     }
   } = useTheme();
@@ -56,24 +56,24 @@ function NoticeContent() {
               alt="User Avatar Img"
             />
             <UserInfo>
-              <Typography variant="s1" color={text[type].text1}>
+              <Typography variant="s1" color={text[mode].text1}>
                 {user?.nickname}
               </Typography>
-              <Typography variant="s1" color={text[type].text1}>
+              <Typography variant="s1" color={text[mode].text1}>
                 {dayjs(createdAt).fromNow()}
               </Typography>
             </UserInfo>
           </Flexbox>
           <Flexbox gap={12}>
             <Flexbox gap={4} alignment="center">
-              <Icon name="CommentOutlined" width={15} height={15} color={text[type].text1} />
-              <Typography variant="s1" color={text[type].text1}>
+              <Icon name="CommentOutlined" width={15} height={15} color={text[mode].text1} />
+              <Typography variant="s1" color={text[mode].text1}>
                 {commentTotalCount.toLocaleString()}
               </Typography>
             </Flexbox>
             <Flexbox gap={4} alignment="center">
-              <Icon name="ViewOutlined" width={15} height={15} color={text[type].text1} />
-              <Typography variant="s1" color={text[type].text1}>
+              <Icon name="ViewOutlined" width={15} height={15} color={text[mode].text1} />
+              <Typography variant="s1" color={text[mode].text1}>
                 {viewCount.toLocaleString()}
               </Typography>
             </Flexbox>
@@ -116,7 +116,12 @@ const UserInfo = styled.div`
     height: 2px;
     margin: 0 5px;
     border-radius: 50%;
-    background-color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+    background-color: ${({
+      theme: {
+        mode,
+        palette: { text }
+      }
+    }) => text[mode].text1};
     vertical-align: middle;
   }
   & > span:last-child:after {

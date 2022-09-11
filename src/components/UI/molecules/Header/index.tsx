@@ -38,7 +38,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
 
   const {
     theme: {
-      type: themeType,
+      mode,
       palette: { text, box }
     }
   } = useTheme();
@@ -201,9 +201,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               customStyle={{
                 height: 32,
                 padding: 0,
-                color: text[themeType].main,
+                color: text[mode].main,
                 '& svg path': {
-                  fill: text[themeType].main
+                  fill: text[mode].main
                 },
                 cursor: 'pointer'
               }}

@@ -70,5 +70,10 @@ export const Dot = styled.div`
   height: 2px;
   margin: 0 5px;
   border-radius: 50%;
-  background-color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+  background-color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].text1};
 `;

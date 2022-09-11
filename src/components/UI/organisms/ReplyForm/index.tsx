@@ -188,8 +188,17 @@ const ReplyBar = styled.div`
   flex-grow: 1;
   display: flex;
   max-height: 80px;
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
   border-radius: 10px;
   overflow: hidden;
 `;
@@ -203,10 +212,20 @@ const ReplyTextArea = styled.textarea`
   font-size: 14px;
   line-height: 18px;
   background-color: inherit;
-  color: ${({ theme: { type, palette } }) => palette.text[type].main};
+  color: ${({
+    theme: {
+      mode,
+      palette: { text }
+    }
+  }) => text[mode].main};
 
   &::placeholder {
-    color: ${({ theme: { type, palette } }) => palette.text[type].text1};
+    color: ${({
+      theme: {
+        mode,
+        palette: { text }
+      }
+    }) => text[mode].text1};
   }
 `;
 
