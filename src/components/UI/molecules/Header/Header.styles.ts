@@ -18,7 +18,7 @@ export const StyledHeader = styled.header<{
           top: 0,
           left: 0,
           borderColor: palette.box.stroked.normal,
-          zIndex: 1,
+          zIndex: 2,
           animation: 'slideDown .2s forwards'
         }
       : {}}
