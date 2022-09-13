@@ -48,6 +48,11 @@ function NoticeHead() {
       <meta name="msapplication-TileColor" content={background.bg} />
       <title>{`${subject} : 새로운 소식 : 개념글 저장소`}</title>
       <link rel="canonical" href={`https://www.cocstorage.com/notices/${id}`} />
+      <link
+        rel="alternate"
+        media="only screen and (max-width: 640px)"
+        href={`https://m.cocstorage.com/notices/${id}`}
+      />
     </Head>
   );
 }

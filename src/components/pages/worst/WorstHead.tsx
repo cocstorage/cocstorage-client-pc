@@ -30,6 +30,11 @@ function WorstHead() {
       <meta name="msapplication-TileColor" content={background.bg} />
       <title>워스트 게시글 : 개념글 저장소</title>
       <link rel="canonical" href="https://www.cocstorage.com/worst" />
+      <link
+        rel="alternate"
+        media="only screen and (max-width: 640px)"
+        href="https://m.cocstorage.com/worst"
+      />
     </Head>
   );
 }

@@ -33,6 +33,11 @@ function PrivacyHead() {
       <meta name="msapplication-TileColor" content={background.bg} />
       <title>개인정보처리방침 : 개념글 저장소</title>
       <link rel="canonical" href="https://www.cocstorage.com/privacy" />
+      <link
+        rel="alternate"
+        media="only screen and (max-width: 640px)"
+        href="https://m.cocstorage.com/privacy"
+      />
     </Head>
   );
 }
