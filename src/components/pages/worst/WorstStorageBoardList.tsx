@@ -6,7 +6,7 @@ import { worstParamsState } from '@recoil/worst/atoms';
 
 import { Flexbox, Pagination } from 'cocstorage-ui';
 
-import StorageBoardCard from '@components/UI/molecules/StorageBoardCard';
+import { Message, StorageBoardCard } from '@components/UI/molecules';
 
 import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
 
@@ -16,7 +16,8 @@ function WorstStorageBoardList() {
   const [params, setParams] = useRecoilState(worstParamsState);
 
   const {
-    data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {}
+    data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {},
+    isLoading
   } = useQuery(
     queryKeys.storageBoards.worstStorageBoardsWithParams(params),
     () => fetchWorstStorageBoards(params),
@@ -31,6 +32,12 @@ function WorstStorageBoardList() {
       page: value
     }));
   };
+
+  if (!isLoading && !boards.length) {
+    return (
+      <Message title="선 넘는 게시글이 없네요!" hideButton customStyle={{ margin: '50px 0' }} />
+    );
+  }
 
   return (
     <>

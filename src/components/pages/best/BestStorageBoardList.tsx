@@ -6,7 +6,7 @@ import { bestParamsState } from '@recoil/best/atoms';
 
 import { Flexbox, Pagination } from 'cocstorage-ui';
 
-import { StorageBoardCard } from '@components/UI/molecules';
+import { Message, StorageBoardCard } from '@components/UI/molecules';
 
 import { fetchPopularStorageBoards } from '@api/v1/storage-boards';
 
@@ -16,7 +16,8 @@ function BestStorageBoardList() {
   const [params, setParams] = useRecoilState(bestParamsState);
 
   const {
-    data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {}
+    data: { boards = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {},
+    isLoading
   } = useQuery(
     queryKeys.storageBoards.popularStorageBoardsWithParams(params),
     () => fetchPopularStorageBoards(params),
@@ -31,6 +32,16 @@ function BestStorageBoardList() {
       page: value
     }));
   };
+
+  if (!isLoading && !boards.length) {
+    return (
+      <Message
+        title="이슈가 되고 있는 게시글이 없네요!"
+        hideButton
+        customStyle={{ margin: '50px 0' }}
+      />
+    );
+  }
 
   return (
     <>

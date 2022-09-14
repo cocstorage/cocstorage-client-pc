@@ -6,7 +6,7 @@ import { noticesParamsState } from '@recoil/notices/atoms';
 
 import { Flexbox, Grid, Pagination } from 'cocstorage-ui';
 
-import { NoticeCard } from '@components/UI/molecules';
+import { Message, NoticeCard } from '@components/UI/molecules';
 
 import { fetchNotices } from '@api/v1/notices';
 
@@ -16,7 +16,8 @@ function NoticesGrid() {
   const [params, setParams] = useRecoilState(noticesParamsState);
 
   const {
-    data: { notices = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {}
+    data: { notices = [], pagination: { totalPages = 1, perPage = 20, currentPage = 1 } = {} } = {},
+    isLoading
   } = useQuery(queryKeys.notices.noticesWithParams(params), () => fetchNotices(params), {
     keepPreviousData: true
   });
@@ -27,6 +28,12 @@ function NoticesGrid() {
       page: value
     }));
   };
+
+  if (!isLoading && !notices.length) {
+    return (
+      <Message title="새로운 소식을 준비 중이에요!" hideButton customStyle={{ margin: '50px 0' }} />
+    );
+  }
 
   return (
     <>
