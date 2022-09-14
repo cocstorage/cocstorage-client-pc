@@ -138,7 +138,7 @@ function StorageBoardContent() {
   return (
     <>
       <Flexbox direction="vertical" gap={8}>
-        <Typography variant="h2" fontWeight="bold">
+        <Typography component="h1" variant="h2" fontWeight="bold">
           {subject}
         </Typography>
         <Flexbox justifyContent="space-between">
