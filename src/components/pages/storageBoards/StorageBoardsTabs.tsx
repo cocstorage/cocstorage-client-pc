@@ -123,7 +123,7 @@ const Wrapper = styled.section<{
           top: 0,
           left: 0,
           padding: '0 20px',
-          zIndex: 1,
+          zIndex: 2,
           animation: 'slideDown .2s forwards'
         }
       : {}}
