@@ -160,7 +160,7 @@ function StorageBoardContent() {
               <Typography variant="s1" color={text[mode].text1}>
                 {nickname || user?.nickname}
               </Typography>
-              {createdIp && (
+              {!user && createdIp && (
                 <Typography variant="s1" color={text[mode].text1}>
                   {`(${createdIp})`}
                 </Typography>
