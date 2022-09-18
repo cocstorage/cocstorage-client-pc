@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilValue } from 'recoil';
@@ -64,11 +62,11 @@ function StoragesGrid() {
               <Grid container columnGap={20} rowGap={12} customStyle={{ marginTop: 20 }}>
                 {categoryStorages.map((storage) => (
                   <Grid key={`storage-${storage.id}`} item xs={2}>
-                    <Link href={`/storages/${storage.path}`}>
-                      <a>
-                        <StorageCard name={storage.name} src={storage.avatarUrl || ''} />
-                      </a>
-                    </Link>
+                    <StorageCard
+                      name={storage.name}
+                      path={storage.path}
+                      src={storage.avatarUrl || ''}
+                    />
                   </Grid>
                 ))}
               </Grid>

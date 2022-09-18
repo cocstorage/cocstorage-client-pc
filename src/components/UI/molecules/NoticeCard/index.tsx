@@ -8,7 +8,7 @@ import { Badge, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui
 
 import { Notice } from '@dto/notices';
 
-import { Dot, Info, InfoLabel, StyledNoticeCard, UserInfo, Wrapper } from './Notice.styles';
+import { Dot, Info, InfoLabel, StyledNoticeCard, UserInfo, Wrapper } from './NoticeCard.styles';
 
 export interface NoticeCardProps extends HTMLAttributes<HTMLDivElement> {
   notice: Notice;
@@ -26,9 +26,9 @@ function NoticeCard({
   } = useTheme();
 
   return (
-    <StyledNoticeCard>
-      <Link href={`/notices/${id}`}>
-        <a>
+    <Link href={`/notices/${id}`}>
+      <a>
+        <StyledNoticeCard>
           <Wrapper {...props}>
             <Image
               ratio="4:3"
@@ -88,9 +88,9 @@ function NoticeCard({
               </Info>
             </Flexbox>
           </Wrapper>
-        </a>
-      </Link>
-    </StyledNoticeCard>
+        </StyledNoticeCard>
+      </a>
+    </Link>
   );
 }
 

@@ -107,7 +107,7 @@ function Comment({
           </Flexbox>
         </Flexbox>
         {!isMember && (
-          <Flexbox alignment="center">
+          <Flexbox alignment="center" customStyle={{ position: 'relative' }}>
             <Button
               ref={buttonRef}
               variant="transparent"
