@@ -1,6 +1,6 @@
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
-import { Alert, Grid, Icon } from 'cocstorage-ui';
+import { Alert, Icon } from 'cocstorage-ui';
 
 import {
   StoragesGrid,
@@ -8,7 +8,7 @@ import {
   StoragesLeftMenu,
   StoragesPopularList
 } from '@components/pages/storages';
-import GeneralTemplate from '@components/templeates/GeneralTemplate';
+import GridTemplate from '@components/templeates/GridTemplate';
 import Header from '@components/UI/molecules/Header';
 import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
 
@@ -21,23 +21,17 @@ function Storages() {
   return (
     <>
       <StoragesHead />
-      <GeneralTemplate header={<Header scrollFixedTrigger />}>
-        <Grid container columnGap={20}>
-          <Grid component="section" item customStyle={{ minWidth: 176, marginRight: 27 }}>
-            <StoragesLeftMenu />
-          </Grid>
-          <Grid component="section" item auto>
-            <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
-              게시판을 만들 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
-            </Alert>
-            <StoragesPopularList />
-            <StoragesGrid />
-          </Grid>
-          <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-            <IssueKeywordRank customStyle={{ position: 'fixed', width: 183 }} />
-          </Grid>
-        </Grid>
-      </GeneralTemplate>
+      <GridTemplate
+        header={<Header scrollFixedTrigger />}
+        leftAside={<StoragesLeftMenu />}
+        rightAside={<IssueKeywordRank customStyle={{ position: 'sticky', top: 89, width: 183 }} />}
+      >
+        <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
+          게시판을 만들 수 있는 기능을 준비하고 있어요! 조금만 기다려주세요.
+        </Alert>
+        <StoragesPopularList />
+        <StoragesGrid />
+      </GridTemplate>
     </>
   );
 }

@@ -2,10 +2,10 @@ import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { worstParamsDefault } from '@recoil/worst/atoms';
 
-import { Alert, Grid, Icon } from 'cocstorage-ui';
+import { Alert, Icon } from 'cocstorage-ui';
 
 import { WorstHead, WorstStorageBoardList, WorstTitle } from '@components/pages/worst';
-import GeneralTemplate from '@components/templeates/GeneralTemplate';
+import GridTemplate from '@components/templeates/GridTemplate';
 import Header from '@components/UI/molecules/Header';
 import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
 
@@ -17,23 +17,19 @@ function Worst() {
   return (
     <>
       <WorstHead />
-      <GeneralTemplate header={<Header scrollFixedTrigger />}>
-        <Grid container columnGap={20}>
-          <Grid component="section" item lgHidden customStyle={{ minWidth: 203 }}>
-            <SidePopularStorageList customStyle={{ position: 'fixed', width: 183 }} />
-          </Grid>
-          <Grid component="section" item auto>
-            <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
-              좀 더 편하게 보실 수 있도록 준비하고 있어요. 불편하시겠지만 조금만 기다려주세요!
-            </Alert>
-            <WorstTitle />
-            <WorstStorageBoardList />
-          </Grid>
-          <Grid component="section" item customStyle={{ minWidth: 203 }}>
-            <IssueKeywordRank customStyle={{ position: 'fixed', width: 183 }} />
-          </Grid>
-        </Grid>
-      </GeneralTemplate>
+      <GridTemplate
+        header={<Header scrollFixedTrigger />}
+        leftAside={
+          <SidePopularStorageList customStyle={{ position: 'sticky', top: 89, width: 183 }} />
+        }
+        rightAside={<IssueKeywordRank customStyle={{ position: 'sticky', top: 89, width: 183 }} />}
+      >
+        <Alert severity="normal" icon={<Icon name="BulbOutlined" />}>
+          좀 더 편하게 보실 수 있도록 준비하고 있어요. 불편하시겠지만 조금만 기다려주세요!
+        </Alert>
+        <WorstTitle />
+        <WorstStorageBoardList />
+      </GridTemplate>
     </>
   );
 }

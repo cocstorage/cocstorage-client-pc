@@ -37,7 +37,7 @@ function StoragesLeftMenu() {
       title="카테고리"
       listGap={2}
       disableToggle
-      customStyle={{ position: 'fixed', width: 156 }}
+      customStyle={{ position: 'sticky', top: 89, width: 156 }}
     >
       {categories.map((category) => (
         <Category
