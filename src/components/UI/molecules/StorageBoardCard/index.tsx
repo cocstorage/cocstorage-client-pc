@@ -66,9 +66,9 @@ function StorageBoardCard({
 
   if (variant === 'emphasize') {
     return (
-      <Link href={`/storages/${path}/${id}`}>
-        <a>
-          <StyledStorageBoardCard>
+      <StyledStorageBoardCard>
+        <Link href={`/storages/${path}/${id}`}>
+          <a>
             <Wrapper variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
               <Box customStyle={{ borderRadius: round, overflow: 'hidden', zIndex: 1 }}>
                 <Image
@@ -159,17 +159,17 @@ function StorageBoardCard({
                 </Info>
               </Flexbox>
             </Wrapper>
-          </StyledStorageBoardCard>
-        </a>
-      </Link>
+          </a>
+        </Link>
+      </StyledStorageBoardCard>
     );
   }
 
   if (variant === 'normal') {
     return (
-      <Link href={`/storages/${path}/${id}`}>
-        <a>
-          <StyledStorageBoardCard>
+      <StyledStorageBoardCard>
+        <Link href={`/storages/${path}/${id}`}>
+          <a>
             <Wrapper variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
               <Box customStyle={{ borderRadius: round, overflow: 'hidden', zIndex: 1 }}>
                 <Image
@@ -259,16 +259,16 @@ function StorageBoardCard({
                 </Info>
               </Flexbox>
             </Wrapper>
-          </StyledStorageBoardCard>
-        </a>
-      </Link>
+          </a>
+        </Link>
+      </StyledStorageBoardCard>
     );
   }
 
   return (
-    <Link href={`/storages/${path}/${id}`}>
-      <a>
-        <StyledStorageBoardCard>
+    <StyledStorageBoardCard>
+      <Link href={`/storages/${path}/${id}`}>
+        <a>
           <Wrapper variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
             <Flexbox
               direction="vertical"
@@ -380,9 +380,9 @@ function StorageBoardCard({
               </Box>
             )}
           </Wrapper>
-        </StyledStorageBoardCard>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </StyledStorageBoardCard>
   );
 }
 
