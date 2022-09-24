@@ -197,7 +197,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
             <Tag
               ref={tagRef}
               variant="transparent"
-              startIcon={<Icon name="SettingOutlined" width={16} height={16} />}
+              startIcon={<Icon name="UserOutlined" width={16} height={16} />}
               customStyle={{
                 height: 32,
                 padding: 0,
@@ -209,7 +209,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               }}
               onClick={handleOpenMenu}
             >
-              <Hidden lgHidden>설정</Hidden>
+              <Hidden lgHidden>마이</Hidden>
             </Tag>
             <SystemMenu open={menuOpen} anchorRef={tagRef} onClose={handleCloseMenu} />
           </Flexbox>
