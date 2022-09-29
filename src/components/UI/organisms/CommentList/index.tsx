@@ -128,7 +128,7 @@ function CommentList({ type = 'storageBoard' }: CommentListProps) {
   ) {
     return (
       <Box component="section">
-        <Message title="댓글이 없네요!" message="첫 댓글의 주인공이 되어 주실래요?" hideButton />
+        <Message title="아직 댓글이 없네요." message="첫 댓글을 남겨주세요!" hideButton />
       </Box>
     );
   }
