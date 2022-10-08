@@ -34,11 +34,6 @@ export const commonOnBoardingDefault = {
     lastStep: 1,
     done: false
   },
-  search: {
-    step: 0,
-    lastStep: 1,
-    done: false
-  },
   comment: {
     step: 0,
     lastStep: 1,

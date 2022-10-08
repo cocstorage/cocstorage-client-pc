@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -8,11 +8,24 @@ import styled from '@emotion/styled';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { commonFeedbackDialogState } from '@recoil/common/atoms';
+import {
+  commonFeedbackDialogState,
+  commonOnBoardingDefault,
+  commonOnBoardingState
+} from '@recoil/common/atoms';
 import { noticeCommentsParamsState } from '@recoil/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
 
-import { Button, CustomStyle, Flexbox, Icon, TextBar, useTheme } from 'cocstorage-ui';
+import {
+  Button,
+  CustomStyle,
+  Flexbox,
+  Icon,
+  Spotlight,
+  TextBar,
+  Tooltip,
+  useTheme
+} from 'cocstorage-ui';
 
 import useNotice from '@hooks/query/useNotice';
 import useNoticeComments from '@hooks/query/useNoticeComments';
@@ -46,6 +59,8 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
 
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
   const [noticeCommentsParams, setNoticeCommentsParams] = useRecoilState(noticeCommentsParamsState);
+  const [{ comment: { step = 0, lastStep = 0 } = {} }, setCommonOnBoardingState] =
+    useRecoilState(commonOnBoardingState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
   const [newCustomStyle] = useState({ ...(customStyle as Record<string, string>), flexGrow: 1 });
@@ -53,6 +68,25 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [content, setContent] = useState('');
+  const [open, setOpen] = useState(false);
+  const [observerTriggered, setObserverTriggered] = useState(false);
+  const [top, setTop] = useState(0);
+  const [width, setWidth] = useState(0);
+
+  const targetRef = useRef<HTMLDivElement>(null);
+  const onIntersectRef = useRef<IntersectionObserverCallback>(async ([entry], observer) => {
+    try {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        setObserverTriggered(true);
+        observer.observe(entry.target);
+      } else {
+        setObserverTriggered(false);
+      }
+    } catch {
+      setObserverTriggered(true);
+    }
+  }).current;
 
   const queryClient = useQueryClient();
 
@@ -197,54 +231,181 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
     }
   };
 
+  const handleClose = () =>
+    setCommonOnBoardingState((prevState) => ({
+      ...prevState,
+      comment: {
+        ...commonOnBoardingDefault.comment,
+        step: 1,
+        done: commonOnBoardingDefault.comment.lastStep === 1
+      }
+    }));
+
+  const handleSpotlight = useCallback(() => {
+    if (targetRef.current && open) {
+      const { top: targetTop } = targetRef.current.getBoundingClientRect();
+      setTop(targetTop);
+      setWidth(targetRef.current.clientWidth);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    let observer: IntersectionObserver;
+    try {
+      if (targetRef.current) {
+        observer = new IntersectionObserver(onIntersectRef, { threshold: 1 });
+        observer.observe(targetRef.current);
+        return () => observer.disconnect();
+      }
+    } catch {
+      return () => {
+        if (observer) observer.disconnect();
+      };
+    }
+    return () => {
+      if (observer) observer.disconnect();
+    };
+  }, [onIntersectRef]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleSpotlight);
+
+    return () => {
+      window.removeEventListener('scroll', handleSpotlight);
+    };
+  }, [handleSpotlight]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleSpotlight);
+
+    return () => {
+      window.removeEventListener('resize', handleSpotlight);
+    };
+  }, [handleSpotlight]);
+
+  useEffect(() => {
+    // TODO Spotlight 컴포넌트 좌표 및 요소 크기 구하는 로직 개선 필요
+    if (observerTriggered && ((!step && !lastStep) || step < lastStep) && targetRef.current) {
+      const { top: targetTop } = targetRef.current.getBoundingClientRect();
+      setOpen(true);
+      setTop(targetTop);
+      setWidth(targetRef.current.clientWidth);
+    } else {
+      setOpen(false);
+    }
+  }, [step, lastStep, observerTriggered]);
+
   return (
-    <Flexbox gap={20} customStyle={newCustomStyle}>
-      <form>
-        <Flexbox gap={8} direction="vertical" justifyContent="space-between">
-          <TextBar
-            size="small"
-            value={nickname}
-            placeholder="닉네임"
-            onChange={handleChange}
-            autoComplete="username"
-            customStyle={{
-              maxWidth: 173,
-              borderColor: box.stroked.normal
-            }}
+    <>
+      <Flexbox ref={targetRef} gap={20} customStyle={newCustomStyle}>
+        <form>
+          <Flexbox gap={8} direction="vertical" justifyContent="space-between">
+            <TextBar
+              size="small"
+              value={nickname}
+              placeholder="닉네임"
+              onChange={handleChange}
+              autoComplete="username"
+              customStyle={{
+                maxWidth: 173,
+                borderColor: box.stroked.normal
+              }}
+            />
+            <TextBar
+              type="password"
+              size="small"
+              placeholder="비밀번호"
+              value={password}
+              onChange={handleChange}
+              autoComplete="current-password"
+              customStyle={{
+                maxWidth: 173,
+                borderColor: box.stroked.normal
+              }}
+            />
+          </Flexbox>
+        </form>
+        <CommentBar>
+          <CommentTextArea
+            onChange={handleChangeContent}
+            value={content}
+            placeholder="내용을 입력해주세요."
           />
-          <TextBar
-            type="password"
-            size="small"
-            placeholder="비밀번호"
-            value={password}
-            onChange={handleChange}
-            autoComplete="current-password"
+          <Button
+            variant="accent"
+            startIcon={<Icon name="SendFilled" width={18} height={18} />}
             customStyle={{
-              maxWidth: 173,
-              borderColor: box.stroked.normal
+              margin: '17px 12px 17px 0'
             }}
-          />
-        </Flexbox>
-      </form>
-      <CommentBar>
-        <CommentTextArea
-          onChange={handleChangeContent}
-          value={content}
-          placeholder="내용을 입력해주세요."
-        />
-        <Button
-          variant="accent"
-          startIcon={<Icon name="SendFilled" width={18} height={18} />}
-          customStyle={{
-            margin: '17px 12px 17px 0'
-          }}
-          onClick={handleClick}
-          disabled={isLoading || noticeCommentIsLoading || !nickname || !password || !content}
+            onClick={handleClick}
+            disabled={isLoading || noticeCommentIsLoading || !nickname || !password || !content}
+          >
+            작성
+          </Button>
+        </CommentBar>
+      </Flexbox>
+      <Spotlight
+        open={open}
+        onClose={handleClose}
+        targetRef={targetRef}
+        customStyle={{ top, width, borderRadius: 8 }}
+      >
+        <Tooltip
+          open={open}
+          onClose={handleClose}
+          content="로그인하지 않아도 댓글을 남길 수 있어요!"
+          placement="top"
         >
-          작성
-        </Button>
-      </CommentBar>
-    </Flexbox>
+          <Flexbox gap={20} onClick={handleClose} customStyle={{ width }}>
+            <form>
+              <Flexbox gap={8} direction="vertical" justifyContent="space-between">
+                <TextBar
+                  size="small"
+                  value={nickname}
+                  placeholder="닉네임"
+                  onChange={handleChange}
+                  autoComplete="username"
+                  customStyle={{
+                    maxWidth: 173,
+                    borderColor: box.stroked.normal
+                  }}
+                />
+                <TextBar
+                  type="password"
+                  size="small"
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={handleChange}
+                  autoComplete="current-password"
+                  customStyle={{
+                    maxWidth: 173,
+                    borderColor: box.stroked.normal
+                  }}
+                />
+              </Flexbox>
+            </form>
+            <CommentBar>
+              <CommentTextArea
+                onChange={handleChangeContent}
+                value={content}
+                placeholder="내용을 입력해주세요."
+              />
+              <Button
+                variant="accent"
+                startIcon={<Icon name="SendFilled" width={18} height={18} />}
+                customStyle={{
+                  margin: '17px 12px 17px 0'
+                }}
+                onClick={handleClick}
+                disabled={isLoading || noticeCommentIsLoading || !nickname || !password || !content}
+              >
+                작성
+              </Button>
+            </CommentBar>
+          </Flexbox>
+        </Tooltip>
+      </Spotlight>
+    </>
   );
 }
 
