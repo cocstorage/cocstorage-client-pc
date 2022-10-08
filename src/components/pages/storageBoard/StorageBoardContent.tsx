@@ -129,6 +129,7 @@ function StorageBoardContent() {
 
       if (videos.length) {
         for (let i = 0; i < videos.length; i += 1) {
+          videos[i].muted = true;
           videos[i].play();
         }
       }

@@ -1,11 +1,23 @@
-import { ChangeEvent, HTMLAttributes, useMemo, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  HTMLAttributes,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { commonFeedbackDialogState } from '@recoil/common/atoms';
+import {
+  commonFeedbackDialogState,
+  commonOnBoardingDefault,
+  commonOnBoardingState
+} from '@recoil/common/atoms';
 
 import {
   Box,
@@ -13,8 +25,10 @@ import {
   Hidden,
   Icon,
   Image,
+  Spotlight,
   Tag,
   TextBar,
+  Tooltip,
   Typography,
   useTheme
 } from 'cocstorage-ui';
@@ -34,11 +48,14 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const router = useRouter();
   const { query } = router;
 
+  const [{ theme: { step = 0, lastStep = 0 } = {} }, setCommonOnBoardingState] =
+    useRecoilState(commonOnBoardingState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
   const {
     theme: {
       mode,
+      breakpoints,
       palette: { text, box }
     }
   } = useTheme();
@@ -46,6 +63,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const { path, avatarUrl = '', name = '' } = useStorageData(String(query.path)) || {};
 
   const [value, setValue] = useState('');
+  const [open, setOpen] = useState(false);
+  const [left, setLeft] = useState(0);
+  const [triangleLeft, setTriangleLeft] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isHome = useMemo(
@@ -70,12 +90,60 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
       message: '조금만 기다려주세요!'
     });
 
+  const handleClose = () =>
+    setCommonOnBoardingState((prevState) => ({
+      ...prevState,
+      theme: {
+        ...commonOnBoardingDefault.theme,
+        step: 1,
+        done: commonOnBoardingDefault.theme.lastStep === 1
+      }
+    }));
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setValue(event.currentTarget.value);
 
-  const handleOpenMenu = () => setMenuOpen(true);
+  const handleOpenMenu = () => {
+    handleClose();
+    setMenuOpen(true);
+  };
 
   const handleCloseMenu = () => setMenuOpen(false);
+
+  const handleResize = useCallback(() => {
+    if (tagRef.current) {
+      const { clientWidth } = tagRef.current;
+      // TODO 추후 UI 라이브러리 내 Hook 작성
+      const lgHidden = window.matchMedia(`(max-width: ${breakpoints.lg}px)`).matches;
+      setLeft(clientWidth - (lgHidden ? 189 : 199));
+      setTriangleLeft((lgHidden ? 189 : 209) - clientWidth);
+    }
+  }, [breakpoints.lg]);
+
+  useEffect(() => {
+    if (tagRef.current) {
+      const { clientWidth } = tagRef.current;
+      const lgHidden = window.matchMedia(`(max-width: ${breakpoints.lg}px)`).matches;
+      setLeft(clientWidth - (lgHidden ? 189 : 199));
+      setTriangleLeft((lgHidden ? 189 : 209) - clientWidth);
+    }
+  }, [breakpoints.lg]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
+
+  useEffect(() => {
+    if ((!step && !lastStep) || step < lastStep) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [step, lastStep]);
 
   return (
     <>
@@ -212,6 +280,41 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Hidden lgHidden>마이</Hidden>
             </Tag>
             <SystemMenu open={menuOpen} anchorRef={tagRef} onClose={handleCloseMenu} />
+            <Spotlight
+              open={open}
+              onClose={handleClose}
+              targetRef={tagRef}
+              customStyle={{
+                borderRadius: 8
+              }}
+            >
+              <Tooltip
+                open={open}
+                onClose={handleClose}
+                content="여기서 다크 모드를 설정하실 수 있어요!"
+                centered={false}
+                left={left}
+                triangleLeft={triangleLeft}
+                disableOnClose
+              >
+                <Tag
+                  variant="transparent"
+                  startIcon={<Icon name="UserOutlined" width={16} height={16} />}
+                  customStyle={{
+                    height: 32,
+                    padding: 0,
+                    color: text[mode].main,
+                    '& svg path': {
+                      fill: text[mode].main
+                    },
+                    cursor: 'pointer'
+                  }}
+                  onClick={handleOpenMenu}
+                >
+                  <Hidden lgHidden>마이</Hidden>
+                </Tag>
+              </Tooltip>
+            </Spotlight>
           </Flexbox>
         </HeaderInner>
       </StyledHeader>

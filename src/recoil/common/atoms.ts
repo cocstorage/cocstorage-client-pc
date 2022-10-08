@@ -1,16 +1,16 @@
-import { ThemeMode } from 'cocstorage-ui/dist/types';
-
 import { atom } from 'recoil';
+
+import { ThemeMode } from 'cocstorage-ui';
 
 import LocalStorage from '@library/localStorage';
 
 import localStorageKeys from '@constants/localStorageKeys';
 
-export const themeDefault: ThemeMode | 'system' = 'system';
+export const commonThemeDefault: ThemeMode | 'system' = 'system';
 
-export const themeState = atom<ThemeMode | 'system'>({
+export const commonThemeState = atom<ThemeMode | 'system'>({
   key: 'common/themeState',
-  default: themeDefault,
+  default: commonThemeDefault,
   effects: [
     ({ onSet, setSelf }) => {
       const theme = LocalStorage.get<ThemeMode | 'system'>(localStorageKeys.theme) || 'system';
@@ -22,6 +22,46 @@ export const themeState = atom<ThemeMode | 'system'>({
           LocalStorage.remove(localStorageKeys.theme);
         } else {
           LocalStorage.set(localStorageKeys.theme, newValue);
+        }
+      });
+    }
+  ]
+});
+
+export const commonOnBoardingDefault = {
+  theme: {
+    step: 0,
+    lastStep: 1,
+    done: false
+  },
+  search: {
+    step: 0,
+    lastStep: 1,
+    done: false
+  },
+  comment: {
+    step: 0,
+    lastStep: 1,
+    done: false
+  }
+};
+
+export const commonOnBoardingState = atom({
+  key: 'common/onBoardingState',
+  default: commonOnBoardingDefault,
+  effects: [
+    ({ onSet, setSelf }) => {
+      const onBoarding =
+        LocalStorage.get<typeof commonOnBoardingDefault>(localStorageKeys.onBoarding) ||
+        commonOnBoardingDefault;
+
+      setSelf(onBoarding);
+
+      onSet((newValue, _, isReset) => {
+        if (isReset) {
+          LocalStorage.remove(localStorageKeys.onBoarding);
+        } else {
+          LocalStorage.set(localStorageKeys.onBoarding, newValue);
         }
       });
     }

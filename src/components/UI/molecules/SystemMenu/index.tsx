@@ -6,7 +6,7 @@ import { ThemeMode } from 'cocstorage-ui/dist/types';
 
 import { useRecoilState } from 'recoil';
 
-import { themeState } from '@recoil/common/atoms';
+import { commonThemeState } from '@recoil/common/atoms';
 
 import { Dropdown, Flexbox, Icon, Menu, Typography, useTheme } from 'cocstorage-ui';
 
@@ -42,7 +42,7 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
     }
   } = useTheme();
 
-  const [theme, setTheme] = useRecoilState(themeState);
+  const [theme, setTheme] = useRecoilState(commonThemeState);
 
   const handleTheme = (value: string | number) => {
     const newValue = value as ThemeMode | 'system';
