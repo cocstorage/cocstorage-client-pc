@@ -13,6 +13,7 @@ import { ErrorBoundary, GoogleScript, ThemeRoot } from '@components/utils';
 
 import 'dayjs/locale/ko';
 import '@styles/base.css';
+import HistoryProvider from '@provider/HistoryProvider';
 
 dayjs.locale('ko');
 dayjs.extend(RelativeTime);
@@ -62,7 +63,9 @@ function App({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedSta
             <ThemeRoot>
               <Hydrate state={pageProps.dehydratedState}>
                 <PageProgress />
-                <Component {...pageProps} />
+                <HistoryProvider>
+                  <Component {...pageProps} />
+                </HistoryProvider>
                 <FeedbackDialog />
               </Hydrate>
             </ThemeRoot>
