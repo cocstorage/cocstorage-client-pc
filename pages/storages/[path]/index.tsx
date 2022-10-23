@@ -51,9 +51,9 @@ function StorageBoards() {
 }
 
 export async function getServerSideProps({ req, res, query }: GetServerSidePropsContext) {
-  const isReturning = req.cookies.isReturning ? JSON.parse(req.cookies.isReturning) : false;
-  if (isReturning) {
-    res.setHeader('Set-Cookie', 'isReturning=false;path=/');
+  const isGoBack = req.cookies.isGoBack ? JSON.parse(req.cookies.isGoBack) : false;
+  if (isGoBack) {
+    res.setHeader('Set-Cookie', 'isGoBack=false;path=/');
 
     return {
       props: {
