@@ -66,13 +66,10 @@ export async function getServerSideProps({ req, res, query }: GetServerSideProps
     const queryClient = new QueryClient();
     const path = String(query.path);
 
-    const storage = await fetchStorage(path);
-    const storageBoards = await fetchStorageBoards(path, storageBoardsParamsDefault);
-
-    await queryClient.setQueryData(queryKeys.storages.storageById(path), storage);
-    await queryClient.setQueryData(
+    await queryClient.fetchQuery(queryKeys.storages.storageById(path), () => fetchStorage(path));
+    await queryClient.fetchQuery(
       queryKeys.storageBoards.storageBoardsByIdWithParams(path, storageBoardsParamsDefault),
-      storageBoards
+      () => fetchStorageBoards(path, storageBoardsParamsDefault)
     );
 
     return {

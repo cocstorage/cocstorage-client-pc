@@ -135,33 +135,35 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
         flexGrow: 1
       }}
     >
-      <form>
-        <Flexbox gap={8} direction="vertical" justifyContent="space-between">
-          <TextBar
-            size="small"
-            value={nickname}
-            placeholder="닉네임"
-            onChange={handleChange}
-            autoComplete="username"
-            customStyle={{
-              maxWidth: 173,
-              borderColor: box.stroked.normal
-            }}
-          />
-          <TextBar
-            type="password"
-            size="small"
-            placeholder="비밀번호"
-            value={password}
-            onChange={handleChange}
-            autoComplete="current-password"
-            customStyle={{
-              maxWidth: 173,
-              borderColor: box.stroked.normal
-            }}
-          />
-        </Flexbox>
-      </form>
+      {content && (
+        <form>
+          <Flexbox gap={8} direction="vertical" justifyContent="space-between">
+            <TextBar
+              size="small"
+              value={nickname}
+              placeholder="닉네임"
+              onChange={handleChange}
+              autoComplete="username"
+              customStyle={{
+                maxWidth: 173,
+                borderColor: box.stroked.normal
+              }}
+            />
+            <TextBar
+              type="password"
+              size="small"
+              placeholder="비밀번호"
+              value={password}
+              onChange={handleChange}
+              autoComplete="current-password"
+              customStyle={{
+                maxWidth: 173,
+                borderColor: box.stroked.normal
+              }}
+            />
+          </Flexbox>
+        </form>
+      )}
       <ReplyBar>
         <ReplyTextArea
           onChange={handleChangeContent}

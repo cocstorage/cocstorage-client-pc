@@ -298,33 +298,35 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
   return (
     <>
       <Flexbox ref={targetRef} gap={20} customStyle={newCustomStyle}>
-        <form>
-          <Flexbox gap={8} direction="vertical" justifyContent="space-between">
-            <TextBar
-              size="small"
-              value={nickname}
-              placeholder="닉네임"
-              onChange={handleChange}
-              autoComplete="username"
-              customStyle={{
-                maxWidth: 173,
-                borderColor: box.stroked.normal
-              }}
-            />
-            <TextBar
-              type="password"
-              size="small"
-              placeholder="비밀번호"
-              value={password}
-              onChange={handleChange}
-              autoComplete="current-password"
-              customStyle={{
-                maxWidth: 173,
-                borderColor: box.stroked.normal
-              }}
-            />
-          </Flexbox>
-        </form>
+        {content && (
+          <form>
+            <Flexbox gap={8} direction="vertical" justifyContent="space-between">
+              <TextBar
+                size="small"
+                value={nickname}
+                placeholder="닉네임"
+                onChange={handleChange}
+                autoComplete="username"
+                customStyle={{
+                  maxWidth: 173,
+                  borderColor: box.stroked.normal
+                }}
+              />
+              <TextBar
+                type="password"
+                size="small"
+                placeholder="비밀번호"
+                value={password}
+                onChange={handleChange}
+                autoComplete="current-password"
+                customStyle={{
+                  maxWidth: 173,
+                  borderColor: box.stroked.normal
+                }}
+              />
+            </Flexbox>
+          </form>
+        )}
         <CommentBar>
           <CommentTextArea
             onChange={handleChangeContent}
@@ -357,33 +359,35 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
           placement="top"
         >
           <Flexbox gap={20} onClick={handleClose} customStyle={{ width }}>
-            <form>
-              <Flexbox gap={8} direction="vertical" justifyContent="space-between">
-                <TextBar
-                  size="small"
-                  value={nickname}
-                  placeholder="닉네임"
-                  onChange={handleChange}
-                  autoComplete="username"
-                  customStyle={{
-                    maxWidth: 173,
-                    borderColor: box.stroked.normal
-                  }}
-                />
-                <TextBar
-                  type="password"
-                  size="small"
-                  placeholder="비밀번호"
-                  value={password}
-                  onChange={handleChange}
-                  autoComplete="current-password"
-                  customStyle={{
-                    maxWidth: 173,
-                    borderColor: box.stroked.normal
-                  }}
-                />
-              </Flexbox>
-            </form>
+            {content && (
+              <form>
+                <Flexbox gap={8} direction="vertical" justifyContent="space-between">
+                  <TextBar
+                    size="small"
+                    value={nickname}
+                    placeholder="닉네임"
+                    onChange={handleChange}
+                    autoComplete="username"
+                    customStyle={{
+                      maxWidth: 173,
+                      borderColor: box.stroked.normal
+                    }}
+                  />
+                  <TextBar
+                    type="password"
+                    size="small"
+                    placeholder="비밀번호"
+                    value={password}
+                    onChange={handleChange}
+                    autoComplete="current-password"
+                    customStyle={{
+                      maxWidth: 173,
+                      borderColor: box.stroked.normal
+                    }}
+                  />
+                </Flexbox>
+              </form>
+            )}
             <CommentBar>
               <CommentTextArea
                 onChange={handleChangeContent}

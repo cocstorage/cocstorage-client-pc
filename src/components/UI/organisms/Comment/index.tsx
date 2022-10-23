@@ -2,7 +2,7 @@ import { memo, useRef, useState } from 'react';
 
 import dayjs from 'dayjs';
 
-import { Box, Button, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
+import { Button, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
 
 import { CommentMenu, Reply, ReplyForm } from '@components/UI/organisms';
 
@@ -86,24 +86,9 @@ function Comment({
                 customStyle={{ cursor: 'pointer', color: text[mode].text1 }}
                 onClick={handleClick}
               >
-                답글달기
+                {replies.length > 0 ? `답글 ${replies.length.toLocaleString()}개` : '답글달기'}
               </Typography>
             </Flexbox>
-            {replies.length > 0 && (
-              <Flexbox gap={10} alignment="center">
-                <Box customStyle={{ width: 24, height: 1, backgroundColor: text[mode].text3 }} />
-                <Typography
-                  variant="s1"
-                  customStyle={{
-                    color: text[mode].text1,
-                    cursor: 'pointer'
-                  }}
-                  onClick={handleClick}
-                >
-                  {open ? '답글 숨기기' : `답글 ${replies.length}개`}
-                </Typography>
-              </Flexbox>
-            )}
           </Flexbox>
         </Flexbox>
         {!isMember && (
@@ -128,6 +113,9 @@ function Comment({
       </Flexbox>
       {open && (
         <Flexbox gap={18} direction="vertical" customStyle={{ margin: '15px 0 0 40px' }}>
+          {replies.map((reply) => (
+            <Reply key={`reply-${reply.id}`} type={type} commentId={commentId} reply={reply} />
+          ))}
           <Flexbox
             gap={10}
             customStyle={{
@@ -145,9 +133,28 @@ function Comment({
           >
             <ReplyForm type={type} commentId={commentId} />
           </Flexbox>
-          {replies.map((reply) => (
+        </Flexbox>
+      )}
+      {!open && replies.length > 0 && (
+        <Flexbox gap={18} direction="vertical" customStyle={{ margin: '15px 0 0 40px' }}>
+          {replies.slice(0, 3).map((reply) => (
             <Reply key={`reply-${reply.id}`} type={type} commentId={commentId} reply={reply} />
           ))}
+        </Flexbox>
+      )}
+      {replies.length > 3 && (
+        <Flexbox alignment="center" customStyle={{ marginLeft: 40 }}>
+          <Icon name={!open ? 'CaretDownOutlined' : 'CaretUpOutlined'} color={text[mode].text1} />
+          <Typography
+            variant="s1"
+            customStyle={{
+              color: text[mode].text1,
+              cursor: 'pointer'
+            }}
+            onClick={handleClick}
+          >
+            {open ? '답글 숨기기' : `답글 ${(replies.length - 3).toLocaleString()}개 더 보기`}
+          </Typography>
         </Flexbox>
       )}
     </>
