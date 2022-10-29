@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import { useRecoilState } from 'recoil';
 
-import { storageBoardsParamsStateFamily } from '@recoil/storageBoards/atoms';
+import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
 
 import { Flexbox, Grid, Pagination } from 'cocstorage-ui';
 

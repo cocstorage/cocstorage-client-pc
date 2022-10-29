@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 
 import { useRecoilState, useResetRecoilState } from 'recoil';
 
-import { noticeCommentsParamsState } from '@recoil/notice/atoms';
-import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
+import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
+import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
 
 import { Box, Flexbox, Icon, Pagination, Typography, useTheme } from 'cocstorage-ui';
 

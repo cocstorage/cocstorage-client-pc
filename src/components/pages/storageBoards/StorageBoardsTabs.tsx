@@ -9,7 +9,7 @@ import styled, { CSSObject } from '@emotion/styled';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { commonFeedbackDialogState } from '@recoil/common/atoms';
-import { storageBoardsParamsStateFamily } from '@recoil/storageBoards/atoms';
+import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
 
 import { Box, Button, Flexbox, Icon, Image, Tab, Tabs, useTheme } from 'cocstorage-ui';
 

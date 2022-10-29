@@ -6,8 +6,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useRecoilValue } from 'recoil';
 
-import { noticeCommentsParamsState } from '@recoil/notice/atoms';
-import { storageBoardCommentsParamsState } from '@recoil/storageBoard/atoms';
+import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
+import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
 
 import {
   Box,
@@ -159,7 +159,7 @@ function ReplyDeleteDialog({
       onClose={onClose}
       fullWidth
       customStyle={{
-        maxWidth: 480
+        maxWidth: 475
       }}
     >
       <Box

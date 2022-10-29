@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
-import { noticesParamsDefault } from '@recoil/notices/atoms';
+import { noticesParamsDefault } from '@recoil/pages/notices/atoms';
 
 import { Flexbox, Typography } from 'cocstorage-ui';
 
@@ -36,9 +36,7 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     res.setHeader('Set-Cookie', 'isGoBack=false;path=/');
 
     return {
-      props: {
-        dehydratedState: null
-      }
+      props: {}
     };
   }
 

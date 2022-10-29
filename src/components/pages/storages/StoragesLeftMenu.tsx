@@ -6,7 +6,7 @@ import styled, { CSSObject } from '@emotion/styled';
 
 import { useRecoilState } from 'recoil';
 
-import { storagesSelectedCategoryIdState } from '@recoil/storages/atoms';
+import { storagesSelectedCategoryIdState } from '@recoil/pages/storages/atoms';
 
 import { Typography } from 'cocstorage-ui';
 
