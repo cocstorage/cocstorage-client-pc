@@ -295,6 +295,7 @@ const UserInfo = styled.div`
 const Content = styled(Typography)`
   position: relative;
   margin-top: 20px;
+  overflow: hidden;
 
   * {
     max-width: 100%;
