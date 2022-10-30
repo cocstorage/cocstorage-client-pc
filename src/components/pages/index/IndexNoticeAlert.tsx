@@ -15,19 +15,17 @@ function IndexNoticeAlert() {
 
   return (
     <Link href={`/notices/${notices[0].id}`}>
-      <a>
-        <Alert
-          severity="info"
-          icon={<Icon name="LoudSpeakerOutlined" />}
-          action={
-            <IconButton>
-              <Icon name="CaretRightOutlined" />
-            </IconButton>
-          }
-        >
-          {notices[0].subject}
-        </Alert>
-      </a>
+      <Alert
+        severity="info"
+        icon={<Icon name="LoudSpeakerOutlined" />}
+        action={
+          <IconButton>
+            <Icon name="CaretRightOutlined" />
+          </IconButton>
+        }
+      >
+        {notices[0].subject}
+      </Alert>
     </Link>
   );
 }

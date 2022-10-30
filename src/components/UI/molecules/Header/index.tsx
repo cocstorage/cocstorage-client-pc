@@ -151,58 +151,54 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
         <HeaderInner triggered={triggered}>
           {!isStorageBoardDetail && (
             <Link href="/">
-              <a>
-                <Flexbox component="button" gap={8} alignment="center">
-                  <Logo
-                    width={34}
-                    height={24}
-                    src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
-                    alt="Logo Img"
-                  />
-                  <Hidden lgHidden>
-                    <Flexbox>
-                      <Typography variant="h3" fontWeight="bold">
-                        개념글’
-                      </Typography>
-                      <Typography variant="h3">저장소</Typography>
-                    </Flexbox>
-                  </Hidden>
-                </Flexbox>
-              </a>
+              <Flexbox component="button" gap={8} alignment="center">
+                <Logo
+                  width={34}
+                  height={24}
+                  src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
+                  alt="Logo Img"
+                />
+                <Hidden lgHidden>
+                  <Flexbox>
+                    <Typography variant="h3" fontWeight="bold">
+                      개념글’
+                    </Typography>
+                    <Typography variant="h3">저장소</Typography>
+                  </Flexbox>
+                </Hidden>
+              </Flexbox>
             </Link>
           )}
           {isStorageBoardDetail && (
             <Link href={`/storages/${path}`}>
-              <a>
-                <Flexbox gap={14} alignment="center">
-                  <Logo
-                    width={34}
+              <Flexbox gap={14} alignment="center">
+                <Logo
+                  width={34}
+                  height={24}
+                  src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
+                  alt="Logo Img"
+                />
+                <Box
+                  customStyle={{
+                    width: 1,
+                    height: 16,
+                    backgroundColor: box.stroked.normal
+                  }}
+                />
+                <Flexbox gap={10} alignment="center">
+                  <Image
+                    width={24}
                     height={24}
-                    src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
-                    alt="Logo Img"
+                    round={4}
+                    src={avatarUrl || ''}
+                    alt="Storage Logo Img"
+                    disableAspectRatio
                   />
-                  <Box
-                    customStyle={{
-                      width: 1,
-                      height: 16,
-                      backgroundColor: box.stroked.normal
-                    }}
-                  />
-                  <Flexbox gap={10} alignment="center">
-                    <Image
-                      width={24}
-                      height={24}
-                      round={4}
-                      src={avatarUrl || ''}
-                      alt="Storage Logo Img"
-                      disableAspectRatio
-                    />
-                    <Typography variant="h4" fontWeight="bold">
-                      {name}
-                    </Typography>
-                  </Flexbox>
+                  <Typography variant="h4" fontWeight="bold">
+                    {name}
+                  </Typography>
                 </Flexbox>
-              </a>
+              </Flexbox>
             </Link>
           )}
           <Box
@@ -229,37 +225,33 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
           <Flexbox gap={20}>
             <Flexbox gap={10}>
               <Link href="/">
-                <a>
-                  <Tag
-                    variant={isHome ? 'semiAccent' : 'transparent'}
-                    startIcon={
-                      <Icon name={isHome ? 'HomeFilled' : 'HomeOutlined'} width={16} height={16} />
-                    }
-                    customStyle={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      height: 32,
+                <Tag
+                  variant={isHome ? 'semiAccent' : 'transparent'}
+                  startIcon={
+                    <Icon name={isHome ? 'HomeFilled' : 'HomeOutlined'} width={16} height={16} />
+                  }
+                  customStyle={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: 32,
 
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <Hidden lgHidden>홈</Hidden>
-                  </Tag>
-                </a>
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Hidden lgHidden>홈</Hidden>
+                </Tag>
               </Link>
               <Link href="/storages">
-                <a>
-                  <Tag
-                    variant={isStorages ? 'semiAccent' : 'transparent'}
-                    startIcon={<Icon name="CommunityFilled" width={16} height={16} />}
-                    customStyle={{
-                      height: 32,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <Hidden lgHidden>게시판</Hidden>
-                  </Tag>
-                </a>
+                <Tag
+                  variant={isStorages ? 'semiAccent' : 'transparent'}
+                  startIcon={<Icon name="CommunityFilled" width={16} height={16} />}
+                  customStyle={{
+                    height: 32,
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Hidden lgHidden>게시판</Hidden>
+                </Tag>
               </Link>
             </Flexbox>
             <Tag

@@ -15,19 +15,17 @@ interface StorageCardProps extends HTMLAttributes<HTMLDivElement> {
 function StorageCard({ src, path, name, ...props }: StorageCardProps) {
   return (
     <Link href={`/storages/${path}`}>
-      <a>
-        <StyledStorageCard {...props}>
-          <Image
-            width={36}
-            height={36}
-            round={6}
-            src={src}
-            alt="Storage Logo Img"
-            disableAspectRatio
-          />
-          <Typography>{name}</Typography>
-        </StyledStorageCard>
-      </a>
+      <StyledStorageCard {...props}>
+        <Image
+          width={36}
+          height={36}
+          round={6}
+          src={src}
+          alt="Storage Logo Img"
+          disableAspectRatio
+        />
+        <Typography>{name}</Typography>
+      </StyledStorageCard>
     </Link>
   );
 }
