@@ -80,15 +80,13 @@ function StorageBoardContent() {
           queryClient.setQueryData(queryKeys.storageBoards.storageBoardById(storageBoardId), data);
         }
       },
-      onError: (error) => {
-        const asError = error as AxiosError;
-
-        if (asError && asError.response) {
-          const { data = {} } = (asError || {}).response || {};
+      onError: (error: AxiosError) => {
+        if (error && error.response) {
+          const { data: { code = '' } = {} } = error.response as { data: { code: string } };
 
           setCommonFeedbackDialogState({
             open: true,
-            title: getErrorMessageByCode(data.code),
+            title: getErrorMessageByCode(code),
             message: '다른 글도 한번 살펴보시는 건 어때요?'
           });
         }
