@@ -31,9 +31,9 @@ function StorageBoards() {
         <Flexbox gap={20} direction="vertical">
           <StorageBoardsIntro />
           <StorageBoardsTabs />
-          <Link href="/notices/173">
+          <Link href="/notices/181">
             <Alert severity="info" icon={<Icon name="PinOutlined" width={16} height={16} />}>
-              개념글 저장소 유사앱 관련 주의 안내
+              여러분들께 드리는 마지막 소식
             </Alert>
           </Link>
           <StorageBoardGrid />
