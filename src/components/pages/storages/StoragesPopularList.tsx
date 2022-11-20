@@ -14,7 +14,7 @@ function StoragesPopularList() {
             <Avatar
               width={81}
               height={81}
-              round
+              round={6}
               src={`https://${process.env.IMAGE_DOMAIN}/images/xt868xt2w6i50bf4x98xdsbfado3`}
               alt="Storage Logo Img"
             />
@@ -26,7 +26,7 @@ function StoragesPopularList() {
             <Avatar
               width={81}
               height={81}
-              round
+              round={6}
               src={`https://${process.env.IMAGE_DOMAIN}/images/zksw76puo6l255o5sabljom0gw8l`}
               alt="Storage Logo Img"
             />
@@ -38,7 +38,7 @@ function StoragesPopularList() {
             <Avatar
               width={81}
               height={81}
-              round
+              round={6}
               src={`https://${process.env.IMAGE_DOMAIN}/images/uvx4jiy4ur5hm0t0vpbqb3lw1qq9`}
               alt="Storage Logo Img"
             />
@@ -50,7 +50,7 @@ function StoragesPopularList() {
             <Avatar
               width={81}
               height={81}
-              round
+              round={6}
               src={`https://${process.env.IMAGE_DOMAIN}/images/on6nrgp7utess2qf3lyj8ry921tm`}
               alt="Storage Logo Img"
             />
@@ -62,7 +62,7 @@ function StoragesPopularList() {
             <Avatar
               width={81}
               height={81}
-              round
+              round={6}
               src={`https://${process.env.IMAGE_DOMAIN}/images/58l159jwcs71iwkdx0kh4reg5ra6`}
               alt="Storage Logo Img"
             />
