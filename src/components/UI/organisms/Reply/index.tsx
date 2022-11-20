@@ -56,6 +56,7 @@ function Reply({
         src={(user || {}).avatarUrl || ''}
         alt="User Avatar Img"
         round="50%"
+        disableAspectRatio
         fallback={{
           iconName: 'UserFilled',
           width: 15,
