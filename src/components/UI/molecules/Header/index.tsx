@@ -20,6 +20,7 @@ import {
 } from '@recoil/common/atoms';
 
 import {
+  Avatar,
   Box,
   Flexbox,
   Hidden,
@@ -38,7 +39,7 @@ import SystemMenu from '@components/UI/molecules/SystemMenu';
 import { useStorageData } from '@hooks/query/useStorage';
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
-import { HeaderInner, Logo, StyledHeader } from './Header.styles';
+import { HeaderInner, StyledHeader } from './Header.styles';
 
 interface HeaderProps extends HTMLAttributes<HTMLHeadElement> {
   scrollFixedTrigger?: boolean;
@@ -152,19 +153,27 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
           {!isStorageBoardDetail && (
             <Link href="/">
               <Flexbox component="button" gap={8} alignment="center">
-                <Logo
+                <Image
                   width={34}
                   height={24}
                   src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
                   alt="Logo Img"
+                  disableAspectRatio
+                  customStyle={{
+                    backgroundColor: 'transparent'
+                  }}
                 />
                 <Hidden lgHidden>
-                  <Flexbox>
-                    <Typography variant="h3" fontWeight="bold">
-                      개념글’
-                    </Typography>
-                    <Typography variant="h3">저장소</Typography>
-                  </Flexbox>
+                  <Typography
+                    variant="h3"
+                    customStyle={{
+                      '& > strong': {
+                        fontWeight: 700
+                      }
+                    }}
+                  >
+                    <strong>개념글’</strong>저장소
+                  </Typography>
                 </Hidden>
               </Flexbox>
             </Link>
@@ -172,11 +181,15 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
           {isStorageBoardDetail && (
             <Link href={`/storages/${path}`}>
               <Flexbox gap={14} alignment="center">
-                <Logo
+                <Image
                   width={34}
                   height={24}
                   src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
                   alt="Logo Img"
+                  disableAspectRatio
+                  customStyle={{
+                    backgroundColor: 'transparent'
+                  }}
                 />
                 <Box
                   customStyle={{
@@ -186,13 +199,12 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                   }}
                 />
                 <Flexbox gap={10} alignment="center">
-                  <Image
+                  <Avatar
                     width={24}
                     height={24}
                     round={4}
                     src={avatarUrl || ''}
                     alt="Storage Logo Img"
-                    disableAspectRatio
                   />
                   <Typography variant="h4" fontWeight="bold">
                     {name}

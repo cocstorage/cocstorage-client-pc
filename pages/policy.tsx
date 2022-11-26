@@ -9,7 +9,11 @@ function Policy() {
     <>
       <PolicyHead />
       <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
-        <Typography variant="h1" fontWeight="bold" customStyle={{ textAlign: 'center' }}>
+        <Typography
+          variant="h1"
+          fontWeight="bold"
+          customStyle={{ margin: '20px 0 40px', textAlign: 'center' }}
+        >
           이용약관
         </Typography>
         <Flexbox component="section" direction="vertical" gap={20} customStyle={{ marginTop: 20 }}>

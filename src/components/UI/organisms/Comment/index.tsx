@@ -2,7 +2,7 @@ import { memo, useRef, useState } from 'react';
 
 import dayjs from 'dayjs';
 
-import { Button, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
+import { Avatar, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import { CommentMenu, Reply, ReplyForm } from '@components/UI/organisms';
 
@@ -38,13 +38,11 @@ function Comment({
   return (
     <>
       <Flexbox gap={10} customStyle={{ flex: 1 }}>
-        <Image
+        <Avatar
           width={30}
           height={30}
           src={(user || {}).avatarUrl || ''}
           alt="User Avatar Img"
-          round="50%"
-          disableAspectRatio
           fallback={{
             iconName: 'UserFilled',
             width: 15,

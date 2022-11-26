@@ -9,10 +9,14 @@ function Privacy() {
     <>
       <PrivacyHead />
       <GeneralTemplate header={<Header scrollFixedTrigger />} footer={<Footer />}>
-        <Typography variant="h1" fontWeight="bold" customStyle={{ textAlign: 'center' }}>
+        <Typography
+          variant="h1"
+          fontWeight="bold"
+          customStyle={{ margin: '20px 0 40px', textAlign: 'center' }}
+        >
           개인정보처리방침
         </Typography>
-        <Flexbox component="section" direction="vertical" gap={20} customStyle={{ marginTop: 20 }}>
+        <Flexbox component="section" direction="vertical" gap={20}>
           <Typography>
             {`개념글 저장소는 이용자의 개인 정보보호를 매우 중요시하며 "정보통신망 이용촉진 및 정보보호
           등에 관한 법률", "개인정보 보호법" 등 개인정보 보호 법령을 준수하고 있습니다. 관련 법률 및

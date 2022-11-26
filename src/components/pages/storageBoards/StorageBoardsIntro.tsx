@@ -9,12 +9,12 @@ import { useSetRecoilState } from 'recoil';
 import { commonFeedbackDialogState } from '@recoil/common/atoms';
 
 import {
+  Avatar,
   Box,
   Button,
   Flexbox,
   Icon,
   IconButton,
-  Image,
   Menu,
   Typography,
   useTheme
@@ -56,17 +56,10 @@ function StorageBoardsIntro() {
   return (
     <Flexbox component="section" justifyContent="space-between">
       <Flexbox gap={16} alignment="center">
-        <Image
-          width={102}
-          height={102}
-          round={6}
-          src={avatarUrl || ''}
-          alt="Storage Logo Img"
-          disableAspectRatio
-        />
+        <Avatar width={102} height={102} round={6} src={avatarUrl || ''} alt="Storage Logo Img" />
         <div>
           <Flexbox alignment="center" gap={6}>
-            <Typography variant="h2" fontWeight="bold">
+            <Typography component="h1" variant="h2" fontWeight="bold">
               {name}
             </Typography>
             <IconButton ref={buttonRef}>
@@ -106,7 +99,7 @@ function StorageBoardsIntro() {
               </Flexbox>
             </Menu>
           </Flexbox>
-          <Typography color={text[mode].text1} customStyle={{ marginTop: 2 }}>
+          <Typography component="h2" color={text[mode].text1} customStyle={{ marginTop: 2 }}>
             {description}
           </Typography>
           <Box customStyle={{ marginTop: 16 }}>

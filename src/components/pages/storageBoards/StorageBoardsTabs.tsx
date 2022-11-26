@@ -11,7 +11,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { commonFeedbackDialogState } from '@recoil/common/atoms';
 import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
 
-import { Box, Button, Flexbox, Icon, Image, Tab, Tabs, useTheme } from 'cocstorage-ui';
+import { Avatar, Box, Button, Flexbox, Icon, Tab, Tabs, useTheme } from 'cocstorage-ui';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
 
@@ -69,7 +69,7 @@ function StorageBoardsTabs() {
         >
           <Flexbox gap={30} alignment="center">
             {triggered && (
-              <Image
+              <Avatar
                 width={24}
                 height={24}
                 round={6}

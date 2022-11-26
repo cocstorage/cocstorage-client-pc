@@ -2,7 +2,7 @@ import { HTMLAttributes, memo } from 'react';
 
 import Link from 'next/link';
 
-import { Image, Typography } from 'cocstorage-ui';
+import { Avatar, Typography } from 'cocstorage-ui';
 
 import { StyledStorageCard } from './StorageCard.styles';
 
@@ -16,14 +16,7 @@ function StorageCard({ src, path, name, ...props }: StorageCardProps) {
   return (
     <Link href={`/storages/${path}`}>
       <StyledStorageCard {...props}>
-        <Image
-          width={36}
-          height={36}
-          round={6}
-          src={src}
-          alt="Storage Logo Img"
-          disableAspectRatio
-        />
+        <Avatar width={36} height={36} src={src} round={6} alt="Storage Logo Img" />
         <Typography>{name}</Typography>
       </StyledStorageCard>
     </Link>

@@ -2,7 +2,7 @@ import { memo, useRef, useState } from 'react';
 
 import dayjs from 'dayjs';
 
-import { Button, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
+import { Avatar, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import ReplyMenu from '@components/UI/organisms/ReplyMenu';
 
@@ -50,13 +50,11 @@ function Reply({
         }
       }}
     >
-      <Image
+      <Avatar
         width={30}
         height={30}
         src={(user || {}).avatarUrl || ''}
         alt="User Avatar Img"
-        round="50%"
-        disableAspectRatio
         fallback={{
           iconName: 'UserFilled',
           width: 15,

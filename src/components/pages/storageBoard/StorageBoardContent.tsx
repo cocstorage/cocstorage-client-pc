@@ -11,7 +11,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { commonFeedbackDialogState } from '@recoil/common/atoms';
 
-import { Box, Button, Flexbox, Icon, Image, Tag, Typography, useTheme } from 'cocstorage-ui';
+import { Avatar, Box, Button, Flexbox, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
 
 import type { AxiosError } from 'axios';
 
@@ -142,13 +142,11 @@ function StorageBoardContent() {
         </Typography>
         <Flexbox justifyContent="space-between">
           <Flexbox gap={6}>
-            <Image
+            <Avatar
               width={24}
               height={24}
               src={(user || {}).avatarUrl || ''}
               alt="User Avatar Img"
-              round="50%"
-              disableAspectRatio
               fallback={{
                 iconName: 'UserFilled',
                 width: 12,
