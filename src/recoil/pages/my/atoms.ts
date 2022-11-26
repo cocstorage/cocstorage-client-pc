@@ -57,10 +57,10 @@ export const myHasSavedPasswordState = atom({
   default: false,
   effects: [
     ({ onSet, setSelf }) => {
-      const hasSavedPasswordToday =
+      const hasSavedPassword =
         SessionStorage.get<boolean>(sessionStorageKeys.hasSavedPassword) || false;
 
-      setSelf(hasSavedPasswordToday);
+      setSelf(hasSavedPassword);
 
       onSet((newValue, _, isReset) => {
         if (isReset) {
