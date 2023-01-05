@@ -6,6 +6,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
 
+import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/atoms';
+import { myPasswordState } from '@recoil/pages/my/atoms';
 import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
 
@@ -18,6 +20,7 @@ import {
   Icon,
   IconButton,
   TextBar,
+  Tooltip,
   Typography,
   useTheme
 } from 'cocstorage-ui';
@@ -56,6 +59,9 @@ function CommentDeleteDialog({
   } = useTheme();
 
   const [params, setParams] = useRecoilState(storageBoardCommentsParamsState);
+  const myPassword = useRecoilValue(myPasswordState);
+  const [{ loadPassword: { done = false } = {} }, setCommonOnBoardingState] =
+    useRecoilState(commonOnBoardingState);
   const noticeCommentsParams = useRecoilValue(noticeCommentsParamsState);
 
   const queryClient = useQueryClient();
@@ -68,7 +74,7 @@ function CommentDeleteDialog({
     keepPreviousData: true
   });
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(myPassword);
   const [errorMessage, setErrorMessage] = useState<{
     error: boolean;
     message: string;
@@ -138,6 +144,7 @@ function CommentDeleteDialog({
   };
 
   const handleClick = () => {
+    handleClose();
     setErrorMessage({
       error: false,
       message: ''
@@ -159,15 +166,25 @@ function CommentDeleteDialog({
     }
   };
 
+  const handleClose = () =>
+    setCommonOnBoardingState((prevState) => ({
+      ...prevState,
+      loadPassword: {
+        ...commonOnBoardingDefault.loadPassword,
+        step: 1,
+        done: commonOnBoardingDefault.loadPassword.lastStep === 1
+      }
+    }));
+
   useEffect(() => {
     if (!open) {
       setErrorMessage({
         error: false,
         message: ''
       });
-      setPassword('');
+      if (myPassword) setPassword(myPassword);
     }
-  }, [open]);
+  }, [open, myPassword]);
 
   return (
     <Dialog
@@ -208,15 +225,32 @@ function CommentDeleteDialog({
           <Hidden xsHidden>
             <input type="text" autoComplete="username" />
           </Hidden>
-          <TextBar
-            type="password"
-            fullWidth
-            size="big"
-            label="비밀번호"
-            value={password}
-            onChange={handleChange}
-            autoComplete="current-password"
-          />
+          {/* // TODO UI 라이브러리 Tooltip 컴포넌트 수정 필요 */}
+          <Box
+            onClick={handleClose}
+            customStyle={{
+              '& > div > div': {
+                width: '100%'
+              }
+            }}
+          >
+            <Tooltip
+              open={!done}
+              onClose={handleClose}
+              content="저장된 비밀번호를 불러왔어요!"
+              placement="right"
+            >
+              <TextBar
+                type="password"
+                fullWidth
+                size="big"
+                label="비밀번호"
+                value={password}
+                onChange={handleChange}
+                autoComplete="current-password"
+              />
+            </Tooltip>
+          </Box>
         </Box>
         {errorMessage.error && (
           <Typography customStyle={{ marginTop: 10, color: secondary.red.main }}>

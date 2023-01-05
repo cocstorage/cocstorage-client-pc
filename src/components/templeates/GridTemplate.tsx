@@ -23,20 +23,14 @@ function GridTemplate({
       {header}
       <Grid component="main" container columnGap={20}>
         {leftAside && (
-          // TODO 추후 UI 라이브러리 반영
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           <Grid component="aside" item lgHidden customStyle={{ minWidth: 203 }}>
             {leftAside}
           </Grid>
         )}
-        {/* customStyle width: 100% TODO 추후 UI 라이브러리 반영 */}
         <Grid component="section" item auto customStyle={{ width: '100%' }}>
           {children}
         </Grid>
         {rightAside && (
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           <Grid component="aside" item customStyle={{ minWidth: 203 }}>
             {rightAside}
           </Grid>

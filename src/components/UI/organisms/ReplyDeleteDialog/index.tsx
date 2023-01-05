@@ -1,11 +1,13 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
+import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/atoms';
+import { myPasswordState } from '@recoil/pages/my/atoms';
 import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
 
@@ -18,6 +20,7 @@ import {
   Icon,
   IconButton,
   TextBar,
+  Tooltip,
   Typography,
   useTheme
 } from 'cocstorage-ui';
@@ -60,9 +63,12 @@ function ReplyDeleteDialog({
   } = useTheme();
 
   const params = useRecoilValue(storageBoardCommentsParamsState);
+  const myPassword = useRecoilValue(myPasswordState);
+  const [{ loadPassword: { done = false } = {} }, setCommonOnBoardingState] =
+    useRecoilState(commonOnBoardingState);
   const noticeCommentParams = useRecoilValue(noticeCommentsParamsState);
 
-  const [value, setValue] = useState('');
+  const [password, setPassword] = useState(myPassword);
   const [errorMessage, setErrorMessage] = useState<{
     error: boolean;
     message: string;
@@ -126,10 +132,12 @@ function ReplyDeleteDialog({
         message: ''
       });
     }
-    setValue(event.currentTarget.value);
+    setPassword(event.currentTarget.value);
   };
 
   const handleClick = () => {
+    handleClose();
+
     setErrorMessage({
       error: false,
       message: ''
@@ -141,17 +149,37 @@ function ReplyDeleteDialog({
         id: Number(id),
         commentId,
         replyId,
-        password: value
+        password
       });
     } else if (type === 'notice') {
       noticeCommentReplyMutate({
         id: Number(id),
         commentId,
         replyId,
-        password: value
+        password
       });
     }
   };
+
+  const handleClose = () =>
+    setCommonOnBoardingState((prevState) => ({
+      ...prevState,
+      loadPassword: {
+        ...commonOnBoardingDefault.loadPassword,
+        step: 1,
+        done: commonOnBoardingDefault.loadPassword.lastStep === 1
+      }
+    }));
+
+  useEffect(() => {
+    if (!open) {
+      setErrorMessage({
+        error: false,
+        message: ''
+      });
+      if (myPassword) setPassword(myPassword);
+    }
+  }, [open, myPassword]);
 
   return (
     <Dialog
@@ -187,15 +215,31 @@ function ReplyDeleteDialog({
           <Hidden xsHidden>
             <input type="text" autoComplete="username" />
           </Hidden>
-          <TextBar
-            type="password"
-            fullWidth
-            size="big"
-            label="비밀번호"
-            value={value}
-            onChange={handleChange}
-            autoComplete="current-password"
-          />
+          <Box
+            onClick={handleClose}
+            customStyle={{
+              '& > div > div': {
+                width: '100%'
+              }
+            }}
+          >
+            <Tooltip
+              open={!done}
+              onClose={handleClose}
+              content="저장된 비밀번호를 불러왔어요!"
+              placement="right"
+            >
+              <TextBar
+                type="password"
+                fullWidth
+                size="big"
+                label="비밀번호"
+                value={password}
+                onChange={handleChange}
+                autoComplete="current-password"
+              />
+            </Tooltip>
+          </Box>
         </Box>
         {errorMessage.error && (
           <Typography customStyle={{ marginTop: 10, color: secondary.red.main }}>
@@ -229,7 +273,7 @@ function ReplyDeleteDialog({
               backgroundColor: secondary.red.main,
               color: text.dark.main
             }}
-            disabled={!value || isLoading || noticeCommentReplyIsLoading}
+            disabled={!password || isLoading || noticeCommentReplyIsLoading}
           >
             삭제하기
           </Button>

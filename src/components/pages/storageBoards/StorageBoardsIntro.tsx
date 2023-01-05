@@ -4,9 +4,14 @@ import { useRouter } from 'next/router';
 
 import dayjs from 'dayjs';
 
-import { useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { commonFeedbackDialogState } from '@recoil/common/atoms';
+import {
+  storageBoardPostDraftIdState,
+  storageBoardPostEditorContentsState,
+  storageBoardPostSubjectState
+} from '@recoil/pages/storageBoardPost/atoms';
 
 import {
   Avatar,
@@ -23,7 +28,8 @@ import {
 import useStorage from '@hooks/query/useStorage';
 
 function StorageBoardsIntro() {
-  const { query } = useRouter();
+  const router = useRouter();
+  const { query } = router;
   const {
     theme: {
       mode,
@@ -36,6 +42,9 @@ function StorageBoardsIntro() {
 
   const [open, setOpen] = useState(false);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
+  const resetDraftIdState = useResetRecoilState(storageBoardPostDraftIdState);
+  const resetSubjectState = useResetRecoilState(storageBoardPostSubjectState);
+  const resetEditorContentsState = useResetRecoilState(storageBoardPostEditorContentsState);
 
   const { data: { path, name, avatarUrl, description, user, createdAt } = {} } = useStorage(
     String(query.path)
@@ -45,6 +54,13 @@ function StorageBoardsIntro() {
 
   const handleMenuOpen = () => setOpen(true);
   const handleMenuClose = () => setOpen(false);
+
+  const handleClick = () => {
+    resetDraftIdState();
+    resetSubjectState();
+    resetEditorContentsState();
+    router.push(`/storages/${path}/post`);
+  };
 
   const handleDialogOpen = () =>
     setCommonFeedbackDialogState({
@@ -111,6 +127,14 @@ function StorageBoardsIntro() {
         </div>
       </Flexbox>
       <Flexbox gap={6} alignment="center">
+        <Button
+          variant="accent"
+          size="small"
+          startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
+          onClick={handleClick}
+        >
+          글쓰기
+        </Button>
         <Button
           size="small"
           startIcon={<Icon name="StarOutlined" width={15} height={15} color={yellow.main} />}

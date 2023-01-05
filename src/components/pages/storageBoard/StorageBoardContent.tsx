@@ -3,9 +3,10 @@ import { MouseEvent, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { convertToReactElement } from 'cocstorage-ui-editor';
 import dayjs from 'dayjs';
 
-import styled from '@emotion/styled';
+import styled, { CSSObject } from '@emotion/styled';
 
 import { useSetRecoilState } from 'recoil';
 
@@ -50,6 +51,7 @@ function StorageBoardContent() {
     storage,
     subject = '',
     content = '',
+    contentJson = [],
     nickname,
     thumbUp = 0,
     thumbDown = 0,
@@ -215,12 +217,9 @@ function StorageBoardContent() {
           <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
         </Flexbox>
       )}
-      <Content
-        ref={contentRef}
-        component="article"
-        lineHeight="main"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+      <Content ref={contentRef} component="article" lineHeight="main" sourceCode={sourceCode}>
+        {convertToReactElement(contentJson)}
+      </Content>
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
           size="small"
@@ -288,21 +287,24 @@ const UserInfo = styled.div`
   }
 `;
 
-const Content = styled(Typography)`
+const Content = styled(Typography)<{
+  sourceCode?: string | null;
+}>`
   position: relative;
   margin-top: 20px;
   overflow: hidden;
 
-  * {
-    max-width: 100%;
-  }
-
-  img,
-  video,
-  embed,
-  iframe {
-    border-radius: 8px;
-  }
+  ${({ sourceCode }): CSSObject =>
+    sourceCode
+      ? {
+          '*': {
+            maxWidth: '100%'
+          },
+          'img, video, embed, iframe': {
+            borderRadius: 8
+          }
+        }
+      : {}}
 `;
 
 export default StorageBoardContent;

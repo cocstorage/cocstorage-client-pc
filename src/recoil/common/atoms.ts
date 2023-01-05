@@ -38,6 +38,16 @@ export const commonOnBoardingDefault = {
     step: 0,
     lastStep: 1,
     done: false
+  },
+  password: {
+    step: 0,
+    lastStep: 1,
+    done: false
+  },
+  loadPassword: {
+    step: 0,
+    lastStep: 1,
+    done: false
   }
 };
 
@@ -72,11 +82,6 @@ export const commonHistoryState = atom<{
     index: 0,
     object: ['/']
   }
-});
-
-export const commonForwardPathState = atom({
-  key: 'common/forwardPathState',
-  default: '/'
 });
 
 export const commonFeedbackDialogState = atom<{

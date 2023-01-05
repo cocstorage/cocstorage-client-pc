@@ -8,12 +8,16 @@ import styled from '@emotion/styled';
 
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { commonFeedbackDialogState } from '@recoil/common/atoms';
-import { myHasSavedPasswordState, myNicknameState, myPasswordState } from '@recoil/pages/my/atoms';
+import {
+  commonFeedbackDialogState,
+  commonOnBoardingDefault,
+  commonOnBoardingState
+} from '@recoil/common/atoms';
+import { myNicknameState, myPasswordState } from '@recoil/pages/my/atoms';
 import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
 
-import { Box, Button, Dialog, Flexbox, Icon, TextBar, Typography, useTheme } from 'cocstorage-ui';
+import { Button, Flexbox, Icon, TextBar, Tooltip, useTheme } from 'cocstorage-ui';
 
 import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 
@@ -47,15 +51,13 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
 
   const [myNickname, setMyNicknameState] = useRecoilState(myNicknameState);
   const [myPassword, setMyPasswordState] = useRecoilState(myPasswordState);
-  const [myHasSavedPassword, setMyHasSavedPasswordState] = useRecoilState(myHasSavedPasswordState);
+  const [{ password: { done = false } = {} }, setCommonOnBoardingState] =
+    useRecoilState(commonOnBoardingState);
   const params = useRecoilValue(storageBoardCommentsParamsState);
   const noticeCommentsParams = useRecoilValue(noticeCommentsParamsState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
-  const [nickname, setNickname] = useState(myNickname);
-  const [password, setPassword] = useState(myPassword);
   const [content, setContent] = useState('');
-  const [open, setOpen] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -65,11 +67,6 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
     (data: PostStorageBoardCommentReplyData) =>
       postNonMemberStorageBoardCommentReply(storageId, Number(id), commentId, data),
     {
-      onSettled: () => {
-        if (!myHasSavedPassword && !myPassword) {
-          setOpen(true);
-        }
-      },
       onSuccess: () => {
         setContent('');
 
@@ -87,11 +84,6 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
     (data: PostNoticeCommentReplyData) =>
       postNonMemberNoticeCommentReply(Number(id), commentId, data),
     {
-      onSettled: () => {
-        if (!myHasSavedPassword && !myPassword) {
-          setOpen(true);
-        }
-      },
       onSuccess: () => {
         setContent('');
 
@@ -107,9 +99,9 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.type === 'password') {
-      setPassword(event.currentTarget.value);
+      setMyPasswordState(event.currentTarget.value);
     } else {
-      setNickname(event.currentTarget.value);
+      setMyNicknameState(event.currentTarget.value);
     }
   };
 
@@ -118,7 +110,7 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
   };
 
   const handleClick = () => {
-    if (!validators.nickname(nickname)) {
+    if (!validators.nickname(myNickname)) {
       setCommonFeedbackDialogState({
         open: true,
         title: '닉네임이 올바르지 않아요',
@@ -127,7 +119,7 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
       });
       return;
     }
-    if (!validators.password(password)) {
+    if (!validators.password(myPassword)) {
       setCommonFeedbackDialogState({
         open: true,
         title: '비밀번호가 올바르지 않아요.',
@@ -137,56 +129,60 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
     }
 
     if (type === 'storageBoard') {
-      mutate({ nickname, password, content });
+      mutate({ nickname: myNickname, password: myPassword, content });
     } else if (type === 'notice') {
-      noticeCommentReplyMutate({ nickname, password, content });
+      noticeCommentReplyMutate({ nickname: myNickname, password: myPassword, content });
     }
   };
 
-  const handleBlurNicknameTextBar = () => setMyNicknameState(nickname);
+  const handleClose = () =>
+    setCommonOnBoardingState((prevState) => ({
+      ...prevState,
+      password: {
+        ...commonOnBoardingDefault.password,
+        step: 1,
+        done: commonOnBoardingDefault.password.lastStep === 1
+      }
+    }));
+
+  const handleBlurNicknameTextBar = () => setMyNicknameState(myNickname);
   const handleBlurPasswordTextBar = () => {
-    if (myPassword) setMyPasswordState(password);
-  };
-
-  const handleClosePasswordSaveDialog = () => {
-    setMyHasSavedPasswordState(true);
-    setOpen(false);
-  };
-
-  const handleClickPasswordSaveConfirm = () => {
-    setMyHasSavedPasswordState(true);
-    setMyPasswordState(password);
-    setOpen(false);
+    if (myPassword) setMyPasswordState(myPassword);
   };
 
   return (
-    <>
-      <Flexbox
-        gap={20}
-        customStyle={{
-          flexGrow: 1
-        }}
-      >
-        {content && (
-          <form>
-            <Flexbox gap={8} direction="vertical" justifyContent="space-between">
-              <TextBar
-                size="small"
-                value={nickname}
-                placeholder="닉네임"
-                onChange={handleChange}
-                onBlur={handleBlurNicknameTextBar}
-                autoComplete="username"
-                customStyle={{
-                  maxWidth: 173,
-                  borderColor: box.stroked.normal
-                }}
-              />
+    <Flexbox
+      gap={20}
+      customStyle={{
+        flexGrow: 1
+      }}
+    >
+      {content && (
+        <form>
+          <Flexbox gap={8} direction="vertical" justifyContent="space-between">
+            <TextBar
+              size="small"
+              value={myNickname}
+              placeholder="닉네임"
+              onChange={handleChange}
+              onBlur={handleBlurNicknameTextBar}
+              autoComplete="username"
+              customStyle={{
+                maxWidth: 173,
+                borderColor: box.stroked.normal
+              }}
+            />
+            <Tooltip
+              open={!done}
+              onClose={handleClose}
+              placement="top"
+              content="비밀번호를 랜덤하게 생성했어요!"
+            >
               <TextBar
                 type="password"
                 size="small"
                 placeholder="비밀번호"
-                value={password}
+                value={myPassword}
                 onChange={handleChange}
                 onBlur={handleBlurPasswordTextBar}
                 autoComplete="current-password"
@@ -195,66 +191,31 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
                   borderColor: box.stroked.normal
                 }}
               />
-            </Flexbox>
-          </form>
-        )}
-        <ReplyBar>
-          <ReplyTextArea
-            onChange={handleChangeContent}
-            value={content}
-            placeholder="내용을 입력해주세요."
-          />
-          <Button
-            variant="accent"
-            startIcon={<Icon name="SendFilled" width={18} height={18} />}
-            customStyle={{
-              margin: '17px 12px 17px 0'
-            }}
-            onClick={handleClick}
-            disabled={
-              isLoading || noticeCommentReplyIsLoading || !nickname || !password || !content
-            }
-          >
-            작성
-          </Button>
-        </ReplyBar>
-      </Flexbox>
-      <Dialog
-        fullWidth
-        open={open}
-        onClose={handleClosePasswordSaveDialog}
-        customStyle={{
-          maxWidth: 320
-        }}
-      >
-        <Box customStyle={{ padding: 16 }}>
-          <Typography
-            variant="h3"
-            fontWeight="bold"
-            customStyle={{ padding: '30px 0', textAlign: 'center' }}
-          >
-            비밀번호를 저장하시겠어요?
-          </Typography>
-          <Flexbox gap={8} customStyle={{ marginTop: 20 }}>
-            <Button
-              fullWidth
-              onClick={handleClosePasswordSaveDialog}
-              customStyle={{ flex: 1, justifyContent: 'center' }}
-            >
-              안할래요
-            </Button>
-            <Button
-              fullWidth
-              variant="accent"
-              onClick={handleClickPasswordSaveConfirm}
-              customStyle={{ flex: 1, justifyContent: 'center' }}
-            >
-              저장할게요
-            </Button>
+            </Tooltip>
           </Flexbox>
-        </Box>
-      </Dialog>
-    </>
+        </form>
+      )}
+      <ReplyBar>
+        <ReplyTextArea
+          onChange={handleChangeContent}
+          value={content}
+          placeholder="내용을 입력해주세요."
+        />
+        <Button
+          variant="accent"
+          startIcon={<Icon name="SendFilled" width={18} height={18} />}
+          customStyle={{
+            margin: '17px 12px 17px 0'
+          }}
+          onClick={handleClick}
+          disabled={
+            isLoading || noticeCommentReplyIsLoading || !myNickname || !myPassword || !content
+          }
+        >
+          등록
+        </Button>
+      </ReplyBar>
+    </Flexbox>
   );
 }
 

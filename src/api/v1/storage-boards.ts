@@ -91,6 +91,39 @@ export async function putNonMemberStorageBoardRecommend(
   return data;
 }
 
+export async function postNonMemberStorageBoardDraft(storageId: number) {
+  const { data } = await Axios.post<StorageBoard, null>(
+    `${BASE_PATH}/${storageId}/boards/non-members/drafts`
+  );
+
+  return data;
+}
+
+export async function putNonMemberStorageBoard(
+  storageId: number,
+  id: number,
+  data: PutStorageBoardData
+) {
+  const { data: response } = await Axios.put<StorageBoard, PutStorageBoardData>(
+    `${BASE_PATH}/${storageId}/boards/non-members/${id}`,
+    data
+  );
+
+  return response;
+}
+
+export async function postNonMemberStorageBoardImage(storageId: number, id: number, file: File) {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  const { data } = await Axios.post<{ imageUrl: string }, FormData>(
+    `${BASE_PATH}/${storageId}/boards/non-members/${id}/images`,
+    formData
+  );
+
+  return data;
+}
+
 export interface FetchStorageBoardsParams {
   subject?: string | null;
   content?: string | null;
@@ -103,4 +136,12 @@ export interface FetchStorageBoardsParams {
 export interface FetchStorageBoardsResponse {
   boards: StorageBoard[];
   pagination: Pagination;
+}
+
+export interface PutStorageBoardData {
+  nickname?: string;
+  password?: string | number;
+  subject: string;
+  content_json: string;
+  description?: string;
 }
