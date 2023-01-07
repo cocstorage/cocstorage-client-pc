@@ -127,7 +127,10 @@ function StorageBoardContent() {
     }
   );
 
-  const handleClick = () => setOpen(true);
+  const handleClick = () => {
+    if (openSpotlight) handleCloseSpotlight();
+    setOpen(true);
+  };
 
   const handleClose = () => setOpen(false);
 
@@ -155,7 +158,7 @@ function StorageBoardContent() {
     setOpenSpotlight(false);
     setCommonOnBoardingState((prevState) => ({
       ...prevState,
-      comment: {
+      editAndDelete: {
         ...commonOnBoardingDefault.editAndDelete,
         step: 1,
         done: commonOnBoardingDefault.editAndDelete.lastStep === 1
@@ -375,7 +378,6 @@ function StorageBoardContent() {
             content="게시글의 수정 및 삭제는 여기를 클릭해 주세요!"
           >
             <Button
-              ref={buttonRef}
               variant="transparent"
               size="pico"
               startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}

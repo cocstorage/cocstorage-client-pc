@@ -71,6 +71,8 @@ function StorageBoardsIntro() {
   const handleMenuClose = () => setOpen(false);
 
   const handleClick = () => {
+    if (openSpotlight) handleClose();
+
     resetDraftIdState();
     resetSubjectState();
     resetEditorContentsState();
