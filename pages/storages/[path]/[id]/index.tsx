@@ -6,7 +6,11 @@ import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { Flexbox, Typography } from 'cocstorage-ui';
 
-import { StorageBoardContent, StorageBoardHead } from '@components/pages/storageBoard';
+import {
+  StorageBoardContent,
+  StorageBoardDeleteDialog,
+  StorageBoardHead
+} from '@components/pages/storageBoard';
 import GridTemplate from '@components/templeates/GridTemplate';
 import { Footer, GoogleAdSense, Header } from '@components/UI/molecules';
 import {
@@ -63,6 +67,7 @@ function StorageBoard() {
           <StorageBoardGrid />
         </Flexbox>
       </GridTemplate>
+      <StorageBoardDeleteDialog />
     </>
   );
 }

@@ -12,3 +12,8 @@ export const storageBoardCommentsParamsState = atom({
   key: 'storageBoard/commentsParamsState',
   default: storageBoardCommentsParamsDefault
 });
+
+export const storageBoardDeleteDialogOpenState = atom({
+  key: 'storageBoard/deleteDialogOpenState',
+  default: false
+});

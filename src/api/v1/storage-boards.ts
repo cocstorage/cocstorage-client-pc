@@ -139,6 +139,23 @@ export async function patchNonMemberStorageBoard(
   return response;
 }
 
+export async function deleteNonMemberStorageBoard(
+  storageId: number,
+  id: number,
+  password: string | number
+) {
+  const { data: response } = await Axios.delete<StorageBoard>(
+    `${BASE_PATH}/${storageId}/boards/non-members/${id}`,
+    {
+      data: {
+        password
+      }
+    }
+  );
+
+  return response;
+}
+
 export interface FetchStorageBoardsParams {
   subject?: string | null;
   content?: string | null;

@@ -1,6 +1,6 @@
 import { RefObject, useState } from 'react';
 
-import { Icon, Menu, Typography } from 'cocstorage-ui';
+import { Icon, Menu, Typography, useTheme } from 'cocstorage-ui';
 
 import CommentDeleteDialog from '@components/UI/organisms/CommentDeleteDialog';
 
@@ -21,6 +21,13 @@ function CommentMenu({
   commentId,
   onClose
 }: CommentMenuProps) {
+  const {
+    theme: {
+      mode,
+      palette: { text }
+    }
+  } = useTheme();
+
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleClick = () => setDialogOpen(true);
@@ -34,7 +41,7 @@ function CommentMenu({
       <Menu open={open} anchorRef={anchorRef} onClose={onClose}>
         <List>
           <ListItem onClick={handleClick}>
-            <Icon name="CloseOutlined" />
+            <Icon name="CloseOutlined" width={20} height={20} color={text[mode].text2} />
             <Typography>댓글 삭제</Typography>
           </ListItem>
         </List>

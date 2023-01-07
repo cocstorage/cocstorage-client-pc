@@ -102,8 +102,15 @@ function StorageBoardEditAuthDialog() {
 
   const handleClose = () => router.back();
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (errorMessage.error) {
+      setErrorMessage({
+        error: false,
+        message: ''
+      });
+    }
     setPassword(event.currentTarget.value);
+  };
 
   const handleClick = () => {
     handleCloseLoadPasswordTooltip();

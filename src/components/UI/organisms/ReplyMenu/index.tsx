@@ -1,6 +1,6 @@
 import { RefObject, useState } from 'react';
 
-import { Icon, Menu, Typography } from 'cocstorage-ui';
+import { Icon, Menu, Typography, useTheme } from 'cocstorage-ui';
 
 import ReplyDeleteDialog from '@components/UI/organisms/ReplyDeleteDialog';
 
@@ -23,6 +23,13 @@ function ReplyMenu({
   replyId,
   onClose
 }: ReplyMenuProps) {
+  const {
+    theme: {
+      mode,
+      palette: { text }
+    }
+  } = useTheme();
+
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleClick = () => setDialogOpen(true);
@@ -36,7 +43,7 @@ function ReplyMenu({
       <Menu open={open} anchorRef={anchorRef} onClose={onClose}>
         <List>
           <ListItem onClick={handleClick}>
-            <Icon name="CloseOutlined" />
+            <Icon name="CloseOutlined" width={20} height={20} color={text[mode].text2} />
             <Typography>답글 삭제</Typography>
           </ListItem>
         </List>

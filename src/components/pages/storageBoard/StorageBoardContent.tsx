@@ -16,6 +16,7 @@ import {
   commonOnBoardingDefault,
   commonOnBoardingState
 } from '@recoil/common/atoms';
+import { storageBoardDeleteDialogOpenState } from '@recoil/pages/storageBoard/atoms';
 
 import {
   Avatar,
@@ -65,6 +66,7 @@ function StorageBoardContent() {
   ] = useRecoilState(commonOnBoardingState);
   const { index, object } = useRecoilValue(commonHistoryState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
+  const setOpenState = useSetRecoilState(storageBoardDeleteDialogOpenState);
 
   const [open, setOpen] = useState(false);
   const [openSpotlight, setOpenSpotlight] = useState(false);
@@ -135,6 +137,8 @@ function StorageBoardContent() {
   const handleClose = () => setOpen(false);
 
   const handleClickEdit = () => router.push(`/storages/${storage?.path}/${id}/edit`);
+
+  const handleClickDelete = () => setOpenState(true);
 
   const handleClickRecommend = (event: MouseEvent<HTMLButtonElement>) => {
     const dataType = Number(event.currentTarget.getAttribute('data-type') || 0);
@@ -277,7 +281,7 @@ function StorageBoardContent() {
                     alignment="center"
                     onClick={handleClickEdit}
                     customStyle={{
-                      padding: 10,
+                      padding: '12px 16px',
                       cursor: 'pointer'
                     }}
                   >
@@ -287,8 +291,9 @@ function StorageBoardContent() {
                   <Flexbox
                     gap={8}
                     alignment="center"
+                    onClick={handleClickDelete}
                     customStyle={{
-                      padding: 10,
+                      padding: '12px 16px',
                       cursor: 'pointer'
                     }}
                   >
