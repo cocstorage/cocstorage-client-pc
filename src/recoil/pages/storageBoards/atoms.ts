@@ -1,10 +1,6 @@
-import { atom, atomFamily } from 'recoil';
-
-import LocalStorage from '@library/localStorage';
+import { atomFamily } from 'recoil';
 
 import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
-
-import localStorageKeys from '@constants/localStorageKeys';
 
 export const storageBoardsParamsDefault: FetchStorageBoardsParams = {
   subject: null,
@@ -24,26 +20,4 @@ export const storageBoardsParamsStateFamily = atomFamily<
     path,
     params: storageBoardsParamsDefault
   })
-});
-
-export const storageBoardsDialogDisablePathsState = atom<string[]>({
-  key: 'storageBoards/dialogDisablePathsState',
-  default: [],
-  effects: [
-    ({ onSet, setSelf }) => {
-      const disableDialogPaths =
-        LocalStorage.get<string[]>(localStorageKeys.storageBoardsLastNoticeDisableDialogPaths) ||
-        [];
-
-      setSelf(disableDialogPaths);
-
-      onSet((newValue, _, isReset) => {
-        if (isReset) {
-          LocalStorage.remove(localStorageKeys.storageBoardsLastNoticeDisableDialogPaths);
-        } else {
-          LocalStorage.set(localStorageKeys.storageBoardsLastNoticeDisableDialogPaths, newValue);
-        }
-      });
-    }
-  ]
 });

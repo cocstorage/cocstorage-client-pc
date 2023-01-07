@@ -1,17 +1,15 @@
 import { GetServerSidePropsContext } from 'next';
 
-import Link from 'next/link';
-
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { storageBoardsParamsDefault } from '@recoil/pages/storageBoards/atoms';
 
-import { Alert, Flexbox, Icon } from 'cocstorage-ui';
+import { Flexbox } from 'cocstorage-ui';
 
 import {
   StorageBoardsHead,
   StorageBoardsIntro,
-  StorageBoardsNoticeDialog,
+  StorageBoardsNoticeAlert,
   StorageBoardsTabs
 } from '@components/pages/storageBoards';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
@@ -31,11 +29,7 @@ function StorageBoards() {
         <Flexbox gap={20} direction="vertical">
           <StorageBoardsIntro />
           <StorageBoardsTabs />
-          <Link href="/notices/181">
-            <Alert severity="info" icon={<Icon name="PinOutlined" width={16} height={16} />}>
-              여러분들께 드리는 마지막 소식
-            </Alert>
-          </Link>
+          <StorageBoardsNoticeAlert />
           <StorageBoardGrid />
           <GoogleAdSense
             html={
@@ -49,7 +43,6 @@ function StorageBoards() {
           />
         </Flexbox>
       </GeneralTemplate>
-      <StorageBoardsNoticeDialog />
     </>
   );
 }
