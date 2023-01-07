@@ -63,7 +63,11 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
   const [myNickname, setMyNicknameState] = useRecoilState(myNicknameState);
   const [myPassword, setMyPasswordState] = useRecoilState(myPasswordState);
   const [
-    { comment: { step = 0, lastStep = 0 } = {}, password: { done = false } = {} },
+    {
+      theme: { done: themeDone = false } = {},
+      comment: { done: commentDone = false } = {},
+      password: { done = false } = {}
+    },
     setCommonOnBoardingState
   ] = useRecoilState(commonOnBoardingState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
@@ -90,6 +94,7 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
       setObserverTriggered(true);
     }
   }).current;
+  const spotlightOpenTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   const queryClient = useQueryClient();
 
@@ -238,7 +243,8 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
     }
   };
 
-  const handleClose = () =>
+  const handleClose = () => {
+    setOpen(false);
     setCommonOnBoardingState((prevState) => ({
       ...prevState,
       comment: {
@@ -247,6 +253,7 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
         done: commonOnBoardingDefault.comment.lastStep === 1
       }
     }));
+  };
 
   const handleClosePasswordTooltip = () =>
     setCommonOnBoardingState((prevState) => ({
@@ -302,15 +309,28 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
 
   useEffect(() => {
     // TODO Spotlight 컴포넌트 좌표 및 요소 크기 구하는 로직 개선 필요
-    if (observerTriggered && ((!step && !lastStep) || step < lastStep) && targetRef.current) {
-      const { top: targetTop } = targetRef.current.getBoundingClientRect();
-      setOpen(true);
-      setTop(targetTop);
-      setWidth(targetRef.current.clientWidth);
+    // TODO Spotlight 컴포넌트 동시성 개선 필요
+    if (observerTriggered && themeDone && !commentDone) {
+      spotlightOpenTimerRef.current = setTimeout(() => {
+        if (!targetRef.current) return;
+
+        const { top: targetTop } = targetRef.current.getBoundingClientRect();
+        setOpen(true);
+        setTop(targetTop);
+        setWidth(targetRef.current.clientWidth);
+      }, 350);
     } else {
       setOpen(false);
     }
-  }, [step, lastStep, observerTriggered]);
+  }, [themeDone, commentDone, observerTriggered]);
+
+  useEffect(() => {
+    return () => {
+      if (spotlightOpenTimerRef.current) {
+        clearTimeout(spotlightOpenTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>

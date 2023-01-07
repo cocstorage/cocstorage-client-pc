@@ -1,8 +1,7 @@
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { useMutation } from '@tanstack/react-query';
 import { Editor, EditorContent } from 'cocstorage-ui-editor';
 
 import styled, { CSSObject } from '@emotion/styled';
@@ -10,35 +9,26 @@ import styled, { CSSObject } from '@emotion/styled';
 import { useRecoilState } from 'recoil';
 
 import {
-  storageBoardPostDraftIdState,
-  storageBoardPostEditorContentsState,
-  storageBoardPostSubjectState
-} from '@recoil/pages/storageBoardPost/atoms';
+  storageBoardEditEditorContentsState,
+  storageBoardEditSubjectState
+} from '@recoil/pages/storageBoardEdit/atoms';
 
 import { Flexbox } from 'cocstorage-ui';
 
 import useStorage from '@hooks/query/useStorage';
 
-import {
-  postNonMemberStorageBoardDraft,
-  postNonMemberStorageBoardImage
-} from '@api/v1/storage-boards';
+import { postNonMemberStorageBoardImage } from '@api/v1/storage-boards';
 
-function StorageBoardPostEditor() {
+function StorageBoardEditEditor() {
   const { query } = useRouter();
 
-  const [subject, setSubjectState] = useRecoilState(storageBoardPostSubjectState);
-  const [draftId, setDraftIdState] = useRecoilState(storageBoardPostDraftIdState);
+  const [subject, setSubjectState] = useRecoilState(storageBoardEditSubjectState);
   const [editorContents, setEditorContentsState] = useRecoilState(
-    storageBoardPostEditorContentsState
+    storageBoardEditEditorContentsState
   );
 
-  const { data: { id = 0 } = {}, isLoading } = useStorage(String(query.path), {
+  const { data: { id = 0 } = {} } = useStorage(String(query.path), {
     enabled: !!query.path
-  });
-
-  const { mutate } = useMutation((storageId: number) => postNonMemberStorageBoardDraft(storageId), {
-    onSuccess: ({ id: newDraftId }) => setDraftIdState(newDraftId)
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
@@ -49,17 +39,11 @@ function StorageBoardPostEditor() {
 
   const handleUploadImage = async (file: File | null) => {
     if (file) {
-      const { imageUrl } = await postNonMemberStorageBoardImage(id, draftId, file);
+      const { imageUrl } = await postNonMemberStorageBoardImage(id, Number(query.id), file);
       return imageUrl;
     }
     return '';
   };
-
-  useEffect(() => {
-    if (!isLoading && !draftId) {
-      mutate(id);
-    }
-  }, [isLoading, id, mutate, draftId]);
 
   return (
     <Flexbox direction="vertical" customStyle={{ height: '100%', padding: '0 20px' }}>
@@ -113,4 +97,4 @@ const Input = styled.input`
   }
 `;
 
-export default StorageBoardPostEditor;
+export default StorageBoardEditEditor;

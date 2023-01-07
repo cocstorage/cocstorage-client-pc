@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useRef } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -8,11 +8,28 @@ import dayjs from 'dayjs';
 
 import styled, { CSSObject } from '@emotion/styled';
 
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { commonFeedbackDialogState } from '@recoil/common/atoms';
+import {
+  commonFeedbackDialogState,
+  commonHistoryState,
+  commonOnBoardingDefault,
+  commonOnBoardingState
+} from '@recoil/common/atoms';
 
-import { Avatar, Box, Button, Flexbox, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
+import {
+  Avatar,
+  Box,
+  Button,
+  Flexbox,
+  Icon,
+  Menu,
+  Spotlight,
+  Tag,
+  Tooltip,
+  Typography,
+  useTheme
+} from 'cocstorage-ui';
 
 import type { AxiosError } from 'axios';
 
@@ -38,10 +55,24 @@ function StorageBoardContent() {
     }
   } = useTheme();
 
+  const [
+    {
+      theme: { done: themeDone = false },
+      comment: { done: commentDone = false } = {},
+      editAndDelete: { done = false } = {}
+    },
+    setCommonOnBoardingState
+  ] = useRecoilState(commonOnBoardingState);
+  const { index, object } = useRecoilValue(commonHistoryState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
+
+  const [open, setOpen] = useState(false);
+  const [openSpotlight, setOpenSpotlight] = useState(false);
 
   const updatedViewCountRef = useRef(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const spotlightOpenTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   const queryClient = useQueryClient();
 
@@ -96,6 +127,12 @@ function StorageBoardContent() {
     }
   );
 
+  const handleClick = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
+
+  const handleClickEdit = () => router.push(`/storages/${storage?.path}/${id}/edit`);
+
   const handleClickRecommend = (event: MouseEvent<HTMLButtonElement>) => {
     const dataType = Number(event.currentTarget.getAttribute('data-type') || 0);
 
@@ -114,6 +151,18 @@ function StorageBoardContent() {
       '_blank'
     );
 
+  const handleCloseSpotlight = () => {
+    setOpenSpotlight(false);
+    setCommonOnBoardingState((prevState) => ({
+      ...prevState,
+      comment: {
+        ...commonOnBoardingDefault.editAndDelete,
+        step: 1,
+        done: commonOnBoardingDefault.editAndDelete.lastStep === 1
+      }
+    }));
+  };
+
   useEffect(() => {
     if (!updatedViewCountRef.current && storageBoardId && storage && storage.id) {
       updatedViewCountRef.current = true;
@@ -124,7 +173,7 @@ function StorageBoardContent() {
   // TODO video autoplay 가 동작하지 않는 문제, 서버 쪽 크롤링 로직 확인 후 수정
   // 임시 처리
   useEffect(() => {
-    if (content && contentRef.current) {
+    if (content && contentRef.current && sourceCode) {
       const videos = contentRef.current.getElementsByTagName('video');
 
       if (videos.length) {
@@ -134,7 +183,22 @@ function StorageBoardContent() {
         }
       }
     }
-  }, [content]);
+  }, [content, sourceCode]);
+
+  useEffect(() => {
+    // TODO Spotlight 컴포넌트 동시성 개선 필요
+    if (
+      object[index - 1] === '/storages/[path]/post' &&
+      themeDone &&
+      commentDone &&
+      !done &&
+      !sourceCode
+    ) {
+      spotlightOpenTimerRef.current = setTimeout(() => {
+        setOpenSpotlight(true);
+      }, 350);
+    }
+  }, [object, index, themeDone, commentDone, done, sourceCode]);
 
   return (
     <>
@@ -194,6 +258,43 @@ function StorageBoardContent() {
                 {viewCount.toLocaleString()}
               </Typography>
             </Flexbox>
+            {!sourceCode && (
+              <>
+                <Button
+                  ref={buttonRef}
+                  variant="transparent"
+                  size="pico"
+                  startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
+                  iconOnly
+                  onClick={handleClick}
+                />
+                <Menu anchorRef={buttonRef} open={open} onClose={handleClose}>
+                  <Flexbox
+                    gap={8}
+                    alignment="center"
+                    onClick={handleClickEdit}
+                    customStyle={{
+                      padding: 10,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <Icon name="WriteOutlined" width={20} height={20} color={text[mode].text2} />
+                    <Typography>수정하기</Typography>
+                  </Flexbox>
+                  <Flexbox
+                    gap={8}
+                    alignment="center"
+                    customStyle={{
+                      padding: 10,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <Icon name="CloseOutlined" width={20} height={20} color={text[mode].text2} />
+                    <Typography>삭제하기</Typography>
+                  </Flexbox>
+                </Menu>
+              </>
+            )}
           </Flexbox>
         </Flexbox>
       </Flexbox>
@@ -259,6 +360,31 @@ function StorageBoardContent() {
           backgroundColor: box.stroked.normal
         }}
       />
+      {!sourceCode && (
+        <Spotlight
+          open={openSpotlight}
+          targetRef={buttonRef}
+          onClose={handleCloseSpotlight}
+          customStyle={{
+            borderRadius: 8
+          }}
+        >
+          <Tooltip
+            open
+            onClose={handleCloseSpotlight}
+            content="게시글의 수정 및 삭제는 여기를 클릭해 주세요!"
+          >
+            <Button
+              ref={buttonRef}
+              variant="transparent"
+              size="pico"
+              startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
+              iconOnly
+              onClick={handleClick}
+            />
+          </Tooltip>
+        </Spotlight>
+      )}
     </>
   );
 }

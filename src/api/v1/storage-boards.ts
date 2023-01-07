@@ -124,6 +124,21 @@ export async function postNonMemberStorageBoardImage(storageId: number, id: numb
   return data;
 }
 
+export async function patchNonMemberStorageBoard(
+  storageId: number,
+  id: number,
+  password: string | number
+) {
+  const { data: response } = await Axios.patch<StorageBoard, { password: string | number }>(
+    `${BASE_PATH}/${storageId}/boards/non-members/${id}/edit`,
+    {
+      password
+    }
+  );
+
+  return response;
+}
+
 export interface FetchStorageBoardsParams {
   subject?: string | null;
   content?: string | null;

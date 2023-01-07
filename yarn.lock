@@ -873,10 +873,10 @@ client-only@0.0.1:
   resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
 
-cocstorage-ui-editor@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/cocstorage-ui-editor/-/cocstorage-ui-editor-0.1.3.tgz#853270d967140e59b7e7127fa393e62893cb893c"
-  integrity sha512-OMlEcYxzclmcuK6r86vIARqbV6qsdS3gFT+WegM6PkrXwCX//1lodIpUPxkq2H0DKnu9RHDFKbKNb45vmZ+UQQ==
+cocstorage-ui-editor@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/cocstorage-ui-editor/-/cocstorage-ui-editor-0.1.4.tgz#78f85e2ddd97e7fa2dd73b8b89982dea07cc54be"
+  integrity sha512-tjLA0Xiu7GQQBnVOf3z6DxfG5QP41eB5k6DVjuhznWj3pvy+lzXDFoI8wxan7XCiKP7f6w+ubRN/otUa4RfndA==
 
 cocstorage-ui@^0.1.43:
   version "0.1.43"

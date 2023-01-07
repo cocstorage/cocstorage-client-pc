@@ -236,7 +236,7 @@ function ReplyDeleteDialog({
                 label="비밀번호"
                 value={password}
                 onChange={handleChange}
-                autoComplete="current-password"
+                autoFocus
               />
             </Tooltip>
           </Box>

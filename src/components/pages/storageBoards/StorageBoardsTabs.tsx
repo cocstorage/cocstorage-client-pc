@@ -6,9 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import styled, { CSSObject } from '@emotion/styled';
 
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
-import { commonFeedbackDialogState } from '@recoil/common/atoms';
 import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
 
 import { Avatar, Box, Button, Flexbox, Icon, Tab, Tabs, useTheme } from 'cocstorage-ui';
@@ -20,8 +19,8 @@ import { fetchStorage } from '@api/v1/storages';
 import queryKeys from '@constants/queryKeys';
 
 function StorageBoardsTabs() {
-  const { query } = useRouter();
-  const { path } = query;
+  const router = useRouter();
+  const { path } = router.query;
 
   const {
     theme: {
@@ -30,8 +29,6 @@ function StorageBoardsTabs() {
   } = useTheme();
 
   const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(String(path)));
-
-  const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
   const tabsRef = useRef<HTMLDivElement>(null);
 
@@ -52,12 +49,7 @@ function StorageBoardsTabs() {
     }));
   };
 
-  const handleClick = () =>
-    setCommonFeedbackDialogState({
-      open: true,
-      title: '준비 중인 기능이에요!',
-      message: '조금만 기다려주세요!'
-    });
+  const handleClick = () => router.push(`/storages/${path}/post`);
 
   return (
     <>

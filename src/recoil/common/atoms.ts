@@ -48,6 +48,16 @@ export const commonOnBoardingDefault = {
     step: 0,
     lastStep: 1,
     done: false
+  },
+  post: {
+    step: 0,
+    lastStep: 1,
+    done: false
+  },
+  editAndDelete: {
+    step: 0,
+    lastStep: 1,
+    done: false
   }
 };
 

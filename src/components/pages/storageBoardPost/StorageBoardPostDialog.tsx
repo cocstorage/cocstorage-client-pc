@@ -43,7 +43,7 @@ function StorageBoardPostDialog() {
     }
   } = useTheme();
 
-  const [open, setOpen] = useRecoilState(storageBoardPostDialogOpenState);
+  const [open, setOpenState] = useRecoilState(storageBoardPostDialogOpenState);
   const [myNickname, setMyNicknameState] = useRecoilState(myNicknameState);
   const [myPassword, setMyPasswordState] = useRecoilState(myPasswordState);
   const [{ password: { done = false } = {} }, setCommonOnBoardingState] =
@@ -82,10 +82,10 @@ function StorageBoardPostDialog() {
     }) => putNonMemberStorageBoard(storageId, newDraftId, data),
     {
       onSettled: () => {
-        setOpen(false);
+        setOpenState(false);
       },
       onSuccess: ({ id: storageBoardId }) => {
-        setOpen(false);
+        setOpenState(false);
         router.push(`/storages/${query.path}/${storageBoardId}`).then(() => {
           resetDraftIdState();
           resetSubjectState();
@@ -95,7 +95,7 @@ function StorageBoardPostDialog() {
     }
   );
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setOpenState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.type === 'password') {

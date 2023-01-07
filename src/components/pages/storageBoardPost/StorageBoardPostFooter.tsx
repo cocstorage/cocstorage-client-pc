@@ -23,9 +23,9 @@ function StorageBoardPostFooter() {
   const draftId = useRecoilValue(storageBoardPostDraftIdState);
   const subject = useRecoilValue(storageBoardPostSubjectState);
   const editorContents = useRecoilValue(storageBoardPostEditorContentsState);
-  const setOpen = useSetRecoilState(storageBoardPostDialogOpenState);
+  const setOpenState = useSetRecoilState(storageBoardPostDialogOpenState);
 
-  const handleClick = () => setOpen(true);
+  const handleClick = () => setOpenState(true);
 
   const handleClickBack = () => router.back();
 

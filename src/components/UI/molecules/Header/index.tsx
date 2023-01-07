@@ -49,7 +49,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const router = useRouter();
   const { query } = router;
 
-  const [{ theme: { step = 0, lastStep = 0 } = {} }, setCommonOnBoardingState] =
+  const [{ theme: { done = false } = {} }, setCommonOnBoardingState] =
     useRecoilState(commonOnBoardingState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
@@ -139,12 +139,12 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   }, [handleResize]);
 
   useEffect(() => {
-    if ((!step && !lastStep) || step < lastStep) {
+    if (!done) {
       setOpen(true);
     } else {
       setOpen(false);
     }
-  }, [step, lastStep]);
+  }, [done]);
 
   return (
     <>
