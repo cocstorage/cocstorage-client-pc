@@ -326,9 +326,22 @@ function StorageBoardContent() {
           <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
         </Flexbox>
       )}
-      <Content ref={contentRef} component="article" lineHeight="main" sourceCode={sourceCode}>
-        {convertToReactElement(contentJson)}
-      </Content>
+      {sourceCode && (
+        <Content
+          ref={contentRef}
+          component="article"
+          lineHeight="main"
+          sourceCode={sourceCode}
+          dangerouslySetInnerHTML={{
+            __html: content
+          }}
+        />
+      )}
+      {!sourceCode && (
+        <Content ref={contentRef} component="article" lineHeight="main" sourceCode={sourceCode}>
+          {convertToReactElement(contentJson)}
+        </Content>
+      )}
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
           size="small"
