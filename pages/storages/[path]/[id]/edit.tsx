@@ -6,6 +6,7 @@ import {
   StorageBoardEditAuthDialog,
   StorageBoardEditEditor,
   StorageBoardEditFooter,
+  StorageBoardEditHead,
   StorageBoardEditHeader
 } from '@components/pages/storageBoardEdit';
 import WideFlexibleTemplate from '@components/templeates/WideFlexibleTemplate';
@@ -17,10 +18,13 @@ import queryKeys from '@constants/queryKeys';
 
 function StorageBoardEdit() {
   return (
-    <WideFlexibleTemplate header={<StorageBoardEditHeader />} footer={<StorageBoardEditFooter />}>
-      <StorageBoardEditEditor />
-      <StorageBoardEditAuthDialog />
-    </WideFlexibleTemplate>
+    <>
+      <StorageBoardEditHead />
+      <WideFlexibleTemplate header={<StorageBoardEditHeader />} footer={<StorageBoardEditFooter />}>
+        <StorageBoardEditEditor />
+        <StorageBoardEditAuthDialog />
+      </WideFlexibleTemplate>
+    </>
   );
 }
 

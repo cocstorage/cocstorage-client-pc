@@ -47,7 +47,12 @@ function StorageBoardEditEditor() {
 
   return (
     <Flexbox direction="vertical" customStyle={{ height: '100%', padding: '0 20px' }}>
-      <Input onChange={handleChange} value={subject} placeholder="제목을 입력해 주세요." />
+      <Input
+        onChange={handleChange}
+        value={subject}
+        placeholder="제목을 입력해 주세요."
+        autoFocus
+      />
       <Editor
         onChange={handleChangeContent}
         onUploadImage={handleUploadImage}

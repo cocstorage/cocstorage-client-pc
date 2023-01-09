@@ -6,6 +6,7 @@ import {
   StorageBoardPostDialog,
   StorageBoardPostEditor,
   StorageBoardPostFooter,
+  StorageBoardPostHead,
   StorageBoardPostHeader
 } from '@components/pages/storageBoardPost';
 import WideFlexibleTemplate from '@components/templeates/WideFlexibleTemplate';
@@ -16,10 +17,13 @@ import queryKeys from '@constants/queryKeys';
 
 function StorageBoardPost() {
   return (
-    <WideFlexibleTemplate header={<StorageBoardPostHeader />} footer={<StorageBoardPostFooter />}>
-      <StorageBoardPostEditor />
-      <StorageBoardPostDialog />
-    </WideFlexibleTemplate>
+    <>
+      <StorageBoardPostHead />
+      <WideFlexibleTemplate header={<StorageBoardPostHeader />} footer={<StorageBoardPostFooter />}>
+        <StorageBoardPostEditor />
+        <StorageBoardPostDialog />
+      </WideFlexibleTemplate>
+    </>
   );
 }
 

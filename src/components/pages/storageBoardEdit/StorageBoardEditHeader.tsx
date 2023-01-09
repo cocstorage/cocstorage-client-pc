@@ -48,7 +48,7 @@ function StorageBoardEditHeader() {
             {name}
           </Typography>
         </Flexbox>
-        <Tag variant="semiAccent">글쓰기 BETA</Tag>
+        <Tag variant="semiAccent">글수정 BETA</Tag>
       </Flexbox>
     </Flexbox>
   );
