@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 
 import styled, { CSSObject } from '@emotion/styled';
 
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import {
   commonFeedbackDialogState,
@@ -17,6 +17,12 @@ import {
   commonOnBoardingState
 } from '@recoil/common/atoms';
 import { storageBoardDeleteDialogOpenState } from '@recoil/pages/storageBoard/atoms';
+import {
+  storageBoardEditEditorContentsState,
+  storageBoardEditNicknameState,
+  storageBoardEditPasswordState,
+  storageBoardEditSubjectState
+} from '@recoil/pages/storageBoardEdit/atoms';
 
 import {
   Avatar,
@@ -67,6 +73,10 @@ function StorageBoardContent() {
   const { index, object } = useRecoilValue(commonHistoryState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
   const setOpenState = useSetRecoilState(storageBoardDeleteDialogOpenState);
+  const resetSubjectState = useResetRecoilState(storageBoardEditSubjectState);
+  const resetNicknameState = useResetRecoilState(storageBoardEditNicknameState);
+  const resetPasswordState = useResetRecoilState(storageBoardEditPasswordState);
+  const resetEditorContentsState = useResetRecoilState(storageBoardEditEditorContentsState);
 
   const [open, setOpen] = useState(false);
   const [openSpotlight, setOpenSpotlight] = useState(false);
@@ -136,7 +146,13 @@ function StorageBoardContent() {
 
   const handleClose = () => setOpen(false);
 
-  const handleClickEdit = () => router.push(`/storages/${storage?.path}/${id}/edit`);
+  const handleClickEdit = () => {
+    resetNicknameState();
+    resetPasswordState();
+    resetSubjectState();
+    resetEditorContentsState();
+    router.push(`/storages/${storage?.path}/${id}/edit`);
+  };
 
   const handleClickDelete = () => setOpenState(true);
 
