@@ -72,7 +72,7 @@ function StorageBoardContent() {
   ] = useRecoilState(commonOnBoardingState);
   const { index, object } = useRecoilValue(commonHistoryState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
-  const setOpenState = useSetRecoilState(storageBoardDeleteDialogOpenState);
+  const [openDeleteDialog, setOpenState] = useRecoilState(storageBoardDeleteDialogOpenState);
   const resetSubjectState = useResetRecoilState(storageBoardEditSubjectState);
   const resetNicknameState = useResetRecoilState(storageBoardEditNicknameState);
   const resetPasswordState = useResetRecoilState(storageBoardEditPasswordState);
@@ -222,6 +222,10 @@ function StorageBoardContent() {
       }, 350);
     }
   }, [object, index, themeDone, commentDone, done, sourceCode]);
+
+  useEffect(() => {
+    if (!openDeleteDialog) setOpen(false);
+  }, [openDeleteDialog]);
 
   return (
     <>
