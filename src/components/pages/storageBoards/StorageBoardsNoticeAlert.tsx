@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import Link from 'next/link';
 
 import { useQuery } from '@tanstack/react-query';
@@ -9,14 +11,20 @@ import { fetchIndexNotice } from '@api/v1/notices';
 import queryKeys from '@constants/queryKeys';
 
 function StorageBoardsNoticeAlert() {
+  const [isMounted, setIsMounted] = useState(false);
+
   const { data: { notices = [] } = {}, isLoading } = useQuery(
     queryKeys.notices.indexNotice,
     fetchIndexNotice
   );
 
-  if (!isLoading && !notices.length) return null;
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  if (isLoading) {
+  if (isMounted && !isLoading && !notices.length) return null;
+
+  if (!isMounted || isLoading) {
     return <Skeleton width="100%" height={50} round={12} disableAspectRatio />;
   }
 

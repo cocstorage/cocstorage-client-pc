@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { useRouter } from 'next/router';
 
 import { useRecoilState } from 'recoil';
@@ -15,6 +17,8 @@ function StorageBoardGrid() {
   const router = useRouter();
   const { path } = router.query;
 
+  const [isMounted, setIsMounted] = useState(false);
+
   const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(String(path)));
 
   const {
@@ -24,7 +28,7 @@ function StorageBoardGrid() {
     keepPreviousData: true
   });
 
-  const handleChange = (value: number) => {
+  const handleChange = (value: number) =>
     setParams((prevParams) => ({
       path: prevParams.path,
       params: {
@@ -32,9 +36,12 @@ function StorageBoardGrid() {
         page: value
       }
     }));
-  };
 
-  if (!isLoading && !boards.length)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (isMounted && !isLoading && !boards.length)
     return (
       <Message title="아직 게시글이 없네요!" hideButton customStyle={{ margin: '50px auto' }} />
     );
@@ -42,14 +49,15 @@ function StorageBoardGrid() {
   return (
     <>
       <Grid component="section" container columnGap={20} rowGap={20}>
-        {isLoading &&
+        {(!isMounted || isLoading) &&
           Array.from({ length: 20 }).map((_, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <Grid key={`storage-board-skeleton-${index}`} item xs={1} sm={1} md={1} lg={2}>
               <StorageBoardCardSkeleton />
             </Grid>
           ))}
-        {!isLoading &&
+        {isMounted &&
+          !isLoading &&
           boards.map((storageBoard) => (
             <Grid key={`storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
               <StorageBoardCard storageBoard={storageBoard} />

@@ -56,11 +56,14 @@ function StorageBoard() {
             '     data-ad-format="auto"\n' +
             '     data-full-width-responsive="true"></ins>'
           }
-          customStyle={{
-            marginBottom: 50
-          }}
         />
-        <Flexbox gap={20} direction="vertical">
+        <Flexbox
+          gap={20}
+          direction="vertical"
+          customStyle={{
+            marginTop: 50
+          }}
+        >
           <Typography variant="p1" fontWeight="bold">
             이 게시판의 다른 글
           </Typography>

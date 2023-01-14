@@ -22,12 +22,11 @@ function NoticesGrid() {
     keepPreviousData: true
   });
 
-  const handleChange = (value: number) => {
+  const handleChange = (value: number) =>
     setParams((prevParams) => ({
       ...prevParams,
       page: value
     }));
-  };
 
   if (!isLoading && !notices.length) {
     return (
