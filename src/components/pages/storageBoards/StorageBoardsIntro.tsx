@@ -197,14 +197,7 @@ function StorageBoardsIntro() {
           />
         </Flexbox>
       </Flexbox>
-      <Spotlight
-        open={openSpotlight}
-        targetRef={postButtonRef}
-        onClose={handleClose}
-        customStyle={{
-          borderRadius: 8
-        }}
-      >
+      <Spotlight open={openSpotlight} targetRef={postButtonRef} round={8} onClose={handleClose}>
         <Tooltip open onClose={handleClose} content="로그인하지 않아도 게시글을 등록할 수 있어요!">
           <Button
             variant="accent"

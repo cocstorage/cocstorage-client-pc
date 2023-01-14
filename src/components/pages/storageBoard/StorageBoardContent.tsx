@@ -402,9 +402,7 @@ function StorageBoardContent() {
           open={openSpotlight}
           targetRef={buttonRef}
           onClose={handleCloseSpotlight}
-          customStyle={{
-            borderRadius: 8
-          }}
+          round={8}
         >
           <Tooltip
             open

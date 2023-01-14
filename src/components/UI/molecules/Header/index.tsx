@@ -284,14 +284,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Hidden lgHidden>마이</Hidden>
             </Tag>
             <SystemMenu open={menuOpen} anchorRef={tagRef} onClose={handleCloseMenu} />
-            <Spotlight
-              open={open}
-              onClose={handleClose}
-              targetRef={tagRef}
-              customStyle={{
-                borderRadius: 8
-              }}
-            >
+            <Spotlight open={open} onClose={handleClose} targetRef={tagRef} round={8}>
               <Tooltip
                 open={open}
                 onClose={handleClose}

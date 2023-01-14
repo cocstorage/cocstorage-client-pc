@@ -394,7 +394,8 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
         open={open}
         onClose={handleClose}
         targetRef={targetRef}
-        customStyle={{ top, width, borderRadius: 8 }}
+        round={8}
+        customStyle={{ top, width }}
       >
         <Tooltip
           open={open}
