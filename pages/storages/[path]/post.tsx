@@ -19,7 +19,11 @@ function StorageBoardPost() {
   return (
     <>
       <StorageBoardPostHead />
-      <WideFlexibleTemplate header={<StorageBoardPostHeader />} footer={<StorageBoardPostFooter />}>
+      <WideFlexibleTemplate
+        header={<StorageBoardPostHeader />}
+        footer={<StorageBoardPostFooter />}
+        enableMainOverflowHidden
+      >
         <StorageBoardPostEditor />
         <StorageBoardPostDialog />
       </WideFlexibleTemplate>

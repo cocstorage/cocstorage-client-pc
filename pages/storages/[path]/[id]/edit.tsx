@@ -20,7 +20,11 @@ function StorageBoardEdit() {
   return (
     <>
       <StorageBoardEditHead />
-      <WideFlexibleTemplate header={<StorageBoardEditHeader />} footer={<StorageBoardEditFooter />}>
+      <WideFlexibleTemplate
+        header={<StorageBoardEditHeader />}
+        footer={<StorageBoardEditFooter />}
+        enableMainOverflowHidden
+      >
         <StorageBoardEditEditor />
         <StorageBoardEditAuthDialog />
       </WideFlexibleTemplate>

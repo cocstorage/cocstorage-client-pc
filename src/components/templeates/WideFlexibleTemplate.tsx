@@ -1,23 +1,29 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
-import { Box, Flexbox } from 'cocstorage-ui';
+import { Flexbox } from 'cocstorage-ui';
 
 interface WideFlexibleTemplateProps {
   header?: ReactElement;
   footer?: ReactElement;
+  enableMainOverflowHidden?: boolean;
 }
 
 function WideFlexibleTemplate({
   children,
   header,
-  footer
+  footer,
+  enableMainOverflowHidden
 }: PropsWithChildren<WideFlexibleTemplateProps>) {
   return (
     <Flexbox direction="vertical" customStyle={{ height: '100vh' }}>
       {header}
-      <Box component="main" customStyle={{ flex: 1 }}>
+      <Flexbox
+        direction="vertical"
+        component="main"
+        customStyle={{ flex: 1, overflow: enableMainOverflowHidden ? 'hidden' : undefined }}
+      >
         {children}
-      </Box>
+      </Flexbox>
       {footer}
     </Flexbox>
   );

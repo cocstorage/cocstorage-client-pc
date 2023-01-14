@@ -13,8 +13,6 @@ import {
   storageBoardEditSubjectState
 } from '@recoil/pages/storageBoardEdit/atoms';
 
-import { Flexbox } from 'cocstorage-ui';
-
 import useStorage from '@hooks/query/useStorage';
 
 import { postNonMemberStorageBoardImage } from '@api/v1/storage-boards';
@@ -46,12 +44,13 @@ function StorageBoardEditEditor() {
   };
 
   return (
-    <Flexbox direction="vertical" customStyle={{ height: '100%', padding: '0 20px' }}>
+    <>
       <Input
         onChange={handleChange}
         value={subject}
         placeholder="제목을 입력해 주세요."
         autoFocus
+        maxLength={150}
       />
       <Editor
         onChange={handleChangeContent}
@@ -60,19 +59,21 @@ function StorageBoardEditEditor() {
         fullScreen
         hideLine
         customStyle={{
-          marginTop: 20
+          marginTop: 20,
+          padding: '0 20px',
+          overflow: 'hidden'
         }}
         contentCustomStyle={{
           lineHeight: 1.75
         }}
       />
-    </Flexbox>
+    </>
   );
 }
 
 const Input = styled.input`
   width: 100%;
-  margin-left: 8px;
+  padding: 0 28px;
   border: none;
   outline: 0;
   background: none;

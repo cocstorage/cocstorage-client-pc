@@ -447,7 +447,7 @@ const Content = styled(Typography)<{
             maxWidth: '100%'
           },
           'img, video, embed, iframe': {
-            borderRadius: 8
+            borderRadius: 6
           }
         }
       : {}}
