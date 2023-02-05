@@ -225,32 +225,23 @@ function CommentDeleteDialog({
           <Hidden xsHidden>
             <input type="text" autoComplete="username" />
           </Hidden>
-          {/* // TODO UI 라이브러리 Tooltip 컴포넌트 수정 필요 */}
-          <Box
-            onClick={handleClose}
-            customStyle={{
-              '& > div > div': {
-                width: '100%'
-              }
-            }}
+          <Tooltip
+            open={!done}
+            onClose={handleClose}
+            content="저장된 비밀번호를 불러왔어요!"
+            placement="right"
+            fillWrapper
           >
-            <Tooltip
-              open={!done}
-              onClose={handleClose}
-              content="저장된 비밀번호를 불러왔어요!"
-              placement="right"
-            >
-              <TextBar
-                type="password"
-                fullWidth
-                size="big"
-                label="비밀번호"
-                value={password}
-                onChange={handleChange}
-                autoFocus
-              />
-            </Tooltip>
-          </Box>
+            <TextBar
+              type="password"
+              fullWidth
+              size="big"
+              label="비밀번호"
+              value={password}
+              onChange={handleChange}
+              autoFocus
+            />
+          </Tooltip>
         </Box>
         {errorMessage.error && (
           <Typography customStyle={{ marginTop: 10, color: secondary.red.main }}>

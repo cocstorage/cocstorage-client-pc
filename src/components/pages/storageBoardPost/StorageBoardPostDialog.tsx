@@ -16,7 +16,6 @@ import {
 } from '@recoil/pages/storageBoardPost/atoms';
 
 import {
-  Box,
   Button,
   Dialog,
   Flexbox,
@@ -207,30 +206,21 @@ function StorageBoardPostDialog() {
         <Typography variant="h3" fontWeight="bold">
           비밀번호
         </Typography>
-        {/* // TODO UI 라이브러리 Tooltip 컴포넌트 수정 필요 */}
-        <Box
-          onClick={handleClosePasswordTooltip}
-          customStyle={{
-            '& > div > div': {
-              width: '100%'
-            }
-          }}
+        <Tooltip
+          open={!done}
+          onClose={handleClosePasswordTooltip}
+          placement="top"
+          content="비밀번호를 랜덤하게 생성했어요!"
+          fillWrapper
         >
-          <Tooltip
-            open={!done}
-            onClose={handleClosePasswordTooltip}
-            placement="top"
-            content="비밀번호를 랜덤하게 생성했어요!"
-          >
-            <TextBar
-              type="password"
-              onChange={handleChange}
-              value={myPassword}
-              fullWidth
-              placeholder="비밀번호"
-            />
-          </Tooltip>
-        </Box>
+          <TextBar
+            type="password"
+            onChange={handleChange}
+            value={myPassword}
+            fullWidth
+            placeholder="비밀번호"
+          />
+        </Tooltip>
         {errorMessage.password.error && (
           <Typography
             dangerouslySetInnerHTML={{

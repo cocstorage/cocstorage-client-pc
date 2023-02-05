@@ -160,33 +160,25 @@ function StorageBoardEditAuthDialog() {
           <br />
           비밀번호를 입력해 주세요.
         </Typography>
-        <Box
-          onClick={handleCloseLoadPasswordTooltip}
-          customStyle={{
-            '& > div > div': {
-              width: '100%'
-            }
-          }}
+        <Tooltip
+          open={!done}
+          onClose={handleCloseLoadPasswordTooltip}
+          content="저장된 비밀번호를 불러왔어요!"
+          placement="right"
+          fillWrapper
         >
-          <Tooltip
-            open={!done}
-            onClose={handleCloseLoadPasswordTooltip}
-            content="저장된 비밀번호를 불러왔어요!"
-            placement="right"
-          >
-            <TextBar
-              type="password"
-              label="비밀번호"
-              fullWidth
-              value={password}
-              onChange={handleChange}
-              autoFocus
-              customStyle={{
-                marginTop: 30
-              }}
-            />
-          </Tooltip>
-        </Box>
+          <TextBar
+            type="password"
+            label="비밀번호"
+            fullWidth
+            value={password}
+            onChange={handleChange}
+            autoFocus
+            customStyle={{
+              marginTop: 30
+            }}
+          />
+        </Tooltip>
         {errorMessage.error && (
           <Typography customStyle={{ marginTop: 10, color: secondary.red.main }}>
             {errorMessage.message}
