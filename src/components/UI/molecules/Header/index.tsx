@@ -155,13 +155,11 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Flexbox component="button" gap={8} alignment="center">
                 <Image
                   width={34}
-                  height={24}
+                  height={25.5}
                   src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
                   alt="Logo Img"
                   disableAspectRatio
-                  customStyle={{
-                    backgroundColor: 'transparent'
-                  }}
+                  disableBackgroundColor
                 />
                 <Hidden lgHidden>
                   <Typography
@@ -187,9 +185,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                   src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
                   alt="Logo Img"
                   disableAspectRatio
-                  customStyle={{
-                    backgroundColor: 'transparent'
-                  }}
+                  disableBackgroundColor
                 />
                 <Box
                   customStyle={{
