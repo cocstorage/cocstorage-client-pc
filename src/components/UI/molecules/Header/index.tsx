@@ -181,7 +181,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               <Flexbox gap={14} alignment="center">
                 <Image
                   width={34}
-                  height={24}
+                  height={25.5}
                   src={`https://${process.env.IMAGE_DOMAIN}/assets/logo.png`}
                   alt="Logo Img"
                   disableAspectRatio
