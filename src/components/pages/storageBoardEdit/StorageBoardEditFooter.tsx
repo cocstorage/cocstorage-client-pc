@@ -52,7 +52,7 @@ function StorageBoardEditFooter() {
     }) => putNonMemberStorageBoard(newStorageId, newId, data),
     {
       onSuccess: ({ id: storageBoardId }) => {
-        router.push(`/storages/${path}/${storageBoardId}`).then(() => {
+        router.replace(`/storages/${path}/${storageBoardId}`).then(() => {
           resetNickname();
           resetPassword();
           resetSubject();

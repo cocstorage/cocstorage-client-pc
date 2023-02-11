@@ -3,15 +3,15 @@ import { useRouter } from 'next/router';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import {
-  storageBoardPostDialogOpenState,
-  storageBoardPostDraftIdState,
-  storageBoardPostEditorContentsState,
-  storageBoardPostSubjectState
-} from '@recoil/pages/storageBoardPost/atoms';
+  storageBoardsPostDialogOpenState,
+  storageBoardsPostDraftIdState,
+  storageBoardsPostEditorContentsState,
+  storageBoardsPostSubjectState
+} from '@recoil/pages/storageBoardsPost/atoms';
 
 import { Button, Flexbox, Icon, useTheme } from 'cocstorage-ui';
 
-function StorageBoardPostFooter() {
+function StorageBoardsPostFooter() {
   const router = useRouter();
 
   const {
@@ -20,10 +20,10 @@ function StorageBoardPostFooter() {
     }
   } = useTheme();
 
-  const draftId = useRecoilValue(storageBoardPostDraftIdState);
-  const subject = useRecoilValue(storageBoardPostSubjectState);
-  const editorContents = useRecoilValue(storageBoardPostEditorContentsState);
-  const setOpenState = useSetRecoilState(storageBoardPostDialogOpenState);
+  const draftId = useRecoilValue(storageBoardsPostDraftIdState);
+  const subject = useRecoilValue(storageBoardsPostSubjectState);
+  const editorContents = useRecoilValue(storageBoardsPostEditorContentsState);
+  const setOpenState = useSetRecoilState(storageBoardsPostDialogOpenState);
 
   const handleClick = () => setOpenState(true);
 
@@ -56,4 +56,4 @@ function StorageBoardPostFooter() {
   );
 }
 
-export default StorageBoardPostFooter;
+export default StorageBoardsPostFooter;

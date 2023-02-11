@@ -7,11 +7,11 @@ import {
   StorageBoardEditEditor,
   StorageBoardEditFooter,
   StorageBoardEditHead,
-  StorageBoardEditHeader
+  StorageBoardEditHeader,
+  StorageBoardEditSubjectInput
 } from '@components/pages/storageBoardEdit';
 import WideFlexibleTemplate from '@components/templeates/WideFlexibleTemplate';
 
-import { fetchStorageBoard } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
 
 import queryKeys from '@constants/queryKeys';
@@ -25,9 +25,10 @@ function StorageBoardEdit() {
         footer={<StorageBoardEditFooter />}
         enableMainOverflowHidden
       >
+        <StorageBoardEditSubjectInput />
         <StorageBoardEditEditor />
-        <StorageBoardEditAuthDialog />
       </WideFlexibleTemplate>
+      <StorageBoardEditAuthDialog />
     </>
   );
 }
@@ -45,14 +46,8 @@ export async function getServerSideProps({ req, res, query }: GetServerSideProps
   try {
     const queryClient = new QueryClient();
     const path = String(query.path);
-    const id = Number(query.id);
 
-    const storage = await queryClient.fetchQuery(queryKeys.storages.storageById(path), () =>
-      fetchStorage(path)
-    );
-    await queryClient.fetchQuery(queryKeys.storageBoards.storageBoardById(id), () =>
-      fetchStorageBoard(storage.id, id)
-    );
+    await queryClient.fetchQuery(queryKeys.storages.storageById(path), () => fetchStorage(path));
 
     return {
       props: {

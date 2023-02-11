@@ -3,12 +3,13 @@ import { GetServerSidePropsContext } from 'next';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import {
-  StorageBoardPostDialog,
-  StorageBoardPostEditor,
-  StorageBoardPostFooter,
-  StorageBoardPostHead,
-  StorageBoardPostHeader
-} from '@components/pages/storageBoardPost';
+  StorageBoardsPostDialog,
+  StorageBoardsPostEditor,
+  StorageBoardsPostFooter,
+  StorageBoardsPostHead,
+  StorageBoardsPostHeader,
+  StorageBoardsPostSubjectInput
+} from '@components/pages/storageBoardsPost';
 import WideFlexibleTemplate from '@components/templeates/WideFlexibleTemplate';
 
 import { fetchStorage } from '@api/v1/storages';
@@ -18,15 +19,16 @@ import queryKeys from '@constants/queryKeys';
 function StorageBoardPost() {
   return (
     <>
-      <StorageBoardPostHead />
+      <StorageBoardsPostHead />
       <WideFlexibleTemplate
-        header={<StorageBoardPostHeader />}
-        footer={<StorageBoardPostFooter />}
+        header={<StorageBoardsPostHeader />}
+        footer={<StorageBoardsPostFooter />}
         enableMainOverflowHidden
       >
-        <StorageBoardPostEditor />
-        <StorageBoardPostDialog />
+        <StorageBoardsPostSubjectInput />
+        <StorageBoardsPostEditor />
       </WideFlexibleTemplate>
+      <StorageBoardsPostDialog />
     </>
   );
 }

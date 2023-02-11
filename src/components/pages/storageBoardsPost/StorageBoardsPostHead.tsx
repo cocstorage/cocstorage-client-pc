@@ -40,6 +40,11 @@ function IndexHead() {
       <meta name="msapplication-TileColor" content={background.bg} />
       <title>{`${name} : 글쓰기 : 개념글 저장소`}</title>
       <link rel="canonical" href={`https://www.cocstorage.com/storages/${path}/post`} />
+      <link
+        rel="alternate"
+        media="only screen and (max-width: 640px)"
+        href={`https://m.cocstorage.com/storages/${path}/post`}
+      />
     </Head>
   );
 }

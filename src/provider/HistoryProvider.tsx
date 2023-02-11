@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 
 import { commonHistoryState } from '@recoil/common/atoms';
 
-import getAsPath from '@utils/getAsPath';
+import getPathNameByUrl from '@utils/getPathNameByUrl';
 
 const serverSidePages = [
   '/',
@@ -29,7 +29,7 @@ function HistoryProvider({ children }: PropsWithChildren) {
 
   const handleRouteChangeStart = useCallback(
     (url: string) => {
-      const pathname = getAsPath(url);
+      const pathname = getPathNameByUrl(url);
 
       if (isGoBack) {
         setHistoryState({

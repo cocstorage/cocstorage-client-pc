@@ -12,10 +12,10 @@ import {
   commonOnBoardingState
 } from '@recoil/common/atoms';
 import {
-  storageBoardPostDraftIdState,
-  storageBoardPostEditorContentsState,
-  storageBoardPostSubjectState
-} from '@recoil/pages/storageBoardPost/atoms';
+  storageBoardsPostDraftIdState,
+  storageBoardsPostEditorContentsState,
+  storageBoardsPostSubjectState
+} from '@recoil/pages/storageBoardsPost/atoms';
 
 import {
   Avatar,
@@ -55,9 +55,9 @@ function StorageBoardsIntro() {
     setCommonOnBoardingState
   ] = useRecoilState(commonOnBoardingState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
-  const resetDraftIdState = useResetRecoilState(storageBoardPostDraftIdState);
-  const resetSubjectState = useResetRecoilState(storageBoardPostSubjectState);
-  const resetEditorContentsState = useResetRecoilState(storageBoardPostEditorContentsState);
+  const resetDraftIdState = useResetRecoilState(storageBoardsPostDraftIdState);
+  const resetSubjectState = useResetRecoilState(storageBoardsPostSubjectState);
+  const resetEditorContentsState = useResetRecoilState(storageBoardsPostEditorContentsState);
 
   const { data: { path, name, avatarUrl, description, user, createdAt } = {} } = useStorage(
     String(query.path)

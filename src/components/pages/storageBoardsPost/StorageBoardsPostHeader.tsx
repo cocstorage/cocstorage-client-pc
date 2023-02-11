@@ -4,7 +4,7 @@ import { Avatar, Flexbox, Icon, IconButton, Tag, Typography } from 'cocstorage-u
 
 import useStorage from '@hooks/query/useStorage';
 
-function StorageBoardPostHeader() {
+function StorageBoardsPostHeader() {
   const router = useRouter();
   const { query } = router;
 
@@ -54,4 +54,4 @@ function StorageBoardPostHeader() {
   );
 }
 
-export default StorageBoardPostHeader;
+export default StorageBoardsPostHeader;

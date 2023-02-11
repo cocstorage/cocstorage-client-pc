@@ -227,6 +227,14 @@ function StorageBoardContent() {
     if (!openDeleteDialog) setOpen(false);
   }, [openDeleteDialog]);
 
+  useEffect(() => {
+    return () => {
+      if (spotlightOpenTimerRef.current) {
+        clearTimeout(spotlightOpenTimerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <Flexbox direction="vertical" gap={8}>

@@ -9,11 +9,11 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/atoms';
 import { myNicknameState, myPasswordState } from '@recoil/pages/my/atoms';
 import {
-  storageBoardPostDialogOpenState,
-  storageBoardPostDraftIdState,
-  storageBoardPostEditorContentsState,
-  storageBoardPostSubjectState
-} from '@recoil/pages/storageBoardPost/atoms';
+  storageBoardsPostDialogOpenState,
+  storageBoardsPostDraftIdState,
+  storageBoardsPostEditorContentsState,
+  storageBoardsPostSubjectState
+} from '@recoil/pages/storageBoardsPost/atoms';
 
 import {
   Button,
@@ -32,7 +32,7 @@ import validators from '@utils/validators';
 
 import { PutStorageBoardData, putNonMemberStorageBoard } from '@api/v1/storage-boards';
 
-function StorageBoardPostDialog() {
+function StorageBoardsPostDialog() {
   const router = useRouter();
   const { query } = router;
 
@@ -42,17 +42,17 @@ function StorageBoardPostDialog() {
     }
   } = useTheme();
 
-  const [open, setOpenState] = useRecoilState(storageBoardPostDialogOpenState);
+  const [open, setOpenState] = useRecoilState(storageBoardsPostDialogOpenState);
   const [myNickname, setMyNicknameState] = useRecoilState(myNicknameState);
   const [myPassword, setMyPasswordState] = useRecoilState(myPasswordState);
   const [{ password: { done = false } = {} }, setCommonOnBoardingState] =
     useRecoilState(commonOnBoardingState);
-  const subject = useRecoilValue(storageBoardPostSubjectState);
-  const draftId = useRecoilValue(storageBoardPostDraftIdState);
-  const editorContents = useRecoilValue(storageBoardPostEditorContentsState);
-  const resetDraftIdState = useResetRecoilState(storageBoardPostDraftIdState);
-  const resetSubjectState = useResetRecoilState(storageBoardPostSubjectState);
-  const resetEditorContentsState = useResetRecoilState(storageBoardPostEditorContentsState);
+  const subject = useRecoilValue(storageBoardsPostSubjectState);
+  const draftId = useRecoilValue(storageBoardsPostDraftIdState);
+  const editorContents = useRecoilValue(storageBoardsPostEditorContentsState);
+  const resetDraftIdState = useResetRecoilState(storageBoardsPostDraftIdState);
+  const resetSubjectState = useResetRecoilState(storageBoardsPostSubjectState);
+  const resetEditorContentsState = useResetRecoilState(storageBoardsPostEditorContentsState);
 
   const [errorMessage, setErrorMessage] = useState({
     nickname: {
@@ -85,7 +85,7 @@ function StorageBoardPostDialog() {
       },
       onSuccess: ({ id: storageBoardId }) => {
         setOpenState(false);
-        router.push(`/storages/${query.path}/${storageBoardId}`).then(() => {
+        router.replace(`/storages/${query.path}/${storageBoardId}`).then(() => {
           resetDraftIdState();
           resetSubjectState();
           resetEditorContentsState();
@@ -192,7 +192,7 @@ function StorageBoardPostDialog() {
               __html: errorMessage.nickname.message
             }}
             color={secondary.red.main}
-            customStyle={{ marginTio: 10 }}
+            customStyle={{ marginTop: 10 }}
           />
         )}
       </Flexbox>
@@ -227,7 +227,7 @@ function StorageBoardPostDialog() {
               __html: errorMessage.password.message
             }}
             color={secondary.red.main}
-            customStyle={{ marginTio: 10 }}
+            customStyle={{ marginTop: 10 }}
           />
         )}
       </Flexbox>
@@ -254,4 +254,4 @@ function StorageBoardPostDialog() {
   );
 }
 
-export default StorageBoardPostDialog;
+export default StorageBoardsPostDialog;

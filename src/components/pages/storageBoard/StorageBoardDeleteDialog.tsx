@@ -38,9 +38,9 @@ function StorageBoardDeleteDialog() {
   } = useTheme();
 
   const [open, setOpenState] = useRecoilState(storageBoardDeleteDialogOpenState);
-  const myPassword = useRecoilValue(myPasswordState);
   const [{ loadPassword: { done = false } = {} }, setCommonOnBoardingState] =
     useRecoilState(commonOnBoardingState);
+  const myPassword = useRecoilValue(myPasswordState);
 
   const [password, setPassword] = useState(myPassword);
   const [errorMessage, setErrorMessage] = useState<{

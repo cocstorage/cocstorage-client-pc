@@ -18,8 +18,8 @@ function WideFlexibleTemplate({
     <Flexbox direction="vertical" customStyle={{ height: '100vh' }}>
       {header}
       <Flexbox
-        direction="vertical"
         component="main"
+        direction="vertical"
         customStyle={{ flex: 1, overflow: enableMainOverflowHidden ? 'hidden' : undefined }}
       >
         {children}
