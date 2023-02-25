@@ -76,7 +76,7 @@ function IndexBestWorstStorageBoardGrid() {
           <Button
             variant="transparent"
             size="pico"
-            endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
+            endIcon={<Icon name="CaretSemiRightOutlined" />}
             onClick={handleClickMoreBest}
             customStyle={{
               color: text[mode].text1
@@ -141,7 +141,7 @@ function IndexBestWorstStorageBoardGrid() {
           <Button
             variant="transparent"
             size="pico"
-            endIcon={<Icon name="CaretSemiRightOutlined" width={16} height={16} />}
+            endIcon={<Icon name="CaretSemiRightOutlined" />}
             onClick={handleClickMoreWorst}
             customStyle={{
               color: text[mode].text1

@@ -2,23 +2,70 @@ import { HTMLAttributes, memo } from 'react';
 
 import Link from 'next/link';
 
-import { Avatar, Typography } from 'cocstorage-ui';
-
-import { StyledStorageCard } from './StorageCard.styles';
+import { Avatar, CustomStyle, Flexbox, Typography } from 'cocstorage-ui';
 
 interface StorageCardProps extends HTMLAttributes<HTMLDivElement> {
+  direction?: 'horizontal' | 'vertical';
+  size?: 'small' | 'medium';
   src: string;
   path: string;
   name: string;
+  customStyle?: CustomStyle;
 }
 
-function StorageCard({ src, path, name, ...props }: StorageCardProps) {
+function StorageCard({
+  direction = 'horizontal',
+  size = 'medium',
+  src,
+  path,
+  name,
+  customStyle,
+  ...props
+}: StorageCardProps) {
+  if (direction === 'vertical') {
+    return (
+      <Link href={`/storages/${path}`}>
+        <Flexbox direction="vertical" gap={8} {...props} css={customStyle}>
+          <Avatar width={60} height={60} src={src} round={6} alt="Storage Logo Img" />
+          <Typography
+            variant="p2"
+            noWrap
+            customStyle={{
+              textAlign: 'center'
+            }}
+          >
+            {name}
+          </Typography>
+        </Flexbox>
+      </Link>
+    );
+  }
+
   return (
     <Link href={`/storages/${path}`}>
-      <StyledStorageCard {...props}>
-        <Avatar width={36} height={36} src={src} round={6} alt="Storage Logo Img" />
-        <Typography>{name}</Typography>
-      </StyledStorageCard>
+      <Flexbox alignment="center" gap={8} {...props} css={customStyle}>
+        <Avatar
+          width={size === 'small' ? 18 : 36}
+          height={size === 'small' ? 18 : 36}
+          src={src}
+          round={size === 'small' ? 4 : 6}
+          alt="Storage Logo Img"
+          fallback={{
+            iconName: 'ImageOutlined',
+            width: size === 'small' ? 12 : 24,
+            height: size === 'small' ? 12 : 24
+          }}
+        />
+        <Typography
+          variant="p2"
+          noWrap
+          customStyle={{
+            flex: 1
+          }}
+        >
+          {name}
+        </Typography>
+      </Flexbox>
     </Link>
   );
 }

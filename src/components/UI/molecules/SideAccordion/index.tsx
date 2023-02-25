@@ -9,6 +9,7 @@ export interface SideAccordionProps extends HTMLAttributes<HTMLDivElement> {
   listGap?: number;
   disableToggle?: boolean;
   customStyle?: CustomStyle;
+  titleCustomStyle?: CustomStyle;
 }
 
 function SideAccordion({
@@ -17,6 +18,7 @@ function SideAccordion({
   listGap = 12,
   disableToggle = false,
   customStyle,
+  titleCustomStyle,
   ...props
 }: PropsWithChildren<SideAccordionProps>) {
   const {
@@ -53,20 +55,14 @@ function SideAccordion({
   return (
     <StyledSideAccordion {...props} css={customStyle}>
       <Flexbox alignment="center" justifyContent="space-between">
-        <Typography variant="h4" fontWeight="bold">
+        <Typography variant="h4" fontWeight="bold" customStyle={titleCustomStyle}>
           {title}
         </Typography>
         {openToggleButton && !disableToggle && (
           <Button
             variant="transparent"
             size="pico"
-            startIcon={
-              <Icon
-                name={toggleList ? 'CaretSemiDownOutlined' : 'CaretSemiUpOutlined'}
-                width={16}
-                height={16}
-              />
-            }
+            startIcon={<Icon name={toggleList ? 'CaretSemiDownOutlined' : 'CaretSemiUpOutlined'} />}
             onClick={handleClick}
             customStyle={{
               color: text[mode].text1

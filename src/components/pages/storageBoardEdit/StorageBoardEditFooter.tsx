@@ -100,7 +100,7 @@ function StorageBoardEditFooter() {
       </Button>
       <Button
         variant="accent"
-        startIcon={<Icon name="WriteOutlined" width={18} height={18} />}
+        startIcon={<Icon name="WriteOutlined" />}
         onClick={handleClick}
         disabled={!nickname || !password || !subject || !editorContents.length || isLoading}
       >

@@ -1,6 +1,10 @@
-import { atomFamily } from 'recoil';
+import { atom, atomFamily } from 'recoil';
+
+import LocalStorage from '@library/localStorage';
 
 import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
+
+import localStorageKeys from '@constants/localStorageKeys';
 
 export const storageBoardsParamsDefault: FetchStorageBoardsParams = {
   subject: null,
@@ -20,4 +24,34 @@ export const storageBoardsParamsStateFamily = atomFamily<
     path,
     params: storageBoardsParamsDefault
   })
+});
+
+export const storageBoardsLastVisitHistoryState = atom<
+  {
+    src: string;
+    name: string;
+    path: string;
+  }[]
+>({
+  key: 'storageBoards/lastVisitHistoryState',
+  default: [],
+  effects: [
+    ({ onSet, setSelf }) => {
+      const storageBoardsLastVisitHistory = LocalStorage.get<
+        { src: string; name: string; path: string }[]
+      >(localStorageKeys.storageBoardsLastVisitHistory);
+
+      if (storageBoardsLastVisitHistory) {
+        setSelf(storageBoardsLastVisitHistory);
+      }
+
+      onSet((newValue, _, isReset) => {
+        if (isReset) {
+          LocalStorage.remove(localStorageKeys.storageBoardsLastVisitHistory);
+        } else {
+          LocalStorage.set(localStorageKeys.storageBoardsLastVisitHistory, newValue);
+        }
+      });
+    }
+  ]
 });

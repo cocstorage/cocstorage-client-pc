@@ -22,12 +22,11 @@ import {
 import {
   Avatar,
   Box,
+  Button,
   Flexbox,
-  Hidden,
   Icon,
   Image,
   Spotlight,
-  Tag,
   TextBar,
   Tooltip,
   Typography,
@@ -49,15 +48,17 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const router = useRouter();
   const { query } = router;
 
+  const [left, setLeft] = useState(0);
+  const [triangleLeft, setTriangleLeft] = useState(0);
+
   const [{ theme: { done = false } = {} }, setCommonOnBoardingState] =
     useRecoilState(commonOnBoardingState);
   const setCommonFeedbackDialogState = useSetRecoilState(commonFeedbackDialogState);
 
   const {
     theme: {
-      mode,
-      breakpoints,
-      palette: { text, box }
+      palette: { box },
+      breakpoints
     }
   } = useTheme();
 
@@ -65,22 +66,17 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
 
   const [value, setValue] = useState('');
   const [open, setOpen] = useState(false);
-  const [left, setLeft] = useState(0);
-  const [triangleLeft, setTriangleLeft] = useState(0);
+  const [lgHidden, setLgHidden] = useState(false);
+
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const isHome = useMemo(
-    () => router.pathname === '/' || router.pathname === '/best' || router.pathname === '/worst',
-    [router.pathname]
-  );
-  const isStorages = useMemo(() => router.pathname.includes('/storages'), [router.pathname]);
   const isStorageBoardDetail = useMemo(
     () => router.pathname === '/storages/[path]/[id]',
     [router.pathname]
   );
 
   const headerRef = useRef<HTMLHeadElement>(null);
-  const tagRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { triggered } = useScrollTrigger({ trigger: scrollFixedTrigger, ref: headerRef });
 
@@ -112,31 +108,15 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   const handleCloseMenu = () => setMenuOpen(false);
 
   const handleResize = useCallback(() => {
-    if (tagRef.current) {
-      const { clientWidth } = tagRef.current;
-      // TODO 추후 UI 라이브러리 내 Hook 작성
-      const lgHidden = window.matchMedia(`(max-width: ${breakpoints.lg}px)`).matches;
-      setLeft(clientWidth - (lgHidden ? 189 : 199));
-      setTriangleLeft((lgHidden ? 189 : 209) - clientWidth);
+    // TODO 추후 UI 라이브러리 내 Hook 작성
+    const newLgHidden = window.matchMedia(`(max-width: ${breakpoints.lg}px)`).matches;
+    setLgHidden(newLgHidden);
+    if (buttonRef.current) {
+      const { clientWidth } = buttonRef.current;
+      setLeft(clientWidth - 199);
+      setTriangleLeft(219 - clientWidth);
     }
-  }, [breakpoints.lg]);
-
-  useEffect(() => {
-    if (tagRef.current) {
-      const { clientWidth } = tagRef.current;
-      const lgHidden = window.matchMedia(`(max-width: ${breakpoints.lg}px)`).matches;
-      setLeft(clientWidth - (lgHidden ? 189 : 199));
-      setTriangleLeft((lgHidden ? 189 : 209) - clientWidth);
-    }
-  }, [breakpoints.lg]);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [handleResize]);
+  }, [breakpoints]);
 
   useEffect(() => {
     if (!done) {
@@ -145,6 +125,24 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
       setOpen(false);
     }
   }, [done]);
+
+  useEffect(() => {
+    const newLgHidden = window.matchMedia(`(max-width: ${breakpoints.lg}px)`).matches;
+    setLgHidden(newLgHidden);
+    if (buttonRef.current) {
+      const { clientWidth } = buttonRef.current;
+      setLeft(clientWidth - 199);
+      setTriangleLeft(219 - clientWidth);
+    }
+  }, [breakpoints]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [handleResize]);
 
   return (
     <>
@@ -161,18 +159,16 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                   disableAspectRatio
                   disableBackgroundColor
                 />
-                <Hidden lgHidden>
-                  <Typography
-                    variant="h3"
-                    customStyle={{
-                      '& > strong': {
-                        fontWeight: 700
-                      }
-                    }}
-                  >
-                    <strong>개념글’</strong>저장소
-                  </Typography>
-                </Hidden>
+                <Typography
+                  variant="h3"
+                  customStyle={{
+                    '& > strong': {
+                      fontWeight: 700
+                    }
+                  }}
+                >
+                  <strong>개념글’</strong>저장소
+                </Typography>
               </Flexbox>
             </Link>
           )}
@@ -209,78 +205,43 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               </Flexbox>
             </Link>
           )}
-          <Box
-            component="button"
+          <Flexbox
             onClick={handleClick}
+            justifyContent={lgHidden ? 'flex-start' : 'center'}
             customStyle={{
-              minWidth: 280
+              flexGrow: 1
             }}
           >
             <TextBar
-              fullWidth
-              startIcon={<Icon name="SearchOutlined" width={20} height={20} />}
-              size="small"
+              variant="fill"
+              startIcon={<Icon name="SearchOutlined" />}
               value={value}
               onChange={handleChange}
               placeholder="검색"
-              customStyle={{
-                backgroundColor: box.filled.normal,
-                borderColor: 'transparent'
-              }}
               disabled
+              customStyle={{
+                minWidth: 260
+              }}
             />
-          </Box>
-          <Flexbox gap={20}>
-            <Flexbox gap={10}>
+          </Flexbox>
+          <Flexbox>
+            <Flexbox gap={8}>
               <Link href="/">
-                <Tag
-                  variant={isHome ? 'semiAccent' : 'transparent'}
-                  startIcon={
-                    <Icon name={isHome ? 'HomeFilled' : 'HomeOutlined'} width={16} height={16} />
-                  }
-                  customStyle={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    height: 32,
-
-                    cursor: 'pointer'
-                  }}
-                >
-                  <Hidden lgHidden>홈</Hidden>
-                </Tag>
+                <Button startIcon={<Icon name="HomeOutlined" />}>홈</Button>
               </Link>
               <Link href="/storages">
-                <Tag
-                  variant={isStorages ? 'semiAccent' : 'transparent'}
-                  startIcon={<Icon name="CommunityFilled" width={16} height={16} />}
-                  customStyle={{
-                    height: 32,
-                    cursor: 'pointer'
-                  }}
-                >
-                  <Hidden lgHidden>게시판</Hidden>
-                </Tag>
+                <Button startIcon={<Icon name="ListOutlined" />}>게시판</Button>
               </Link>
+              <Button
+                ref={buttonRef}
+                startIcon={<Icon name="UserOutlined" />}
+                onClick={handleOpenMenu}
+              >
+                마이
+              </Button>
             </Flexbox>
-            <Tag
-              ref={tagRef}
-              variant="transparent"
-              startIcon={<Icon name="UserOutlined" width={16} height={16} />}
-              customStyle={{
-                height: 32,
-                padding: 0,
-                color: text[mode].main,
-                '& svg path': {
-                  fill: text[mode].main
-                },
-                cursor: 'pointer'
-              }}
-              onClick={handleOpenMenu}
-            >
-              <Hidden lgHidden>마이</Hidden>
-            </Tag>
-            <SystemMenu open={menuOpen} anchorRef={tagRef} onClose={handleCloseMenu} />
-            <Spotlight open={open} onClose={handleClose} targetRef={tagRef} round={8}>
+            <SystemMenu open={menuOpen} anchorRef={buttonRef} onClose={handleCloseMenu} />
+            <Spotlight open={open} onClose={handleClose} targetRef={buttonRef} round={8}>
               <Tooltip
                 open={open}
                 onClose={handleClose}
@@ -290,22 +251,9 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                 triangleLeft={triangleLeft}
                 disableOnClose
               >
-                <Tag
-                  variant="transparent"
-                  startIcon={<Icon name="UserOutlined" width={16} height={16} />}
-                  customStyle={{
-                    height: 32,
-                    padding: 0,
-                    color: text[mode].main,
-                    '& svg path': {
-                      fill: text[mode].main
-                    },
-                    cursor: 'pointer'
-                  }}
-                  onClick={handleOpenMenu}
-                >
-                  <Hidden lgHidden>마이</Hidden>
-                </Tag>
+                <Button startIcon={<Icon name="UserOutlined" />} onClick={handleOpenMenu}>
+                  마이
+                </Button>
               </Tooltip>
             </Spotlight>
           </Flexbox>

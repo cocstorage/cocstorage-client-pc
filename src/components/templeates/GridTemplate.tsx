@@ -27,7 +27,7 @@ function GridTemplate({
             {leftAside}
           </Grid>
         )}
-        <Grid component="section" item auto customStyle={{ width: '100%' }}>
+        <Grid component="section" item auto customStyle={{ width: '100%', overflow: 'hidden' }}>
           {children}
         </Grid>
         {rightAside && (

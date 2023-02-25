@@ -5,6 +5,7 @@ const storageBoardsDisableDialogPaths = 'storageBoardsDisableDialogPaths' as con
 const onBoarding = 'onBoarding' as const;
 const nickname = 'nickname' as const;
 const password = 'password' as const;
+const storageBoardsLastVisitHistory = 'storageBoardsLastVisitHistory' as const;
 
 const localStorageKeys = {
   theme,
@@ -12,7 +13,8 @@ const localStorageKeys = {
   storageBoardsDisableDialogPaths,
   onBoarding,
   nickname,
-  password
+  password,
+  storageBoardsLastVisitHistory
 };
 
 export default localStorageKeys;

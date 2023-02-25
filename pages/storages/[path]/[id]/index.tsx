@@ -17,7 +17,7 @@ import {
   CommentForm,
   CommentList,
   SidePopularStorageList,
-  StorageBoardGrid
+  StorageBoardList
 } from '@components/UI/organisms';
 
 import { fetchStorageBoard } from '@api/v1/storage-boards';
@@ -67,7 +67,7 @@ function StorageBoard() {
           <Typography variant="p1" fontWeight="bold">
             이 게시판의 다른 글
           </Typography>
-          <StorageBoardGrid />
+          <StorageBoardList />
         </Flexbox>
       </GridTemplate>
       <StorageBoardDeleteDialog />

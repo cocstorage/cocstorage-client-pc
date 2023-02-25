@@ -299,7 +299,7 @@ function StorageBoardContent() {
                   ref={buttonRef}
                   variant="transparent"
                   size="pico"
-                  startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
+                  startIcon={<Icon name="MoreMenuOutlined" />}
                   iconOnly
                   onClick={handleClick}
                 />
@@ -373,7 +373,7 @@ function StorageBoardContent() {
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
           size="small"
-          startIcon={<Icon name="ThumbsUpFilled" width={15} height={15} color={primary.main} />}
+          startIcon={<Icon name="ThumbsUpFilled" color={primary.main} />}
           customStyle={{
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
@@ -387,9 +387,7 @@ function StorageBoardContent() {
         </Button>
         <Button
           size="small"
-          startIcon={
-            <Icon name="ThumbsDownOutlined" width={15} height={15} color={text[mode].text1} />
-          }
+          startIcon={<Icon name="ThumbsDownOutlined" color={text[mode].text1} />}
           customStyle={{
             borderTopLeftRadius: 0,
             borderBottomLeftRadius: 0,
@@ -424,7 +422,7 @@ function StorageBoardContent() {
             <Button
               variant="transparent"
               size="pico"
-              startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
+              startIcon={<Icon name="MoreMenuOutlined" />}
               iconOnly
               onClick={handleClick}
             />

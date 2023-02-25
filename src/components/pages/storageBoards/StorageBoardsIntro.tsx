@@ -19,7 +19,6 @@ import {
 
 import {
   Avatar,
-  Box,
   Button,
   Flexbox,
   Icon,
@@ -40,10 +39,7 @@ function StorageBoardsIntro() {
   const {
     theme: {
       mode,
-      palette: {
-        text,
-        secondary: { yellow }
-      }
+      palette: { text }
     }
   } = useTheme();
 
@@ -118,22 +114,15 @@ function StorageBoardsIntro() {
   return (
     <>
       <Flexbox component="section" justifyContent="space-between">
-        <Flexbox gap={16} alignment="center">
-          <Avatar width={102} height={102} round={6} src={avatarUrl || ''} alt="Storage Logo Img" />
+        <Flexbox gap={12} alignment="center">
+          <Avatar width={40} height={40} round={8} src={avatarUrl || ''} alt="Storage Logo Img" />
           <div>
             <Flexbox alignment="center" gap={6}>
-              <Typography component="h1" variant="h2" fontWeight="bold">
+              <Typography component="h1" variant="h4" fontWeight="bold">
                 {name}
               </Typography>
-              <IconButton ref={buttonRef}>
-                <Icon
-                  name="InfoOutlined"
-                  width={20}
-                  height={20}
-                  onClick={handleMenuOpen}
-                  color={text[mode].text1}
-                  customStyle={{ display: 'block' }}
-                />
+              <IconButton ref={buttonRef} onClick={handleMenuOpen}>
+                <Icon name="InfoOutlined" width={16} height={16} />
               </IconButton>
               <Menu anchorRef={buttonRef} centered open={open} onClose={handleMenuClose}>
                 <Flexbox gap={10} direction="vertical" customStyle={{ padding: 20 }}>
@@ -162,36 +151,30 @@ function StorageBoardsIntro() {
                 </Flexbox>
               </Menu>
             </Flexbox>
-            <Typography component="h2" color={text[mode].text1} customStyle={{ marginTop: 2 }}>
+            <Typography component="h2" variant="s1" customStyle={{ marginTop: 4 }}>
               {description}
             </Typography>
-            <Box customStyle={{ marginTop: 16 }}>
-              <Flexbox alignment="center" gap={6}>
-                <Typography fontWeight="medium">관리자</Typography>
-                <Typography color={text[mode].text1}>{(user || {}).nickname}</Typography>
-              </Flexbox>
-            </Box>
           </div>
         </Flexbox>
-        <Flexbox gap={6} alignment="center">
+        <Flexbox gap={8} alignment="center">
           <Button
             ref={postButtonRef}
             variant="accent"
             size="small"
-            startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
+            startIcon={<Icon name="WriteFilled" />}
             onClick={handleClick}
           >
             글쓰기
           </Button>
           <Button
             size="small"
-            startIcon={<Icon name="StarOutlined" width={15} height={15} color={yellow.main} />}
+            startIcon={<Icon name="StarOutlined" />}
             iconOnly
             onClick={handleDialogOpen}
           />
           <Button
             size="small"
-            startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
+            startIcon={<Icon name="MoreMenuOutlined" />}
             iconOnly
             onClick={handleDialogOpen}
           />
@@ -202,7 +185,7 @@ function StorageBoardsIntro() {
           <Button
             variant="accent"
             size="small"
-            startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
+            startIcon={<Icon name="WriteOutlined" />}
             onClick={handleClick}
           >
             글쓰기

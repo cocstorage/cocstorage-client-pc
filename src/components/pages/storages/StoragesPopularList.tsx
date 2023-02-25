@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import { Flexbox, Typography } from 'cocstorage-ui';
 
-import { Avatar, Box, Flexbox, Typography } from 'cocstorage-ui';
+import { StorageCard } from '@components/UI/molecules';
 
 function StoragesPopularList() {
   return (
@@ -9,66 +9,36 @@ function StoragesPopularList() {
         인기 게시판
       </Typography>
       <Flexbox gap={20} customStyle={{ overflowX: 'auto' }}>
-        <Link href="/storages/ibroadcast">
-          <Box component="button">
-            <Avatar
-              width={81}
-              height={81}
-              round={6}
-              src={`https://${process.env.IMAGE_DOMAIN}/images/xt868xt2w6i50bf4x98xdsbfado3`}
-              alt="Storage Logo Img"
-            />
-            <Typography customStyle={{ marginTop: 6, textAlign: 'center' }}>인터넷 방송</Typography>
-          </Box>
-        </Link>
-        <Link href="/storages/streamer">
-          <Box component="button">
-            <Avatar
-              width={81}
-              height={81}
-              round={6}
-              src={`https://${process.env.IMAGE_DOMAIN}/images/zksw76puo6l255o5sabljom0gw8l`}
-              alt="Storage Logo Img"
-            />
-            <Typography customStyle={{ marginTop: 6, textAlign: 'center' }}>스트리머</Typography>
-          </Box>
-        </Link>
-        <Link href="/storages/baseball">
-          <Box component="button">
-            <Avatar
-              width={81}
-              height={81}
-              round={6}
-              src={`https://${process.env.IMAGE_DOMAIN}/images/uvx4jiy4ur5hm0t0vpbqb3lw1qq9`}
-              alt="Storage Logo Img"
-            />
-            <Typography customStyle={{ marginTop: 6, textAlign: 'center' }}>야구</Typography>
-          </Box>
-        </Link>
-        <Link href="/storages/hotissue">
-          <Box component="button">
-            <Avatar
-              width={81}
-              height={81}
-              round={6}
-              src={`https://${process.env.IMAGE_DOMAIN}/images/on6nrgp7utess2qf3lyj8ry921tm`}
-              alt="Storage Logo Img"
-            />
-            <Typography customStyle={{ marginTop: 6, textAlign: 'center' }}>핫이슈</Typography>
-          </Box>
-        </Link>
-        <Link href="/storages/bitcoins">
-          <Box component="button">
-            <Avatar
-              width={81}
-              height={81}
-              round={6}
-              src={`https://${process.env.IMAGE_DOMAIN}/images/58l159jwcs71iwkdx0kh4reg5ra6`}
-              alt="Storage Logo Img"
-            />
-            <Typography customStyle={{ marginTop: 6, textAlign: 'center' }}>비트코인</Typography>
-          </Box>
-        </Link>
+        <StorageCard
+          direction="vertical"
+          src={`https://${process.env.IMAGE_DOMAIN}/images/xt868xt2w6i50bf4x98xdsbfado3`}
+          path="ibroadcast"
+          name="인터넷 방송"
+        />
+        <StorageCard
+          direction="vertical"
+          src={`https://${process.env.IMAGE_DOMAIN}/images/zksw76puo6l255o5sabljom0gw8l`}
+          path="streamer"
+          name="스트리머"
+        />
+        <StorageCard
+          direction="vertical"
+          src={`https://${process.env.IMAGE_DOMAIN}/images/uvx4jiy4ur5hm0t0vpbqb3lw1qq9`}
+          path="baseball"
+          name="야구"
+        />
+        <StorageCard
+          direction="vertical"
+          src={`https://${process.env.IMAGE_DOMAIN}/images/on6nrgp7utess2qf3lyj8ry921tm`}
+          path="hotissue"
+          name="핫이슈"
+        />
+        <StorageCard
+          direction="vertical"
+          src={`https://${process.env.IMAGE_DOMAIN}/images/58l159jwcs71iwkdx0kh4reg5ra6`}
+          path="bitcoins"
+          name="비트코인"
+        />
       </Flexbox>
     </Flexbox>
   );

@@ -7,14 +7,17 @@ import { storageBoardsParamsDefault } from '@recoil/pages/storageBoards/atoms';
 import { Flexbox } from 'cocstorage-ui';
 
 import {
+  StorageBoardsBestList,
   StorageBoardsHead,
   StorageBoardsIntro,
-  StorageBoardsNoticeAlert,
+  StorageBoardsIssueKeywordRank,
+  StorageBoardsLastVisitHistory,
+  StorageBoardsNotice,
   StorageBoardsTabs
 } from '@components/pages/storageBoards';
-import GeneralTemplate from '@components/templeates/GeneralTemplate';
-import { Footer, GoogleAdSense, Header } from '@components/UI/molecules';
-import StorageBoardGrid from '@components/UI/organisms/StorageBoardGrid';
+import GridTemplate from '@components/templeates/GridTemplate';
+import { Footer, Header } from '@components/UI/molecules';
+import StorageBoardList from '@components/UI/organisms/StorageBoardList';
 
 import { fetchStorageBoards } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
@@ -25,24 +28,26 @@ function StorageBoards() {
   return (
     <>
       <StorageBoardsHead />
-      <GeneralTemplate header={<Header scrollFixedTrigger={false} />} footer={<Footer />}>
-        <Flexbox gap={20} direction="vertical">
-          <StorageBoardsIntro />
-          <StorageBoardsTabs />
-          <StorageBoardsNoticeAlert />
-          <StorageBoardGrid />
-          <GoogleAdSense
-            html={
-              '<ins class="adsbygoogle"\n' +
-              '     style="display:block"\n' +
-              '     data-ad-client="ca-pub-5809905264951057"\n' +
-              '     data-ad-slot="2500107460"\n' +
-              '     data-ad-format="auto"\n' +
-              '     data-full-width-responsive="true"></ins>'
-            }
-          />
-        </Flexbox>
-      </GeneralTemplate>
+      <GridTemplate
+        header={<Header scrollFixedTrigger={false} />}
+        leftAside={<StorageBoardsLastVisitHistory />}
+        rightAside={
+          <Flexbox
+            direction="vertical"
+            gap={25}
+            customStyle={{ position: 'sticky', width: 280, top: 69 }}
+          >
+            <StorageBoardsBestList />
+            <StorageBoardsIssueKeywordRank />
+          </Flexbox>
+        }
+        footer={<Footer />}
+      >
+        <StorageBoardsIntro />
+        <StorageBoardsTabs />
+        <StorageBoardsNotice />
+        <StorageBoardList />
+      </GridTemplate>
     </>
   );
 }

@@ -243,7 +243,7 @@ function StorageBoardsPostDialog() {
         </Button>
         <Button
           variant="accent"
-          startIcon={<Icon name="SendFilled" width={18} height={18} />}
+          startIcon={<Icon name="SendFilled" />}
           onClick={handleClick}
           disabled={isLoading}
         >

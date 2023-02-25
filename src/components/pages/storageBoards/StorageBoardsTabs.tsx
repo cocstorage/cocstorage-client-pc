@@ -79,13 +79,9 @@ function StorageBoardsTabs() {
             <Button
               variant="accent"
               size="pico"
-              startIcon={<Icon name="WriteOutlined" width={15} height={15} />}
+              startIcon={<Icon name="WriteFilled" />}
               iconOnly
               onClick={handleClick}
-              customStyle={{
-                height: 'fit-content',
-                padding: 5
-              }}
             />
           )}
         </Flexbox>
@@ -104,9 +100,18 @@ const Wrapper = styled.section<{
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 54px;
-  border-bottom: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
+  margin-top: 20px;
+  border-bottom: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
 
   ${({ triggered }): CSSObject =>
     triggered
@@ -114,6 +119,7 @@ const Wrapper = styled.section<{
           position: 'fixed',
           top: 0,
           left: 0,
+          marginTop: 0,
           padding: '0 20px',
           zIndex: 2,
           animation: 'slideDown .2s forwards'

@@ -42,7 +42,7 @@ export const HeaderInner = styled.div<{
   justify-content: space-between;
   width: 100%;
   max-width: ${({ theme: { breakpoints } }) => `${breakpoints.xl}px`};
-  gap: 8px;
+  gap: 20px;
 
   ${({ triggered }): CSSObject =>
     triggered

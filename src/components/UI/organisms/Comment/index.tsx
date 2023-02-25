@@ -95,7 +95,7 @@ function Comment({
               ref={buttonRef}
               variant="transparent"
               size="pico"
-              startIcon={<Icon name="MoreMenuOutlined" width={15} height={15} />}
+              startIcon={<Icon name="MoreMenuOutlined" />}
               onClick={handleClickMenu}
               iconOnly
             />

@@ -379,7 +379,7 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
           />
           <Button
             variant="accent"
-            startIcon={<Icon name="SendFilled" width={18} height={18} />}
+            startIcon={<Icon name="SendFilled" />}
             customStyle={{
               margin: '17px 12px 17px 0'
             }}
@@ -441,7 +441,7 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
               />
               <Button
                 variant="accent"
-                startIcon={<Icon name="SendFilled" width={18} height={18} />}
+                startIcon={<Icon name="SendFilled" />}
                 customStyle={{
                   margin: '17px 12px 17px 0'
                 }}

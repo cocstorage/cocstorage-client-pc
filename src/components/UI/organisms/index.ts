@@ -8,7 +8,7 @@ export { default as Reply } from './Reply';
 export { default as ReplyDeleteDialog } from './ReplyDeleteDialog';
 export { default as ReplyMenu } from './ReplyMenu';
 export { default as ReplyForm } from './ReplyForm';
-export { default as StorageBoardGrid } from './StorageBoardGrid';
+export { default as StorageBoardList } from './StorageBoardList';
 export { default as PageProgress } from './PageProgress';
 export { default as SidePopularStorageList } from './SidePopularStorageList';
 export { default as IssueKeywordRank } from './IssueKeywordRank';

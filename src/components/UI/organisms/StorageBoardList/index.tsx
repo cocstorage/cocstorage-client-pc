@@ -6,10 +6,10 @@ import { useRecoilState } from 'recoil';
 
 import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
 
-import { Flexbox, Grid, Pagination } from 'cocstorage-ui';
+import { Flexbox, Pagination } from 'cocstorage-ui';
 
-import { Message, StorageBoardCard } from '@components/UI/molecules';
-import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/StorageBoardCardSkeleton';
+import { Message, NewStorageBoardCard } from '@components/UI/molecules';
+import NewStorageBoardCardSkeleton from '@components/UI/molecules/NewStorageBoardCard/NewStorageBoardCardSkeleton';
 
 import useStorageBoards from '@hooks/query/useStorageBoards';
 
@@ -48,24 +48,24 @@ function StorageBoardGrid() {
 
   return (
     <>
-      <Grid component="section" container columnGap={20} rowGap={20}>
+      <Flexbox direction="vertical">
         {(!isMounted || isLoading) &&
           Array.from({ length: 20 }).map((_, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Grid key={`storage-board-skeleton-${index}`} item xs={1} sm={1} md={1} lg={2}>
-              <StorageBoardCardSkeleton />
-            </Grid>
+            <NewStorageBoardCardSkeleton key={`storage-board-skeleton-${index}`} />
           ))}
         {isMounted &&
           !isLoading &&
           boards.map((storageBoard) => (
-            <Grid key={`storage-board-${storageBoard.id}`} item xs={1} sm={1} md={1} lg={2}>
-              <StorageBoardCard storageBoard={storageBoard} />
-            </Grid>
+            <NewStorageBoardCard
+              key={`storage-board-${storageBoard.id}`}
+              storageBoard={storageBoard}
+            />
           ))}
-      </Grid>
+      </Flexbox>
       <Flexbox
         component="section"
+        justifyContent="center"
         customStyle={{
           margin: '50px auto'
         }}
