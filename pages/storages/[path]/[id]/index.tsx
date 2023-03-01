@@ -12,7 +12,7 @@ import {
   StorageBoardHead
 } from '@components/pages/storageBoard';
 import GridTemplate from '@components/templeates/GridTemplate';
-import { Footer, GoogleAdSense, Header } from '@components/UI/molecules';
+import { Footer, Header } from '@components/UI/molecules';
 import {
   CommentForm,
   CommentList,
@@ -47,16 +47,6 @@ function StorageBoard() {
         <StorageBoardContent />
         <CommentList />
         <CommentForm customStyle={{ margin: '35px 0 20px 0' }} />
-        <GoogleAdSense
-          html={
-            '<ins class="adsbygoogle"\n' +
-            '     style="display:block"\n' +
-            '     data-ad-client="ca-pub-5809905264951057"\n' +
-            '     data-ad-slot="8033291397"\n' +
-            '     data-ad-format="auto"\n' +
-            '     data-full-width-responsive="true"></ins>'
-          }
-        />
         <Flexbox
           gap={20}
           direction="vertical"

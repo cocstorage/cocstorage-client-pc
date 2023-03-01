@@ -8,4 +8,3 @@ export { default as IssueKeywordCard } from './IssueKeywordCard';
 export { default as Message } from './Message';
 export { default as SystemMenu } from './SystemMenu';
 export { default as NoticeCard } from './NoticeCard';
-export { default as GoogleAdSense } from './GoogleAdSense';
