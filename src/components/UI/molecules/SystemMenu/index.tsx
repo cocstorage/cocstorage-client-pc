@@ -67,7 +67,7 @@ function SystemMenu({ open, anchorRef, onClose }: SystemMenuProps) {
         </ListItem>
         <ListItemGroup>
           <Flexbox gap={8} alignment="center">
-            <Icon name="StarOutlined" width={20} color={text[mode].text2} />
+            <Icon name="ThemeOutlined" width={20} color={text[mode].text2} />
             <Typography>테마</Typography>
           </Flexbox>
           <Dropdown fullWidth options={options} value={theme} onChange={handleTheme} />

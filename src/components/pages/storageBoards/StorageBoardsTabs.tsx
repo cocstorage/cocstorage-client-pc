@@ -59,7 +59,13 @@ function StorageBoardsTabs() {
           alignment="center"
           customStyle={{ width: '100%', maxWidth: xl - 40, margin: 'auto' }}
         >
-          <Flexbox gap={30} alignment="center">
+          <Flexbox
+            gap={30}
+            alignment="center"
+            customStyle={{
+              flexGrow: 1
+            }}
+          >
             {triggered && (
               <Avatar
                 width={24}
@@ -69,7 +75,13 @@ function StorageBoardsTabs() {
                 alt="Storage Logo Img"
               />
             )}
-            <Tabs ref={tabsRef} onChange={handleChange} value={params.orderBy || 'latest'}>
+            <Tabs
+              ref={tabsRef}
+              fullWidth
+              onChange={handleChange}
+              value={params.orderBy || 'latest'}
+              hideLine={triggered}
+            >
               <Tab text="최신" value="latest" />
               <Tab text="베스트" value="popular" />
               <Tab text="워스트" value="worst" />
@@ -101,12 +113,19 @@ const Wrapper = styled.section<{
   justify-content: space-between;
   width: 100%;
   margin-top: 20px;
-  border-bottom: 1px solid
-    ${({
-      theme: {
-        palette: { box }
-      }
-    }) => box.stroked.normal};
+
+  ${({
+    theme: {
+      palette: { box }
+    },
+    triggered
+  }): CSSObject =>
+    triggered
+      ? {
+          borderBottom: `1px solid ${box.stroked.normal}`
+        }
+      : {}};
+
   background-color: ${({
     theme: {
       palette: { background }
