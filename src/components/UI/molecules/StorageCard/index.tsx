@@ -1,4 +1,4 @@
-import { HTMLAttributes, memo } from 'react';
+import { HTMLAttributes } from 'react';
 
 import Link from 'next/link';
 
@@ -70,4 +70,4 @@ function StorageCard({
   );
 }
 
-export default memo(StorageCard);
+export default StorageCard;

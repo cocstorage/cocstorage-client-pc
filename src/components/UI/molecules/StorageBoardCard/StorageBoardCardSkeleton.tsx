@@ -16,13 +16,13 @@ function StorageBoardCardSkeleton({ variant }: Pick<StorageBoardCardProps, 'vari
           customStyle={{ height: '100%' }}
         >
           <Flexbox direction="vertical" gap={8}>
-            <Skeleton width="100%" maxWidth={70} height={14} disableAspectRatio />
-            <Skeleton width="100%" maxWidth={200} height={17.5} disableAspectRatio />
+            <Skeleton width="100%" maxWidth={70} height={14} round={6} disableAspectRatio />
+            <Skeleton width="100%" maxWidth={200} height={17.5} round={6} disableAspectRatio />
           </Flexbox>
           <Flexbox gap={12}>
-            <Skeleton width={30} height={18} disableAspectRatio />
-            <Skeleton width={30} height={18} disableAspectRatio />
-            <Skeleton width={30} height={18} disableAspectRatio />
+            <Skeleton width={30} height={18} round={6} disableAspectRatio />
+            <Skeleton width={30} height={18} round={6} disableAspectRatio />
+            <Skeleton width={30} height={18} round={6} disableAspectRatio />
           </Flexbox>
         </Flexbox>
       </Wrapper>
@@ -39,12 +39,12 @@ function StorageBoardCardSkeleton({ variant }: Pick<StorageBoardCardProps, 'vari
           gap={6}
           customStyle={{ height: '100%' }}
         >
-          <Skeleton width="100%" maxWidth={200} height={17.5} disableAspectRatio />
+          <Skeleton width="100%" maxWidth={200} height={17.5} round={6} disableAspectRatio />
           <Flexbox gap={12}>
-            <Skeleton width={30} height={16} disableAspectRatio />
-            <Skeleton width={30} height={16} disableAspectRatio />
-            <Skeleton width={30} height={16} disableAspectRatio />
-            <Skeleton width={50} height={16} disableAspectRatio />
+            <Skeleton width={30} height={16} round={6} disableAspectRatio />
+            <Skeleton width={30} height={16} round={6} disableAspectRatio />
+            <Skeleton width={30} height={16} round={6} disableAspectRatio />
+            <Skeleton width={50} height={16} round={6} disableAspectRatio />
           </Flexbox>
         </Flexbox>
       </Wrapper>
@@ -54,12 +54,12 @@ function StorageBoardCardSkeleton({ variant }: Pick<StorageBoardCardProps, 'vari
   return (
     <Wrapper variant={variant} hasThumbnail>
       <Flexbox direction="vertical" gap={6}>
-        <Skeleton width="100%" maxWidth={200} height={17.5} disableAspectRatio />
+        <Skeleton width="100%" maxWidth={200} height={17.5} round={6} disableAspectRatio />
         <Flexbox gap={12}>
-          <Skeleton width={30} height={14} disableAspectRatio />
-          <Skeleton width={30} height={14} disableAspectRatio />
-          <Skeleton width={30} height={14} disableAspectRatio />
-          <Skeleton width={50} height={14} disableAspectRatio />
+          <Skeleton width={30} height={14} round={6} disableAspectRatio />
+          <Skeleton width={30} height={14} round={6} disableAspectRatio />
+          <Skeleton width={30} height={14} round={6} disableAspectRatio />
+          <Skeleton width={50} height={14} round={6} disableAspectRatio />
         </Flexbox>
       </Flexbox>
       <Skeleton ratio="16:9" round={8} />

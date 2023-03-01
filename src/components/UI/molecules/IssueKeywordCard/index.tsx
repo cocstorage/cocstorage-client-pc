@@ -1,4 +1,4 @@
-import { HTMLAttributes, memo } from 'react';
+import { HTMLAttributes } from 'react';
 
 import { Badge, Icon, Tag, Typography } from 'cocstorage-ui';
 
@@ -40,4 +40,4 @@ function IssueKeywordCard({
   );
 }
 
-export default memo(IssueKeywordCard);
+export default IssueKeywordCard;

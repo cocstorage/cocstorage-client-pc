@@ -1,4 +1,4 @@
-import { HTMLAttributes, memo } from 'react';
+import { HTMLAttributes } from 'react';
 
 import Link from 'next/link';
 
@@ -86,4 +86,4 @@ function NoticeCard({
   );
 }
 
-export default memo(NoticeCard);
+export default NoticeCard;

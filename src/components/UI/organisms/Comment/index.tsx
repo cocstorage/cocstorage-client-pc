@@ -1,4 +1,4 @@
-import { memo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import dayjs from 'dayjs';
 
@@ -159,4 +159,4 @@ function Comment({
   );
 }
 
-export default memo(Comment);
+export default Comment;

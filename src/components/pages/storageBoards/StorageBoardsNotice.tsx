@@ -39,8 +39,8 @@ function StorageBoardsNotice() {
           borderBottom: `1px solid ${box.stroked.normal}`
         }}
       >
-        <Skeleton width={30} height={20} disableAspectRatio />
-        <Skeleton width="100%" maxWidth={300} height={20} round={8} disableAspectRatio />
+        <Skeleton width={30} height={21} disableAspectRatio />
+        <Skeleton width="100%" maxWidth={300} height={17.5} round={8} disableAspectRatio />
       </Flexbox>
     );
   }

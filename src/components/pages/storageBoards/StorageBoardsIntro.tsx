@@ -24,6 +24,7 @@ import {
   Icon,
   IconButton,
   Menu,
+  Skeleton,
   Spotlight,
   Tooltip,
   Typography,
@@ -55,9 +56,8 @@ function StorageBoardsIntro() {
   const resetSubjectState = useResetRecoilState(storageBoardsPostSubjectState);
   const resetEditorContentsState = useResetRecoilState(storageBoardsPostEditorContentsState);
 
-  const { data: { path, name, avatarUrl, description, user, createdAt } = {} } = useStorage(
-    String(query.path)
-  );
+  const { data: { path, name, avatarUrl, description, user, createdAt } = {}, isLoading } =
+    useStorage(String(query.path));
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const postButtonRef = useRef<HTMLButtonElement>(null);
@@ -118,13 +118,21 @@ function StorageBoardsIntro() {
           <Avatar width={40} height={40} round={8} src={avatarUrl || ''} alt="Storage Logo Img" />
           <div>
             <Flexbox alignment="center" gap={6}>
-              <Typography component="h1" variant="h4" fontWeight="bold">
-                {name}
-              </Typography>
+              {isLoading && <Skeleton width={90} height={18.5} round={6} disableAspectRatio />}
+              {!isLoading && (
+                <Typography component="h1" variant="h4" fontWeight="bold">
+                  {name}
+                </Typography>
+              )}
               <IconButton ref={buttonRef} onClick={handleMenuOpen}>
                 <Icon name="InfoOutlined" width={16} height={16} />
               </IconButton>
-              <Menu anchorRef={buttonRef} centered open={open} onClose={handleMenuClose}>
+              <Menu
+                anchorRef={buttonRef}
+                centered
+                open={open && !isLoading}
+                onClose={handleMenuClose}
+              >
                 <Flexbox gap={10} direction="vertical" customStyle={{ padding: 20 }}>
                   <Flexbox>
                     <Typography fontWeight="medium" customStyle={{ width: 54 }}>
@@ -151,9 +159,12 @@ function StorageBoardsIntro() {
                 </Flexbox>
               </Menu>
             </Flexbox>
-            <Typography component="h2" variant="s1" customStyle={{ marginTop: 4 }}>
-              {description}
-            </Typography>
+            {isLoading && <Skeleton width={150} height={15} round={6} disableAspectRatio />}
+            {!isLoading && (
+              <Typography component="h2" variant="s1" customStyle={{ marginTop: 4 }}>
+                {description}
+              </Typography>
+            )}
           </div>
         </Flexbox>
         <Flexbox gap={8} alignment="center">

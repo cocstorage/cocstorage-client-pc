@@ -52,39 +52,39 @@ function StorageBoardsBestList() {
         variant="p1"
         fontWeight="bold"
         customStyle={{
-          marginBottom: 8,
+          marginBottom: 16,
           padding: '8px 0'
         }}
       >
         이 게시판의 베스트
       </Typography>
-      {(!isMounted || isLoading) &&
-        Array.from({ length: 5 }).map((_, index) => (
-          <Flexbox
-            // eslint-disable-next-line react/no-array-index-key
-            key={`storage-boards-best-skeleton-${index}`}
-            alignment="center"
-            gap={8}
-            customStyle={{
-              padding: '8px 0',
-              cursor: 'pointer'
-            }}
-          >
-            <Skeleton
-              width="100%"
-              height={18}
-              round={6}
-              disableAspectRatio
+      <Flexbox direction="vertical" gap={16}>
+        {(!isMounted || isLoading) &&
+          Array.from({ length: 5 }).map((_, index) => (
+            <Flexbox
+              // eslint-disable-next-line react/no-array-index-key
+              key={`storage-boards-best-skeleton-${index}`}
+              alignment="center"
+              gap={8}
               customStyle={{
-                flex: 1
+                cursor: 'pointer'
               }}
-            />
-            <Skeleton width={42} height={16} round={8} disableAspectRatio />
-          </Flexbox>
-        ))}
-      {isMounted && !isLoading && (
-        <Flexbox direction="vertical" gap={16}>
-          {boards.slice(0, 5).map(({ id, subject, thumbUp }) => (
+            >
+              <Skeleton
+                width="100%"
+                height={17.5}
+                round={6}
+                disableAspectRatio
+                customStyle={{
+                  flex: 1
+                }}
+              />
+              <Skeleton width={42} height={17.5} round={6} disableAspectRatio />
+            </Flexbox>
+          ))}
+        {isMounted &&
+          !isLoading &&
+          boards.slice(0, 5).map(({ id, subject, thumbUp }) => (
             <Link key={`storage-boards-best-${id}`} href={`/storages/${path}/${id}`}>
               <Flexbox
                 alignment="center"
@@ -107,8 +107,7 @@ function StorageBoardsBestList() {
               </Flexbox>
             </Link>
           ))}
-        </Flexbox>
-      )}
+      </Flexbox>
       {isMounted && !isLoading && !boards.length && (
         <Message title="아직 게시글이 없네요!" hideButton />
       )}
