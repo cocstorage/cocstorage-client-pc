@@ -65,7 +65,10 @@ function NewStorageBoardCard({
           >
             <Flexbox gap={4}>
               {dayjs().diff(createdAt, 'day') <= 1 && (
-                <Badge severity="success" customStyle={{ verticalAlign: 'bottom' }}>
+                <Badge
+                  severity="success"
+                  customStyle={{ height: 'fit-content', verticalAlign: 'bottom' }}
+                >
                   NEW
                 </Badge>
               )}
@@ -73,6 +76,7 @@ function NewStorageBoardCard({
                 variant="h4"
                 fontWeight="medium"
                 noWrap
+                lineClamp={2}
                 className="subject"
                 customStyle={{
                   flex: 1

@@ -72,14 +72,14 @@ function StorageBoardsBestList() {
             >
               <Skeleton
                 width="100%"
-                height={17.5}
+                height={18}
                 round={6}
                 disableAspectRatio
                 customStyle={{
                   flex: 1
                 }}
               />
-              <Skeleton width={42} height={17.5} round={6} disableAspectRatio />
+              <Skeleton width={42} height={18} round={6} disableAspectRatio />
             </Flexbox>
           ))}
         {isMounted &&

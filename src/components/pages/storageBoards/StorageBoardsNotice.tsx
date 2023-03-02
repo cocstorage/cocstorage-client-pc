@@ -40,7 +40,7 @@ function StorageBoardsNotice() {
         }}
       >
         <Skeleton width={30} height={21} disableAspectRatio />
-        <Skeleton width="100%" maxWidth={300} height={17.5} round={8} disableAspectRatio />
+        <Skeleton width="100%" maxWidth={300} height={18} round={8} disableAspectRatio />
       </Flexbox>
     );
   }
