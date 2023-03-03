@@ -113,7 +113,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
     setLgHidden(newLgHidden);
     if (buttonRef.current) {
       const { clientWidth } = buttonRef.current;
-      setLeft(clientWidth - 199);
+      setLeft(clientWidth - 192);
       setTriangleLeft(219 - clientWidth);
     }
   }, [breakpoints]);
@@ -131,7 +131,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
     setLgHidden(newLgHidden);
     if (buttonRef.current) {
       const { clientWidth } = buttonRef.current;
-      setLeft(clientWidth - 199);
+      setLeft(clientWidth - 192);
       setTriangleLeft(219 - clientWidth);
     }
   }, [breakpoints]);
