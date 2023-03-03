@@ -39,6 +39,7 @@ function StorageBoardsPostFooter() {
     >
       <Button
         variant="transparent"
+        size="big"
         startIcon={<Icon name="ArrowLeftOutlined" />}
         onClick={handleClickBack}
       >
@@ -46,6 +47,7 @@ function StorageBoardsPostFooter() {
       </Button>
       <Button
         variant="accent"
+        size="big"
         startIcon={<Icon name="SendFilled" />}
         onClick={handleClick}
         disabled={!draftId || !subject || !editorContents.length}

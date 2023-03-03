@@ -53,7 +53,7 @@ function StorageBoardsLastVisitHistory() {
       customStyle={{
         position: 'sticky',
         top: 69,
-        width: 160
+        width: 140
       }}
     >
       <Typography variant="h4" fontWeight="bold">

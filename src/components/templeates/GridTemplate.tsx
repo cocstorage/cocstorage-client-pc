@@ -21,7 +21,7 @@ function GridTemplate({
   return (
     <StyledGridTemplate>
       {header}
-      <Grid component="main" container columnGap={20}>
+      <Grid component="main" container columnGap={80}>
         {leftAside && (
           <Grid component="aside" item lgHidden customStyle={{ minWidth: 203 }}>
             {leftAside}
@@ -45,7 +45,7 @@ export const StyledGridTemplate = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 40px;
   max-width: ${({ theme: { breakpoints } }) => breakpoints.xl}px;
   min-width: ${({ theme: { breakpoints } }) => breakpoints.md}px;
   margin: 0 auto;

@@ -48,7 +48,7 @@ function StorageBoardIssueKeywordRank() {
       direction="vertical"
       gap={20}
       customStyle={{
-        padding: '12px 20px 20px',
+        padding: 20,
         backgroundColor: background.fg1,
         borderRadius: 8
       }}
@@ -56,9 +56,11 @@ function StorageBoardIssueKeywordRank() {
       <SideAccordion
         title="지금 막 뜨고 있어요!"
         disableToggle
-        titleCustomStyle={{
-          marginBottom: 4,
-          paddingTop: 8
+        customStyle={{
+          gap: 20
+        }}
+        listCustomStyle={{
+          gap: 16
         }}
       >
         {(!isMounted || isLoading) &&

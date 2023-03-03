@@ -225,7 +225,7 @@ function ReplyDeleteDialog({
             <TextBar
               type="password"
               fullWidth
-              size="big"
+              size="xBig"
               label="비밀번호"
               value={password}
               onChange={handleChange}
@@ -246,7 +246,7 @@ function ReplyDeleteDialog({
         >
           <Button
             variant="text"
-            size="big"
+            size="xBig"
             onClick={onClose}
             customStyle={{
               flexGrow: 1,
@@ -257,7 +257,7 @@ function ReplyDeleteDialog({
           </Button>
           <Button
             variant="accent"
-            size="big"
+            size="xBig"
             onClick={handleClick}
             customStyle={{
               flexGrow: 1,

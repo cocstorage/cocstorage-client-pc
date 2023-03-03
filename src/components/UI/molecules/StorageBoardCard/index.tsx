@@ -111,7 +111,7 @@ function StorageBoardCard({
                   {!hideSymbolismBadge && isPopular && (
                     <Badge
                       severity="info"
-                      startIcon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
+                      icon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
                       iconOnly
                       customStyle={{
                         marginRight: 4,
@@ -122,7 +122,7 @@ function StorageBoardCard({
                   {!hideSymbolismBadge && isWorst && (
                     <Badge
                       severity="error"
-                      startIcon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
+                      icon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
                       iconOnly
                       customStyle={{
                         marginRight: 4,
@@ -195,7 +195,7 @@ function StorageBoardCard({
                 {!hideSymbolismBadge && isPopular && (
                   <Badge
                     severity="info"
-                    startIcon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
+                    icon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
                     iconOnly
                     customStyle={{
                       marginRight: 4,
@@ -206,7 +206,7 @@ function StorageBoardCard({
                 {!hideSymbolismBadge && isWorst && (
                   <Badge
                     severity="error"
-                    startIcon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
+                    icon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
                     iconOnly
                     customStyle={{
                       marginRight: 4,
@@ -274,14 +274,14 @@ function StorageBoardCard({
               {!hideSymbolismBadge && isPopular && (
                 <Badge
                   severity="info"
-                  startIcon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
+                  icon={<Icon name="ThumbsUpFilled" width={12} height={12} />}
                   iconOnly
                 />
               )}
               {!hideSymbolismBadge && isWorst && (
                 <Badge
                   severity="error"
-                  startIcon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
+                  icon={<Icon name="ThumbsDownFilled" width={12} height={12} />}
                   iconOnly
                 />
               )}

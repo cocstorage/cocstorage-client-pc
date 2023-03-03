@@ -185,7 +185,13 @@ function StorageBoardsPostDialog() {
         <Typography variant="h3" fontWeight="bold">
           닉네임
         </Typography>
-        <TextBar onChange={handleChange} value={myNickname} fullWidth placeholder="닉네임" />
+        <TextBar
+          size="xBig"
+          onChange={handleChange}
+          value={myNickname}
+          fullWidth
+          placeholder="닉네임"
+        />
         {errorMessage.nickname.error && (
           <Typography
             dangerouslySetInnerHTML={{
@@ -215,6 +221,7 @@ function StorageBoardsPostDialog() {
         >
           <TextBar
             type="password"
+            size="xBig"
             onChange={handleChange}
             value={myPassword}
             fullWidth
@@ -238,11 +245,12 @@ function StorageBoardsPostDialog() {
           marginTop: 20
         }}
       >
-        <Button onClick={handleClose} disabled={isLoading}>
+        <Button size="big" onClick={handleClose} disabled={isLoading}>
           취소
         </Button>
         <Button
           variant="accent"
+          size="big"
           startIcon={<Icon name="SendFilled" />}
           onClick={handleClick}
           disabled={isLoading}

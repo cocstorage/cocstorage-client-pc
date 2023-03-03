@@ -43,7 +43,7 @@ function StorageBoardsBestList() {
   return (
     <Box
       customStyle={{
-        padding: '12px 20px 20px',
+        padding: 20,
         backgroundColor: background.fg1,
         borderRadius: 8
       }}
@@ -52,8 +52,7 @@ function StorageBoardsBestList() {
         variant="p1"
         fontWeight="bold"
         customStyle={{
-          marginBottom: 16,
-          padding: '8px 0'
+          marginBottom: 20
         }}
       >
         이 게시판의 베스트
@@ -67,6 +66,7 @@ function StorageBoardsBestList() {
               alignment="center"
               gap={8}
               customStyle={{
+                padding: '8px 0',
                 cursor: 'pointer'
               }}
             >

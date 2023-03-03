@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { GetServerSidePropsContext } from 'next';
 
 import { QueryClient, dehydrate } from '@tanstack/react-query';
@@ -26,14 +24,6 @@ import { fetchStorage } from '@api/v1/storages';
 import queryKeys from '@constants/queryKeys';
 
 function StorageBoard() {
-  useEffect(() => {
-    return () => {
-      // 구글 애드센스 영향
-      const rootElement = document.getElementById('__next');
-      if (rootElement) rootElement.removeAttribute('style');
-    };
-  }, []);
-
   return (
     <>
       <StorageBoardHead />

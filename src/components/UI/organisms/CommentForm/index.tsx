@@ -339,7 +339,6 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
           <form>
             <Flexbox gap={8} direction="vertical" justifyContent="space-between">
               <TextBar
-                size="small"
                 value={myNickname}
                 placeholder="닉네임"
                 onChange={handleChange}
@@ -357,7 +356,6 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
               >
                 <TextBar
                   type="password"
-                  size="small"
                   placeholder="비밀번호"
                   value={myPassword}
                   onChange={handleChange}
@@ -379,6 +377,7 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
           />
           <Button
             variant="accent"
+            size="big"
             startIcon={<Icon name="SendFilled" />}
             customStyle={{
               margin: '17px 12px 17px 0'
@@ -408,7 +407,6 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
               <form>
                 <Flexbox gap={8} direction="vertical" justifyContent="space-between">
                   <TextBar
-                    size="small"
                     value={myNickname}
                     placeholder="닉네임"
                     onChange={handleChange}
@@ -420,7 +418,6 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
                   />
                   <TextBar
                     type="password"
-                    size="small"
                     placeholder="비밀번호"
                     value={myPassword}
                     onChange={handleChange}
@@ -441,6 +438,7 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
               />
               <Button
                 variant="accent"
+                size="big"
                 startIcon={<Icon name="SendFilled" />}
                 customStyle={{
                   margin: '17px 12px 17px 0'
@@ -463,15 +461,24 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
 const CommentBar = styled.div`
   flex-grow: 1;
   display: flex;
-  max-height: 80px;
-  border: 1px solid ${({ theme: { palette } }) => palette.box.stroked.normal};
-  background-color: ${({ theme: { palette } }) => palette.background.bg};
+  height: 84px;
+  border: 1px solid
+    ${({
+      theme: {
+        palette: { box }
+      }
+    }) => box.stroked.normal};
+  background-color: ${({
+    theme: {
+      palette: { background }
+    }
+  }) => background.bg};
   border-radius: 10px;
   overflow: hidden;
 `;
 
 const CommentTextArea = styled.textarea`
-  flex-grow: 1;
+  flex: 1;
   padding: 12px;
   border: none;
   resize: none;

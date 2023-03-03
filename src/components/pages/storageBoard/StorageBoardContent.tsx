@@ -372,7 +372,6 @@ function StorageBoardContent() {
       )}
       <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
         <Button
-          size="small"
           startIcon={<Icon name="ThumbsUpFilled" color={primary.main} />}
           customStyle={{
             borderTopRightRadius: 0,
@@ -386,7 +385,6 @@ function StorageBoardContent() {
           {thumbUp.toLocaleString()}
         </Button>
         <Button
-          size="small"
           startIcon={<Icon name="ThumbsDownOutlined" color={text[mode].text1} />}
           customStyle={{
             borderTopLeftRadius: 0,

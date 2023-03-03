@@ -35,7 +35,16 @@ function IssueKeywordRank({ customStyle }: IssueKeywordRankProps) {
 
   return (
     <Flexbox direction="vertical" gap={20} customStyle={customStyle}>
-      <SideAccordion title="지금 막 뜨고 있어요!" disableToggle>
+      <SideAccordion
+        title="지금 막 뜨고 있어요!"
+        disableToggle
+        customStyle={{
+          gap: 20
+        }}
+        listCustomStyle={{
+          gap: 16
+        }}
+      >
         {isLoading &&
           Array.from({ length: 10 }).map((_, index) => (
             <IssueKeywordCardSkeleton

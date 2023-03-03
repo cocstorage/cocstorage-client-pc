@@ -25,7 +25,7 @@ function Footer() {
 
   return (
     <StyledFooter>
-      <Typography variant="s1" color={text[mode].text2}>
+      <Typography variant="s1" noWrap color={text[mode].text2}>
         ⓒ 개념글 저장소 All Rights Reserved.
       </Typography>
       <Links>

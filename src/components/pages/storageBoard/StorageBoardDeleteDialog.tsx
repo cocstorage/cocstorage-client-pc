@@ -173,7 +173,7 @@ function StorageBoardDeleteDialog() {
             <TextBar
               type="password"
               fullWidth
-              size="big"
+              size="xBig"
               label="비밀번호"
               value={password}
               onChange={handleChange}
@@ -194,7 +194,7 @@ function StorageBoardDeleteDialog() {
         >
           <Button
             variant="text"
-            size="big"
+            size="xBig"
             onClick={handleClose}
             customStyle={{
               flexGrow: 1,
@@ -205,7 +205,7 @@ function StorageBoardDeleteDialog() {
           </Button>
           <Button
             variant="accent"
-            size="big"
+            size="xBig"
             onClick={handleClick}
             disabled={!password || isLoading}
             customStyle={{

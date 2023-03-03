@@ -1,10 +1,10 @@
 import { HTMLAttributes } from 'react';
 
-import { Badge, Icon, Tag, Typography } from 'cocstorage-ui';
+import { Badge, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
 
 import { IssueKeyword } from '@dto/issue-keywords';
 
-import { Keyword, StyledIssueKeywordCard } from './IssueKeywordCard.styles';
+import { StyledIssueKeywordCard } from './IssueKeywordCard.styles';
 
 interface IssueKeywordCardProps extends HTMLAttributes<HTMLDivElement> {
   issueKeyword: IssueKeyword;
@@ -16,6 +16,11 @@ function IssueKeywordCard({
   isTopTier = false,
   ...props
 }: IssueKeywordCardProps) {
+  const {
+    theme: {
+      typography: { s1 }
+    }
+  } = useTheme();
   return (
     <StyledIssueKeywordCard {...props}>
       <Tag
@@ -23,19 +28,27 @@ function IssueKeywordCard({
         customStyle={{
           display: 'flex',
           justifyContent: 'center',
-          width: 24,
-          height: 24,
-          lineHeight: '24px'
+          width: 20,
+          height: 18,
+          borderRadius: 4,
+          fontSize: s1.size,
+          lineHeight: s1.lineHeight.default
         }}
       >
         {number}
       </Tag>
-      <Keyword>
-        <Typography fontWeight="bold">{keyword}</Typography>
-      </Keyword>
+      <Typography
+        fontWeight="medium"
+        customStyle={{
+          flex: 1,
+          textAlign: 'left'
+        }}
+      >
+        {keyword}
+      </Typography>
       {isNew && <Badge severity="warning">NEW</Badge>}
-      {isUp && <Badge severity="success" startIcon={<Icon name="ArrowDropUpSpecify_12_12" />} />}
-      {isDown && <Badge severity="error" startIcon={<Icon name="ArrowDropDownSpecify_12_12" />} />}
+      {isUp && <Badge severity="success" icon={<Icon name="ArrowDropUpFilled" />} iconOnly />}
+      {isDown && <Badge severity="error" icon={<Icon name="ArrowDropDownFilled" />} iconOnly />}
     </StyledIssueKeywordCard>
   );
 }

@@ -169,6 +169,7 @@ function StorageBoardEditAuthDialog() {
         >
           <TextBar
             type="password"
+            size="xBig"
             label="비밀번호"
             fullWidth
             value={password}
@@ -192,7 +193,7 @@ function StorageBoardEditAuthDialog() {
         >
           <Button
             variant="text"
-            size="big"
+            size="xBig"
             onClick={handleClose}
             customStyle={{
               flexGrow: 1,
@@ -203,7 +204,7 @@ function StorageBoardEditAuthDialog() {
           </Button>
           <Button
             variant="accent"
-            size="big"
+            size="xBig"
             customStyle={{
               flexGrow: 1,
               justifyContent: 'center'

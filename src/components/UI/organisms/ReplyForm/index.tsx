@@ -161,7 +161,6 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
         <form>
           <Flexbox gap={8} direction="vertical" justifyContent="space-between">
             <TextBar
-              size="small"
               value={myNickname}
               placeholder="닉네임"
               onChange={handleChange}
@@ -180,7 +179,6 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
             >
               <TextBar
                 type="password"
-                size="small"
                 placeholder="비밀번호"
                 value={myPassword}
                 onChange={handleChange}
@@ -203,6 +201,7 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
         />
         <Button
           variant="accent"
+          size="big"
           startIcon={<Icon name="SendFilled" />}
           customStyle={{
             margin: '17px 12px 17px 0'
@@ -222,7 +221,7 @@ function ReplyForm({ type = 'storageBoard', commentId }: ReplyFormProps) {
 const ReplyBar = styled.div`
   flex-grow: 1;
   display: flex;
-  max-height: 80px;
+  height: 84px;
   border: 1px solid
     ${({
       theme: {
@@ -239,7 +238,7 @@ const ReplyBar = styled.div`
 `;
 
 const ReplyTextArea = styled.textarea`
-  flex-grow: 1;
+  flex: 1;
   padding: 12px;
   border: none;
   resize: none;

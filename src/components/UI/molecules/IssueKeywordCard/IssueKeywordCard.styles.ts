@@ -11,8 +11,3 @@ export const StyledIssueKeywordCard = styled.div`
     cursor: pointer !important;
   }
 `;
-
-export const Keyword = styled.div`
-  flex: 1;
-  text-align: left;
-`;
