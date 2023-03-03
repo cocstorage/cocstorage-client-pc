@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -8,12 +9,14 @@ import RelativeTime from 'dayjs/plugin/relativeTime';
 
 import { RecoilRoot } from 'recoil';
 
-import { FeedbackDialog, PageProgress } from '@components/UI/organisms';
 import { ErrorBoundary, GoogleScript, ThemeRoot } from '@components/utils';
-
 import 'dayjs/locale/ko';
 import '@styles/base.css';
+
 import HistoryProvider from '@provider/HistoryProvider';
+
+const FeedbackDialog = dynamic(() => import('@components/UI/organisms/FeedbackDialog'));
+const PageProgress = dynamic(() => import('@components/UI/organisms/PageProgress'));
 
 dayjs.locale('ko');
 dayjs.extend(RelativeTime);

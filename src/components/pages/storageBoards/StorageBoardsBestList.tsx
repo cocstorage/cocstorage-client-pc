@@ -65,10 +65,6 @@ function StorageBoardsBestList() {
               key={`storage-boards-best-skeleton-${index}`}
               alignment="center"
               gap={8}
-              customStyle={{
-                padding: '8px 0',
-                cursor: 'pointer'
-              }}
             >
               <Skeleton
                 width="100%"
