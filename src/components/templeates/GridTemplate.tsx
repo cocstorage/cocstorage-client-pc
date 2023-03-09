@@ -51,6 +51,7 @@ export const StyledGridTemplate = styled.div`
   margin: 0 auto;
   padding: 0 20px 20px;
   height: 100%;
+  overflow-x: hidden;
 `;
 
 export default GridTemplate;
