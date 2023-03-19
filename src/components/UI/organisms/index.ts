@@ -12,3 +12,5 @@ export { default as StorageBoardList } from './StorageBoardList';
 export { default as PageProgress } from './PageProgress';
 export { default as SidePopularStorageList } from './SidePopularStorageList';
 export { default as IssueKeywordRank } from './IssueKeywordRank';
+export { default as LastVisitStorageHistory } from './LastVisitStorageHistory';
+export { default as BestStorageBoardList } from './BestStorageBoardList';

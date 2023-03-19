@@ -15,18 +15,18 @@
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@tanstack/react-query": "^4.24.4",
-    "@tanstack/react-query-devtools": "^4.24.4",
-    "axios": "^1.3.2",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@tanstack/react-query": "^4.27.0",
+    "@tanstack/react-query-devtools": "^4.27.0",
+    "axios": "^1.3.4",
     "cocstorage-ui": "^0.1.54",
     "cocstorage-ui-editor": "^0.1.11",
     "dayjs": "^1.11.7",
-    "next": "^13.1.6",
+    "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "recoil": "^0.7.6"
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

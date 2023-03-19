@@ -6,13 +6,17 @@ import { useRecoilState } from 'recoil';
 
 import { storageBoardsLastVisitHistoryState } from '@recoil/pages/storageBoards/atoms';
 
-import { Flexbox, Typography } from 'cocstorage-ui';
+import { CustomStyle, Flexbox, Typography } from 'cocstorage-ui';
 
 import StorageCard from '@components/UI/molecules/StorageCard';
 
 import useStorage from '@hooks/query/useStorage';
 
-function StorageBoardsLastVisitHistory() {
+interface LastVisitStorageHistoryProps {
+  customStyle?: CustomStyle;
+}
+
+function LastVisitStorageHistory({ customStyle }: LastVisitStorageHistoryProps) {
   const router = useRouter();
   const { path } = router.query;
 
@@ -47,15 +51,7 @@ function StorageBoardsLastVisitHistory() {
   }, []);
 
   return (
-    <Flexbox
-      direction="vertical"
-      gap={20}
-      customStyle={{
-        position: 'sticky',
-        top: 69,
-        width: 140
-      }}
-    >
+    <Flexbox direction="vertical" gap={20} css={customStyle}>
       <Typography variant="h4" fontWeight="bold">
         최근 방문
       </Typography>
@@ -76,4 +72,4 @@ function StorageBoardsLastVisitHistory() {
   );
 }
 
-export default StorageBoardsLastVisitHistory;
+export default LastVisitStorageHistory;

@@ -38,7 +38,7 @@ function StorageBoardsTabs() {
     fetchStorage(String(path))
   );
 
-  const handleChange = (value: number | string) => {
+  const handleChange = (value: number | string) =>
     setParams((prevParams) => ({
       path: prevParams.path,
       params: {
@@ -47,7 +47,6 @@ function StorageBoardsTabs() {
         orderBy: String(value)
       }
     }));
-  };
 
   const handleClick = () => router.push(`/storages/${path}/post`);
 
@@ -99,7 +98,11 @@ function StorageBoardsTabs() {
         </Flexbox>
       </Wrapper>
       {triggered && (
-        <Box customStyle={{ height: tabsRef.current ? tabsRef.current?.clientHeight : 40 }} />
+        <Box
+          customStyle={{
+            minHeight: tabsRef.current ? tabsRef.current?.clientHeight : 41
+          }}
+        />
       )}
     </>
   );

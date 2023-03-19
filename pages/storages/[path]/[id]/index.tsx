@@ -12,9 +12,11 @@ import {
 import GridTemplate from '@components/templeates/GridTemplate';
 import { Footer, Header } from '@components/UI/molecules';
 import {
+  BestStorageBoardList,
   CommentForm,
   CommentList,
-  SidePopularStorageList,
+  IssueKeywordRank,
+  LastVisitStorageHistory,
   StorageBoardList
 } from '@components/UI/organisms';
 
@@ -30,8 +32,24 @@ function StorageBoard() {
       <GridTemplate
         header={<Header scrollFixedTrigger />}
         footer={<Footer />}
+        leftAside={
+          <LastVisitStorageHistory
+            customStyle={{
+              position: 'sticky',
+              width: 140,
+              top: 99
+            }}
+          />
+        }
         rightAside={
-          <SidePopularStorageList customStyle={{ position: 'sticky', top: 89, width: 183 }} />
+          <Flexbox
+            direction="vertical"
+            gap={25}
+            customStyle={{ position: 'sticky', width: 280, top: 99 }}
+          >
+            <BestStorageBoardList />
+            <IssueKeywordRank compact={false} />
+          </Flexbox>
         }
       >
         <StorageBoardContent />

@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useState } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 interface UseScrollTriggerProps<T> {
   trigger?: boolean;
@@ -13,6 +13,8 @@ export default function useScrollTrigger<T extends HTMLElement>({
 } {
   const [triggered, setTriggered] = useState(false);
   const [fixedTop, setFixedTop] = useState(0);
+
+  const initRef = useRef(false);
 
   const handleScroll = useCallback(() => {
     if (!ref || !ref.current) return;
@@ -44,15 +46,10 @@ export default function useScrollTrigger<T extends HTMLElement>({
   }, [trigger, handleScroll]);
 
   useEffect(() => {
-    if (trigger) {
-      window.addEventListener('load', handleScroll);
+    if (trigger && !initRef.current) {
+      initRef.current = true;
+      handleScroll();
     }
-
-    return () => {
-      if (trigger) {
-        window.removeEventListener('load', handleScroll);
-      }
-    };
   }, [trigger, handleScroll]);
 
   return {

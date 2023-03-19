@@ -7,17 +7,19 @@ import { storageBoardsParamsDefault } from '@recoil/pages/storageBoards/atoms';
 import { Flexbox } from 'cocstorage-ui';
 
 import {
-  StorageBoardsBestList,
   StorageBoardsHead,
   StorageBoardsIntro,
-  StorageBoardsIssueKeywordRank,
-  StorageBoardsLastVisitHistory,
   StorageBoardsNotice,
   StorageBoardsTabs
 } from '@components/pages/storageBoards';
 import GridTemplate from '@components/templeates/GridTemplate';
 import { Footer, Header } from '@components/UI/molecules';
-import StorageBoardList from '@components/UI/organisms/StorageBoardList';
+import {
+  BestStorageBoardList,
+  IssueKeywordRank,
+  LastVisitStorageHistory,
+  StorageBoardList
+} from '@components/UI/organisms';
 
 import { fetchStorageBoards } from '@api/v1/storage-boards';
 import { fetchStorage } from '@api/v1/storages';
@@ -30,15 +32,23 @@ function StorageBoards() {
       <StorageBoardsHead />
       <GridTemplate
         header={<Header scrollFixedTrigger={false} />}
-        leftAside={<StorageBoardsLastVisitHistory />}
+        leftAside={
+          <LastVisitStorageHistory
+            customStyle={{
+              position: 'sticky',
+              width: 140,
+              top: 72
+            }}
+          />
+        }
         rightAside={
           <Flexbox
             direction="vertical"
             gap={25}
-            customStyle={{ position: 'sticky', width: 280, top: 69 }}
+            customStyle={{ position: 'sticky', width: 280, top: 72 }}
           >
-            <StorageBoardsBestList />
-            <StorageBoardsIssueKeywordRank />
+            <BestStorageBoardList />
+            <IssueKeywordRank compact={false} />
           </Flexbox>
         }
         footer={<Footer />}
