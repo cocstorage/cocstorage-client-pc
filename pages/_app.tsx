@@ -62,17 +62,17 @@ function App({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedSta
       <ErrorBoundary>
         <GoogleScript />
         <QueryClientProvider client={queryClient}>
-          <RecoilRoot>
-            <ThemeRoot>
-              <Hydrate state={pageProps.dehydratedState}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <RecoilRoot>
+              <ThemeRoot>
                 <PageProgress />
                 <HistoryProvider>
                   <Component {...pageProps} />
                 </HistoryProvider>
                 <FeedbackDialog />
-              </Hydrate>
-            </ThemeRoot>
-          </RecoilRoot>
+              </ThemeRoot>
+            </RecoilRoot>
+          </Hydrate>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ErrorBoundary>
