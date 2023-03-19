@@ -343,7 +343,7 @@ function StorageBoardContent() {
         }}
       />
       {sourceCode && sourceCode !== 'fahumor' && (
-        <Flexbox gap={8} customStyle={{ marginBottom: 20, justifyContent: 'flex-end' }}>
+        <Flexbox gap={8} justifyContent="flex-end" customStyle={{ marginBottom: 20 }}>
           <Tag
             startIcon={<Icon name="LogoutOutlined" />}
             onClick={handleClickSource}
@@ -355,7 +355,9 @@ function StorageBoardContent() {
         </Flexbox>
       )}
       {sourceCode === 'fahumor' && (
-        <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
+        <Flexbox gap={8} justifyContent="flex-end" customStyle={{ marginBottom: 20 }}>
+          <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
+        </Flexbox>
       )}
       {sourceCode && (
         <Content

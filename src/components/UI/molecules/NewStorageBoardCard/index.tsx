@@ -66,7 +66,7 @@ function NewStorageBoardCard({
             {/* TODO UI 라이브러리 반영 */}
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
-            <Flexbox gap={4} alignment="baseline">
+            <Flexbox gap={4} alignment="center">
               {dayjs().diff(createdAt, 'day') <= 1 && (
                 <Badge
                   severity="success"
