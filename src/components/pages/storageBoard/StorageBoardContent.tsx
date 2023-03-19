@@ -342,7 +342,7 @@ function StorageBoardContent() {
           backgroundColor: box.stroked.normal
         }}
       />
-      {sourceCode && (
+      {sourceCode && sourceCode !== 'fahumor' && (
         <Flexbox gap={8} customStyle={{ marginBottom: 20, justifyContent: 'flex-end' }}>
           <Tag
             startIcon={<Icon name="LogoutOutlined" />}
@@ -353,6 +353,9 @@ function StorageBoardContent() {
           </Tag>
           <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
         </Flexbox>
+      )}
+      {sourceCode === 'fahumor' && (
+        <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
       )}
       {sourceCode && (
         <Content
