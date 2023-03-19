@@ -13,11 +13,15 @@ import NewStorageBoardCardSkeleton from '@components/UI/molecules/NewStorageBoar
 
 import useStorageBoards from '@hooks/query/useStorageBoards';
 
-function StorageBoardGrid() {
+interface StorageBoardListProps {
+  ssr?: boolean;
+}
+
+function StorageBoardList({ ssr = true }: StorageBoardListProps) {
   const router = useRouter();
   const { path } = router.query;
 
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(ssr);
 
   const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(String(path)));
 
@@ -81,4 +85,4 @@ function StorageBoardGrid() {
   );
 }
 
-export default StorageBoardGrid;
+export default StorageBoardList;
