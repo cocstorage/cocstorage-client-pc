@@ -9,6 +9,7 @@ import { storageBoardsLastVisitHistoryState } from '@recoil/pages/storageBoards/
 import { CustomStyle, Flexbox, Typography } from 'cocstorage-ui';
 
 import StorageCard from '@components/UI/molecules/StorageCard';
+import StorageCardSkeleton from '@components/UI/molecules/StorageCard/StorageCardSkeleton';
 
 import useStorage from '@hooks/query/useStorage';
 
@@ -56,6 +57,14 @@ function LastVisitStorageHistory({ customStyle }: LastVisitStorageHistoryProps) 
         최근 방문
       </Typography>
       <Flexbox direction="vertical" gap={16}>
+        {!isMounted &&
+          Array.from({ length: 5 }).map((_, index) => (
+            <StorageCardSkeleton
+              // eslint-disable-next-line react/no-array-index-key
+              key={`storage-boards-last-visit-history-skeleton-${path}-${index}`}
+              size="small"
+            />
+          ))}
         {isMounted &&
           lastVisitHistory.map(({ src, path: historyPath, name: historyName }, index) => (
             <StorageCard
