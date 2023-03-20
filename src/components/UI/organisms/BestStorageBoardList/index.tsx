@@ -26,7 +26,7 @@ function BestStorageBoardList() {
 
   const { data: { boards = [] } = {}, isLoading } = useStorageBoards(
     String(path),
-    { ...params, orderBy: 'popular' },
+    { ...params, page: 1, orderBy: 'popular' },
     {
       keepPreviousData: true
     }
