@@ -1,19 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
-import localFont from 'next/font/local';
-
 import styled from '@emotion/styled';
-
-const font = localFont({
-  src: [
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '900' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '700' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '500' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '400' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '300' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '100' }
-  ]
-});
 
 interface GeneralTemplateProps {
   header?: ReactElement;
@@ -22,7 +9,7 @@ interface GeneralTemplateProps {
 
 function GeneralTemplate({ children, header, footer }: PropsWithChildren<GeneralTemplateProps>) {
   return (
-    <StyledGeneralTemplate className={font.className}>
+    <StyledGeneralTemplate>
       {header}
       <Content>{children}</Content>
       {footer}
