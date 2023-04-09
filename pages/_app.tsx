@@ -11,7 +11,6 @@ import { RecoilRoot } from 'recoil';
 
 import { ErrorBoundary, GoogleScript, ThemeRoot } from '@components/utils';
 import 'dayjs/locale/ko';
-import '@styles/base.css';
 
 import HistoryProvider from '@provider/HistoryProvider';
 
