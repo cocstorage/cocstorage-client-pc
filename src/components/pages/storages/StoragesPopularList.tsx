@@ -1,4 +1,4 @@
-import { Flexbox, Typography } from 'cocstorage-ui';
+import { Flexbox, Typography } from '@cocstorage/ui';
 
 import { StorageCard } from '@components/UI/molecules';
 

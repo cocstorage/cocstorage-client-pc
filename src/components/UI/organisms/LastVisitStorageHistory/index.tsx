@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { CustomStyle, Flexbox, Typography } from '@cocstorage/ui';
+
 import { useRecoilState } from 'recoil';
 
 import { storageBoardsLastVisitHistoryState } from '@recoil/pages/storageBoards/atoms';
-
-import { CustomStyle, Flexbox, Typography } from 'cocstorage-ui';
 
 import StorageCard from '@components/UI/molecules/StorageCard';
 import StorageCardSkeleton from '@components/UI/molecules/StorageCard/StorageCardSkeleton';

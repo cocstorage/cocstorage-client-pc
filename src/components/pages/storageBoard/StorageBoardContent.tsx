@@ -2,8 +2,21 @@ import { MouseEvent, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import {
+  Avatar,
+  Box,
+  Button,
+  Flexbox,
+  Menu,
+  Spotlight,
+  Tag,
+  Tooltip,
+  Typography,
+  useTheme
+} from '@cocstorage/ui';
+import { convertToReactElement } from '@cocstorage/ui-editor';
+import Icon from '@cocstorage/ui-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { convertToReactElement } from 'cocstorage-ui-editor';
 import dayjs from 'dayjs';
 
 import styled, { CSSObject } from '@emotion/styled';
@@ -23,20 +36,6 @@ import {
   storageBoardEditPasswordState,
   storageBoardEditSubjectState
 } from '@recoil/pages/storageBoardEdit/atoms';
-
-import {
-  Avatar,
-  Box,
-  Button,
-  Flexbox,
-  Icon,
-  Menu,
-  Spotlight,
-  Tag,
-  Tooltip,
-  Typography,
-  useTheme
-} from 'cocstorage-ui';
 
 import type { AxiosError } from 'axios';
 
@@ -249,7 +248,6 @@ function StorageBoardContent() {
               src={(user || {}).avatarUrl || ''}
               alt="User Avatar Img"
               fallback={{
-                iconName: 'UserFilled',
                 width: 12,
                 height: 12
               }}

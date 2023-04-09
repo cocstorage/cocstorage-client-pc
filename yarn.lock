@@ -204,6 +204,21 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
+"@cocstorage/ui-editor@^0.1.13":
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/@cocstorage/ui-editor/-/ui-editor-0.1.13.tgz#ef58cb4138925259fa6506cc96c98f399049c362"
+  integrity sha512-P4THP6091UfSDSrEndvsYDONyzO71v3HlrpLS7NaNl4RA6io6EBFfSzzPEhkZgv1kyIQNHd4kyVkrXDPeJHbtg==
+
+"@cocstorage/ui-icons@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@cocstorage/ui-icons/-/ui-icons-0.0.2.tgz#40cc6b51d2575aacba4a9eeac933988090cf5b11"
+  integrity sha512-BHYrb2qWMAy35x5q1W9FsSVwYNPtIR+0liAkFHBd2vyVoPjO+c2VVBhha904dDNcmW30TpMAmj8Zcg5/l58J9Q==
+
+"@cocstorage/ui@^0.1.56":
+  version "0.1.56"
+  resolved "https://registry.yarnpkg.com/@cocstorage/ui/-/ui-0.1.56.tgz#089402eac37d7cd18ce94343de0f844c49a2b53c"
+  integrity sha512-qn7YjILGOj3KHNvz5LmTRcLOGHAhBBLaI7w6q0TWW8toRtm27vuVN9IwC6AmrSXnicoSPHr+h968z+5X6N1W7A==
+
 "@emotion/babel-plugin@^11.10.6":
   version "11.10.6"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.10.6.tgz#a68ee4b019d661d6f37dec4b8903255766925ead"
@@ -859,16 +874,6 @@ client-only@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
-
-cocstorage-ui-editor@^0.1.11:
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/cocstorage-ui-editor/-/cocstorage-ui-editor-0.1.11.tgz#95b37e9c8e0d9df3ea4dd2673923ca407894799a"
-  integrity sha512-6QwwgYotFzSbJ53xWjkr05GpFCwvVR3gPp78IOPx64cSDF4he0uXyDoYfnbY+0WKGdZ6SyKaIA9Q/a0C3wyXEw==
-
-cocstorage-ui@^0.1.54:
-  version "0.1.54"
-  resolved "https://registry.yarnpkg.com/cocstorage-ui/-/cocstorage-ui-0.1.54.tgz#a7182f3c436f8f91ef6b9af3009043cec780e9e2"
-  integrity sha512-lgNEFWe+NvRZM1UffJ0+s+1+6xqqjvKzJ1LpK3SNOeTOhMCq4zgCKU8VoKMlv32EZ5G7EDRvTsI3wBIKd+HPHQ==
 
 color-convert@^1.9.0:
   version "1.9.3"

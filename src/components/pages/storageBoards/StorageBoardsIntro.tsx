@@ -2,6 +2,19 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import {
+  Avatar,
+  Button,
+  Flexbox,
+  IconButton,
+  Menu,
+  Skeleton,
+  Spotlight,
+  Tooltip,
+  Typography,
+  useTheme
+} from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import dayjs from 'dayjs';
 
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
@@ -16,20 +29,6 @@ import {
   storageBoardsPostEditorContentsState,
   storageBoardsPostSubjectState
 } from '@recoil/pages/storageBoardsPost/atoms';
-
-import {
-  Avatar,
-  Button,
-  Flexbox,
-  Icon,
-  IconButton,
-  Menu,
-  Skeleton,
-  Spotlight,
-  Tooltip,
-  Typography,
-  useTheme
-} from 'cocstorage-ui';
 
 import useStorage from '@hooks/query/useStorage';
 

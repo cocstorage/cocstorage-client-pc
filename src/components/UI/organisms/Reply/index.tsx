@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 
+import { Avatar, Button, Flexbox, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import dayjs from 'dayjs';
-
-import { Avatar, Button, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import ReplyMenu from '@components/UI/organisms/ReplyMenu';
 
@@ -56,7 +56,6 @@ function Reply({
         src={(user || {}).avatarUrl || ''}
         alt="User Avatar Img"
         fallback={{
-          iconName: 'UserFilled',
           width: 15,
           height: 15
         }}

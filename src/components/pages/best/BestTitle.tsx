@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { Flexbox, Icon, IconButton, Typography } from 'cocstorage-ui';
+import { Flexbox, IconButton, Typography } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 
 function BestTitle() {
   const router = useRouter();

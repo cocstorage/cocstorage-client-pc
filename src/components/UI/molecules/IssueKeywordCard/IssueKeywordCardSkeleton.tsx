@@ -1,4 +1,4 @@
-import { Box, Flexbox, Skeleton } from 'cocstorage-ui';
+import { Box, Flexbox, Skeleton } from '@cocstorage/ui';
 
 function IssueKeywordCardSkeleton() {
   return (

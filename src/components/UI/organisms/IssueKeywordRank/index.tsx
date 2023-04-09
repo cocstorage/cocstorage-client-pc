@@ -1,10 +1,9 @@
+import { CustomStyle, Flexbox, useTheme } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import { useSetRecoilState } from 'recoil';
 
 import { commonFeedbackDialogState } from '@recoil/common/atoms';
-
-import { CustomStyle, Flexbox, useTheme } from 'cocstorage-ui';
 
 import { Footer, IssueKeywordCard, SideAccordion } from '@components/UI/molecules';
 import IssueKeywordCardSkeleton from '@components/UI/molecules/IssueKeywordCard/IssueKeywordCardSkeleton';

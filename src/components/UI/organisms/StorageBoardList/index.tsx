@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { Flexbox, Pagination } from '@cocstorage/ui';
+
 import { useRecoilState } from 'recoil';
 
 import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
-
-import { Flexbox, Pagination } from 'cocstorage-ui';
 
 import { Message, NewStorageBoardCard } from '@components/UI/molecules';
 import NewStorageBoardCardSkeleton from '@components/UI/molecules/NewStorageBoardCard/NewStorageBoardCardSkeleton';

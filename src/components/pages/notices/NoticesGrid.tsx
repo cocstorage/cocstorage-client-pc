@@ -1,10 +1,9 @@
+import { Flexbox, Grid, Pagination } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilState } from 'recoil';
 
 import { noticesParamsState } from '@recoil/pages/notices/atoms';
-
-import { Flexbox, Grid, Pagination } from 'cocstorage-ui';
 
 import { Message, NoticeCard } from '@components/UI/molecules';
 import NoticeCardSkeleton from '@components/UI/molecules/NoticeCard/NoticeCardSkeleton';

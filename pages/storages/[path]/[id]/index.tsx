@@ -1,8 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 
+import { Flexbox, Typography } from '@cocstorage/ui';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
-
-import { Flexbox, Typography } from 'cocstorage-ui';
 
 import {
   StorageBoardContent,

@@ -1,10 +1,9 @@
+import { Flexbox, Pagination } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilState } from 'recoil';
 
 import { bestParamsState } from '@recoil/pages/best/atoms';
-
-import { Flexbox, Pagination } from 'cocstorage-ui';
 
 import { Message, StorageBoardCard } from '@components/UI/molecules';
 

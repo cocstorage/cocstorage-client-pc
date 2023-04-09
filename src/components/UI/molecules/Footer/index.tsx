@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { Typography, useTheme } from 'cocstorage-ui';
+import { Typography, useTheme } from '@cocstorage/ui';
 
 import { Links, StyledFooter } from './Footer.styles';
 

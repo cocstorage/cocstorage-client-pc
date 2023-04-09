@@ -1,6 +1,7 @@
 import { RefObject, useState } from 'react';
 
-import { Icon, Menu, Typography, useTheme } from 'cocstorage-ui';
+import { Menu, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 
 import ReplyDeleteDialog from '@components/UI/organisms/ReplyDeleteDialog';
 

@@ -2,9 +2,9 @@ import { HTMLAttributes, useMemo } from 'react';
 
 import Link from 'next/link';
 
+import { Avatar, Badge, Box, Flexbox, Image, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import dayjs from 'dayjs';
-
-import { Avatar, Badge, Box, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
 
 import { StorageBoard } from '@dto/storage-boards';
 

@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { Box, Flexbox, Pagination, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
+
 import { useRecoilState, useResetRecoilState } from 'recoil';
 
 import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
-
-import { Box, Flexbox, Icon, Pagination, Typography, useTheme } from 'cocstorage-ui';
 
 import Message from '@components/UI/molecules/Message';
 import Comment from '@components/UI/organisms/Comment';

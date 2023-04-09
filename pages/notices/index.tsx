@@ -1,10 +1,9 @@
 import { GetServerSidePropsContext } from 'next';
 
+import { Flexbox, Typography } from '@cocstorage/ui';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { noticesParamsDefault } from '@recoil/pages/notices/atoms';
-
-import { Flexbox, Typography } from 'cocstorage-ui';
 
 import { NoticesGrid, NoticesHead } from '@components/pages/notices';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';

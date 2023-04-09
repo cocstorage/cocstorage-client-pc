@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
+import { Alert, IconButton } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { useQuery } from '@tanstack/react-query';
-
-import { Alert, Icon, IconButton } from 'cocstorage-ui';
 
 import { fetchIndexNotice } from '@api/v1/notices';
 

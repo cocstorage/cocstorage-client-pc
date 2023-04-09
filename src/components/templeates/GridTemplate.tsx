@@ -1,8 +1,8 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
-import styled from '@emotion/styled';
+import { Grid } from '@cocstorage/ui';
 
-import { Grid } from 'cocstorage-ui';
+import styled from '@emotion/styled';
 
 interface GridTemplateProps {
   header?: ReactElement;

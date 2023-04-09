@@ -1,4 +1,4 @@
-import { Box, Flexbox, Skeleton, Typography, useTheme } from 'cocstorage-ui';
+import { Box, Flexbox, Skeleton, Typography, useTheme } from '@cocstorage/ui';
 
 function NewStorageBoardCardSkeleton() {
   const {

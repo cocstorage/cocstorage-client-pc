@@ -1,6 +1,6 @@
-import { atom } from 'recoil';
+import { ThemeMode } from '@cocstorage/ui';
 
-import { ThemeMode } from 'cocstorage-ui';
+import { atom } from 'recoil';
 
 import LocalStorage from '@library/localStorage';
 

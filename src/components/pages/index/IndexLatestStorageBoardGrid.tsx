@@ -1,6 +1,5 @@
+import { Flexbox, Grid, Typography } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
-
-import { Flexbox, Grid, Typography } from 'cocstorage-ui';
 
 import StorageBoardCard from '@components/UI/molecules/StorageBoardCard';
 import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/StorageBoardCardSkeleton';

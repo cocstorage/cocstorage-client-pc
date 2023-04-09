@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { LinearProgress } from 'cocstorage-ui';
+import { LinearProgress } from '@cocstorage/ui';
 
 function PageProgress() {
   const router = useRouter();

@@ -15,13 +15,14 @@
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },
   "dependencies": {
+    "@cocstorage/ui": "^0.1.56",
+    "@cocstorage/ui-editor": "^0.1.13",
+    "@cocstorage/ui-icons": "^0.0.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@tanstack/react-query": "^4.27.0",
     "@tanstack/react-query-devtools": "^4.27.0",
     "axios": "^1.3.4",
-    "cocstorage-ui": "^0.1.54",
-    "cocstorage-ui-editor": "^0.1.11",
     "dayjs": "^1.11.7",
     "next": "^13.2.4",
     "react": "^18.2.0",

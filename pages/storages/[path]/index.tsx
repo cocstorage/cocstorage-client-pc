@@ -1,10 +1,9 @@
 import { GetServerSidePropsContext } from 'next';
 
+import { Flexbox } from '@cocstorage/ui';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { storageBoardsParamsDefault } from '@recoil/pages/storageBoards/atoms';
-
-import { Flexbox } from 'cocstorage-ui';
 
 import {
   StorageBoardsHead,

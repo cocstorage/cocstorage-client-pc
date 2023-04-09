@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { Editor, EditorContent } from '@cocstorage/ui-editor';
 import { useMutation } from '@tanstack/react-query';
-import { Editor, EditorContent } from 'cocstorage-ui-editor';
 
 import { useRecoilState } from 'recoil';
 

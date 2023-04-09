@@ -1,8 +1,8 @@
 import { GetServerSidePropsContext } from 'next';
 
+import { Alert } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
-
-import { Alert, Icon } from 'cocstorage-ui';
 
 import {
   StoragesGrid,

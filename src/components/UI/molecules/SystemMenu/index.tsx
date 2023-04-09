@@ -2,13 +2,12 @@ import { RefObject } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { ThemeMode } from 'cocstorage-ui/dist/types';
+import { Dropdown, Flexbox, Menu, ThemeMode, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 
 import { useRecoilState } from 'recoil';
 
 import { commonThemeState } from '@recoil/common/atoms';
-
-import { Dropdown, Flexbox, Icon, Menu, Typography, useTheme } from 'cocstorage-ui';
 
 import { List, ListItem, ListItemGroup } from './SystemMenu.styles';
 

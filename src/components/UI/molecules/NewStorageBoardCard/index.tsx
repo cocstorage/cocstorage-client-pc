@@ -2,9 +2,9 @@ import { HTMLAttributes } from 'react';
 
 import Link from 'next/link';
 
+import { Avatar, Badge, Box, Flexbox, Image, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import dayjs from 'dayjs';
-
-import { Avatar, Badge, Box, Flexbox, Icon, Image, Typography, useTheme } from 'cocstorage-ui';
 
 import { StorageBoard } from '@dto/storage-boards';
 
@@ -114,7 +114,6 @@ function NewStorageBoardCard({
                   src={(user || {}).avatarUrl || ''}
                   alt="User Avatar Img"
                   fallback={{
-                    iconName: 'UserFilled',
                     width: 8,
                     height: 8
                   }}

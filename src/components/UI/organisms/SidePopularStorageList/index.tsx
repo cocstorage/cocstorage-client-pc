@@ -1,4 +1,4 @@
-import { CustomStyle } from 'cocstorage-ui';
+import { CustomStyle } from '@cocstorage/ui';
 
 import { SideAccordion, StorageCard } from '@components/UI/molecules';
 

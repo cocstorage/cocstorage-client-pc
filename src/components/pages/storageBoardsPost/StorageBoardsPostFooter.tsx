@@ -1,5 +1,8 @@
 import { useRouter } from 'next/router';
 
+import { Button, Flexbox, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
+
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import {
@@ -8,8 +11,6 @@ import {
   storageBoardsPostEditorContentsState,
   storageBoardsPostSubjectState
 } from '@recoil/pages/storageBoardsPost/atoms';
-
-import { Button, Flexbox, Icon, useTheme } from 'cocstorage-ui';
 
 function StorageBoardsPostFooter() {
   const router = useRouter();

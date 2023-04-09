@@ -2,6 +2,8 @@ import { useRef } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { Avatar, Box, Button, Flexbox, Tab, Tabs, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { useQuery } from '@tanstack/react-query';
 
 import styled, { CSSObject } from '@emotion/styled';
@@ -9,8 +11,6 @@ import styled, { CSSObject } from '@emotion/styled';
 import { useRecoilState } from 'recoil';
 
 import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
-
-import { Avatar, Box, Button, Flexbox, Icon, Tab, Tabs, useTheme } from 'cocstorage-ui';
 
 import useScrollTrigger from '@hooks/useScrollTrigger';
 

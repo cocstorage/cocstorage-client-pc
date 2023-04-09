@@ -1,10 +1,9 @@
+import { Grid, Typography } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilValue } from 'recoil';
 
 import { storagesSelectedCategoryIdState } from '@recoil/pages/storages/atoms';
-
-import { Grid, Typography } from 'cocstorage-ui';
 
 import { Message, StorageCard } from '@components/UI/molecules';
 

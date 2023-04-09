@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { Button, Dialog, Flexbox, TextBar, Tooltip, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { useMutation } from '@tanstack/react-query';
 
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
@@ -14,17 +16,6 @@ import {
   storageBoardsPostEditorContentsState,
   storageBoardsPostSubjectState
 } from '@recoil/pages/storageBoardsPost/atoms';
-
-import {
-  Button,
-  Dialog,
-  Flexbox,
-  Icon,
-  TextBar,
-  Tooltip,
-  Typography,
-  useTheme
-} from 'cocstorage-ui';
 
 import useStorage from '@hooks/query/useStorage';
 

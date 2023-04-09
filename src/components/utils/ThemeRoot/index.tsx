@@ -1,12 +1,10 @@
 import { HTMLAttributes, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
-import { ThemeMode } from 'cocstorage-ui/dist/types';
+import { ThemeMode, ThemeProvider } from '@cocstorage/ui';
 
 import { useRecoilState } from 'recoil';
 
 import { commonThemeState } from '@recoil/common/atoms';
-
-import { ThemeProvider } from 'cocstorage-ui';
 
 type ThemeRootProps = HTMLAttributes<HTMLDivElement>;
 

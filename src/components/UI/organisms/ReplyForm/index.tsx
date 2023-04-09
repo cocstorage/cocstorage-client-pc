@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { Button, Flexbox, TextBar, Tooltip, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import styled from '@emotion/styled';
@@ -16,8 +18,6 @@ import {
 import { myNicknameState, myPasswordState } from '@recoil/pages/my/atoms';
 import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
-
-import { Button, Flexbox, Icon, TextBar, Tooltip, useTheme } from 'cocstorage-ui';
 
 import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 

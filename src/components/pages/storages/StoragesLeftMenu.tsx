@@ -1,5 +1,6 @@
 import { MouseEvent } from 'react';
 
+import { Typography } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import styled, { CSSObject } from '@emotion/styled';
@@ -7,8 +8,6 @@ import styled, { CSSObject } from '@emotion/styled';
 import { useRecoilState } from 'recoil';
 
 import { storagesSelectedCategoryIdState } from '@recoil/pages/storages/atoms';
-
-import { Typography } from 'cocstorage-ui';
 
 import SideAccordion from '@components/UI/molecules/SideAccordion';
 

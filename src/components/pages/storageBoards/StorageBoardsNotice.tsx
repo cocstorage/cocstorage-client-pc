@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 
+import { Flexbox, Skeleton, Typography, useTheme } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
-
-import { Flexbox, Skeleton, Typography, useTheme } from 'cocstorage-ui';
 
 import { fetchIndexNotice } from '@api/v1/notices';
 

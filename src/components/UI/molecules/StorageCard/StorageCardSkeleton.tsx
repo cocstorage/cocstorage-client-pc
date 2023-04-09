@@ -1,4 +1,4 @@
-import { CustomStyle, Flexbox, Skeleton } from 'cocstorage-ui';
+import { CustomStyle, Flexbox, Skeleton } from '@cocstorage/ui';
 
 interface StorageCardSkeletonProps {
   direction?: 'horizontal' | 'vertical';

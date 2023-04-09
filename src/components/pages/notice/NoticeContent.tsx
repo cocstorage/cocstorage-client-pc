@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { Avatar, Box, Flexbox, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
 import styled from '@emotion/styled';
-
-import { Avatar, Box, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
 
 import useNotice from '@hooks/query/useNotice';
 

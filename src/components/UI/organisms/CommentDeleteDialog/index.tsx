@@ -2,6 +2,19 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import {
+  Box,
+  Button,
+  Dialog,
+  Flexbox,
+  Hidden,
+  IconButton,
+  TextBar,
+  Tooltip,
+  Typography,
+  useTheme
+} from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -10,20 +23,6 @@ import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/a
 import { myPasswordState } from '@recoil/pages/my/atoms';
 import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
-
-import {
-  Box,
-  Button,
-  Dialog,
-  Flexbox,
-  Hidden,
-  Icon,
-  IconButton,
-  TextBar,
-  Tooltip,
-  Typography,
-  useTheme
-} from 'cocstorage-ui';
 
 import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 import useStorageBoardComments from '@hooks/query/useStorageBoardComments';

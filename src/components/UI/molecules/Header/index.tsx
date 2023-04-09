@@ -11,6 +11,20 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import {
+  Avatar,
+  Box,
+  Button,
+  Flexbox,
+  Image,
+  Spotlight,
+  TextBar,
+  Tooltip,
+  Typography,
+  useTheme
+} from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
+
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import {
@@ -18,20 +32,6 @@ import {
   commonOnBoardingDefault,
   commonOnBoardingState
 } from '@recoil/common/atoms';
-
-import {
-  Avatar,
-  Box,
-  Button,
-  Flexbox,
-  Icon,
-  Image,
-  Spotlight,
-  TextBar,
-  Tooltip,
-  Typography,
-  useTheme
-} from 'cocstorage-ui';
 
 import SystemMenu from '@components/UI/molecules/SystemMenu';
 

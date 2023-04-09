@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { Avatar, Flexbox, Icon, IconButton, Tag, Typography } from 'cocstorage-ui';
+import { Avatar, Flexbox, IconButton, Tag, Typography } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 
 import useStorage from '@hooks/query/useStorage';
 

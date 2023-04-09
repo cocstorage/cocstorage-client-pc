@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { useTheme } from 'cocstorage-ui';
+import { useTheme } from '@cocstorage/ui';
 
 import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 

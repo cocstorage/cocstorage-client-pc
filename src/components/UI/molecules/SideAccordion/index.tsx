@@ -1,6 +1,7 @@
 import { HTMLAttributes, PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-import { Button, CustomStyle, Flexbox, Icon, Typography, useTheme } from 'cocstorage-ui';
+import { Button, CustomStyle, Flexbox, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 
 import { List, StyledSideAccordion } from './SideAccordion.styles';
 

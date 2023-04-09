@@ -1,8 +1,8 @@
+import { Box, Dialog } from '@cocstorage/ui';
+
 import { useRecoilState } from 'recoil';
 
 import { commonFeedbackDialogState } from '@recoil/common/atoms';
-
-import { Box, Dialog } from 'cocstorage-ui';
 
 import Message from '@components/UI/molecules/Message';
 

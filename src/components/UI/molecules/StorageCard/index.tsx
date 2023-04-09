@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 
 import Link from 'next/link';
 
-import { Avatar, CustomStyle, Flexbox, Typography } from 'cocstorage-ui';
+import { Avatar, CustomStyle, Flexbox, Typography } from '@cocstorage/ui';
 
 interface StorageCardProps extends HTMLAttributes<HTMLDivElement> {
   direction?: 'horizontal' | 'vertical';
@@ -51,7 +51,6 @@ function StorageCard({
           round={size === 'small' ? 4 : 6}
           alt="Storage Logo Img"
           fallback={{
-            iconName: 'ImageOutlined',
             width: size === 'small' ? 12 : 24,
             height: size === 'small' ? 12 : 24
           }}

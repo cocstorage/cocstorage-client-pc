@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 
-import { Badge, Icon, Tag, Typography, useTheme } from 'cocstorage-ui';
+import { Badge, Tag, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 
 import { IssueKeyword } from '@dto/issue-keywords';
 

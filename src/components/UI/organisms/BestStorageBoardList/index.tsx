@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { Box, Flexbox, Skeleton, Typography, useTheme } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
+
 import { useRecoilValue } from 'recoil';
 
 import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
-
-import { Box, Flexbox, Icon, Skeleton, Typography, useTheme } from 'cocstorage-ui';
 
 import Message from '@components/UI/molecules/Message';
 

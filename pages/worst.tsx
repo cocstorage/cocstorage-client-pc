@@ -1,10 +1,10 @@
 import { GetServerSidePropsContext } from 'next';
 
+import { Alert } from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { worstParamsDefault } from '@recoil/pages/worst/atoms';
-
-import { Alert, Icon } from 'cocstorage-ui';
 
 import { WorstHead, WorstStorageBoardList, WorstTitle } from '@components/pages/worst';
 import GridTemplate from '@components/templeates/GridTemplate';

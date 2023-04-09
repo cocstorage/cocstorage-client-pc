@@ -2,6 +2,18 @@ import { ChangeEvent, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import {
+  Backdrop,
+  Box,
+  Button,
+  Flexbox,
+  IconButton,
+  TextBar,
+  Tooltip,
+  Typography,
+  useTheme
+} from '@cocstorage/ui';
+import Icon from '@cocstorage/ui-icons';
 import { useMutation } from '@tanstack/react-query';
 
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -14,19 +26,6 @@ import {
   storageBoardEditPasswordState,
   storageBoardEditSubjectState
 } from '@recoil/pages/storageBoardEdit/atoms';
-
-import {
-  Backdrop,
-  Box,
-  Button,
-  Flexbox,
-  Icon,
-  IconButton,
-  TextBar,
-  Tooltip,
-  Typography,
-  useTheme
-} from 'cocstorage-ui';
 
 import useStorage from '@hooks/query/useStorage';
 
