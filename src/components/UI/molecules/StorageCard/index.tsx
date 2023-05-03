@@ -51,6 +51,7 @@ function StorageCard({
           round={size === 'small' ? 4 : 6}
           alt="Storage Logo Img"
           fallback={{
+            name: 'ImageOutlined',
             width: size === 'small' ? 12 : 24,
             height: size === 'small' ? 12 : 24
           }}
