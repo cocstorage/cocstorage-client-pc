@@ -1,21 +1,8 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
-import localFont from 'next/font/local';
-
 import { Grid } from '@cocstorage/ui';
 
 import styled from '@emotion/styled';
-
-const font = localFont({
-  src: [
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '900' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '700' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '500' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '400' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '300' },
-    { path: '../../styles/fonts/MinSansVF.woff2', weight: '100' }
-  ]
-});
 
 interface GridTemplateProps {
   header?: ReactElement;
@@ -32,7 +19,7 @@ function GridTemplate({
   footer
 }: PropsWithChildren<GridTemplateProps>) {
   return (
-    <StyledGridTemplate className={font.className}>
+    <StyledGridTemplate>
       {header}
       <Grid component="main" container columnGap={80}>
         {leftAside && (
