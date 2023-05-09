@@ -17,7 +17,7 @@ interface StorageBoardListProps {
   ssr?: boolean;
 }
 
-function StorageBoardList({ ssr = true }: StorageBoardListProps) {
+function StorageBoardList({ ssr }: StorageBoardListProps) {
   const router = useRouter();
   const { path } = router.query;
 

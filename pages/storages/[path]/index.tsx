@@ -55,7 +55,7 @@ function StorageBoards() {
         <StorageBoardsIntro />
         <StorageBoardsTabs />
         <StorageBoardsNotice />
-        <StorageBoardList />
+        <StorageBoardList ssr={false} />
       </GridTemplate>
     </>
   );
