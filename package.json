@@ -15,8 +15,8 @@
     "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },
   "dependencies": {
-    "@cocstorage/ui": "^0.1.57",
-    "@cocstorage/ui-editor": "^0.1.13",
+    "@cocstorage/ui": "^0.1.58",
+    "@cocstorage/ui-editor": "^0.1.15",
     "@cocstorage/ui-icons": "^0.0.2",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
