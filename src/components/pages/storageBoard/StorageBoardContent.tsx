@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Flexbox,
+  Image,
   Menu,
   Spotlight,
   Tag,
@@ -57,7 +58,7 @@ function StorageBoardContent() {
   const {
     theme: {
       mode,
-      palette: { primary, text, box }
+      palette: { primary, text, box, background }
     }
   } = useTheme();
 
@@ -184,6 +185,8 @@ function StorageBoardContent() {
       }
     }));
   };
+
+  const handleClickBanner = () => window.open('https://mrcamel.co.kr', '_blank');
 
   useEffect(() => {
     if (!updatedViewCountRef.current && storageBoardId && storage && storage.id) {
@@ -357,6 +360,49 @@ function StorageBoardContent() {
           <Tag startIcon={<Icon name="EmailOutlined" />}>cocstoragehelps@gmail.com</Tag>
         </Flexbox>
       )}
+      <Flexbox
+        gap={8}
+        onClick={handleClickBanner}
+        customStyle={{
+          marginTop: 20,
+          padding: 16,
+          borderRadius: 8,
+          backgroundColor: background.fg1,
+          cursor: 'pointer'
+        }}
+      >
+        <Flexbox
+          gap={8}
+          customStyle={{
+            flex: 1
+          }}
+        >
+          <Image
+            width={32}
+            height={32}
+            round={8}
+            src={`https://${process.env.IMAGE_DOMAIN}/assets/camel_logo_black.png`}
+            alt="Camel Logo Img"
+            disableAspectRatio
+          />
+          <Flexbox
+            direction="vertical"
+            gap={4}
+            customStyle={{
+              flex: 1,
+              flexWrap: 'wrap'
+            }}
+          >
+            <Typography variant="h4" fontWeight="bold">
+              카멜
+            </Typography>
+            <Typography noWrap lineClamp={2}>
+              세상 모든 중고명품을 여기서 다 볼 수 있어요!
+            </Typography>
+          </Flexbox>
+        </Flexbox>
+        <Button variant="semiAccent">바로가기</Button>
+      </Flexbox>
       {sourceCode && (
         <Content
           ref={contentRef}
