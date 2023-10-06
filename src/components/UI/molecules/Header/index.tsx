@@ -194,6 +194,11 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
                     round={4}
                     src={avatarUrl || ''}
                     alt="Storage Logo Img"
+                    fallback={{
+                      name: 'ImageOutlined',
+                      width: 20,
+                      height: 20
+                    }}
                   />
                   <Typography variant="h4" fontWeight="bold">
                     {name}

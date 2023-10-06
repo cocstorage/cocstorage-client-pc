@@ -44,7 +44,18 @@ function StorageBoardsPostHeader() {
             cursor: 'pointer'
           }}
         >
-          <Avatar width={24} height={24} src={avatarUrl || ''} alt="Logo Img" round={4} />
+          <Avatar
+            width={24}
+            height={24}
+            src={avatarUrl || ''}
+            alt="Logo Img"
+            round={4}
+            fallback={{
+              name: 'ImageOutlined',
+              width: 20,
+              height: 20
+            }}
+          />
           <Typography variant="h3" fontWeight="bold">
             {name}
           </Typography>

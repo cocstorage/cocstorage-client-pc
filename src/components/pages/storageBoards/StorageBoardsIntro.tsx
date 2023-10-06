@@ -112,7 +112,18 @@ function StorageBoardsIntro() {
     <>
       <Flexbox component="section" justifyContent="space-between">
         <Flexbox gap={12} alignment="center">
-          <Avatar width={40} height={40} round={8} src={avatarUrl || ''} alt="Storage Logo Img" />
+          <Avatar
+            width={40}
+            height={40}
+            round={8}
+            src={avatarUrl || ''}
+            alt="Storage Logo Img"
+            fallback={{
+              name: 'ImageOutlined',
+              width: 32,
+              height: 32
+            }}
+          />
           <div>
             <Flexbox alignment="center" gap={6}>
               {isLoading && <Skeleton width={90} height={18.5} round={6} disableAspectRatio />}
