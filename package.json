@@ -12,7 +12,8 @@
     "start": "next build && next start -p $PORT",
     "lint": "next lint",
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{js,ts,tsx,json}\"",
-    "convention": "pnpm prettier && eslint --fix \"**/*.{js,ts,tsx}\""
+    "convention": "pnpm prettier && eslint --fix \"**/*.{js,ts,tsx}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@cocstorage/ui": "^0.1.59",
