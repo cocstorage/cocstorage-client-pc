@@ -412,7 +412,7 @@ function StorageBoardContent() {
           {convertToReactElement(contentJson)}
         </Content>
       )}
-      <Box customStyle={{ margin: '30px 0', textAlign: 'center' }}>
+      <Box customStyle={{ margin: '40px 0 30px', textAlign: 'center' }}>
         <Button
           startIcon={<Icon name="ThumbsUpFilled" color={primary.main} />}
           customStyle={{
@@ -501,7 +501,7 @@ const Content = styled(Typography)<{
   sourceCode?: string | null;
 }>`
   position: relative;
-  margin-top: 20px;
+  margin-top: 40px;
   overflow: hidden;
 
   ${({ sourceCode }): CSSObject =>

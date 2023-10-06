@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { Box, Flexbox, Pagination, Typography, useTheme } from '@cocstorage/ui';
+import { Box, Flexbox, Pagination, Skeleton, Typography, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 
@@ -135,20 +135,23 @@ function CommentList({ type = 'storageBoard' }: CommentListProps) {
     <Flexbox direction="vertical" gap={24}>
       <Flexbox gap={4} alignment="center">
         <Icon name="CommentOutlined" width={20} height={20} />
-        <Flexbox gap={6}>
-          <Typography variant="h4" fontWeight="bold">
-            댓글
-          </Typography>
-          <Typography
-            variant="h4"
-            fontWeight="bold"
-            customStyle={{
-              color: primary.main
-            }}
-          >
-            {(commentTotalCount || noticeCommentTotalCount).toLocaleString()}
-          </Typography>
-        </Flexbox>
+        {isLoading && <Skeleton width={40} height={20} round={6} disableAspectRatio />}
+        {!isLoading && (
+          <Flexbox gap={6}>
+            <Typography variant="h4" fontWeight="bold">
+              댓글
+            </Typography>
+            <Typography
+              variant="h4"
+              fontWeight="bold"
+              customStyle={{
+                color: primary.main
+              }}
+            >
+              {(commentTotalCount || noticeCommentTotalCount).toLocaleString()}
+            </Typography>
+          </Flexbox>
+        )}
       </Flexbox>
       <Flexbox gap={18} direction="vertical">
         {type === 'storageBoard' &&
