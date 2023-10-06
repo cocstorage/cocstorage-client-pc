@@ -11,8 +11,8 @@
     "build": "next build",
     "start": "next build && next start -p $PORT",
     "lint": "next lint",
-    "prettier": "prettier --write --config ./.prettierrc \"**/*.{js,ts,tsx}\"",
-    "conventions": "yarn prettier && eslint --fix \"**/*.{js,ts,tsx}\""
+    "prettier": "prettier --write --config ./.prettierrc \"**/*.{js,ts,tsx,json}\"",
+    "convention": "pnpm prettier && eslint --fix \"**/*.{js,ts,tsx}\""
   },
   "dependencies": {
     "@cocstorage/ui": "^0.1.59",
@@ -30,23 +30,21 @@
     "recoil": "^0.7.7"
   },
   "devDependencies": {
-    "@types/node": "^20.1.0",
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.59.2",
-    "eslint": "^8.39.0",
+    "@next/eslint-plugin-next": "^13.5.4",
+    "@types/node": "^20.8.2",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.10",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.50.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "^13.4.1",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.8.8",
-    "typescript": "^4.9.5"
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   }
 }

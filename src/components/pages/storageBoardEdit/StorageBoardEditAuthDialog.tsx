@@ -15,9 +15,10 @@ import {
 } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import { useMutation } from '@tanstack/react-query';
-
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { patchNonMemberStorageBoard } from '@api/v1/storage-boards';
+import useStorage from '@hooks/query/useStorage';
 import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/atoms';
 import { myPasswordState } from '@recoil/pages/my/atoms';
 import {
@@ -26,10 +27,6 @@ import {
   storageBoardEditPasswordState,
   storageBoardEditSubjectState
 } from '@recoil/pages/storageBoardEdit/atoms';
-
-import useStorage from '@hooks/query/useStorage';
-
-import { patchNonMemberStorageBoard } from '@api/v1/storage-boards';
 
 function StorageBoardEditAuthDialog() {
   const router = useRouter();

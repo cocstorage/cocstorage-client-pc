@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 
 import { commonHistoryState } from '@recoil/common/atoms';
-
 import getPathNameByUrl from '@utils/getPathNameByUrl';
 
 const serverSidePages = [

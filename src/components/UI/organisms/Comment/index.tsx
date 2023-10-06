@@ -5,7 +5,6 @@ import Icon from '@cocstorage/ui-icons';
 import dayjs from 'dayjs';
 
 import { CommentMenu, Reply, ReplyForm } from '@components/UI/organisms';
-
 import { NoticeComment } from '@dto/notice-comments';
 import { StorageBoardComment } from '@dto/storage-board-comments';
 

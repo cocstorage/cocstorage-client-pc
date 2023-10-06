@@ -4,6 +4,8 @@ import { Alert } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
+import { fetchStorageCategories } from '@api/v1/storage-categories';
+import { fetchStorages } from '@api/v1/storages';
 import {
   StoragesGrid,
   StoragesHead,
@@ -13,10 +15,6 @@ import {
 import GridTemplate from '@components/templeates/GridTemplate';
 import Header from '@components/UI/molecules/Header';
 import IssueKeywordRank from '@components/UI/organisms/IssueKeywordRank';
-
-import { fetchStorageCategories } from '@api/v1/storage-categories';
-import { fetchStorages } from '@api/v1/storages';
-
 import queryKeys from '@constants/queryKeys';
 
 function Storages() {

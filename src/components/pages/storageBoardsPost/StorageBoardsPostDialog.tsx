@@ -5,9 +5,10 @@ import { useRouter } from 'next/router';
 import { Button, Dialog, Flexbox, TextBar, Tooltip, Typography, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import { useMutation } from '@tanstack/react-query';
-
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
+import { PutStorageBoardData, putNonMemberStorageBoard } from '@api/v1/storage-boards';
+import useStorage from '@hooks/query/useStorage';
 import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/atoms';
 import { myNicknameState, myPasswordState } from '@recoil/pages/my/atoms';
 import {
@@ -16,12 +17,7 @@ import {
   storageBoardsPostEditorContentsState,
   storageBoardsPostSubjectState
 } from '@recoil/pages/storageBoardsPost/atoms';
-
-import useStorage from '@hooks/query/useStorage';
-
 import validators from '@utils/validators';
-
-import { PutStorageBoardData, putNonMemberStorageBoard } from '@api/v1/storage-boards';
 
 function StorageBoardsPostDialog() {
   const router = useRouter();

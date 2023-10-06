@@ -2,13 +2,11 @@ import { GetServerSidePropsContext } from 'next';
 
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
+import { fetchNotice } from '@api/v1/notices';
 import { NoticeContent, NoticeHead } from '@components/pages/notice';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
 import { CommentForm, CommentList } from '@components/UI/organisms';
-
-import { fetchNotice } from '@api/v1/notices';
-
 import queryKeys from '@constants/queryKeys';
 
 function Notice() {

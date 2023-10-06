@@ -1,15 +1,11 @@
 import { Flexbox, Pagination } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
-
 import { useRecoilState } from 'recoil';
 
-import { worstParamsState } from '@recoil/pages/worst/atoms';
-
-import { Message, StorageBoardCard } from '@components/UI/molecules';
-
 import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
-
+import { Message, StorageBoardCard } from '@components/UI/molecules';
 import queryKeys from '@constants/queryKeys';
+import { worstParamsState } from '@recoil/pages/worst/atoms';
 
 function WorstStorageBoardList() {
   const [params, setParams] = useRecoilState(worstParamsState);

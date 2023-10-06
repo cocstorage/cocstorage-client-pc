@@ -5,7 +5,6 @@ import {
   FetchNoticeCommentsResponse,
   fetchNoticeComments
 } from '@api/v1/notice-comments';
-
 import queryKeys from '@constants/queryKeys';
 
 export default function useNoticeComments(

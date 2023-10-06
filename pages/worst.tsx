@@ -4,16 +4,13 @@ import { Alert } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
-import { worstParamsDefault } from '@recoil/pages/worst/atoms';
-
+import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
 import { WorstHead, WorstStorageBoardList, WorstTitle } from '@components/pages/worst';
 import GridTemplate from '@components/templeates/GridTemplate';
 import Header from '@components/UI/molecules/Header';
 import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
-
-import { fetchWorstStorageBoards } from '@api/v1/storage-boards';
-
 import queryKeys from '@constants/queryKeys';
+import { worstParamsDefault } from '@recoil/pages/worst/atoms';
 
 function Worst() {
   return (

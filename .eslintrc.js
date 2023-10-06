@@ -1,6 +1,5 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['import', 'prettier', '@typescript-eslint'],
   extends: [
     'airbnb',
     'airbnb/hooks',
@@ -40,71 +39,6 @@ module.exports = {
           {
             pattern: 'next/**',
             group: 'builtin',
-            position: 'after'
-          },
-          {
-            pattern: '@tanstack/query',
-            group: 'external',
-            position: 'before'
-          },
-          {
-            pattern: '@tanstack/query/**',
-            group: 'external',
-            position: 'before'
-          },
-          {
-            pattern: '@tanstack/query-devtools',
-            group: 'external',
-            position: 'before'
-          },
-          {
-            pattern: '@tanstack/query-devtools/**',
-            group: 'external',
-            position: 'before'
-          },
-          {
-            pattern: '@emotion/**',
-            group: 'external',
-            position: 'after'
-          },
-          {
-            pattern: 'recoil',
-            group: 'external',
-            position: 'after'
-          },
-          {
-            pattern: '@recoil/**',
-            group: 'external',
-            position: 'after'
-          },
-          {
-            pattern: 'cocstorage-ui',
-            group: 'external',
-            position: 'after'
-          },
-          {
-            pattern: 'axios',
-            group: 'external',
-            position: 'after'
-          },
-          {
-            pattern: '@components/**',
-            group: 'internal',
-            position: 'before'
-          },
-          {
-            pattern: '@hooks/**',
-            group: 'internal',
-            position: 'before'
-          },
-          {
-            pattern: '@api/**',
-            group: 'internal',
-            position: 'after'
-          },
-          {
-            pattern: '@constants/**',
-            group: 'internal',
             position: 'after'
           }
         ],

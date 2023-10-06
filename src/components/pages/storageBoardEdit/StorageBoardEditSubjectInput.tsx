@@ -1,7 +1,6 @@
 import { ChangeEvent } from 'react';
 
 import styled, { CSSObject } from '@emotion/styled';
-
 import { useRecoilState } from 'recoil';
 
 import { storageBoardEditSubjectState } from '@recoil/pages/storageBoardEdit/atoms';

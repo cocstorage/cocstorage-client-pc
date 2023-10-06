@@ -4,20 +4,17 @@ import { useRouter } from 'next/router';
 
 import Editor, { EditorContent } from '@cocstorage/ui-editor';
 import { useMutation } from '@tanstack/react-query';
-
 import { useRecoilState } from 'recoil';
-
-import {
-  storageBoardsPostDraftIdState,
-  storageBoardsPostEditorContentsState
-} from '@recoil/pages/storageBoardsPost/atoms';
-
-import useStorage from '@hooks/query/useStorage';
 
 import {
   postNonMemberStorageBoardDraft,
   postNonMemberStorageBoardImage
 } from '@api/v1/storage-boards';
+import useStorage from '@hooks/query/useStorage';
+import {
+  storageBoardsPostDraftIdState,
+  storageBoardsPostEditorContentsState
+} from '@recoil/pages/storageBoardsPost/atoms';
 
 function StorageBoardsPostEditor() {
   const { query } = useRouter();

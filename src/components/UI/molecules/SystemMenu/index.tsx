@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { Dropdown, Flexbox, Menu, ThemeMode, Typography, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
-
 import { useRecoilState } from 'recoil';
 
 import { commonThemeState } from '@recoil/common/atoms';

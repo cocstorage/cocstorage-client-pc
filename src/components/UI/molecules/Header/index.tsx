@@ -24,19 +24,16 @@ import {
   useTheme
 } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
-
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
+import SystemMenu from '@components/UI/molecules/SystemMenu';
+import { useStorageData } from '@hooks/query/useStorage';
+import useScrollTrigger from '@hooks/useScrollTrigger';
 import {
   commonFeedbackDialogState,
   commonOnBoardingDefault,
   commonOnBoardingState
 } from '@recoil/common/atoms';
-
-import SystemMenu from '@components/UI/molecules/SystemMenu';
-
-import { useStorageData } from '@hooks/query/useStorage';
-import useScrollTrigger from '@hooks/useScrollTrigger';
 
 import { HeaderInner, StyledHeader } from './Header.styles';
 

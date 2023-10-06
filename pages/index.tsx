@@ -2,6 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
+import { fetchIndexNotice } from '@api/v1/notices';
 import {
   IndexBestWorstStorageBoardGrid,
   IndexHead,
@@ -11,9 +12,6 @@ import {
 import GridTemplate from '@components/templeates/GridTemplate';
 import Header from '@components/UI/molecules/Header';
 import { IssueKeywordRank, SidePopularStorageList } from '@components/UI/organisms';
-
-import { fetchIndexNotice } from '@api/v1/notices';
-
 import queryKeys from '@constants/queryKeys';
 
 function Index() {

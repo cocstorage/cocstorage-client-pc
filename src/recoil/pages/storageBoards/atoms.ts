@@ -1,10 +1,8 @@
 import { atom, atomFamily } from 'recoil';
 
-import LocalStorage from '@library/localStorage';
-
 import { FetchStorageBoardsParams } from '@api/v1/storage-boards';
-
 import localStorageKeys from '@constants/localStorageKeys';
+import LocalStorage from '@library/localStorage';
 
 export const storageBoardsParamsDefault: FetchStorageBoardsParams = {
   subject: null,

@@ -16,24 +16,20 @@ import {
 } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { useRecoilState, useRecoilValue } from 'recoil';
-
-import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/atoms';
-import { myPasswordState } from '@recoil/pages/my/atoms';
-import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
-import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
-
-import { useStorageBoardData } from '@hooks/query/useStorageBoard';
-import useStorageBoardComments from '@hooks/query/useStorageBoardComments';
 
 import { DeleteNoticeCommentData, deleteNonMemberNoticeComment } from '@api/v1/notice-comments';
 import {
   DeleteStorageBoardCommentData,
   deleteNonMemberStorageBoardComment
 } from '@api/v1/storage-board-comments';
-
 import queryKeys from '@constants/queryKeys';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
+import useStorageBoardComments from '@hooks/query/useStorageBoardComments';
+import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/atoms';
+import { myPasswordState } from '@recoil/pages/my/atoms';
+import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
+import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
 
 interface CommentDeleteDialogProps {
   type?: 'storageBoard' | 'notice';

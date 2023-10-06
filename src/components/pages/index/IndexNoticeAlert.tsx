@@ -5,7 +5,6 @@ import Icon from '@cocstorage/ui-icons';
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchIndexNotice } from '@api/v1/notices';
-
 import queryKeys from '@constants/queryKeys';
 
 function IndexNoticeAlert() {

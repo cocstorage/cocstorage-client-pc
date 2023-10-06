@@ -3,9 +3,7 @@ import { HTMLAttributes, PropsWithChildren, useCallback, useEffect, useState } f
 import localFont from 'next/font/local';
 
 import { ThemeMode, ThemeProvider } from '@cocstorage/ui';
-
 import { Global } from '@emotion/react';
-
 import { useRecoilState } from 'recoil';
 
 import { commonThemeState } from '@recoil/common/atoms';

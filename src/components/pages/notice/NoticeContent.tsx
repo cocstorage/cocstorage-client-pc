@@ -4,14 +4,12 @@ import { useRouter } from 'next/router';
 
 import { Avatar, Box, Flexbox, Typography, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
+import styled from '@emotion/styled';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import styled from '@emotion/styled';
-
-import useNotice from '@hooks/query/useNotice';
-
 import { putNoticeViewCount } from '@api/v1/notices';
+import useNotice from '@hooks/query/useNotice';
 
 function NoticeContent() {
   const { query: { id = 0 } = {} } = useRouter();

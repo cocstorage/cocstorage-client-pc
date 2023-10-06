@@ -4,14 +4,12 @@ import { Button, Flexbox, Grid, Tag, Typography, useTheme } from '@cocstorage/ui
 import Icon from '@cocstorage/ui-icons';
 import { useQuery } from '@tanstack/react-query';
 
-import StorageBoardCard from '@components/UI/molecules/StorageBoardCard';
-import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/StorageBoardCardSkeleton';
-
 import {
   fetchIndexPopularStorageBoards,
   fetchIndexWorstStorageBoards
 } from '@api/v1/storage-boards';
-
+import StorageBoardCard from '@components/UI/molecules/StorageBoardCard';
+import StorageBoardCardSkeleton from '@components/UI/molecules/StorageBoardCard/StorageBoardCardSkeleton';
 import queryKeys from '@constants/queryKeys';
 
 function IndexBestWorstStorageBoardGrid() {

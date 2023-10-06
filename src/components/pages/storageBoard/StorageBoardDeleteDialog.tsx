@@ -16,16 +16,13 @@ import {
 } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import { useMutation } from '@tanstack/react-query';
-
 import { useRecoilState, useRecoilValue } from 'recoil';
 
+import { deleteNonMemberStorageBoard } from '@api/v1/storage-boards';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 import { commonOnBoardingDefault, commonOnBoardingState } from '@recoil/common/atoms';
 import { myPasswordState } from '@recoil/pages/my/atoms';
 import { storageBoardDeleteDialogOpenState } from '@recoil/pages/storageBoard/atoms';
-
-import { useStorageBoardData } from '@hooks/query/useStorageBoard';
-
-import { deleteNonMemberStorageBoard } from '@api/v1/storage-boards';
 
 function StorageBoardDeleteDialog() {
   const router = useRouter();

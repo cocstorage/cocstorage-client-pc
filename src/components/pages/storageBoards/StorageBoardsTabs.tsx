@@ -4,19 +4,14 @@ import { useRouter } from 'next/router';
 
 import { Avatar, Box, Button, Flexbox, Tab, Tabs, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
-import { useQuery } from '@tanstack/react-query';
-
 import styled, { CSSObject } from '@emotion/styled';
-
+import { useQuery } from '@tanstack/react-query';
 import { useRecoilState } from 'recoil';
 
-import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
-
-import useScrollTrigger from '@hooks/useScrollTrigger';
-
 import { fetchStorage } from '@api/v1/storages';
-
 import queryKeys from '@constants/queryKeys';
+import useScrollTrigger from '@hooks/useScrollTrigger';
+import { storageBoardsParamsStateFamily } from '@recoil/pages/storageBoards/atoms';
 
 function StorageBoardsTabs() {
   const router = useRouter();

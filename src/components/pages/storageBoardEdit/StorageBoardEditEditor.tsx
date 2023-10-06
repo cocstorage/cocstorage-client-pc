@@ -1,14 +1,11 @@
 import { useRouter } from 'next/router';
 
 import Editor, { EditorContent } from '@cocstorage/ui-editor';
-
 import { useRecoilState } from 'recoil';
 
-import { storageBoardEditEditorContentsState } from '@recoil/pages/storageBoardEdit/atoms';
-
-import useStorage from '@hooks/query/useStorage';
-
 import { postNonMemberStorageBoardImage } from '@api/v1/storage-boards';
+import useStorage from '@hooks/query/useStorage';
+import { storageBoardEditEditorContentsState } from '@recoil/pages/storageBoardEdit/atoms';
 
 function StorageBoardEditEditor() {
   const { query } = useRouter();

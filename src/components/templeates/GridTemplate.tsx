@@ -1,7 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
 import { Grid } from '@cocstorage/ui';
-
 import styled from '@emotion/styled';
 
 interface GridTemplateProps {

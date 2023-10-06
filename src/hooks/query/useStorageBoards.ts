@@ -5,7 +5,6 @@ import {
   FetchStorageBoardsResponse,
   fetchStorageBoards
 } from '@api/v1/storage-boards';
-
 import queryKeys from '@constants/queryKeys';
 
 export default function useStorageBoards(

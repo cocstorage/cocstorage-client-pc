@@ -4,20 +4,17 @@ import { useRouter } from 'next/router';
 
 import { Box, Flexbox, Pagination, Typography, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
-
 import { useRecoilState, useResetRecoilState } from 'recoil';
-
-import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
-import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
 
 import Message from '@components/UI/molecules/Message';
 import Comment from '@components/UI/organisms/Comment';
 import CommentSkeleton from '@components/UI/organisms/Comment/CommentSkeleton';
-
 import useNotice from '@hooks/query/useNotice';
 import useNoticeComments from '@hooks/query/useNoticeComments';
 import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 import useStorageBoardComments from '@hooks/query/useStorageBoardComments';
+import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
+import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
 
 interface CommentListProps {
   type?: 'storageBoard' | 'notice';

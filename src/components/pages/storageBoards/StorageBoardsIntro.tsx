@@ -16,9 +16,9 @@ import {
 } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import dayjs from 'dayjs';
-
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 
+import useStorage from '@hooks/query/useStorage';
 import {
   commonFeedbackDialogState,
   commonOnBoardingDefault,
@@ -29,8 +29,6 @@ import {
   storageBoardsPostEditorContentsState,
   storageBoardsPostSubjectState
 } from '@recoil/pages/storageBoardsPost/atoms';
-
-import useStorage from '@hooks/query/useStorage';
 
 function StorageBoardsIntro() {
   const router = useRouter();

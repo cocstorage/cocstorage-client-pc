@@ -6,13 +6,11 @@ import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from '@tan
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import dayjs from 'dayjs';
 import RelativeTime from 'dayjs/plugin/relativeTime';
-
 import { RecoilRoot } from 'recoil';
 
 import { ErrorBoundary, GoogleScript, ThemeRoot } from '@components/utils';
-import 'dayjs/locale/ko';
-
 import HistoryProvider from '@provider/HistoryProvider';
+import 'dayjs/locale/ko';
 
 const FeedbackDialog = dynamic(() => import('@components/UI/organisms/FeedbackDialog'));
 const PageProgress = dynamic(() => import('@components/UI/organisms/PageProgress'));

@@ -6,7 +6,6 @@ import { Flexbox, Skeleton, Typography, useTheme } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchIndexNotice } from '@api/v1/notices';
-
 import queryKeys from '@constants/queryKeys';
 
 function StorageBoardsNotice() {

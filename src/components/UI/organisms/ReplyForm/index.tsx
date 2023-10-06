@@ -4,24 +4,9 @@ import { useRouter } from 'next/router';
 
 import { Button, Flexbox, TextBar, Tooltip, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import styled from '@emotion/styled';
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-
-import {
-  commonFeedbackDialogState,
-  commonOnBoardingDefault,
-  commonOnBoardingState
-} from '@recoil/common/atoms';
-import { myNicknameState, myPasswordState } from '@recoil/pages/my/atoms';
-import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
-import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
-
-import { useStorageBoardData } from '@hooks/query/useStorageBoard';
-
-import validators from '@utils/validators';
 
 import {
   PostNoticeCommentReplyData,
@@ -31,8 +16,17 @@ import {
   PostStorageBoardCommentReplyData,
   postNonMemberStorageBoardCommentReply
 } from '@api/v1/storage-board-comment-replies';
-
 import queryKeys from '@constants/queryKeys';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
+import {
+  commonFeedbackDialogState,
+  commonOnBoardingDefault,
+  commonOnBoardingState
+} from '@recoil/common/atoms';
+import { myNicknameState, myPasswordState } from '@recoil/pages/my/atoms';
+import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
+import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
+import validators from '@utils/validators';
 
 interface ReplyFormProps {
   type?: 'storageBoard' | 'notice';

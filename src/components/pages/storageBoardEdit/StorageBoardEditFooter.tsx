@@ -3,19 +3,16 @@ import { useRouter } from 'next/router';
 import { Button, Flexbox, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import { useMutation } from '@tanstack/react-query';
-
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
+import { PutStorageBoardData, putNonMemberStorageBoard } from '@api/v1/storage-boards';
+import useStorage from '@hooks/query/useStorage';
 import {
   storageBoardEditEditorContentsState,
   storageBoardEditNicknameState,
   storageBoardEditPasswordState,
   storageBoardEditSubjectState
 } from '@recoil/pages/storageBoardEdit/atoms';
-
-import useStorage from '@hooks/query/useStorage';
-
-import { PutStorageBoardData, putNonMemberStorageBoard } from '@api/v1/storage-boards';
 
 function StorageBoardEditFooter() {
   const router = useRouter();

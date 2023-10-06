@@ -3,8 +3,8 @@ import { GetServerSidePropsContext } from 'next';
 import { Flexbox } from '@cocstorage/ui';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
-import { storageBoardsParamsDefault } from '@recoil/pages/storageBoards/atoms';
-
+import { fetchStorageBoards } from '@api/v1/storage-boards';
+import { fetchStorage } from '@api/v1/storages';
 import {
   StorageBoardsHead,
   StorageBoardsIntro,
@@ -19,11 +19,8 @@ import {
   LastVisitStorageHistory,
   StorageBoardList
 } from '@components/UI/organisms';
-
-import { fetchStorageBoards } from '@api/v1/storage-boards';
-import { fetchStorage } from '@api/v1/storages';
-
 import queryKeys from '@constants/queryKeys';
+import { storageBoardsParamsDefault } from '@recoil/pages/storageBoards/atoms';
 
 function StorageBoards() {
   return (

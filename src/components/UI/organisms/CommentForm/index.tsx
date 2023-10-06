@@ -12,12 +12,20 @@ import {
   useTheme
 } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import styled from '@emotion/styled';
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
+import { PostNoticeCommentData, postNonMemberNoticeComment } from '@api/v1/notice-comments';
+import {
+  PostStorageBoardCommentData,
+  postNonMemberStorageBoardComment
+} from '@api/v1/storage-board-comments';
+import queryKeys from '@constants/queryKeys';
+import useNotice from '@hooks/query/useNotice';
+import useNoticeComments from '@hooks/query/useNoticeComments';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
+import useStorageBoardComments from '@hooks/query/useStorageBoardComments';
 import {
   commonFeedbackDialogState,
   commonOnBoardingDefault,
@@ -26,21 +34,7 @@ import {
 import { myNicknameState, myPasswordState } from '@recoil/pages/my/atoms';
 import { noticeCommentsParamsState } from '@recoil/pages/notice/atoms';
 import { storageBoardCommentsParamsState } from '@recoil/pages/storageBoard/atoms';
-
-import useNotice from '@hooks/query/useNotice';
-import useNoticeComments from '@hooks/query/useNoticeComments';
-import { useStorageBoardData } from '@hooks/query/useStorageBoard';
-import useStorageBoardComments from '@hooks/query/useStorageBoardComments';
-
 import validators from '@utils/validators';
-
-import { PostNoticeCommentData, postNonMemberNoticeComment } from '@api/v1/notice-comments';
-import {
-  PostStorageBoardCommentData,
-  postNonMemberStorageBoardComment
-} from '@api/v1/storage-board-comments';
-
-import queryKeys from '@constants/queryKeys';
 
 interface CommentFormProps {
   type?: 'storageBoard' | 'notice';

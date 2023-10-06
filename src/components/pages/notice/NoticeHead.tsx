@@ -5,7 +5,6 @@ import { useTheme } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchNotice } from '@api/v1/notices';
-
 import queryKeys from '@constants/queryKeys';
 
 function NoticeHead() {

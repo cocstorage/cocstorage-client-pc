@@ -17,13 +17,18 @@ import {
 } from '@cocstorage/ui';
 import { convertToReactElement } from '@cocstorage/ui-editor';
 import Icon from '@cocstorage/ui-icons';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import dayjs from 'dayjs';
-
 import styled, { CSSObject } from '@emotion/styled';
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
+import dayjs from 'dayjs';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
+import {
+  putNonMemberStorageBoardRecommend,
+  putStorageBoardViewCount
+} from '@api/v1/storage-boards';
+import queryKeys from '@constants/queryKeys';
+import { useStorageBoardData } from '@hooks/query/useStorageBoard';
 import {
   commonFeedbackDialogState,
   commonHistoryState,
@@ -37,19 +42,7 @@ import {
   storageBoardEditPasswordState,
   storageBoardEditSubjectState
 } from '@recoil/pages/storageBoardEdit/atoms';
-
-import type { AxiosError } from 'axios';
-
-import { useStorageBoardData } from '@hooks/query/useStorageBoard';
-
 import getErrorMessageByCode from '@utils/getErrorMessageByCode';
-
-import {
-  putNonMemberStorageBoardRecommend,
-  putStorageBoardViewCount
-} from '@api/v1/storage-boards';
-
-import queryKeys from '@constants/queryKeys';
 
 function StorageBoardContent() {
   const router = useRouter();

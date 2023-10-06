@@ -3,15 +3,12 @@ import { GetServerSidePropsContext } from 'next';
 import { Flexbox, Typography } from '@cocstorage/ui';
 import { QueryClient, dehydrate } from '@tanstack/react-query';
 
-import { noticesParamsDefault } from '@recoil/pages/notices/atoms';
-
+import { fetchNotices } from '@api/v1/notices';
 import { NoticesGrid, NoticesHead } from '@components/pages/notices';
 import GeneralTemplate from '@components/templeates/GeneralTemplate';
 import { Footer, Header } from '@components/UI/molecules';
-
-import { fetchNotices } from '@api/v1/notices';
-
 import queryKeys from '@constants/queryKeys';
+import { noticesParamsDefault } from '@recoil/pages/notices/atoms';
 
 function Notices() {
   return (

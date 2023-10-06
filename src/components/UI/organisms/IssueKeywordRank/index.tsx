@@ -1,17 +1,13 @@
 import { CustomStyle, Flexbox, useTheme } from '@cocstorage/ui';
 import { useQuery } from '@tanstack/react-query';
-
 import { useSetRecoilState } from 'recoil';
 
-import { commonFeedbackDialogState } from '@recoil/common/atoms';
-
+import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
 import { Footer, IssueKeywordCard, SideAccordion } from '@components/UI/molecules';
 import IssueKeywordCardSkeleton from '@components/UI/molecules/IssueKeywordCard/IssueKeywordCardSkeleton';
 import Message from '@components/UI/molecules/Message';
-
-import { fetchIssueKeywordRank } from '@api/v1/issue-keywords';
-
 import queryKeys from '@constants/queryKeys';
+import { commonFeedbackDialogState } from '@recoil/common/atoms';
 
 interface IssueKeywordRankProps {
   compact?: boolean;

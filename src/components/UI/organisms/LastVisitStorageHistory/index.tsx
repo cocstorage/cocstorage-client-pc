@@ -3,15 +3,12 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { CustomStyle, Flexbox, Typography } from '@cocstorage/ui';
-
 import { useRecoilState } from 'recoil';
-
-import { storageBoardsLastVisitHistoryState } from '@recoil/pages/storageBoards/atoms';
 
 import StorageCard from '@components/UI/molecules/StorageCard';
 import StorageCardSkeleton from '@components/UI/molecules/StorageCard/StorageCardSkeleton';
-
 import useStorage from '@hooks/query/useStorage';
+import { storageBoardsLastVisitHistoryState } from '@recoil/pages/storageBoards/atoms';
 
 interface LastVisitStorageHistoryProps {
   customStyle?: CustomStyle;

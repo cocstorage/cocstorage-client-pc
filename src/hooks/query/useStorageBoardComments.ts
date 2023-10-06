@@ -5,7 +5,6 @@ import {
   FetchStorageBoardCommentsResponse,
   fetchStorageBoardComments
 } from '@api/v1/storage-board-comments';
-
 import queryKeys from '@constants/queryKeys';
 
 export default function useStorageBoardComments(

@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 
 import { Button, Flexbox, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
-
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import {

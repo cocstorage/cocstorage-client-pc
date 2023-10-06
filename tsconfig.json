@@ -2,87 +2,35 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@pages": [
-        "./pages"
-      ],
-      "@pages/*": [
-        "./pages/*"
-      ],
-      "@api": [
-        "./src/api"
-      ],
-      "@api/*": [
-        "./src/api/*"
-      ],
-      "@components": [
-        "./src/components"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@constants": [
-        "./src/constants"
-      ],
-      "@constants/*": [
-        "./src/constants/*"
-      ],
-      "@dto": [
-        "./src/dto"
-      ],
-      "@dto/*": [
-        "./src/dto/*"
-      ],
-      "@hooks": [
-        "./src/hooks"
-      ],
-      "@hooks/*": [
-        "./src/hooks/*"
-      ],
-      "@library": [
-        "./src/library"
-      ],
-      "@library/*": [
-        "./src/library/*"
-      ],
-      "@provider": [
-        "./src/provider"
-      ],
-      "@provider/*": [
-        "./src/provider/*"
-      ],
-      "@recoil": [
-        "./src/recoil"
-      ],
-      "@recoil/*": [
-        "./src/recoil/*"
-      ],
-      "@styles": [
-        "./src/styles"
-      ],
-      "@styles/*": [
-        "./src/styles/*"
-      ],
-      "@types": [
-        "./src/types"
-      ],
-      "@types/*": [
-        "./src/types/*"
-      ],
-      "@utils": [
-        "./src/utils"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ]
+      "@pages": ["./pages"],
+      "@pages/*": ["./pages/*"],
+      "@api": ["./src/api"],
+      "@api/*": ["./src/api/*"],
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@constants": ["./src/constants"],
+      "@constants/*": ["./src/constants/*"],
+      "@dto": ["./src/dto"],
+      "@dto/*": ["./src/dto/*"],
+      "@hooks": ["./src/hooks"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@library": ["./src/library"],
+      "@library/*": ["./src/library/*"],
+      "@provider": ["./src/provider"],
+      "@provider/*": ["./src/provider/*"],
+      "@recoil": ["./src/recoil"],
+      "@recoil/*": ["./src/recoil/*"],
+      "@styles": ["./src/styles"],
+      "@styles/*": ["./src/styles/*"],
+      "@types": ["./src/types"],
+      "@types/*": ["./src/types/*"],
+      "@utils": ["./src/utils"],
+      "@utils/*": ["./src/utils/*"]
     },
     "module": "esnext",
     "target": "es5",
     "sourceMap": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -96,13 +44,6 @@
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react"
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "index.d.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }
