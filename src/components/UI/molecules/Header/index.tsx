@@ -148,6 +148,7 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
           {!isStorageBoardDetail && (
             <Link href="/">
               <Flexbox component="button" gap={8} alignment="center">
+                {/* TODO Fallback 컴포넌트 렌더링 시 width 측정이 정상적이지 않은 문제 수정 */}
                 <Image
                   width={34}
                   height={25.5}

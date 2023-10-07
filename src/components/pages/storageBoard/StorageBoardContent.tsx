@@ -507,6 +507,9 @@ const Content = styled(Typography)<{
   ${({ sourceCode }): CSSObject =>
     sourceCode
       ? {
+          '& > div': {
+            width: '100% !important'
+          },
           '*': {
             maxWidth: '100%'
           },
