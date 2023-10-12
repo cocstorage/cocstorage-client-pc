@@ -135,8 +135,14 @@ function CommentList({ type = 'storageBoard' }: CommentListProps) {
     <Flexbox direction="vertical" gap={24}>
       <Flexbox gap={4} alignment="center">
         <Icon name="CommentOutlined" width={20} height={20} />
-        {isLoading && <Skeleton width={40} height={20} round={6} disableAspectRatio />}
-        {!isLoading && (
+        {type === 'storageBoard' && isLoading && (
+          <Skeleton width={40} height={20} round={6} disableAspectRatio />
+        )}
+        {type === 'notice' && isLoadingNoticeComments && (
+          <Skeleton width={40} height={20} round={6} disableAspectRatio />
+        )}
+        {((type === 'storageBoard' && !isLoading) ||
+          (type === 'notice' && !isLoadingNoticeComments)) && (
           <Flexbox gap={6}>
             <Typography variant="h4" fontWeight="bold">
               댓글
