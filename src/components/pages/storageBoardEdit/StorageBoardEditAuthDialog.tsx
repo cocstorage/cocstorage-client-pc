@@ -140,7 +140,7 @@ function StorageBoardEditAuthDialog() {
             textAlign: 'right'
           }}
         >
-          <IconButton>
+          <IconButton onClick={handleClose}>
             <Icon name="CloseOutlined" />
           </IconButton>
         </Box>
@@ -160,8 +160,7 @@ function StorageBoardEditAuthDialog() {
           open={!done}
           onClose={handleCloseLoadPasswordTooltip}
           content="저장된 비밀번호를 불러왔어요!"
-          placement="right"
-          fillWrapper
+          placement="top"
         >
           <TextBar
             type="password"

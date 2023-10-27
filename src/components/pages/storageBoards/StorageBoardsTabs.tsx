@@ -1,8 +1,8 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { Avatar, Box, Button, Flexbox, Tab, Tabs, useTheme } from '@cocstorage/ui';
+import { Avatar, Button, Flexbox, Tab, Tabs, useTheme } from '@cocstorage/ui';
 import Icon from '@cocstorage/ui-icons';
 import styled, { CSSObject } from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
@@ -25,13 +25,19 @@ function StorageBoardsTabs() {
 
   const [{ params }, setParams] = useRecoilState(storageBoardsParamsStateFamily(String(path)));
 
-  const tabsRef = useRef<HTMLDivElement>(null);
+  const [tabsRef, setTabsRef] = useState<HTMLDivElement>();
 
   const { triggered } = useScrollTrigger({ trigger: true, ref: tabsRef });
 
   const { data: { avatarUrl } = {} } = useQuery(queryKeys.storages.storageById(String(path)), () =>
     fetchStorage(String(path))
   );
+
+  const handleTabsRef = (ref?: HTMLDivElement | null) => {
+    if (!tabsRef && ref) {
+      setTabsRef(ref);
+    }
+  };
 
   const handleChange = (value: number | string) =>
     setParams((prevParams) => ({
@@ -47,6 +53,7 @@ function StorageBoardsTabs() {
 
   return (
     <>
+      <div ref={handleTabsRef} />
       <Wrapper triggered={triggered}>
         <Flexbox
           justifyContent="space-between"
@@ -70,7 +77,6 @@ function StorageBoardsTabs() {
               />
             )}
             <Tabs
-              ref={tabsRef}
               fullWidth
               onChange={handleChange}
               value={params.orderBy || 'latest'}
@@ -92,13 +98,6 @@ function StorageBoardsTabs() {
           )}
         </Flexbox>
       </Wrapper>
-      {triggered && (
-        <Box
-          customStyle={{
-            minHeight: tabsRef.current ? tabsRef.current?.clientHeight : 41
-          }}
-        />
-      )}
     </>
   );
 }
@@ -106,11 +105,14 @@ function StorageBoardsTabs() {
 const Wrapper = styled.section<{
   triggered: boolean;
 }>`
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   margin-top: 20px;
+  z-index: 1;
 
   ${({
     theme: {
@@ -129,29 +131,6 @@ const Wrapper = styled.section<{
       palette: { background }
     }
   }) => background.bg};
-
-  ${({ triggered }): CSSObject =>
-    triggered
-      ? {
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          marginTop: 0,
-          padding: '0 20px',
-          zIndex: 2,
-          animation: 'slideDown .2s forwards'
-        }
-      : {}}
-
-  @keyframes slideDown {
-    from {
-      transform: translateY(-40px);
-    }
-
-    to {
-      transform: translateY(0);
-    }
-  }
 `;
 
 export default StorageBoardsTabs;

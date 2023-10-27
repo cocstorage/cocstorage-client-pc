@@ -1,4 +1,4 @@
-import { HTMLAttributes, useMemo } from 'react';
+import { HTMLAttributes } from 'react';
 
 import Link from 'next/link';
 
@@ -53,7 +53,7 @@ function StorageBoardCard({
     }
   } = useTheme();
 
-  const round = useMemo(() => {
+  const round = () => {
     if (variant === 'emphasize') {
       return 12;
     }
@@ -62,21 +62,21 @@ function StorageBoardCard({
     }
 
     return 8;
-  }, [variant]);
+  };
 
   if (variant === 'emphasize') {
     return (
       <StyledStorageBoardCard>
         <Link href={`/storages/${path}/${id}`}>
           <Wrapper variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-            <Box customStyle={{ borderRadius: round, overflow: 'hidden', zIndex: 1 }}>
+            <Box customStyle={{ borderRadius: round(), overflow: 'hidden', zIndex: 1 }}>
               <Image
                 ratio="16:9"
                 src={thumbnailUrl || ''}
                 alt="Thumbnail Img"
                 width={183}
                 height="auto"
-                round={round}
+                round={round()}
               />
             </Box>
             <Flexbox
@@ -167,14 +167,14 @@ function StorageBoardCard({
       <StyledStorageBoardCard>
         <Link href={`/storages/${path}/${id}`}>
           <Wrapper variant={variant} hasThumbnail={!!thumbnailUrl} {...props}>
-            <Box customStyle={{ borderRadius: round, overflow: 'hidden', zIndex: 1 }}>
+            <Box customStyle={{ borderRadius: round(), overflow: 'hidden', zIndex: 1 }}>
               <Image
                 ratio="4:3"
                 src={thumbnailUrl || ''}
                 alt="Thumbnail Img"
                 width={82}
                 height="auto"
-                round={round}
+                round={round()}
               />
             </Box>
             <Flexbox
@@ -353,14 +353,14 @@ function StorageBoardCard({
             </Info>
           </Flexbox>
           {thumbnailUrl && (
-            <Box customStyle={{ borderRadius: round, overflow: 'hidden', zIndex: 1 }}>
+            <Box customStyle={{ borderRadius: round(), overflow: 'hidden', zIndex: 1 }}>
               <Image
                 ratio="16:9"
                 src={thumbnailUrl || ''}
                 alt="Thumbnail Img"
                 width={61}
                 height="auto"
-                round={round}
+                round={round()}
               />
             </Box>
           )}

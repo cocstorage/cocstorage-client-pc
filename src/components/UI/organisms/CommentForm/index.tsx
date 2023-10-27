@@ -1,8 +1,9 @@
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
 import {
+  Box,
   Button,
   CustomStyle,
   Flexbox,
@@ -70,8 +71,6 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
   const [content, setContent] = useState('');
   const [open, setOpen] = useState(false);
   const [observerTriggered, setObserverTriggered] = useState(false);
-  const [top, setTop] = useState(0);
-  const [width, setWidth] = useState(0);
 
   const targetRef = useRef<HTMLDivElement>(null);
   const onIntersectRef = useRef<IntersectionObserverCallback>(async ([entry], observer) => {
@@ -87,7 +86,6 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
       setObserverTriggered(true);
     }
   }).current;
-  const spotlightOpenTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   const queryClient = useQueryClient();
 
@@ -258,14 +256,6 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
       }
     }));
 
-  const handleSpotlight = useCallback(() => {
-    if (targetRef.current && open) {
-      const { top: targetTop } = targetRef.current.getBoundingClientRect();
-      setTop(targetTop);
-      setWidth(targetRef.current.clientWidth);
-    }
-  }, [open]);
-
   useEffect(() => {
     let observer: IntersectionObserver;
     try {
@@ -285,49 +275,18 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
   }, [onIntersectRef]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleSpotlight);
-
-    return () => {
-      window.removeEventListener('scroll', handleSpotlight);
-    };
-  }, [handleSpotlight]);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleSpotlight);
-
-    return () => {
-      window.removeEventListener('resize', handleSpotlight);
-    };
-  }, [handleSpotlight]);
-
-  useEffect(() => {
-    // TODO Spotlight 컴포넌트 좌표 및 요소 크기 구하는 로직 개선 필요
-    // TODO Spotlight 컴포넌트 동시성 개선 필요
     if (observerTriggered && themeDone && !commentDone) {
-      spotlightOpenTimerRef.current = setTimeout(() => {
-        if (!targetRef.current) return;
+      if (!targetRef.current) return;
 
-        const { top: targetTop } = targetRef.current.getBoundingClientRect();
-        setOpen(true);
-        setTop(targetTop);
-        setWidth(targetRef.current.clientWidth);
-      }, 350);
+      setOpen(true);
     } else {
       setOpen(false);
     }
   }, [themeDone, commentDone, observerTriggered]);
 
-  useEffect(() => {
-    return () => {
-      if (spotlightOpenTimerRef.current) {
-        clearTimeout(spotlightOpenTimerRef.current);
-      }
-    };
-  }, []);
-
   return (
-    <>
-      <Flexbox ref={targetRef} gap={20} customStyle={newCustomStyle}>
+    <Box customStyle={newCustomStyle}>
+      <Flexbox ref={targetRef} gap={20}>
         {content && (
           <form>
             <Flexbox gap={8} direction="vertical" justifyContent="space-between">
@@ -386,74 +345,20 @@ function CommentForm({ type = 'storageBoard', customStyle }: CommentFormProps) {
         open={open}
         onClose={handleClose}
         targetRef={targetRef}
-        round={8}
-        customStyle={{ top, width }}
-      >
-        <Tooltip
-          open={open}
-          onClose={handleClose}
-          content="로그인하지 않아도 댓글을 남길 수 있어요!"
-          placement="top"
-        >
-          <Flexbox gap={20} onClick={handleClose} customStyle={{ width }}>
-            {content && (
-              <form>
-                <Flexbox gap={8} direction="vertical" justifyContent="space-between">
-                  <TextBar
-                    value={myNickname}
-                    placeholder="닉네임"
-                    onChange={handleChange}
-                    autoComplete="username"
-                    customStyle={{
-                      maxWidth: 173,
-                      borderColor: box.stroked.normal
-                    }}
-                  />
-                  <TextBar
-                    type="password"
-                    placeholder="비밀번호"
-                    value={myPassword}
-                    onChange={handleChange}
-                    autoComplete="current-password"
-                    customStyle={{
-                      maxWidth: 173,
-                      borderColor: box.stroked.normal
-                    }}
-                  />
-                </Flexbox>
-              </form>
-            )}
-            <CommentBar>
-              <CommentTextArea
-                onChange={handleChangeContent}
-                value={content}
-                placeholder="내용을 입력해주세요."
-              />
-              <Button
-                variant="accent"
-                size="big"
-                startIcon={<Icon name="SendFilled" />}
-                customStyle={{
-                  margin: '17px 12px 17px 0'
-                }}
-                onClick={handleClick}
-                disabled={
-                  isLoading || noticeCommentIsLoading || !myNickname || !myPassword || !content
-                }
-              >
-                등록
-              </Button>
-            </CommentBar>
-          </Flexbox>
-        </Tooltip>
-      </Spotlight>
-    </>
+        round={10}
+        tooltip={{
+          content: '로그인하지 않아도 댓글을 남길 수 있어요!',
+          placement: 'top'
+        }}
+      />
+    </Box>
   );
 }
 
 const CommentBar = styled.div`
   flex-grow: 1;
   display: flex;
+  width: fit-content;
   height: 84px;
   border: 1px solid
     ${({

@@ -18,20 +18,9 @@ export const StyledHeader = styled.header<{
           top: 0,
           left: 0,
           borderColor: palette.box.stroked.normal,
-          zIndex: 2,
-          animation: 'slideDown .2s forwards'
+          zIndex: 2
         }
-      : {}}
-
-  @keyframes slideDown {
-    from {
-      transform: translateY(-73px);
-    }
-
-    to {
-      transform: translateY(0);
-    }
-  }
+      : {}};
 `;
 
 export const HeaderInner = styled.div<{
@@ -51,5 +40,3 @@ export const HeaderInner = styled.div<{
         }
       : {}};
 `;
-
-export const Logo = styled.img``;

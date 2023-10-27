@@ -214,8 +214,7 @@ function ReplyDeleteDialog({
             open={!done}
             onClose={handleClose}
             content="저장된 비밀번호를 불러왔어요!"
-            placement="right"
-            fillWrapper
+            placement="top"
           >
             <TextBar
               type="password"

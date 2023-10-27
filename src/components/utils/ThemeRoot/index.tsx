@@ -1,4 +1,4 @@
-import { HTMLAttributes, PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { HTMLAttributes, PropsWithChildren, useEffect, useState } from 'react';
 
 import localFont from 'next/font/local';
 
@@ -25,15 +25,6 @@ function ThemeRoot({ children }: PropsWithChildren<ThemeRootProps>) {
   const [theme, setTheme] = useRecoilState(commonThemeState);
   const [themeMode, setThemeMode] = useState<ThemeMode>('light');
 
-  const handleChange = useCallback(
-    (event: MediaQueryListEvent) => {
-      if (theme !== 'system') return;
-
-      setThemeMode(event.matches ? 'dark' : 'light');
-    },
-    [setThemeMode, theme]
-  );
-
   useEffect(() => {
     if (theme === 'system') {
       const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -45,12 +36,18 @@ function ThemeRoot({ children }: PropsWithChildren<ThemeRootProps>) {
   }, [theme, setTheme]);
 
   useEffect(() => {
+    const handleChange = (event: MediaQueryListEvent) => {
+      if (theme !== 'system') return;
+
+      setThemeMode(event.matches ? 'dark' : 'light');
+    };
+
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleChange);
 
     return () => {
       window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', handleChange);
     };
-  }, [handleChange]);
+  }, [theme]);
 
   return (
     <ThemeProvider theme={themeMode}>

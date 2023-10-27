@@ -33,7 +33,7 @@ function StorageBoards() {
             customStyle={{
               position: 'sticky',
               width: 140,
-              top: 72
+              top: 32
             }}
           />
         }
@@ -41,7 +41,7 @@ function StorageBoards() {
           <Flexbox
             direction="vertical"
             gap={25}
-            customStyle={{ position: 'sticky', width: 280, top: 72 }}
+            customStyle={{ position: 'sticky', width: 280, top: 32 }}
           >
             <BestStorageBoardList />
             <IssueKeywordRank compact={false} />

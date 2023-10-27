@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -8,21 +8,20 @@ import Gtag from '@library/gtag';
 function GoogleScript() {
   const router = useRouter();
 
-  const handleRouteChange = useCallback((url: string) => Gtag.pageView(url), []);
-
   useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      router.events.on('routeChangeComplete', handleRouteChange);
-      router.events.on('hashChangeComplete', handleRouteChange);
-    }
+    const handleRouteChange = (url: string) => {
+      if (process.env.NODE_ENV !== 'production') return;
+      Gtag.pageView(url);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on('hashChangeComplete', handleRouteChange);
 
     return () => {
-      if (process.env.NODE_ENV === 'production') {
-        router.events.off('routeChangeComplete', handleRouteChange);
-        router.events.off('hashChangeComplete', handleRouteChange);
-      }
+      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off('hashChangeComplete', handleRouteChange);
     };
-  }, [router.events, handleRouteChange]);
+  }, [router.events]);
 
   if (process.env.NODE_ENV !== 'production') return null;
 

@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement, useCallback, useEffect, useState } from 'react';
+import { PropsWithChildren, ReactElement, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -26,8 +26,18 @@ function HistoryProvider({ children }: PropsWithChildren) {
 
   const [isGoBack, setIsGoBack] = useState(false);
 
-  const handleRouteChangeStart = useCallback(
-    (url: string) => {
+  useEffect(() => {
+    router.beforePopState(() => {
+      setIsGoBack(true);
+      if (serverSidePages.indexOf(history.object[history.index - 1]) > -1)
+        document.cookie = 'isGoBack=true;path=/';
+
+      return true;
+    });
+  }, [router, history]);
+
+  useEffect(() => {
+    const handleRouteChangeStart = (url: string) => {
       const pathname = getPathNameByUrl(url);
 
       if (isGoBack) {
@@ -41,42 +51,28 @@ function HistoryProvider({ children }: PropsWithChildren) {
           object: [...history.object, pathname]
         });
       }
-    },
-    [setHistoryState, history, isGoBack]
-  );
+    };
 
-  const handleRouteChangeComplete = useCallback(() => {
-    if (isGoBack) {
-      setIsGoBack(false);
-    }
-  }, [isGoBack]);
-
-  useEffect(() => {
-    router.beforePopState(() => {
-      setIsGoBack(true);
-      if (serverSidePages.indexOf(history.object[history.index - 1]) > -1)
-        document.cookie = 'isGoBack=true;path=/';
-
-      return true;
-    });
-  }, [router, history]);
-
-  useEffect(() => {
     router.events.on('routeChangeStart', handleRouteChangeStart);
-    router.events.on('routeChangeComplete', handleRouteChangeComplete);
 
     return () => {
       router.events.off('routeChangeStart', handleRouteChangeStart);
+    };
+  }, [router.events, setHistoryState, history, isGoBack]);
+
+  useEffect(() => {
+    const handleRouteChangeComplete = () => {
+      if (isGoBack) {
+        setIsGoBack(false);
+      }
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    return () => {
       router.events.off('routeChangeComplete', handleRouteChangeComplete);
     };
-  }, [
-    setHistoryState,
-    handleRouteChangeStart,
-    handleRouteChangeComplete,
-    router,
-    history,
-    isGoBack
-  ]);
+  }, [router.events, isGoBack]);
 
   return children as ReactElement;
 }

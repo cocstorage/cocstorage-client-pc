@@ -1,12 +1,4 @@
-import {
-  ChangeEvent,
-  HTMLAttributes,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react';
+import { ChangeEvent, HTMLAttributes, useEffect, useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -19,7 +11,6 @@ import {
   Image,
   Spotlight,
   TextBar,
-  Tooltip,
   Typography,
   useTheme
 } from '@cocstorage/ui';
@@ -67,15 +58,12 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const isStorageBoardDetail = useMemo(
-    () => router.pathname === '/storages/[path]/[id]',
-    [router.pathname]
-  );
-
   const headerRef = useRef<HTMLHeadElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { triggered } = useScrollTrigger({ trigger: scrollFixedTrigger, ref: headerRef });
+
+  const isStorageBoardDetail = router.pathname === '/storages/[path]/[id]';
 
   const handleClick = () =>
     setCommonFeedbackDialogState({
@@ -104,17 +92,6 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
 
   const handleCloseMenu = () => setMenuOpen(false);
 
-  const handleResize = useCallback(() => {
-    // TODO 추후 UI 라이브러리 내 Hook 작성
-    const newLgHidden = window.matchMedia(`(max-width: ${breakpoints.lg}px)`).matches;
-    setLgHidden(newLgHidden);
-    if (buttonRef.current) {
-      const { clientWidth } = buttonRef.current;
-      setLeft(clientWidth - 192);
-      setTriangleLeft(219 - clientWidth);
-    }
-  }, [breakpoints]);
-
   useEffect(() => {
     if (!done) {
       setOpen(true);
@@ -134,12 +111,23 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
   }, [breakpoints]);
 
   useEffect(() => {
+    const handleResize = () => {
+      // TODO 추후 UI 라이브러리 내 Hook 작성
+      const newLgHidden = window.matchMedia(`(max-width: ${breakpoints.lg}px)`).matches;
+      setLgHidden(newLgHidden);
+      if (buttonRef.current) {
+        const { clientWidth } = buttonRef.current;
+        setLeft(clientWidth - 192);
+        setTriangleLeft(219 - clientWidth);
+      }
+    };
+
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [handleResize]);
+  }, [breakpoints.lg]);
 
   return (
     <>
@@ -244,21 +232,20 @@ function Header({ scrollFixedTrigger = false, ...props }: HeaderProps) {
               </Button>
             </Flexbox>
             <SystemMenu open={menuOpen} anchorRef={buttonRef} onClose={handleCloseMenu} />
-            <Spotlight open={open} onClose={handleClose} targetRef={buttonRef} round={8}>
-              <Tooltip
-                open={open}
-                onClose={handleClose}
-                content="여기서 다크 모드를 설정하실 수 있어요!"
-                centered={false}
-                left={left}
-                triangleLeft={triangleLeft}
-                disableOnClose
-              >
-                <Button startIcon={<Icon name="UserOutlined" />} onClick={handleOpenMenu}>
-                  마이
-                </Button>
-              </Tooltip>
-            </Spotlight>
+            <Spotlight
+              open={open}
+              onClose={handleClose}
+              targetRef={buttonRef}
+              round={8}
+              tooltip={{
+                content: '여기서 다크 모드를 설정하실 수 있어요!',
+                centered: false,
+                left,
+                triangleLeft,
+                onClick: handleOpenMenu,
+                disableOnClose: true
+              }}
+            />
           </Flexbox>
         </HeaderInner>
       </StyledHeader>

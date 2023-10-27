@@ -11,7 +11,6 @@ import {
   Menu,
   Spotlight,
   Tag,
-  Tooltip,
   Typography,
   useTheme
 } from '@cocstorage/ui';
@@ -77,7 +76,6 @@ function StorageBoardContent() {
   const updatedViewCountRef = useRef(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const spotlightOpenTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   const queryClient = useQueryClient();
 
@@ -188,7 +186,7 @@ function StorageBoardContent() {
     }
   }, [mutate, storage, storageBoardId]);
 
-  // TODO video autoplay 가 동작하지 않는 문제, 서버 쪽 크롤링 로직 확인 후 수정
+  // TODO video autoplay 가 동작하지 않는 문제, 서버 쪽 스크래핑 로직 확인 후 수정
   // 임시 처리
   useEffect(() => {
     if (content && contentRef.current && sourceCode) {
@@ -204,7 +202,6 @@ function StorageBoardContent() {
   }, [content, sourceCode]);
 
   useEffect(() => {
-    // TODO Spotlight 컴포넌트 동시성 개선 필요
     if (
       object[index - 1] === '/storages/[path]/post' &&
       themeDone &&
@@ -212,23 +209,13 @@ function StorageBoardContent() {
       !done &&
       !sourceCode
     ) {
-      spotlightOpenTimerRef.current = setTimeout(() => {
-        setOpenSpotlight(true);
-      }, 350);
+      setOpenSpotlight(true);
     }
   }, [object, index, themeDone, commentDone, done, sourceCode]);
 
   useEffect(() => {
     if (!openDeleteDialog) setOpen(false);
   }, [openDeleteDialog]);
-
-  useEffect(() => {
-    return () => {
-      if (spotlightOpenTimerRef.current) {
-        clearTimeout(spotlightOpenTimerRef.current);
-      }
-    };
-  }, []);
 
   return (
     <>
@@ -453,21 +440,11 @@ function StorageBoardContent() {
           targetRef={buttonRef}
           onClose={handleCloseSpotlight}
           round={8}
-        >
-          <Tooltip
-            open
-            onClose={handleCloseSpotlight}
-            content="게시글의 수정 및 삭제는 여기를 클릭해 주세요!"
-          >
-            <Button
-              variant="transparent"
-              size="pico"
-              startIcon={<Icon name="MoreMenuOutlined" />}
-              iconOnly
-              onClick={handleClick}
-            />
-          </Tooltip>
-        </Spotlight>
+          tooltip={{
+            content: '게시글의 수정 및 삭제는 여기를 클릭해 주세요!',
+            onClick: handleClick
+          }}
+        />
       )}
     </>
   );
