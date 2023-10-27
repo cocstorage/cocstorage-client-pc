@@ -148,7 +148,7 @@ function StorageBoardEditAuthDialog() {
           variant="h3"
           fontWeight="bold"
           customStyle={{
-            marginTop: 10,
+            margin: '10px 0 30px',
             textAlign: 'center'
           }}
         >
@@ -170,9 +170,6 @@ function StorageBoardEditAuthDialog() {
             value={password}
             onChange={handleChange}
             autoFocus
-            customStyle={{
-              marginTop: 30
-            }}
           />
         </Tooltip>
         {errorMessage.error && (
